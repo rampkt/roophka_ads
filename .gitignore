@@ -1,6 +1,5 @@
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-themes/classic/views/
+config/config.php
+
+uploads/*
+*/functions/_notes/*
+*/includes/_notes/*
