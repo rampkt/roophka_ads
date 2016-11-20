@@ -7,7 +7,9 @@ spl_autoload_register(function($file){
 });
 
 $dash = new dashboard();
+$date=date("Y-m-d");
 $totals = $dash->totalCount();
+$totalstoday = $dash->totalCounttoday($date);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +48,7 @@ $totals = $dash->totalCount();
 					<div class="number"><?=$totals['users']?><i class="icon-arrow-up"></i></div>
 					<div class="title">Total Users</div>
 					<div class="footer">
-						<a href="#"> read full report</a>
+						<a href="users.php"> View full Users</a>
 					</div>	
 				</div>
 				<!--<div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
@@ -62,7 +64,7 @@ $totals = $dash->totalCount();
 					<div class="number"><?=$totals['ads']?><i class="icon-arrow-up"></i></div>
 					<div class="title">Total Ads</div>
 					<div class="footer">
-						<a href="#"> read full report</a>
+						<a href="ads.php"> View full ads</a>
 					</div>
 				</div>
 				<div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
@@ -70,7 +72,7 @@ $totals = $dash->totalCount();
 					<div class="number"><?=$totals['transaction']?><i class="icon-arrow-up"></i></div>
 					<div class="title">Ads seen</div>
 					<div class="footer">
-						<a href="#"> read full report</a>
+						<a href="#"> views full ads</a>
 					</div>
 				</div>
 				<div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
@@ -78,11 +80,58 @@ $totals = $dash->totalCount();
 					<div class="number"><?=$totals['withdraw']?><i class="icon-arrow-down"></i></div>
 					<div class="title">Total Withdrawn</div>
 					<div class="footer">
+						<a href="#"> View full withdrawn</a>
+					</div>
+				</div>	
+				
+			</div>		
+			
+			<div class="row-fluid">
+				
+                <div class="span3 statbox green" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
+					<div class="number"><?=$totalstoday['users']?><i class="icon-arrow-up"></i></div>
+					<div class="title">Today Users</div>
+					<div class="footer">
+						<a href="users_report.php"> read full report</a>
+					</div>	
+				</div>
+				<!--<div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
+					<div class="number">854<i class="icon-arrow-up"></i></div>
+					<div class="title">visits</div>
+					<div class="footer">
+						<a href="#"> read full report</a>
+					</div>	
+				</div>-->
+				<div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
+					<div class="number"><?=$totalstoday['ads']?><i class="icon-arrow-up"></i></div>
+					<div class="title">Today Post Ads</div>
+					<div class="footer">
+						<a href="ads.php"> read full report</a>
+					</div>
+				</div>
+				<div class="span3 statbox yellow noMargin" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
+					<div class="number"><?=$totalstoday['transaction']?><i class="icon-arrow-up"></i></div>
+					<div class="title">Today View ads</div>
+					<div class="footer">
+						<a href="ads_report.php"> read full report</a>
+					</div>
+				</div>
+				<div class="span3 statbox red" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
+					<div class="number"><?=$totalstoday['withdraw']?><i class="icon-arrow-down"></i></div>
+					<div class="title">Today Withdrawn</div>
+					<div class="footer">
 						<a href="#"> read full report</a>
 					</div>
 				</div>	
 				
 			</div>		
+			
+			
 			
 			<div class="row-fluid">	
 
