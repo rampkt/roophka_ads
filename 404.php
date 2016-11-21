@@ -17,7 +17,7 @@ $subname = '';
 <link type="text/css" rel="stylesheet" href="./assets/css/registration.css" />
 </head>
 
-<body id="home"> 
+<body id="home">
   
 	<!-- header area -->
 	<? include("./includes/header.php"); ?>
