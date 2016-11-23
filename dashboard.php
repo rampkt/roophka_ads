@@ -3,7 +3,7 @@ include_once("./config/config.php");
 /***
  * initial setup
  */
-$pagename = 'dashboard';
+$pagename = 'dashboard'; 
 $subname = '';
 
 $login = check_login();
