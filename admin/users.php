@@ -20,16 +20,52 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 		redirect(HTTP_PATH . "admin/users.php?success=2");
 	}
 	redirect(HTTP_PATH . "admin/users.php");
+	
 }
 
-list($userList,$pagination) = $users->getAllUsers();
+if(isset($_REQUEST['action']))
+{
+	if($_REQUEST['action'] == '_changepassword')
+    {
+		$users->changepass($_REQUEST['userid'],$_REQUEST['newpassword']);
+		redirect(HTTP_PATH . "admin/users.php?success=3");
+		
+	}
+}
+
+if(isset($_REQUEST['search']))
+{
+	$date=$_REQUEST['todaydate'];
+	$name=$_REQUEST['name'];
+	$email=$_REQUEST['email'];
+	$phone=$_REQUEST['phone'];
+	
+}
+else{
+$date="";
+$name="";
+$email="";
+$phone="";
+}
+//echo $date;
+
+list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<? include('./includes/head.php'); ?>
     <style type="text/css">
-	#bankAccount { width:700px; }
+	#bankAccount { width:700px;}
+    
+	#ui-datepicker-div
+	{
+		z-index:100 !important;
+	}
+	.pull-left
+	{
+		margin-right:27px
+	}
 	</style>
 </head>
 
@@ -71,12 +107,35 @@ list($userList,$pagination) = $users->getAllUsers();
             </div>
             <div class="clearfix" style="margin-bottom:20px;"></div>
             <? } ?>
+			
+			<? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '3') { ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Success!</strong> User password changed successfully.
+            </div>
+            <div class="clearfix" style="margin-bottom:20px;"></div>
+            <? } ?>
 
 			<div class="row-fluid sortable">	
 				<div class="box span12">
+				<form name="search" action="users.php" method="get">
+						<div class="row-fluid" style="height:30px;margin:8px 8px -10px 30px;">
+			<input type="hidden" name="search" value="user">
+			<div class="pull-left"><input type="text" name="name" id="name" placeholder="Name" value="<?php echo $name;?>"></div>
+			<div class="pull-left"><input type="text" name="email" id="email" placeholder="Email" value="<?php echo $email;?>"></div>
+			<div class="pull-left"><input type="text" name="phone" id="phone" placeholder="Phone" value="<?php echo $phone;?>"></div>
+			<div class="pull-left"><input type="text" name="todaydate" id="datepicker" placeholder="Registered Date" value="<?php echo $date;?>"></div>
+			<div class="pull-left">
+			<a href="javascript:void(0);" onclick="usersreportfn();"; class="btn btn-small " style="padding:4px 10px;">Search</a>
+			</div>
+			 <div class="clearfix" style="margin-bottom:20px;"></div>
+			
+			</div>
+			</form>
 					<div class="box-header">
 						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Users</h2>
 						<div class="box-icon">
+						
 							<!--<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>-->
@@ -94,7 +153,7 @@ list($userList,$pagination) = $users->getAllUsers();
 									  <th>Date registered</th>
 									  <th>Demo</th>
 									  <th>Status</th>
-                                      <th>Action</th>
+                                      <th style="width:235px;">Action</th>
 								  </tr>
 							  </thead>   
 							  <tbody>
@@ -109,7 +168,7 @@ list($userList,$pagination) = $users->getAllUsers();
 							  ?>
 								<tr>
 									<td><?=$sno?></td>
-                                    <td><?=$usr['email']?></td>
+                                    <td ><a href="./viewprofile.php?action=view&id=<?=$usr['id']?>" style="color:#08c;"><?=$usr['email']?></a></td>
                                     <td><?=$usr['phone']?></td>
                                     <td class="center"><?=$usr['account_balance']?>/-</td>
                                     <td class="center">
@@ -128,9 +187,9 @@ list($userList,$pagination) = $users->getAllUsers();
 									</td>
 									<td class="center">
                                     	<? if($usr['status'] == 0) { ?>
-										<span class="label label-success">Active</span>
+										<span class="label label-success" style="padding:6px;">Active</span>
                                         <? } elseif($usr['status'] == 1) { ?>
-                                        <span class="label">Inactive</span>
+                                        <span class="label" style="padding:6px;">Inactive</span>
                                         <? } ?>
 									</td>
                                     <td>
@@ -139,7 +198,7 @@ list($userList,$pagination) = $users->getAllUsers();
                                         <? } elseif($usr['status'] == 1) { ?>
                                         <a href="./users.php?action=activate&id=<?=$usr['id']?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
-                                        <a href="#" class="btn btn-small btn-primary"><i class="halflings-icon white lock"></i>Change Password</a>
+                                        <a href="javascript:void(0);" onClick="changepassfn('1',<?=$usr['id']?>)" class="btn btn-small btn-primary"><i class="halflings-icon white lock"></i>Change Password</a>
                                     </td>
 								</tr>
                               <? $sno++; } } ?>
@@ -164,6 +223,35 @@ list($userList,$pagination) = $users->getAllUsers();
 	
     <? include('./includes/footer.php'); ?>
 	
+	<div id="light1" class="white_content"> <a href = "javascript:void(0)" onclick = "changepassfn(2);"><button type="button" class="close" data-dismiss="modal">x</button></a>
+		<div style="border-bottom:2px solid #ccc;width100%;margin:5px;"><h2>Change User Password</h2></div>
+		<form action="users.php" method="post">
+		<input type="hidden" name="action" value="_changepassword">
+		<div class="row-fluid" style="margin-top:20px;">
+		<div class="pull-left col-md-6" style="margin-right:40px;">New Password:</div>
+		<div class="pull-left col-md-6">
+		<input type="password" name="newpassword" id="newpassword"  class="input-xlarge" placeholder="Enter new password here..." required>
+		</div>
+		<div class="clearfix" style="margin-bottom:10px;"></div>
+		</div>
+		
+		<div class="row-fluid" style="margin-top:20px;">
+		<div class="pull-left col-md-6" style="margin-right:15px;">Confirm Password:</div>
+		<div class="pull-left col-md-6">
+		<input type="password" name="conpassword" id="conpassword"  class="input-xlarge" placeholder="Enter confirm password here..." required>
+		</div>
+		<div class="clearfix" style="margin-bottom:10px;"></div>
+		</div>
+		
+		<input type="hidden" name="userid" id="userid">
+		<div>
+		<input type="submit" name="submit" id="submit" value="submit" onClick="validatefn();" style="padding:5px 15px;" class="btn btn-small btn-primary add-new">
+		</div>
+		
+		</form>
+		<div></div>
+		</div>
+		<div id="fade1" class="black_overlay"></div>
     <div class="modal hide fade" id="bankAccount">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">x</button>
@@ -203,6 +291,94 @@ list($userList,$pagination) = $users->getAllUsers();
 			
         });
 	</script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker(
+	{
+		dateFormat: "dd-M-yy"
+	}
+	);
+  } );
+  
+  function usersreportfn()
+  {
+	  document.search.submit();
+  }
+  
+   function changepassfn(val,uid)
+  {
+	  //alert(cid);
+	  if(val==1)
+	  {
+	  document.getElementById('light1').style.display='block';
+	  document.getElementById('fade1').style.display='block';
+	  document.getElementById('userid').value=uid;
+	  }
+	  
+	   if(val==2)
+	  {
+	  document.getElementById('light1').style.display='none';
+	  document.getElementById('fade1').style.display='none';
+	   document.getElementById('userid').value="";
+	  }
+	  
+	  
+  }
+  
+  function validatefn()
+  {
+	  
+	  var newpass=document.getElementById('newpassword').value;
+	  var conpass=document.getElementById('conpassword').value;
+	  
+	  if(newpass !="" && conpass !="")
+	  {
+	  if(newpass != conpass)
+	  {
+		  alert("Password is doesnot match !!!");
+		  document.getElementById('conpassword').value="";
+		  document.getElementById('conpassword').focus();
+		  
+	  }
+	  }
+	  
+  }
+  
+  </script>  
+  
     
+  <style>
+		.black_overlay{
+			display: none;
+			position: absolute;
+			top: 0%;
+			left: 0%;
+			width: 100%;
+			height: 100%;
+			background-color: black;
+			z-index:1001;
+			-moz-opacity: 0.8;
+			opacity:.80;
+			filter: alpha(opacity=80);
+		}
+		.white_content {
+			display: none;
+			position: absolute;
+			top: 25%;
+			left: 25%;
+			width: 50%;
+			height: 35%;
+			padding: 16px;
+			border: 10px solid #578EBE;
+			background-color: white;
+			z-index:1002;
+			overflow: auto;
+			border-radius:10px;
+		}
+	</style>
 </body>
 </html>

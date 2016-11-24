@@ -382,7 +382,7 @@ function template_functions(){
 	/* ---------- Datable ---------- */
 	$('.datatable').dataTable({
 			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
-			"sPaginationType": "bootstrap",
+			"spaginationType": "bootstrap",
 			"oLanguage": {
 			"sLengthMenu": "_MENU_ records per page"
 			}
@@ -399,6 +399,7 @@ function template_functions(){
 		$target.slideToggle();
 	});
 	$('.btn-setting').click(function(e){
+		alert("sdfsdf");
 		e.preventDefault();
 		$('#myModal').modal('show');
 	});
@@ -2000,7 +2001,7 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 		"iTotalPages":    Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
 	};
 }
-$.extend( $.fn.dataTableExt.oPagination, {
+$.extend( $.fn.dataTableExt.opagination, {
 	"bootstrap": {
 		"fnInit": function( oSettings, nPaging, fnDraw ) {
 			var oLang = oSettings.oLanguage.oPaginate;

@@ -27,7 +27,7 @@ if(isset($_REQUEST['action'])) {
 	$reg->pincode = $db->escape_string($_REQUEST['pincode']);
 	
 	$result = $reg->save();
-  //print_r($result);exit;
+ // print_r($result);exit;
 	if($result['error']) {
 		if($result['msg'] == 'empty')
 			redirect(HTTP_PATH . "register.php?error=empty");
@@ -212,8 +212,8 @@ $cityDropDown = $location->getCityDropdown(0, 0, '', true, 'data-parsley-errors-
               <span class="pull-right" id="pincode-error"></span>
               <label class="control-label"  for="pincode">Pincode</label>
               <div class="controls">
-                <input type="text" id="pincode" name="pincode" placeholder="" class="form-control input-lg" required data-parsley-errors-container="#pincode-error" />
-                <p class="help-block">Mobile can contain only numbers with 10 digit</p>
+                <input type="text" id="pincode" name="pincode" placeholder="" maxlength="6" class="form-control input-lg" required data-parsley-errors-container="#pincode-error" />
+                <p class="help-block">Pincode can contain only numbers with 6 digit</p>
               </div>
             </div>
          

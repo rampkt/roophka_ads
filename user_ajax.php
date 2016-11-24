@@ -34,6 +34,33 @@ if(isset($_REQUEST['action'])) {
 	
 	if($_REQUEST['action'] == '_submitAd') {
 		
+		$ip_addr=$_SERVER['REMOTE_ADDR'];
+		$lat=$_REQUEST['lat'];
+		$lng=$_REQUEST['lng'];
+		
+		$conlatlng=$lat.",".$lng;
+		//echo $conlatlng; 
+		
+		// Get the string from the URL
+		$url="https://maps.googleapis.com/maps/api/geocode/json?latlng=$conlatlng";
+		//echo $url;
+		
+         $json = file_get_contents($url);
+
+// Decode the JSON string into an object
+$obj = json_decode($json);
+
+// In the case of this input, do key and array lookups to get the values
+$vistorlocation=$obj->results[0]->formatted_address; 
+
+$visitexp=explode(',',$vistorlocation);
+
+$vcount=count($visitexp);
+
+$vcity=$visitexp[$vcount-3];
+$varea=$visitexp[$vcount-4];
+//echo $vistorlocation; exit;
+		
 		if($login === false) {
 			$output['msg'] = 'You are logged out. Please login and try again.';
 			echo json_encode($output);exit;
@@ -49,10 +76,12 @@ if(isset($_REQUEST['action'])) {
 				$balance = $_SESSION['roo']['user']['account_balance'];
 				$user_id = $_SESSION['roo']['user']['id'];
 				
+				//echo "INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added, demo,ipaddr,visitor_city,visitor_area,visitor_location) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."', 1,'".$ip_addr."','".$vcity."','".$varea."','".$vistorlocation."')"; exit;
+				
 				if($_SESSION['roo']['user']['demo'] == 1) {
-					$db->query("INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added, demo) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."', 1)");
+					$db->query("INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added, demo,ipaddr,visitor_city,visitor_area,visitor_location) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."', 1,'".$ip_addr."','".$vcity."','".$varea."','".$vistorlocation."')");
 				} else {
-					$db->query("INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."')");
+					$db->query("INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added,demo,ipaddr,visitor_city,visitor_area,visitor_location) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."','0','".$ip_addr."','".$vcity."','".$varea."','".$vistorlocation."')");
 				}
 				
 				$db->query("UPDATE roo_ads SET clicks_remain = (clicks_remain - 1), viewing = 0 WHERE id = '".$adid."' LIMIT 1");

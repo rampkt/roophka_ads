@@ -3,8 +3,8 @@ include_once("./config/config.php");
 /***
  * initial setup
  */
-$pagename = 'login';
-$subname = 'login';
+$pagename = 'Forgot Password';
+$subname = 'forgot';
 
 $login = check_login();
 if($login === true) {
@@ -31,7 +31,7 @@ if($login === true) {
 <section id="page-header" class="clearfix">    
 <!-- responsive FlexSlider image slideshow -->
 <div class="wrapper">
-	<h1>Login</h1>
+	<h1>Forgot Password</h1>
     </div>
 
 </section>
@@ -39,17 +39,21 @@ if($login === true) {
 <!-- main content area -->   
 <div id="main" class="wrapper register"> 
 	<? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == '1') { ?>
-    <div class="error-msg"><strong>Login failed!</strong> username and password shouldn't empty.</div>
+    <div class="error-msg"><strong> Failed!</strong> email shouldn't empty.</div>
     <? } ?>
     
     <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == '2') { ?>
-    <div class="error-msg"><strong>Login failed!</strong> username or password mismatch.</div>
+    <div class="error-msg"><strong>Failed!</strong> email is mismatch.</div>
     <? } ?>
     
     <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == '3') { ?>
-    <div class="error-msg"><strong>Login failed!</strong> Your account has been blocked, Contact admin.</div>
+    <div class="error-msg"><strong>Failed!</strong> Your account has been blocked, Contact admin.</div>
     <? } ?>
     
+	<? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
+    <div class="success-msg"><strong>Success!</strong> Please check your email and click link to reset your password.</div>
+    <? } ?>
+	
 	<!-- content area -->    
 	<section id="content">
     	<form class="form-horizontal" action='userlogin.php' name="login" method="POST" data-parsley-validate="">
@@ -59,35 +63,26 @@ if($login === true) {
               <span class="pull-right" id="name-error"></span>
               <label class="control-label"  for="name">Email</label>
               <div class="controls">
-                <input type="email" id="username" name="username" placeholder="" class="form-control input-lg" required data-parsley-errors-container="#name-error" />
+                <input type="email" id="username" name="username" placeholder="Please enter your email address here ..." class="form-control input-lg" required data-parsley-errors-container="#name-error" />
               </div>
             </div>
          	<div class="clearfix"></div><br>
             
-            <div class="control-group">
-              <!-- E-mail -->
-              <span class="pull-right" id="email-error"></span>
-              <label class="control-label" for="email">Password</label>
-              <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="form-control input-lg" required data-parsley-errors-container="#email-error" />
-                <p class="help-block">&nbsp;</p>
-              </div>
-            </div>
-			
 			<div class="control-group">
 			<div class="pull-left">
-			<a href="forgot_password.php">Forgot Password ?</a>
+			<a href="login.php">Login ?</a>
 			</div>
 			<div class="pull-left">
-			<a href="register.php"> &nbsp;Register Now</a>
+			<a href="register.php">&nbsp;Register Now</a>
 			</div>
 			</div>
            <div class="clearfix"></div><br>
-			
+		   
+		   
             <div class="control-group">
               <!-- Button -->
               <div class="controls">
-                <button type="submit" name="action" value="dologin" class="btn btn-success">Login</button>
+                <button type="submit" name="action" value="forgotpass" class="btn btn-success">Submit</button>
               </div>
             </div>
           </fieldset>

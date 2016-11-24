@@ -15,11 +15,20 @@
 							<ul>
 								<li><a class="submenu" href="users_report.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> User Reports</span></a></li>
 								<li><a class="submenu" href="ads_report.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Ads Reports</span></a></li>
-								<li><a class="submenu" href="withdraw_request.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Withdraw Reports</span></a></li>
+								<li><a class="submenu" href="withdraw_report.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Withdraw Reports</span></a></li>
 							</ul>	
 						</li>
 						
-						
+						<li>
+						<a href="withdraw_request.php"><i class="icon-calendar"></i><span class="hidden-tablet"> Withdraw Request</span></a>
+							
+						</li>
+						<li>
+						<a href="country.php"><i class="icon-dashboard"></i><span class="hidden-tablet"> Location</span></a>
+							
+						</li>
+						<li><a href="settings.php"><i class="icon-star"></i><span class="hidden-tablet"> Setting</span></a></li>
+						<li><a href="cms.php"><i class="icon-edit"></i><span class="hidden-tablet"> CMS Pages</span></a></li>
 						<!--
 						<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
 						<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>

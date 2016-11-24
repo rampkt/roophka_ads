@@ -113,16 +113,80 @@ class ads
 			$qry = $this->db->query("SELECT * FROM roo_ads WHERE id='".$id."'");
 			$row = $this->db->fetch_array($qry);
 			
+		$queryCount = "SELECT COUNT(t.adid) AS cnt FROM roo_transaction AS t WHERE (adid='$id' and visitor_area != '')"; 
+		
+		//echo $queryCount; exit;
+		//echo $this->db->num_rows($qry); exit;
+		
+		$qryCount = $this->db->query($queryCount);
+		$rowCount = $this->db->fetch_array($qryCount);
+
+		//$cntv=$this->db->num_rows($qryCount);
+			
+			
 			$this->id = $id;
 			$this->adname = $row['name'];
-			$this->adclicks = $row['watch_count'];
+			$this->adwatch = $row['watch_count'];
+			$this->adclicks = $row['clicks_remain'];
 			$this->adduration = $row['duration'];
 			$this->addtitle = $row['title'];
 			$this->addcontent = $row['content'];
 			$this->addtype = $row['type'];
 			$this->adamount = $row['amount'];
+			$this->adstatus = $row['status'];
+			$this->addate = $row['date_added'];
+			$this->adhtml= $this->getAdHtml($row);
+			$this->totalvcount=$rowCount['cnt'];
+			
 		}
 		return false;
+	}
+	
+	
+	public function getAllAdsviews($id,$page) {
+		
+		$limit = 10;
+		$start = (($page == 1) ? 0 : (($page * $limit) - 1));
+		
+		//echo "SELECT count(adid) as cnt,visitor_area  FROM roo_transaction where adid='$id' group by visitor_area LIMIT $start, $limit"; exit;
+		$sql="SELECT count(adid) as cnt,visitor_area FROM roo_transaction where (adid='$id' and visitor_area != '') group by visitor_area LIMIT $start, $limit";
+		
+		$qry = $this->db->query($sql);
+		$queryCount = "SELECT COUNT(t.adid) AS cnt FROM roo_transaction AS t WHERE (adid='$id' and visitor_area != '') group by visitor_area"; 
+		$queryCount1 = "SELECT COUNT(t.adid) AS cnt FROM roo_transaction AS t WHERE (adid='$id' and visitor_area != '')"; 
+		//echo $queryCount; exit;
+		//echo $this->db->num_rows($qry); exit;
+		
+		$qryCount = $this->db->query($queryCount);
+		$qryCount1 = $this->db->query($queryCount1);
+		
+		
+		$rowCount = $this->db->num_rows($qryCount);
+
+		$cntv=$this->db->fetch_array($qryCount1);
+		
+		 $cntot=$cntv['cnt']; 
+		
+		if($this->db->num_rows($qry) > 0) {
+			$adlist = array();
+			while($row=$this->db->fetch_array($qry)) {
+				
+				$row['totalcount']=$cntot;
+				$row['avg']=round(($row['cnt']/$row['totalcount'])*100);
+				
+				
+				$adlist[] = $row;
+			}
+			
+			
+		//echo $rowCount; exit;
+		
+		$totalPage = getTotalPage($rowCount,$limit);
+		$pagination = pagination("ads_details.php", "action=details&id=$id", $page, $totalPage, 6);
+		return array($adlist, $pagination);
+			//return array($adlist, '');
+		} 
+		return array(false, '');
 	}
 	
 	public function getAllAds($page = 1) {
@@ -169,6 +233,28 @@ class ads
 			return true;
 		}
 		return false;
+	}
+	
+	public function getAdHtml($ads) {
+		$html = '';
+		if($ads['type'] == 'image') {
+			$html = '<div class="imagead">
+        				<img src="'.$ads['content'].'" />
+        			</div>';
+		} elseif($ads['type'] == 'video') {
+			$html = '<div class="videoad">
+						<div>
+							<video src="'.$ads['content'].'" controls></video>
+						</div>
+					</div>';
+		} elseif($ads['type'] == 'text') {
+			$html = '<div class="videoad">
+						<div>
+							'.decodehtml($ads['content']).'
+						</div>
+					</div>';
+		} 
+		return $html;
 	}
 	
 }

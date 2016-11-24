@@ -24,6 +24,8 @@ class withdraw
 		
 		$query = 'SELECT w.id, w.userid, w.amount,w.details,w.date_added, w.status FROM roo_withdraw AS w WHERE w.date_added like '."'%$datestr%'".'  order by w.date_added desc LIMIT '.$this->start.','.$this->rowLimit;
 		
+		//echo $query; 
+		
 		$queryCount = 'SELECT COUNT(w.id) AS cnt FROM roo_withdraw AS w WHERE w.date_added like'. "'%$datestr%'"; 
 		
 		$qry = $this->db->query($query);
@@ -47,6 +49,39 @@ class withdraw
 		$pagination = pagination("withdraw_request.php", "todaydate=$date", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
+	
+	
+	public function getAllwithdrawreport($date) {
+		$datestr=date('Y-m-d',strtotime($date));
+		//echo $datestr; exit;
+		$result = array();
+		
+		$query = 'SELECT w.id, w.userid, w.amount,w.details,w.date_added, w.status FROM roo_withdraw AS w WHERE w.date_added like '."'%$datestr%'".'  order by w.date_added desc LIMIT '.$this->start.','.$this->rowLimit;
+		
+		$queryCount = 'SELECT COUNT(w.id) AS cnt FROM roo_withdraw AS w WHERE w.date_added like'. "'%$datestr%'"; 
+		
+		$qry = $this->db->query($query);
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				$userid=$row['userid'];
+				 $qry3 = $this->db->query("SELECT * FROM roo_users WHERE id='".$userid."'");
+			       $row3 = $this->db->fetch_array($qry3);
+				   $row['username']=$row3['firstname'];
+				$row['email']=$row3['email'];
+				   
+				$result[] = $row;
+			}
+		}
+		
+		// Pagination code
+		$qryCount = $this->db->query($queryCount);
+		$rowCount = $this->db->fetch_array($qryCount);
+		
+		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
+		$pagination = pagination("withdraw_report.php", "todaydate=$date", $this->page, $totalPage, 6);
+		return array($result, $pagination);
+	}
+	
 	
 	public function Activate($id=0) {
 		if($id > 0) {
@@ -72,17 +107,49 @@ class withdraw
 		return false;
 	}
 	
-	public function getUserBanks($userid) {
-		$result = array();
-		if($userid > 0) {
-			$qry = $this->db->query("SELECT * FROM roo_user_accounts WHERE userid = '".$userid."'");
-			if($this->db->num_rows($qry) > 0) {
-				while($row = $this->db->fetch_array($qry)) {
-					$result[] = $row;
-				}
-			}
-		}
-		return $result;
+	public function update()
+	{ 
+				$org_filename = $this->file['name'];
+				//echo $org_filename; exit;
+				
+				$extn = pathinfo($org_filename, PATHINFO_EXTENSION);
+				
+				$path = DOCUMENT_PATH . "uploads/withdraw/";
+				$filehash = randomString(20);
+				
+					$filename = $filehash . '.attach';
+				
+				$destination = $path . $org_filename;
+				
+				$httpPath = HTTP_PATH . "uploads/withdraw/" . $org_filename;
+				
+				@move_uploaded_file($this->file['tmp_name'], $destination);
+				
+				
+				//if(file_exists($destination)) {
+					$result=$this->db->query("UPDATE roo_withdraw set approve_date=  '". DATETIME24H ."', upload_image='".$org_filename."',filehash='".$filehash."', transaction_id='".$this->trans_id."',description='".$this->addcontent."',status='1' where id='".$this->id."'");
+					
+					if($result) { 
+						return true;
+					} else {
+						return false;
+					}
+				//}
+				return false;
+		
+	}
+	public function updatedecline()
+	{ 
+				
+					$result=$this->db->query("UPDATE roo_withdraw set approve_date=  '". DATETIME24H ."', description='".$this->addcontent."',status='2' where id='".$this->id."'");
+					
+					if($result) { 
+						return true;
+					} else {
+						return false;
+					}
+			
+		
 	}
 	
 }

@@ -56,7 +56,7 @@ $banner = true;
 $video = true;
 
 if($ads->id > 0) {
-	echo $ads->addtype;
+	//echo $ads->addtype;
 	if($ads->addtype == 'text') {
 		$banner = $video = false;
 	} elseif($ads->addtype == 'image') {

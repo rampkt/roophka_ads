@@ -14,7 +14,7 @@ else{
 $date=date("d-M-Y");
 }
 
-list($withdrawList,$pagination) = $withdraw->getAllwithdraw($date);
+list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +75,7 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdraw($date);
 			<div class="row-fluid sortable">	
 				<div class="box span12">
 					<div class="box-header">
-						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Withdraw Request</h2>
+						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Withdraw Report</h2>
 						<div class="box-icon">
 						<form name="search" action="withdraw_request.php" method="get">
 						<div class="row-fluid" style="height:30px;margin-top:-10px;">
@@ -101,7 +101,8 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdraw($date);
 									  <th>Amount</th>
 									  <th>Details</th>
 									  <th>Date</th>
-									  <th>Action</th>
+                                      <th>Status</th>
+									 
 								  </tr>
 							  </thead>   
 							  <tbody>
@@ -122,19 +123,16 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdraw($date);
 									<td><?=$wdrw['details']?></td>
 									
 									<td class="center"><?=date('d-M-Y h:i A', strtotime($wdrw['date_added']))?></td>
-									
-                                    <td>
-									<? if($wdrw['status'] == 0) { ?>
-									<a href="./withdraw_approve.php?action=approve&id=<?=$wdrw['id']?>&todaydate=<?php echo $date; ?>" onClick="return confirm('Do you realy want to Approve this withdraw request?');" class="btn btn-small btn-success" style="padding:0px 10px;"><i class="halflings-icon white ok">&nbsp;</i>Approve</a>
-                                    	
-                                        <a href="./withdraw_decline.php?action=deactivate&id=<?=$wdrw['id']?>&todaydate=<?php echo $date; ?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small" style="padding:0px 10px;"><i class="halflings-icon white remove"></i>Decline</a>
-										 <? } elseif($wdrw['status'] == 1) { ?>
+									<td class="center">
+                                    	<? if($wdrw['status'] == 0) { ?>
+										<span class="label label-success">Pending</span>
+                                        <? } elseif($wdrw['status'] == 1) { ?>
                                         <span class="label">Approved</span>
                                         <? }  elseif($wdrw['status'] == 2) { ?>
                                         <span class="label">Declined</span>
                                         <? } ?>
-                                        
-                                    </td>
+									</td>
+                                   
 								</tr>
                               <? $sno++; } } ?>
 							  </tbody>

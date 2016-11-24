@@ -89,6 +89,17 @@ if($_SESSION['roo']['user']['demo'] == 1) {
 var adstype = '<?=$currentAd['type']?>';
 var adscount = parseInt('<?=$currentAd['duration']?>');
 var adsid = '<?=$currentAd['id']?>';
+
+$( document ).ready(function() {
+navigator.geolocation.getCurrentPosition(function(position) {
+    //alert('allow');
+}, function() {
+    alert('Must be click allow to share your location,then only you can view this ad');
+});
+
+});
+
+
 </script>
 
 <script src="./assets/js/viewads.js"></script>

@@ -62,7 +62,8 @@ class register
 			}
 			
 			$encpassword = enc_password($this->password);
-			$reg = $this->db->query("INSERT INTO roo_users (email, pass, salt, firstname, phone, signupdate, status, dob, address, country, state, city, pincode) VALUES ('".$this->email."', '".$encpassword."', '".SALT."', '".$this->name."', '".$this->mobile."', '".DATETIME24H."', 1, '".$this->dob."', '".$this->address."', '".$this->state."', '".$this->state."', '".$this->city."', '".$this->pincode."')");
+			
+			$reg = $this->db->query("INSERT INTO roo_users (email, pass, salt, firstname, phone, signupdate, status, dob, address, country, state, city, pincode,account_balance) VALUES ('".$this->email."', '".$encpassword."', '".SALT."', '".$this->name."', '".$this->mobile."', '".DATETIME24H."', 1, '".$this->dob."', '".$this->address."', '".$this->state."', '".$this->state."', '".$this->city."', '".$this->pincode."',0)");
 			if($reg) {
 				$output['error'] = false;
 				$output['msg'] = 'success';

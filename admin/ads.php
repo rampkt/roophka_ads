@@ -111,7 +111,7 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 								?>
 								<tr id="adrow<?=$ad['id']?>">
                                 	<td><?=$sno?></td>
-									<td><?=$ad['name']?></td>
+									<td><a href="./ads_details.php?action=details&id=<?=$ad['id']?>" style="color:#08c;"> <?=$ad['name']?></a></td>
 									<td class="center"><?=$ad['type']?></td>
 									<td class="center"><?=$ad['clicks_remain']?>/<?=$ad['watch_count']?></td>
 									<td class="center status_column">

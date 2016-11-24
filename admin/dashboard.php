@@ -42,50 +42,13 @@ $totalstoday = $dash->totalCounttoday($date);
 			<? include('./includes/breadcrumb.php'); ?>
 
 			<div class="row-fluid">
-				
-                <div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
-					<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
-					<div class="number"><?=$totals['users']?><i class="icon-arrow-up"></i></div>
-					<div class="title">Total Users</div>
-					<div class="footer">
-						<a href="users.php"> View full Users</a>
-					</div>	
-				</div>
-				<!--<div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
-					<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
-					<div class="number">854<i class="icon-arrow-up"></i></div>
-					<div class="title">visits</div>
-					<div class="footer">
-						<a href="#"> read full report</a>
-					</div>	
-				</div>-->
-				<div class="span3 statbox green" onTablet="span6" onDesktop="span3">
-					<div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
-					<div class="number"><?=$totals['ads']?><i class="icon-arrow-up"></i></div>
-					<div class="title">Total Ads</div>
-					<div class="footer">
-						<a href="ads.php"> View full ads</a>
-					</div>
-				</div>
-				<div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
-					<div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
-					<div class="number"><?=$totals['transaction']?><i class="icon-arrow-up"></i></div>
-					<div class="title">Ads seen</div>
-					<div class="footer">
-						<a href="#"> views full ads</a>
-					</div>
-				</div>
-				<div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
-					<div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
-					<div class="number"><?=$totals['withdraw']?><i class="icon-arrow-down"></i></div>
-					<div class="title">Total Withdrawn</div>
-					<div class="footer">
-						<a href="#"> View full withdrawn</a>
-					</div>
-				</div>	
-				
-			</div>		
+			<div class="pull-left"><h4 style="line-height:6px;">Today Count</h4></div>
+			<div class="pull-right"><h4 style="line-height:6px;"><?php echo date("d-M-Y");?></h4></div>
+			<div class="clearfix"></div>
+			</div>
 			
+			
+			<hr style="margin:5px 0px;border-bottom:2px solid #CCC;" />
 			<div class="row-fluid">
 				
                 <div class="span3 statbox green" onTablet="span6" onDesktop="span3">
@@ -130,8 +93,59 @@ $totalstoday = $dash->totalCounttoday($date);
 				</div>	
 				
 			</div>		
+	
 			
+			<div><h4>Total Count</h4></div>
+			<hr style="margin:5px 0px;border-bottom:2px solid #CCC;" />
+			<div class="row-fluid">
 			
+				
+                <div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
+					<div class="number"><?=$totals['users']?><i class="icon-arrow-up"></i></div>
+					<div class="title">Total Users</div>
+					<div class="footer">
+						<a href="users.php"> View full Users</a>
+					</div>	
+				</div>
+				<!--<div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
+					<div class="number">854<i class="icon-arrow-up"></i></div>
+					<div class="title">visits</div>
+					<div class="footer">
+						<a href="#"> read full report</a>
+					</div>	
+				</div>-->
+				<div class="span3 statbox green" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
+					<div class="number"><?=$totals['ads']?><i class="icon-arrow-up"></i></div>
+					<div class="title">Total Ads</div>
+					<div class="footer">
+						<a href="ads.php"> View full ads</a>
+					</div>
+				</div>
+				<div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
+					<div class="number"><?=$totals['transaction']?><i class="icon-arrow-up"></i></div>
+					<div class="title">Ads seen</div>
+					<div class="footer">
+						<a href="#"> views full ads</a>
+					</div>
+				</div>
+				<div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
+					<div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
+					<div class="number"><?=$totals['withdraw']?><i class="icon-arrow-down"></i></div>
+					<div class="title">Total Withdrawn</div>
+					<div class="footer">
+						<a href="#"> View full withdrawn</a>
+					</div>
+				</div>	
+				
+			</div>		
+			
+					
+			<div><h4>Sub Links</h4></div>
+			<hr style="margin:5px 0px;border-bottom:2px solid #CCC;" />
 			
 			<div class="row-fluid">	
 

@@ -1,5 +1,7 @@
 // JavaScript Document
-
+var options = {
+  enableHighAccuracy: true
+};
 function getNextAd() {
 	$('.overlay').fadeIn();
 	var params = { action : '_getAds' }
@@ -15,9 +17,13 @@ function getNextAd() {
 	});
 }
 
-function submitAd() {
+function submitAd(position) {
+	
+	x=position.coords.latitude;
+    y=position.coords.longitude;
+	//console.log(x);
 	//$('.overlay').fadeIn();
-	var params = { action : '_submitAd', adid : adsid }
+	var params = { action : '_submitAd', adid : adsid,lat:x, lng:y}
 	$.ajax({
 		url:"user_ajax.php",
 		type:'POST',
@@ -57,6 +63,8 @@ function resetTimer()
 }
 
 function timer(){
+	
+	
 	count=count-1;
 	if (count <= 0){
 		$('#countdown').removeClass('running');
@@ -64,11 +72,32 @@ function timer(){
 		clearInterval(counter);
 		document.getElementById("countdown").innerHTML='Done!!!';
 		$('.timer-wrap .loader').slideDown();
-		submitAd();
+		
+		
+		
+		  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(submitAd, error, options);
+    } else { 
+       // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+		//submitAd();
 		return;  
 	}
 	document.getElementById("countdown").innerHTML=count + " secs.";
 }
+function getLocation() {
+	
+	
+	//alert("sri");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+       // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
 
 function countDownTimer(cnt) {
 	resetTimer();

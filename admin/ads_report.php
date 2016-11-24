@@ -115,8 +115,10 @@ list($adslist,$pagination) = $ads->getAllads($date);
 									  <th>Type</th>
 									  <th>viewer Name</th>
 									  <th>email</th>
+									  <th>ip</th>
+									  <th>Visitor Location</th>
 									  <th>view Time</th>
-                                      <th>Status</th>
+                                      <th>Demo</th>
 								  </tr>
 							  </thead>   
 							  <tbody>
@@ -135,13 +137,15 @@ list($adslist,$pagination) = $ads->getAllads($date);
 									<td class="center"><?=$ad['type']?></td>
                                     <td class="center"><?=$ad['username']?></td>
 									<td class="center"><?=$ad['email']?></td>
+									<td class="center"><?=$ad['ipaddr']?></td>
+									<td class="center"><?=$ad['visitor_location']?></td>
 									<td class="center"><?=date('d-M-Y h:i A', strtotime($ad['date_added']))?></td>
 									
 									<td class="center">
-                                    	<? if($ad['status'] == 0) { ?>
-										<span class="label label-success">Active</span>
-                                        <? } elseif($ad['status'] == 1) { ?>
-                                        <span class="label">Inactive</span>
+                                    	<? if($ad['demo'] == 0) { ?>
+										<span class="label label-success">Available</span>
+                                        <? } elseif($ad['demo'] == 1) { ?>
+                                        <span class="label">Not-Available</span>
                                         <? } ?>
 									</td>
                                    
@@ -168,45 +172,10 @@ list($adslist,$pagination) = $ads->getAllads($date);
 	
     <? include('./includes/footer.php'); ?>
 	
-    <div class="modal hide fade" id="bankAccount">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">x</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body" id="bankAjaxResult">
-			<p>Nothing to show here...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-		</div>
-	</div>
-    
 	<!-- start: JavaScript-->
 	<? include('./includes/footerinclude.php'); ?>
 	<!-- end: JavaScript-->
 	
-    <script type="text/javascript">
-		function getAccount(id) {
-			var params = { cmd:'_getAccount', user:id }
-            $.ajax({
-				url:"./ajax.php",
-				dataType:"JSON",
-				data:params,
-				success: function(result) {
-					if(result.error) {
-						alert(result.msg);
-					} else {
-						$('#bankAjaxResult').html(result.html);
-						$('#bankAccount').modal('show');
-					}
-				}
-			});
-			return false;
-		}
-		$(document).ready(function(e) {
-			
-        });
-	</script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
