@@ -62,6 +62,10 @@ $genPassword = randomString(10);
     <style type="text/css">
 	.form-horizontal .form-actions { margin: 0 0 -20px 0; }
 	.radio { padding:0; }
+	 .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 	</style>
 </head>
 
@@ -87,7 +91,21 @@ $genPassword = randomString(10);
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? //include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				
+				<li>
+					<a href="adminusers.php">Admin Users</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Add</li>
+			</ul>
 			
             <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == 'empty') { ?>
             <div class="alert alert-error">

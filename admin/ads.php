@@ -30,6 +30,10 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 	<? include('./includes/head.php'); ?>
     <style type="text/css">
 	.add-new { margin:-15px 0 10px 0; }
+	 .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 	</style>
 </head>
 
@@ -55,7 +59,17 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? //include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Ads</li>
+			</ul>
+            
             
             <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
             <div class="alert alert-success">

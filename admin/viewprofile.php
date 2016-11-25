@@ -46,6 +46,10 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 	.tab-menu.nav-tabs > li > a:hover {
 		color:#555;
 	}
+	 .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 	</style>
 </head>
 
@@ -71,7 +75,21 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? //include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				
+				<li>
+					<a href="users.php">Users</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Profile</li>
+			</ul>
 			
             <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == 'currentpassword') { ?>
             <div class="alert alert-error">

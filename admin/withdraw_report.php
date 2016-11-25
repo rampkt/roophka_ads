@@ -28,6 +28,10 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
 	{
 		z-index:100 !important;
 	}
+	 .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 	</style>
 </head>
 
@@ -53,7 +57,16 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? // include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Withdraw Report</li>
+			</ul>
             
             <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
             <div class="alert alert-success">

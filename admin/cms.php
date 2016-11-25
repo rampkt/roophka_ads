@@ -34,6 +34,11 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_cms') {
 	.tab-menu.nav-tabs > li > a:hover {
 		color:#555;
 	}
+	.breadcrumb a 
+	{
+		color:#08c !important;
+	}
+	
 	</style>
 </head>
 

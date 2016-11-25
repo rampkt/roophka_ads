@@ -5,13 +5,13 @@ ob_start();
 define('HOST','localhost');
 define('USER','root');
 define('PASS','');
-define('DATABASE','roophka_ads');
+define('DATABASE','roophka_ads_live');
 
-define('HTTP_PATH','http://localhost/project/roophka/ads/');
-define('HTTPS_PATH','https://localhost/project/roophka/ads/');
+define('HTTP_PATH','http://localhost/roophka/git/');
+define('HTTPS_PATH','https://localhost/roophka/git/');
 
-define('DOCUMENT_PATH',$_SERVER['DOCUMENT_ROOT'].'/project/roophka/ads/');
-define('SUB_DIR','/project/roophka/ads/');
+define('DOCUMENT_PATH',$_SERVER['DOCUMENT_ROOT'].'/roophka/git/');
+define('SUB_DIR','/roophka/git/');
 define('SALT','12BC#@');
 
 // ## database connection

@@ -62,7 +62,10 @@ list($countryList,$pagination) = $location->getAllcountry($country);
     <style type="text/css">
 	.add-search { margin:-15px 0 10px 0;}
     .btn-small{padding:4px 10px;}	
-    
+    .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 	</style>
 </head>
 

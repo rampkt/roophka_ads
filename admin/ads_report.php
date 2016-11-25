@@ -43,6 +43,11 @@ list($adslist,$pagination) = $ads->getAllads($date);
 	{
 		z-index:100 !important;
 	}
+	 .breadcrumb a 
+	{
+		color:#08c !important;
+	}
+	
 	</style>
 </head>
 
@@ -68,7 +73,16 @@ list($adslist,$pagination) = $ads->getAllads($date);
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<?// include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Ad Report</li>
+			</ul>
             
             <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
             <div class="alert alert-success">

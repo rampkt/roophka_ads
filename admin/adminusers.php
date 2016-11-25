@@ -25,6 +25,10 @@ $userList = $users->getAllUsers();
     <style type="text/css">
 	#bankAccount { width:700px; }
 	.add-new { margin:-15px 0 10px 0; }
+	 .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 	</style>
 </head>
 
@@ -50,7 +54,18 @@ $userList = $users->getAllUsers();
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? //('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Admin Users</li>
+			</ul>
+            
+			
             
             <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
             <div class="alert alert-success">

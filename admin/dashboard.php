@@ -14,6 +14,13 @@ $totalstoday = $dash->totalCounttoday($date);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+ .breadcrumb a 
+	{
+		color:#08c !important;
+	}
+</style>
+
 	<? include('./includes/head.php'); ?>
 </head>
 
@@ -39,7 +46,17 @@ $totalstoday = $dash->totalCounttoday($date);
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? //include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Dashboard</li>
+			</ul>
+			
 
 			<div class="row-fluid">
 			<div class="pull-left"><h4 style="line-height:6px;">Today Count</h4></div>

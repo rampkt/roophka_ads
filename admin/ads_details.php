@@ -60,6 +60,10 @@ list($adslist, $pagination)= $ads->getAllAdsviews($_REQUEST['id'],$page);
 	margin-left:25px;
 	line-height:30px;
 }
+ .breadcrumb a 
+	{
+		color:#08c !important;
+	}
 
 	</style>
 	<link rel="stylesheet" href="./css/w3.css">
@@ -87,7 +91,22 @@ list($adslist, $pagination)= $ads->getAllAdsviews($_REQUEST['id'],$page);
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
-			<? include('./includes/breadcrumb.php'); ?>
+			<? //include('./includes/breadcrumb.php'); ?>
+			
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home"></i>
+					<a href="dashboard.php">Home</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				
+				<li>
+					<a href="ads.php">Ads</a> 
+					<i class="icon-angle-right"></i>
+				</li>
+				<li>Details</li>
+			</ul>
+			
 			
             <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == 'empty') { ?>
             <div class="alert alert-error">
