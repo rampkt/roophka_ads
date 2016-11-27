@@ -29,7 +29,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 			$message = '<div style="width:600px;">
 			Dear '.$users->username.'<br>
 			<p>Welcome to ROOPHKA.IN</p>
-			<p>Admin manually deposited '.$users->amount.' for your account.</p>
+			<p>Admin manually deposited '.$users->amount.' rupees for your account.</p>
 			<br>
 			<table cellpadding="0" cellspacing="0" border="0">
 			
@@ -53,7 +53,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 			$message = '<div style="width:600px;">
 			Dear '.$users->username.'<br>
 			<p>Welcome to ROOPHKA.IN</p>
-			<p>Admin manually withdraw your request has been approved.Herewith i have attached receipt also, please check it.</p>
+			<p>Admin manually withdraw amount '.$users->amount.' rupees your request has been approved.Herewith i have attached receipt also, please check it.</p>
 			
 			<br>
 			<table cellpadding="0" cellspacing="0" border="0">
