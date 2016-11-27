@@ -512,8 +512,8 @@ border-bottom: 1px solid transparent;
             box-shadow: none;
 }
 
-.dropdown-menu:after,
-.dropdown-menu:before {
+.dropdown .dropdown-menu:after,
+.dropdown .dropdown-menu:before {
 	top: -1px;
 	left: 10px;
 	border-right: 9px solid transparent;
@@ -522,7 +522,7 @@ border-bottom: 1px solid transparent;
 	content: '';
 }
 
-.dropdown-menu {
+.dropdown .dropdown-menu {
 	border-top: 5px solid transparent;
   	position: absolute;
   	top: 100%;

@@ -125,7 +125,18 @@ class withdraw
 				
 				@move_uploaded_file($this->file['tmp_name'], $destination);
 				
+				$userQry1 = $this->db->query("SELECT userid,amount FROM `roo_withdraw` WHERE (id='".$this->id."') limit 1");
+		$row1=$this->db->fetch_array($userQry1);
+		//echo "SELECT userid,amount FROM `roo_withdraw` WHERE (id='".$this->id."') limit 1";
 				
+				$userQry = $this->db->query("SELECT id,email,account_balance FROM `roo_users` WHERE (id='".$row1['userid']."') limit 1");
+		$row=$this->db->fetch_array($userQry);
+		
+		//echo "SELECT id,email,account_balance FROM `roo_users` WHERE (id='".$row1['userid']."') limit 1";
+		
+		$account_balance=$row['account_balance']-$row1['amount'];
+		$result1=$this->db->query("UPDATE roo_users set account_balance=  '". $account_balance ."' where id='".$row['id']."'");
+				//echo "UPDATE roo_users set account_balance=  '". $account_balance ."' where id='".$row['id']."'"; exit;
 				//if(file_exists($destination)) {
 					$result=$this->db->query("UPDATE roo_withdraw set approve_date=  '". DATETIME24H ."', upload_image='".$org_filename."',filehash='".$filehash."', transaction_id='".$this->trans_id."',description='".$this->addcontent."',status='1' where id='".$this->id."'");
 					

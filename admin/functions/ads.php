@@ -201,12 +201,23 @@ class ads
 		
 		$qry = $this->db->query("SELECT id, name, type, watch_count, clicks_remain, date_added, status FROM roo_ads ".$where." ORDER BY date_added DESC LIMIT $start, $limit");
 		
+		$queryCount = "SELECT count(id) as cnt FROM roo_ads ".$where; 
+		
 		if($this->db->num_rows($qry) > 0) {
 			$adlist = array();
 			while($row=$this->db->fetch_array($qry)) {
 				$adlist[] = $row;
 			}
-			return array($adlist, '');
+			
+			$qryCount = $this->db->query($queryCount);
+		$rowCount = $this->db->fetch_array($qryCount);
+		
+		//echo $rowCount['cnt']; exit;
+		
+		$totalPage = getTotalPage($rowCount['cnt'],$limit);
+		$pagination = pagination("ads.php", "", $page, $totalPage, 6);
+	
+			return array($adlist, $pagination);
 		} 
 		return array(false, '');
 	}

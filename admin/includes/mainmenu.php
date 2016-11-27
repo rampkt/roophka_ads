@@ -23,6 +23,11 @@
 						<a href="withdraw_request.php"><i class="icon-calendar"></i><span class="hidden-tablet"> Withdraw Request</span></a>
 							
 						</li>
+						
+						<li>
+						<a href="manual_transaction.php"><i class="icon-edit"></i><span class="hidden-tablet"> Manual Transaction</span></a>
+							
+						</li>
 						<li>
 						<a href="country.php"><i class="icon-dashboard"></i><span class="hidden-tablet"> Location</span></a>
 							

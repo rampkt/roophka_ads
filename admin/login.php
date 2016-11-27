@@ -31,7 +31,7 @@ if($_REQUEST['action'] == 'dologin') {
 		$db->query("UPDATE `roo_admin_users` SET lastlogin='".DATETIME24H."' WHERE id='".$userRow['id']."'");
 		
 		$_SESSION['roo']['admin_user'] = $userRow;
-		//$_SESSION['roo']['admin_user']['id'] = $userRow['id'];
+		$_SESSION['roo']['admin_user']['id'] = $userRow['id'];
 		//$_SESSION['roo']['admin_user']['email'] = $userRow['email'];
 		$_SESSION['roo']['admin_user']['fullname'] = $userRow['firstname'] . ' ' . $userRow['lastname'];
 		
