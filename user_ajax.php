@@ -6,6 +6,12 @@ $output = array('error' => true, 'msg' => 'Illeagal operation.');
 if(isset($_REQUEST['action'])) {
 	$login = check_login();
 
+	if($_REQUEST['action'] == '_findlocation')
+	{
+		$_SESSION['lat']=$_REQUEST['lat'];
+$_SESSION['lng']=$_REQUEST['lng'];
+	}
+	
 	if($_REQUEST['action'] == '_getAds') {
 		
 		if($login === false) {
@@ -35,8 +41,8 @@ if(isset($_REQUEST['action'])) {
 	if($_REQUEST['action'] == '_submitAd') {
 		
 		$ip_addr=$_SERVER['REMOTE_ADDR'];
-		$lat=$_REQUEST['lat'];
-		$lng=$_REQUEST['lng'];
+		$lat=$_SESSION['lat'];
+		$lng=$_SESSION['lng'];
 		
 		$conlatlng=$lat.",".$lng;
 		//echo $conlatlng; 

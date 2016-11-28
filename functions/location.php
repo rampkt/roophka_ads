@@ -16,7 +16,7 @@ class location
 	public function getStateDropdown($cid, $sid = 0, $class = "", $required = false, $attrbute='') {
 		$html = '<select name="state" id="state" class="form-control '.$class.'" '.(($required === true) ? 'required' : '').' '.$attrbute.'>';
 		if($cid > 0) {
-			$stateQry = $this->db->query("SELECT id, name FROM roo_state WHERE cid = '".$cid."' AND status=0");
+			$stateQry = $this->db->query("SELECT id, name FROM roo_state WHERE cid = '".$cid."' AND status=0 order by name asc");
 			if($this->db->num_rows($stateQry) > 0) {
 				$html .= '<option value="">Select State</option>';
 				while($stateRow = $this->db->fetch_array($stateQry)) {
@@ -35,7 +35,7 @@ class location
 	public function getCityDropdown($sid, $ciid = 0, $class = "", $required = false, $attrbute='') {
 		$html = '<select name="city" id="city" class="form-control '.$class.'" '.(($required === true) ? 'required' : '').' '.$attrbute.'>';
 		if($sid > 0) {
-			$cityQry = $this->db->query("SELECT id, name FROM roo_city WHERE sid = '".$sid."' AND status=0");
+			$cityQry = $this->db->query("SELECT id, name FROM roo_city WHERE sid = '".$sid."' AND status=0 order by name asc");
 			if($this->db->num_rows($cityQry) > 0) {
 				$html .= '<option value="">Select City</option>';
 				while($cityRow = $this->db->fetch_array($cityQry)) {

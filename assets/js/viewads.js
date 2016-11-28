@@ -17,13 +17,13 @@ function getNextAd() {
 	});
 }
 
-function submitAd(position) {
+function submitAd() {
 	
-	x=position.coords.latitude;
-    y=position.coords.longitude;
+	//x=position.coords.latitude;
+    //y=position.coords.longitude;
 	//console.log(x);
 	//$('.overlay').fadeIn();
-	var params = { action : '_submitAd', adid : adsid,lat:x, lng:y}
+	var params = { action : '_submitAd', adid : adsid}
 	$.ajax({
 		url:"user_ajax.php",
 		type:'POST',
@@ -39,6 +39,30 @@ function submitAd(position) {
 				$('.timer-wrap .loader').slideUp();
 				$('.timer-wrap .continue').slideDown();
 				$('.account-balance span').html(result.account_balance);
+			}
+		}
+	});
+}
+
+function findlocationvalue(position) {
+	//alert("ada");
+	x=position.coords.latitude;
+    y=position.coords.longitude;
+	//console.log(x);
+	//$('.overlay').fadeIn();
+	var params = { action : '_findlocation',lat:x, lng:y}
+	$.ajax({
+		url:"user_ajax.php",
+		type:'POST',
+		dataType:"JSON",
+		data:params,
+		success: function(result) {
+			//$('.overlay').fadeOut();
+			console.log(result);
+			if(result.error) {
+				
+			} else {
+			
 			}
 		}
 	});
@@ -63,8 +87,14 @@ function resetTimer()
 }
 
 function timer(){
+	//alert(lngval);
 	
-	
+	if((latval=="")&&(lngval==""))
+	{
+		adPause();
+		return false;
+	}
+	else{
 	count=count-1;
 	if (count <= 0){
 		$('#countdown').removeClass('running');
@@ -75,15 +105,16 @@ function timer(){
 		
 		
 		
-		  if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(submitAd, error, options);
-    } else { 
+		 // if (navigator.geolocation) {
+     // navigator.geolocation.getCurrentPosition(submitAd, error, options);
+   // } else { 
        // x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-		//submitAd();
+    //}
+		submitAd();
 		return;  
 	}
 	document.getElementById("countdown").innerHTML=count + " secs.";
+}
 }
 function getLocation() {
 	
