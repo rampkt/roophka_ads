@@ -3,7 +3,7 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/ads.php");
 $ads = new ads();
-
+$emails=$ads->getAlladminUsersemail();
 if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0) {
 	if($_REQUEST['action'] == 'activate') {
 		$ads->adActivate($_REQUEST['id']);
@@ -17,6 +17,12 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 		$ads->adDelete($_REQUEST['id']);
 		redirect(HTTP_PATH . "admin/ads.php?success=3");
 	}
+	
+	if($_REQUEST['action'] == '_change_user') {
+		$ads->adChangeUser($_REQUEST['id'],$_REQUEST['email']);
+		redirect(HTTP_PATH . "admin/ads.php?success=4");
+	}
+	
 	redirect(HTTP_PATH . "admin/ads.php");
 }
 
@@ -33,6 +39,11 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 	 .breadcrumb a 
 	{
 		color:#08c !important;
+	}
+	.typeahead 
+	{
+		width:282px;
+		border-radius:0px;
 	}
 	</style>
 </head>
@@ -92,6 +103,13 @@ list($adslist, $pagination) = $ads->getAllAds($page);
             </div>
             <div class="clearfix" style="margin-bottom:20px;"></div>
             <? } ?>
+			<? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '4') { ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Success!</strong> Ad User changed successfully.
+            </div>
+            <div class="clearfix" style="margin-bottom:20px;"></div>
+            <? } ?>
 			
 			<a href="ads_add.php" class="btn btn-small btn-primary pull-right add-new">Add new</a>
 			<div class="row-fluid ">	
@@ -109,7 +127,10 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 							  <thead>
 								  <tr>
 									  <th>SNO</th>
-                                      <th>AD NAME</th>
+									 
+                                      <th style="width: 150px;">AD NAME</th>
+									   <th>USERNAME</th>
+									   <th>USEREMAIL</th>
 									  <th>TYPE</th>
 									  <th>COUNT</th>
 									  <th>STATUS</th>
@@ -118,14 +139,18 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 							  </thead>   
 							  <tbody>
                               	<? if(empty($adslist)) { ?>
-                                <tr><td style="text-align:center;" colspan="6"><font color="red">No records to show</font></td></tr>
+                                <tr><td style="text-align:center;" colspan="8"><font color="red">No records to show</font></td></tr>
                                 <? } else { 
 									$sno = 1;
 									foreach($adslist as $ad) {
 								?>
 								<tr id="adrow<?=$ad['id']?>">
                                 	<td><?=$sno?></td>
+									
 									<td><a href="./ads_details.php?action=details&id=<?=$ad['id']?>" style="color:#08c;"> <?=$ad['name']?></a></td>
+									<td><?=$ad['username']?></td>
+									<td><?=$ad['email']?></td>
+									
 									<td class="center"><?=$ad['type']?></td>
 									<td class="center"><?=$ad['clicks_remain']?>/<?=$ad['watch_count']?></td>
 									<td class="center status_column">
@@ -139,11 +164,14 @@ list($adslist, $pagination) = $ads->getAllAds($page);
                                     	<? if($ad['status'] == 1) { ?>
                                         	<a href="./ads.php?action=activate&id=<?=$ad['id']?>" onClick="return confirm('Do you want to activate this record?')" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i> Activate</a>
                                         <? } else { ?>
-                                        	<a href="./ads.php?action=deactivate&id=<?=$ad['id']?>" onClick="return confirm('Do you want to deactivate this record?')" class="btn btn-small"><i class="halflings-icon white remove"></i> Deactivate</a>
+                                        	<a href="./ads.php?action=deactivate&id=<?=$ad['id']?>" onClick="return confirm('Do you want to deactivate this                            record?')" class="btn btn-small"><i class="halflings-icon white remove"></i> Deactivate</a>
                                         <? } ?>
                                     	
                                     	<a href="./ads_add.php?action=edit&id=<?=$ad['id']?>" class="btn btn-small btn-primary"><i class="halflings-icon white edit"></i> Edit</i></a>
                                         <a href="./ads.php?action=delete&id=<?=$ad['id']?>" onClick="return confirm('Do you want to delete this record?')" class="btn btn-small btn-danger"><i class="halflings-icon white trash"></i> Delete</i></a>
+										
+										<a href="javascript:void(0);" onClick="changeidfn(<?=$ad['id']?>)" class="btn btn-small btn-warning" id="changeidfn"><i class="halflings-icon white edit"></i> Change User</i></a>
+										
                                     </td>
 								</tr>
                                 <? $sno++; } } ?>                                   
@@ -179,6 +207,51 @@ list($adslist, $pagination) = $ads->getAllAds($page);
 	<!-- start: JavaScript-->
 	<? include('./includes/footerinclude.php'); ?>
 	<!-- end: JavaScript-->
+	 <div class="modal hide fade" id="changeuserid">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h3>Change ad user</h3>
+		</div>
+		<div class="modal-body" id="AjaxResult" style="overflow:visible;">
+			
+			<form class="form-horizontal" method="post" action="ads.php" name="changeuserform" enctype="multipart/form-data">
+                                <input type="hidden" name="action" value="_change_user" />
+                             
+                                  <fieldset>
+                                    <div class="control-group">
+                                      <label class="control-label" for="email">User Email: </label>
+                                      <div class="controls">
+                                       
+									   <input type="text" name="email" id="email" autocomplete="off" class="input-xlarge" placeholder="Type user email here" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="<?=htmlentities(json_encode($emails));?>" required>
+									   
+                                      </div>
+                                    </div>
+									
+									<input type="hidden" name="id" id="adid">
+									</fieldset>
+
+			</form>
+		</div>
+		<div class="modal-footer">
+		<a href="javascript:void(0)" class="btn btn-primary" data-dismiss="modal" id="changeusersubmit">Submit</a>	<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	
+	<script>
+	function changeidfn(id){
+		//alert("sdfsdf");
+		//e.preventDefault();
+		$('#adid').val(id);
+		$('#changeuserid').modal('show');
+	}
+	
+	$('#changeusersubmit').click(function()
+	{
+		document.changeuserform.submit();
+		
+	});
+	
+	</script>
 	
 </body>
 </html>

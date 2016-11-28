@@ -399,7 +399,7 @@ function template_functions(){
 		$target.slideToggle();
 	});
 	$('.btn-setting').click(function(e){
-		alert("sdfsdf");
+		//alert("sdfsdf");
 		e.preventDefault();
 		$('#myModal').modal('show');
 	});

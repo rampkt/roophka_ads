@@ -64,7 +64,47 @@ class ads
 		return false;
 	}
 	
+	public function getAlladminUsersemail() 
+	{
+		$field=array();
+		
+		//echo $datestr; exit;
+		$result = array();
+		
+		$query = 'SELECT u.id, u.email, u.username FROM roo_admin_users AS u WHERE u.status IN (0,1) and u.type!=0  order by u.email asc';
+		
+		$queryCount = 'SELECT u.id, u.email, u.username FROM roo_admin_users AS u WHERE u.status IN (0,1) and u.type!=0'; 
+		
+		//echo $query; 
+		$qry = $this->db->query($query);
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				
+				$field[]=($row['email']);
+				
+				$result[] = $row;
+			}
+		}
+		//print_r(json_encode($field)); 
+		// pagination code
+		return $field;
+	}
+	
+	public function getadminuser($email) 
+	{
+		$query = "SELECT u.id, u.email, u.username FROM roo_admin_users AS u WHERE u.status IN (0,1) and u.type!=0 and u.email='$email' order by u.email asc limit 1";
+		
+		//echo $query; 
+		$qry = $this->db->query($query);
+		
+		$result= $this->db->fetch_array($qry);
+		
+		return $result['id'];
+	}
+	
+	
 	public function save($id=0) {
+		
 		$this->emptycheck();
 		if($id > 0) {
 			
@@ -199,13 +239,21 @@ class ads
 			$where = "WHERE userid = '".$_SESSION['roo']['admin_user']['id']."'";
 		}
 		
-		$qry = $this->db->query("SELECT id, name, type, watch_count, clicks_remain, date_added, status FROM roo_ads ".$where." ORDER BY date_added DESC LIMIT $start, $limit");
+		$qry = $this->db->query("SELECT id, userid,name, type, watch_count, clicks_remain, date_added, status FROM roo_ads ".$where." ORDER BY date_added DESC LIMIT $start, $limit");
 		
 		$queryCount = "SELECT count(id) as cnt FROM roo_ads ".$where; 
 		
 		if($this->db->num_rows($qry) > 0) {
 			$adlist = array();
 			while($row=$this->db->fetch_array($qry)) {
+                $queryy = "SELECT u.id, u.email, u.username FROM roo_admin_users AS u WHERE u.id='$row[userid]' order by u.email asc";
+		
+		//echo $query; 
+		$qryy = $this->db->query($queryy);
+		
+		$resulty= $this->db->fetch_array($qryy);				
+                 $row['username']=$resulty['username'];
+				 $row['email']=$resulty['email'];
 				$adlist[] = $row;
 			}
 			
@@ -245,6 +293,20 @@ class ads
 		}
 		return false;
 	}
+	
+	public function adChangeUser($id=0,$email) {
+		
+		$userid=$this->getadminuser($email);
+		
+		//echo "UPDATE roo_ads SET userid='".$userid."' WHERE id='".$id."' LIMIT 1"; exit;
+		if($id > 0) {
+			$this->db->query("UPDATE roo_ads SET userid='".$userid."' WHERE id='".$id."' LIMIT 1");
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 	public function getAdHtml($ads) {
 		$html = '';
