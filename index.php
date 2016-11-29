@@ -19,12 +19,11 @@ $val = getLnt($zipcode);
 $_SESSION['lat']=$val['lat'];
 $_SESSION['lng']=$val['lng'];
 
- //echo "Latitude: ".$_SESSION['lat']."<br>";
- //echo "Longitude: ".$_SESSION['lng']."<br>"; exit;
+ echo "Latitude: ".$_SESSION['lat']."<br>";
+ echo "Longitude: ".$_SESSION['lng']."<br>"; exit;
 }
-
-//echo "Latitude: ".$_SESSION['lat']."<br>";
-// echo "Longitude: ".$_SESSION['lng']."<br>"; 
+echo "Latitude: ".$_SESSION['lat']."<br>";
+echo "Longitude: ".$_SESSION['lng']."<br>"; 
  function getLnt($zip){
 $url = "http://maps.googleapis.com/maps/api/geocode/json?address=
 ".urlencode($zip)."&sensor=false";
