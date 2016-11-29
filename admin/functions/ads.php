@@ -132,9 +132,12 @@ class ads
 				
 				$httpPath = HTTP_PATH . "uploads/ads/" . $filename;
 				
+				//echo $destination; exit;
+				
 				@move_uploaded_file($this->file['tmp_name'], $destination);
 				if(file_exists($destination)) {
-					$result = $this->db->query("INSERT INTO roo_ads (userid, isadmin, type, content, name, duration, amount, watch_count, clicks_remain, date_added, status, extension, filename, filehash) VALUES ('".$_SESSION['roo']['admin_user']['id']."', 1, '".$this->addtype."', '".$httpPath."', '".$this->adname."', '".$this->adduration."', '".$this->adamount."', '".$this->adclicks."', '".$this->adclicks."', '". DATETIME24H ."', 1, '".$extn."', '".$org_filename."', '".$filehash."')");
+					
+					$result = $this->db->query("INSERT INTO roo_ads (userid, isadmin, type,title, content, name, duration, amount, watch_count, clicks_remain, date_added, status, extension, filename, filehash) VALUES ('".$_SESSION['roo']['admin_user']['id']."', 1, '".$this->addtype."', '','".$httpPath."', '".$this->adname."', '".$this->adduration."', '".$this->adamount."', '".$this->adclicks."', '".$this->adclicks."', '". DATETIME24H ."', 1, '".$extn."', '".$org_filename."', '".$filehash."')");
 					unset($_SESSION['roo']['ads']);
 					if($result) { 
 						return true;

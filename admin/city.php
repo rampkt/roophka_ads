@@ -245,18 +245,6 @@ list($cityList,$pagination) = $location->getAllcity($city2,$cid,$sid);
 	
     <? include('./includes/footer.php'); ?>
 	
-    <div class="modal hide fade" id="bankAccount">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">x</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body" id="bankAjaxResult">
-			<p>Nothing to show here...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-		</div>
-	</div>
     <div id="light" class="white_content"> <a href = "javascript:void(0)" onclick = "countryaddfn(2);"><button type="button" class="close" data-dismiss="modal">x</button></a>
 		<div style="border-bottom:2px solid #ccc;width100%;margin:5px;"><h2>Add New City</h2></div>
 		<form action="city.php" method="post">
@@ -307,30 +295,8 @@ list($cityList,$pagination) = $location->getAllcity($city2,$cid,$sid);
 	<!-- end: JavaScript-->
 	
 	
-    <script type="text/javascript">
-		function getAccount(id) {
-			var params = { cmd:'_getAccount', user:id }
-            $.ajax({
-				url:"./ajax.php",
-				dataType:"JSON",
-				data:params,
-				success: function(result) {
-					if(result.error) {
-						alert(result.msg);
-					} else {
-						$('#bankAjaxResult').html(result.html);
-						$('#bankAccount').modal('show');
-					}
-				}
-			});
-			return false;
-		}
-		$(document).ready(function(e) {
-			
-        });
-	</script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
