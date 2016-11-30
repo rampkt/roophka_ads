@@ -262,7 +262,7 @@ function findlocationvalue(position) {
 	//alert("ada");
 	x=position.coords.latitude;
     y=position.coords.longitude;
-	//alert(x);
+	alert(x+""+y);
 	//$('.overlay').fadeIn();
 	var params = { action : '_findlocation',lat:x, lng:y}
 	$.ajax({
