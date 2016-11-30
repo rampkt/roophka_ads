@@ -25,8 +25,8 @@ $_SESSION['lng']=$val['lng'];
  //echo "Longitude: ".$_SESSION['lng']."<br>"; exit;
 }
 
-echo "Latitude: ".$_SESSION['lat']."<br>";
- echo "Longitude: ".$_SESSION['lng']."<br>"; 
+//echo "Latitude: ".$_SESSION['lat']."<br>";
+ //echo "Longitude: ".$_SESSION['lng']."<br>"; 
  function getLnt($zip){
 $url = "http://maps.googleapis.com/maps/api/geocode/json?address=
 ".urlencode($zip)."&sensor=false";
@@ -262,7 +262,7 @@ function findlocationvalue(position) {
 	//alert("ada");
 	x=position.coords.latitude;
     y=position.coords.longitude;
-	alert(x+""+y);
+	//alert(x);
 	//$('.overlay').fadeIn();
 	var params = { action : '_findlocation',lat:x, lng:y}
 	$.ajax({
