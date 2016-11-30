@@ -130,7 +130,7 @@ list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
             <div class="clearfix" style="margin-bottom:20px;"></div>
             <? } ?>
 
-			<div class="row-fluid sortable">	
+			<div class="row-fluid ">	
 				<div class="box span12">
 				<form name="search" action="users.php" method="get">
 						<div class="row-fluid" style="height:30px;margin:8px 8px -10px 30px;">
@@ -138,7 +138,7 @@ list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
 			<div class="pull-left"><input type="text" name="name" id="name" placeholder="Name" value="<?php echo $name;?>"></div>
 			<div class="pull-left"><input type="text" name="email" id="email" placeholder="Email" value="<?php echo $email;?>"></div>
 			<div class="pull-left"><input type="text" name="phone" id="phone" placeholder="Phone" value="<?php echo $phone;?>"></div>
-			<div class="pull-left"><input type="text" name="todaydate" id="datepicker" placeholder="Registered Date" value="<?php echo $date;?>"></div>
+			<div class="pull-left"><input type="text" name="todaydate" class="datepicker" placeholder="Registered Date" value="<?php echo $date;?>"></div>
 			<div class="pull-left">
 			<a href="javascript:void(0);" onclick="usersreportfn();"; class="btn btn-small " style="padding:4px 10px;">Search</a>
 			</div>
@@ -307,17 +307,8 @@ list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
 	</script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
   <script>
-  $( function() {
-    $( "#datepicker" ).datepicker(
-	{
-		dateFormat: "dd-M-yy"
-	}
-	);
-  } );
+  
   
   function usersreportfn()
   {

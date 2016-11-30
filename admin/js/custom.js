@@ -304,7 +304,9 @@ function template_functions(){
 	$('.cleditor').cleditor();
 	
 	/* ---------- Datapicker ---------- */
-	$('.datepicker').datepicker();
+	$('.datepicker').datepicker( {
+		dateFormat: "dd-M-yy"
+	});
 	
 	/* ---------- Notifications ---------- */
 	$('.noty').click(function(e){

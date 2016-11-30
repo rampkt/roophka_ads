@@ -101,7 +101,7 @@ list($adslist,$pagination) = $ads->getAllads($date);
 
 			
 			
-			<div class="row-fluid sortable">	
+			<div class="row-fluid ">	
 				<div class="box span12">
 					<div class="box-header">
 						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Ads Report</h2>
@@ -110,7 +110,7 @@ list($adslist,$pagination) = $ads->getAllads($date);
 						<div class="row-fluid" style="height:30px;margin-top:-10px;">
 			
 			<div class="pull-right"><a href="javascript:void(0);" onclick="usersreportfn();"; class="btn btn-small ">Search</a></div>
-			<div class="pull-right"><input type="text" name="todaydate" id="datepicker" value="<?php echo $date;?>"></div>
+			<div class="pull-right"><input type="text" name="todaydate" class="datepicker" value="<?php echo $date;?>"></div>
 			 <div class="clearfix" style="margin-bottom:20px;"></div>
 			
 			</div>
@@ -192,16 +192,9 @@ list($adslist,$pagination) = $ads->getAllads($date);
 	
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <script>
-  $( function() {
-    $( "#datepicker" ).datepicker(
-	{
-		dateFormat: "dd-M-yy"
-	}
-	);
-  } );
+ 
   
   function usersreportfn()
   {
