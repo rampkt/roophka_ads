@@ -6,7 +6,9 @@ include_once("./config/config.php");
  */
 $pagename = 'home';
 $subname = '';
-
+include("./functions/cms.php");
+$cms = new cms();
+$aboutus=$cms->getcms(1,'aboutus');
 include("./functions/ads.php");
 $ads = new ads();
 
@@ -24,7 +26,7 @@ $_SESSION['lng']=$val['lng'];
 }
 
 //echo "Latitude: ".$_SESSION['lat']."<br>";
-// echo "Longitude: ".$_SESSION['lng']."<br>"; 
+ //echo "Longitude: ".$_SESSION['lng']."<br>"; 
  function getLnt($zip){
 $url = "http://maps.googleapis.com/maps/api/geocode/json?address=
 ".urlencode($zip)."&sensor=false";
@@ -59,12 +61,8 @@ return $result3[0];
     <div class="wrapper">
        <div class="row"> 
         <div class="grid_5">
-            <h1>Earn while you browse</h1>
-            <p>Earn money while you browse. No age will stop your earning. Just sit in home and earn money. As well you can get your need also in here. We just not advertise the product. It was also your daily need and best of that.
-            </p>
-            <p>No more retirement are need work on hours. just stay where you are and make money for your internet...
-            </p>
-            <p><a href="#" class="buttonlink">Read More</a> <a href="#" class="buttonlink">How it works</a></p>
+            <?=substr(html_entity_decode($aboutus),0,540)?>
+            <p><a href="aboutus.php" class="buttonlink">Read More</a> <a href="howitworks.php" class="buttonlink">How it works</a></p>
         </div>
         <div class="grid_7 rightfloat">
               <div class="flexslider">
@@ -163,15 +161,24 @@ return $result3[0];
       
   </div><!-- #end div #main .wrapper -->
   
-	<div id="light" class="white_content"> <a href = "javascript:void(0)" onclick = "locationaddfn(2);"><button type="button" class="close" data-dismiss="modal">x</button></a>
-		<div style="border-bottom:2px solid #ccc;width100%;margin:5px;"><h2>Add Your Location</h2></div>
-		<div id="alertmsg">Must be allow your location or enter your zipcode,then only you can view ads !!! </div>
+	
+
+<!-- footer area -->    
+<? include("./includes/footer.php"); ?>
+<!-- #end footer area --> 
+ <div class="modal hide fade" id="light" style="height:340px;">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h3>Add Your Location</h3>
+		</div>
+		<div class="modal-body" id="bankAjaxResult">
+			<div id="alertmsg">Must be allow your location or enter your zipcode,then only you can view ads !!! </div>
 		<form action="index.php" method="post">
 		<input type="hidden" name="action" value="_add_findlocation">
 		<div class="row-fluid" style="margin-top:20px;">
 		<div class="pull-left" style="margin-right:10px;margin-top:10px;">Enter your zipcode :</div>
 		<div class="pull-left">
-		<input type="text" name="zipcode" id="zipcode" class="form-control " maxlength="6" placeholder="Enter zipcode here..." required>
+		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;" maxlength="6" placeholder="Enter zipcode here..." required>
 		</div>
 		<div class="pull-left"  style="margin-top:3px;margin-left:20px;">
 		<input type="submit" name="submit" id="submit" value="submit" style="padding:5px 15px;" class="btn btn-small btn-primary add-new">
@@ -192,13 +199,11 @@ return $result3[0];
 		
 		
 		</form>
-		<div></div>
 		</div>
-		<div id="fade" class="black_overlay"></div>
-
-<!-- footer area -->    
-<? include("./includes/footer.php"); ?>
-<!-- #end footer area --> 
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
 
 <? include("./includes/footerinclude.php"); ?>
 <script>
@@ -209,14 +214,14 @@ var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ ec
 	  //alert("adad");
 	  if(val==1)
 	  {
-	  document.getElementById('light').style.display='block';
-	  document.getElementById('fade').style.display='block';
+	  //document.getElementById('light').style.display='block';
+	 // document.getElementById('fade').style.display='block';
+	 $('#light').modal('show');
 	  }
 	  
 	   if(val==2)
 	  {
-	  document.getElementById('light').style.display='none';
-	  document.getElementById('fade').style.display='none';
+	  $('#light').modal('hide');
 	  }
 	  
 	  
@@ -238,17 +243,18 @@ var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ ec
    
   function findlocation(){
 	  
-	  
+	var options = {
+  enableHighAccuracy: true
+};  
 navigator.geolocation.getCurrentPosition(function(position) {
-	document.getElementById('light').style.display='none';
-	  document.getElementById('fade').style.display='none';
+	$('#light').modal('hide');
 	  findlocationvalue(position);
 	  
     //alert('allow');
-}, function() {
+},function() {
 	//location.reload(true);
    $('#alertmsg').html('You blocked your share location, so clear cache and then try !!! ');
-});
+},{enableHighAccuracy: true});
 
 }
  
@@ -256,7 +262,7 @@ function findlocationvalue(position) {
 	//alert("ada");
 	x=position.coords.latitude;
     y=position.coords.longitude;
-	//console.log(x);
+	//alert(x);
 	//$('.overlay').fadeIn();
 	var params = { action : '_findlocation',lat:x, lng:y}
 	$.ajax({
@@ -266,6 +272,7 @@ function findlocationvalue(position) {
 		data:params,
 		success: function(result) {
 			//$('.overlay').fadeOut();
+			location.reload(true);
 			console.log(result);
 			if(result.error) {
 				
@@ -286,33 +293,125 @@ function findlocationvalue(position) {
 			font-size:13px;
 		}
  
-		.black_overlay{
-			display: none;
-			position: fixed;
-			top: 0%;
-			left: 0%;
-			width: 100%;
-			height: 100%;
-			background-color: black;
-			z-index:1001;
-			-moz-opacity: 0.8;
-			opacity:.80;
-			filter: alpha(opacity=80);
-		}
-		.white_content {
-			display: none;
-			position: fixed;
-			top: 25%;
-			left: 25%;
-			width: 50%;
-			height: 45%;
-			padding: 16px;
-			border: 10px solid #578EBE;
-			background-color: white;
-			z-index:1002;
-			overflow: auto;
-			border-radius:10px;
-		}
+		.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+}
+
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  margin-left: -280px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+}
+
+.modal.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal.fade.in {
+  top: 10%;
+}
+
+.modal-header {
+  padding: 9px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header .close {
+  margin-top: 2px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  line-height: 30px;
+}
+
+.modal-body {
+  position: relative;
+  max-height: 400px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.modal-form {
+  margin-bottom: 0;
+}
+
+.modal-footer {
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  text-align: right;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.modal-footer:before,
+.modal-footer:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.modal-footer:after {
+  clear: both;
+}
+
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+
 	</style>
 </body>
 </html

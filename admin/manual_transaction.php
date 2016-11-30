@@ -8,8 +8,9 @@ $emails=$users->getAllUserstransaction();
 
 if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 	//print_r($_REQUEST);
+	$users->userinput=$db->escape_string($_REQUEST['userinput']);
 	
-	$users->email = $db->escape_string($_REQUEST['email']);
+	
 	$users->username = $db->escape_string($_REQUEST['username']);
 	$users->amount = $db->escape_string($_REQUEST['amount']);
 	$users->reason = $db->escape_string($_REQUEST['reason']);
@@ -19,6 +20,25 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 	$users->file = $_FILES['trans_image'];
 	
 	//$emptycheck = $settings->emptycheck();
+	if($_REQUEST['userinput']=='2')
+	{
+    $users->email = $users->getemail($_REQUEST['userid']);
+	}
+	else{
+		$users->email = $db->escape_string($_REQUEST['email']);
+	}
+	
+	if($_REQUEST['userinput']=='1')
+	{
+    $users->userid = $users->getuserid($_REQUEST['email']);
+	}
+	else
+	{
+		$users->userid = $db->escape_string($_REQUEST['userid']);
+	}
+	
+	
+	
 	
 	$save = $users->savetransaction();
 	if($users->trans_type==1)
@@ -194,18 +214,40 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
                                 <input type="hidden" name="action" value="_add_transaction" />
                              
                                   <fieldset>
+								  
+								   <div class="control-group">
+                                      <label class="control-label" for="userinput">User Input:</label>
+                                      <div class="controls-label">
+                                       <label for="emailuser" style="width:100px;margin-top: 8px;" class="pull-left">
+										<input type="radio" name="userinput" id="emailuser" value="1" onclick="userinputfn(1);" checked> Email
+										</label>
+										<label for="iduser" style="width:120px;margin-top: 8px;" class="pull-left">
+										<input type="radio" name="userinput" id="iduser" value="2" onclick="userinputfn(2);"> Id
+										</label>
+                                      </div>
+                                    </div>
+								  
                                     <div class="control-group">
                                       <label class="control-label" for="email">User Email: </label>
                                       <div class="controls">
                                        
-									   <input type="text" name="email" id="email" autocomplete="off" class="input-xlarge" placeholder="Type user email here" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="<?=htmlentities(json_encode($emails));?>" required>
+									   <input type="text" name="email" id="email" autocomplete="off" class="input-xlarge" placeholder="Type user email here" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="<?=htmlentities(json_encode($emails));?>" required onblur="currentbalancefn(this.value,'email');">
 									   
                                       </div>
                                     </div>
+									<div style="padding-left:135px; padding-bottom:20px;">(or)</div>
+									
 									<div class="control-group">
-                                      <label class="control-label" for="username">User Name: </label>
+                                      <label class="control-label" for="userid">User id: </label>
                                       <div class="controls">
-                                        <input type="text" class="input-xlarge" id="username" name="username"  placeholder="Enter user name here" required />
+                                        <input type="text" class="input-xlarge" id="userid" name="userid"  placeholder="Enter user id here" required disabled onblur="currentbalancefn(this.value,'id');" />
+                                      </div>
+                                    </div>
+									
+									<div class="control-group balanceid" style="display:none;">
+                                      <label class="control-label" for="currentbalance"> Current Balance: </label>
+                                      <div class="controls" style="margin-top: 5px;">
+                                      <span class="accountspan"> &#8377; &nbsp;</span>
                                       </div>
                                     </div>
 									
@@ -219,7 +261,7 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
 									 <div class="control-group ">
                                       <label class="control-label" for="reason">Reason:</label>
                                       <div class="controls">
-                                        <textarea class="cleditor" id="reason" rows="3" name="reason" placeholder="Enter reason for transaction" required></textarea>
+                                        <textarea  id="reason" rows="5" name="reason" style="width:270px;" placeholder="Enter reason for transaction" required></textarea>
                                       </div>
                                     </div>
                                     
@@ -304,7 +346,46 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
 			$('#withdrawid').show();
 		}
 	}
+	function userinputfn(val)
+	{
+		//alert(val);
+		if(val==1)
+		{
+			$('#userid').attr('disabled','disabled');
+			$('#email').removeAttr('disabled');	
+		}
+	    if(val==2)
+		{
+			$('#email').attr('disabled','disabled');
+			$('#userid').removeAttr('disabled');
+		}
+	}
 	
+	function currentbalancefn(val,type)
+	{
+		//alert(val);
+		
+		//console.log(val);
+		var params = { cmd : '_currentbalance',inputtype:type,email:val}
+	$.ajax({
+		url:"ajax_bank.php",
+		type:'POST',
+		dataType:"JSON",
+		data:params,
+		success: function(result) {
+			//$('.overlay').fadeOut();
+			//location.reload(true);
+			console.log(result);
+			if(result.error) {
+				
+			} else {
+			$('.balanceid').show();
+			$('.accountspan').append(result);
+			
+			}
+		}
+	});
+	}
 	
 	</script>
 </body>

@@ -138,6 +138,22 @@ class users
 		return $result;
 	}
 	
+	public function getemail($userid) {
+		//$result = array();
+		if($userid > 0) {
+			$qry = $this->db->query("SELECT email FROM roo_users WHERE id = '".$userid."'");
+			$row = $this->db->fetch_array($qry);
+		}
+		return $row['email'];
+	}
+	public function getuserid($email) {
+		//$result = array();
+		if($userid > 0) {
+			$qry = $this->db->query("SELECT id FROM roo_users WHERE email = '".$email."'");
+			$row = $this->db->fetch_array($qry);
+		}
+		return $row['id'];
+	}
 	
 	public function savetransaction()
 	{

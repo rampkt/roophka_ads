@@ -47,7 +47,7 @@ $aboutus=$cms->getcms(1,'aboutus');
 		  <div class="pull-left">
 		  <p>
 		  
-		  <?=$aboutus?>
+		  <?=html_entity_decode($aboutus)?>
 		  </p>
 		  </div>
 		  </div>	
