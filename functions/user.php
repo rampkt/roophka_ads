@@ -198,15 +198,15 @@ class user
 
 			if($mail == true) {
 				$to = array($user['email']);
-				$from = 'info@roophka.in';
+				$from = 'info@roophka.com';
 				$subject = "Roophka : Registration complete.";
 				$message = '<div style="width:600px;">
 				Dear '.$user['firstname'].'<br>
-				<p>Welcome to ROOPHKA.IN</p>
+				<p>Welcome to ROOPHKA.COM</p>
 				<p>Your email verified successfully....</p>
 				<p>Please login to site and continue earn by seeing advertisements and promotions</p>
 				Thanks & regards,<br>
-				<a href="'.HTTP_PATH.'">roophka.in</a>
+				<a href="'.HTTP_PATH.'">roophka.com</a>
 				</div>';
 			   $mailler->sendmail($to, $from, $subject, $message);
 			}

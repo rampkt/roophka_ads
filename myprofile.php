@@ -43,14 +43,14 @@ if(isset($_REQUEST['cmd'])) {
 				redirect(HTTP_PATH . "myprofile.php?view=_edit&error=1");
 		} else {
 			/*$to = array($reg->email);
-			$from = 'info@roophka.in';
+			$from = 'info@roophka.com';
 			$subject = "Roophka : Registration complete.";
 			$message = '<div style="width:600px;">
 			Dear '.$reg->name.'<br>
-			<p>Welcome to ROOPHKA.IN</p>
+			<p>Welcome to ROOPHKA.COM</p>
 			<p>Please login to site and continue earn by seeing advertisements and promotions</p>
 			Thanks & regards,<br>
-			<a href="roophka.in">roophka.in</a>
+			<a href="roophka.com">roophka.com</a>
 			</div>';
 			
 			$mailler->sendmail($to, $from, $subject, $message);*/

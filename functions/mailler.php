@@ -6,7 +6,7 @@ class mailler {
 		$tomail = implode(',',$to);
 		//$subject = 'Test mail Ram';
 		
-		$message = '<html><head><title>Mail from Roophka.in</title></head><body>';
+		$message = '<html><head><title>Mail from Roophka.com</title></head><body>';
 		$message .= $msg;
 		$message .= '</body></html>';
 		
@@ -38,7 +38,7 @@ class mailler {
 		$to = implode(',',$mailto);
 		//$subject = 'Test mail Ram';
 		
-		$message = '<html><head><title>Mail from Roophka.in</title></head><body>';
+		$message = '<html><head><title>Mail from Roophka.com</title></head><body>';
 		$message .= $msg;
 		$message .= '</body></html>';
 		

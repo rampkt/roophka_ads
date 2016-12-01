@@ -17,7 +17,7 @@
 	<footer>
 
 		<p>
-			<span style="text-align:left;float:left">&copy; <?=date('Y')?> <a href="http://www.roophka.in/" alt="Roophka.in" target="_blank">powered by Roophka.in</a></span>
+			<span style="text-align:left;float:left">&copy; <?=date('Y')?> <a href="http://www.roophka.com/" alt="Roophka.com" target="_blank">powered by Roophka.com</a></span>
 			
 		</p>
 
