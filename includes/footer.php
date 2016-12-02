@@ -12,10 +12,12 @@
             <div class="clearfix">&nbsp;</div>
             <ul class="footer-menu">
             	<li><a href="aboutus.php">About Us</a></li>
+				<li><a href="contactus.php">Contact Us</a></li>
                 <li><a href="howitworks.php">How it works</a></li>
                 <li><a href="privacy.php">Privacy policy</a></li>
                 <li><a href="terms.php">Terms &amp; Condition</a></li>
 				<li><a href="viewads.php">View Ads</a></li>
+				<li><a href="advertise.php">Advertise With us</a></li>
             </ul>
         </div>
         <div class="grid_3">

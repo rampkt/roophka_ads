@@ -68,6 +68,7 @@
                   <li <? if($pagename == 'myprofile') { ?>class="current"<? } ?>><a href="./myprofile.php">My Profile</a></li>
                   <li><a href="./logout.php">Logout</a></li>
                   <? } ?>
+				   <li <? if($pagename == 'contact') { ?>class="current"<? } ?>><a href="./contactus.php">Contact Us</a></li>
               </ul> 
               <div class="clearfix"></div>    
             </nav><!-- end main navigation -->

@@ -13,8 +13,7 @@
                         <? } ?>
                         <li <? if($subname == 'aboutus') { ?>class="current"<? } ?>><a href="aboutus.php">About Us</a></li>
                         <li <? if($subname == 'how') { ?>class="current"<? } ?>><a href="howitworks.php">How it works</a></li>
-						
-						
+												
 						
                     </ul>
              </nav>
