@@ -27,11 +27,11 @@ global $mailler;
 		if($add) {
 			
 			$to = array($row3['email']);
-			$from = 'info@roophka.in';
+			$from = 'info@roophka.com';
 			$subject = "Withdraw Request approved";
 			$message = '<div style="width:600px;">
 			Dear '.$row3['firstname'].'<br>
-			<p>Welcome to ROOPHKA.IN</p>
+			<p>Welcome to ROOPHKA.COM</p>
 			<p>Your withdraw request has been approved.Herewith i have attached receipt also, please check it.</p>
 			
 			<br>
@@ -49,7 +49,7 @@ global $mailler;
 			</table>
 			<br>
 			Thanks & regards,<br>
-			<a href="roophka.in">roophka.in</a>
+			<a href="roophka.com">roophka.com</a>
 			</div>';
 			
 			$my_file = $withdraw->file['name'];

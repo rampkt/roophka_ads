@@ -44,11 +44,11 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 	if($users->trans_type==1)
 	{
 	$to = array($users->email);
-			$from = 'info@roophka.in';
+			$from = 'info@roophka.com';
 			$subject = "Manual deposit by admin";
 			$message = '<div style="width:600px;">
 			Dear '.$users->username.'<br>
-			<p>Welcome to ROOPHKA.IN</p>
+			<p>Welcome to ROOPHKA.COM</p>
 			<p>Admin manually deposited '.$users->amount.' rupees for your account.</p>
 			<br>
 			<table cellpadding="0" cellspacing="0" border="0">
@@ -61,18 +61,18 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 			</table>
 			<br>
 			Thanks & regards,<br>
-			<a href="roophka.in">roophka.in</a>
+			<a href="roophka.com">roophka.com</a>
 			</div>';
 			
 			$mailler->sendmail($to, $from, $subject, $message);
 	}else{
 		
 		$to = array($users->email);
-			$from = 'info@roophka.in';
+			$from = 'info@roophka.com';
 			$subject = "Manual Withdrawn by admin";
 			$message = '<div style="width:600px;">
 			Dear '.$users->username.'<br>
-			<p>Welcome to ROOPHKA.IN</p>
+			<p>Welcome to ROOPHKA.COM</p>
 			<p>Admin manually withdraw amount '.$users->amount.' rupees your request has been approved.Herewith i have attached receipt also, please check it.</p>
 			
 			<br>
@@ -90,7 +90,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 			</table>
 			<br>
 			Thanks & regards,<br>
-			<a href="roophka.in">roophka.in</a>
+			<a href="roophka.com">roophka.com</a>
 			</div>';
 			
 			$my_file = $users->file['name'];

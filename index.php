@@ -121,40 +121,36 @@ return $result3[0];
 	<section id="content" class="wide-content">
       <div class="row">	
         <div class="grid_4">
-        	<h2 class="first-header text-primary" align="center">-- Place your ad here --</h2>
-            <img src="./assets/img/business-380x150.png" />
-            <p>Detail about your ad here. We place your ad in home page to get know about your product. And make femilier to all user who vist to our site. Also your external site link also redirected when clicked the banner. please contact our sale department for futher clarification. Please be the first one to view the ads here.</p>
+        	<h2 class="first-header text-primary" align="center">Saravana Stores Gold Jewellery</h2>
+            <img src="./assets/img/homepageads/saravana_stores_jewellery.jpg" />
+            
         </div>
         
         <div class="grid_4">
-        	<h2 class="first-header text-primary" align="center">-- Place your ad here --</h2>
-            <img src="./assets/img/business-380x150.png" />
-            <p>Detail about your ad here. We place your ad in home page to get know about your product. And make femilier to all user who vist to our site. Also your external site link also redirected when clicked the banner. please contact our sale department for futher clarification. Please be the first one to view the ads here.</p>
+        	<h2 class="first-header text-primary" align="center">Yesbond Construction Chemicals</h2>
+           <img src="./assets/img/homepageads/yesbond.jpg" />
+            
         </div>
         
         <div class="grid_4">
-        	<h2 class="first-header text-primary" align="center">-- Place your ad here --</h2>
-            <img src="./assets/img/business-380x150.png" />
-            <p>Detail about your ad here. We place your ad in home page to get know about your product. And make femilier to all user who vist to our site. Also your external site link also redirected when clicked the banner. please contact our sale department for futher clarification. Please be the first one to view the ads here.</p>
+        	<h2 class="first-header text-primary" align="center">Kalaikutty Semiya</h2>
+           <img src="./assets/img/homepageads/kalaikutty.jpg" />
         </div>
 	  </div><!-- end row -->
       <div class="row">	
         <div class="grid_4">
-        	<h2 class="first-header text-primary" align="center">-- Place your ad here --</h2>
-            <img src="./assets/img/business-380x150.png" />
-            <p>Detail about your ad here. We place your ad in home page to get know about your product. And make femilier to all user who vist to our site. Also your external site link also redirected when clicked the banner. please contact our sale department for futher clarification. Please be the first one to view the ads here.</p>
+        	<h2 class="first-header text-primary" align="center">Bharathi Kovai Cotton</h2>
+           <img src="./assets/img/homepageads/bharathikathi.jpg" />
         </div>
         
         <div class="grid_4">
-        	<h2 class="first-header text-primary" align="center">-- Place your ad here --</h2>
-            <img src="./assets/img/business-380x150.png" />
-            <p>Detail about your ad here. We place your ad in home page to get know about your product. And make femilier to all user who vist to our site. Also your external site link also redirected when clicked the banner. please contact our sale department for futher clarification. Please be the first one to view the ads here.</p>
+        	<h2 class="first-header text-primary" align="center">Supreme Mobiles</h2>
+            <img src="./assets/img/homepageads/supreme.jpg" />
         </div>
         
         <div class="grid_4">
-        	<h2 class="first-header text-primary" align="center">-- Place your ad here --</h2>
-            <img src="./assets/img/business-380x150.png" />
-            <p>Detail about your ad here. We place your ad in home page to get know about your product. And make femilier to all user who vist to our site. Also your external site link also redirected when clicked the banner. please contact our sale department for futher clarification. Please be the first one to view the ads here.</p>
+        	<h2 class="first-header text-primary" align="center">Vijaya Dhayaa Realtors</h2>
+            <img src="./assets/img/homepageads/realtors.jpg" />
         </div>
 	  </div><!-- end row -->
 	</section><!-- end content area -->   

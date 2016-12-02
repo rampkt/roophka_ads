@@ -47,16 +47,8 @@ $subname = 'register';
       
       
     <!-- sidebar -->    
-    <aside>
-        <h2>Secondary Section menu</h2>
-            <nav id="secondary-navigation">
-                    <ul>
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">How it works</a></li>
-                    </ul>
-             </nav>
-      </aside><!-- #end sidebar -->
+    <? include("./includes/loginmenu.php"); ?>
+    <!-- #end sidebar -->
    
   </div><!-- #end div #main .wrapper -->
 

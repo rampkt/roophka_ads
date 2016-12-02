@@ -101,18 +101,18 @@ if($_REQUEST['action'] == 'forgotpass') {
 		//exit;
 		
                 $to = array($userRow['email']);
-				$from = 'info@roophka.in';
+				$from = 'info@roophka.com';
 				$subject = "Roophka : Reset Password link.";
 				$message = '<div style="width:600px;">
 				Dear '.$userRow['firstname'].'<br>
-				<p>Welcome to ROOPHKA.IN</p>
+				<p>Welcome to ROOPHKA.COM</p>
 				
 				<p>Please click below link to reset your password and continue earn by seeing advertisements and promotions</p>
 				
-				<p><a href="'.HTTP_PATH.'reset_password.php?id='.$id.'">roophka.in reset password link</a></p>
+				<p><a href="'.HTTP_PATH.'reset_password.php?id='.$id.'">roophka.com reset password link</a></p>
 				
 				Thanks & regards,<br>
-				<a href="'.HTTP_PATH.'">roophka.in</a>
+				<a href="'.HTTP_PATH.'">roophka.com</a>
 				</div>';
 			   $mailler->sendmail($to, $from, $subject, $message);
 				

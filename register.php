@@ -39,24 +39,24 @@ if(isset($_REQUEST['action'])) {
 			redirect(HTTP_PATH . "register.php?error=1");
 	} else {
 		$to = array($reg->email);
-		$from = 'info@roophka.in';
+		$from = 'info@roophka.com';
 		$subject = "Roophka : Registration complete.";
 		/*$message = '<div style="width:600px;">
 		Dear '.$reg->name.'<br>
-		<p>Welcome to ROOPHKA.IN</p>
+		<p>Welcome to ROOPHKA.COM</p>
 		<p>Please login to site and continue earn by seeing advertisements and promotions</p>
 		Thanks & regards,<br>
-		<a href="'.HTTP_PATH.'">roophka.in</a>
+		<a href="'.HTTP_PATH.'">roophka.com</a>
 		</div>';*/
     $encarray = array('userid'=>$result['userid'], 'action'=>'verify', 'type'=>'email');
     $enc = three_layer_encrypt('',$encarray);
     $message = '<div style="width:600px;">
     Dear '.$reg->name.'<br>
-    <p>Welcome to ROOPHKA.IN</p>
+    <p>Welcome to ROOPHKA.COM</p>
     <p>Please verify your mail address by clicking below link.</p>
     <a href="'.HTTP_PATH.'userlogin.php?enc='.$enc.'">Click here to verify</a><br /><br />
     Thanks & regards,<br />
-    <a href="'.HTTP_PATH.'">roophka.in</a>
+    <a href="'.HTTP_PATH.'">roophka.com</a>
     </div>';
 		
 		$mailler->sendmail($to, $from, $subject, $message);

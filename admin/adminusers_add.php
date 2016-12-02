@@ -19,11 +19,11 @@ if(isset($_REQUEST['action'])) {
 		if($add) {
 			
 			$to = array($data['email']);
-			$from = 'info@roophka.in';
+			$from = 'info@roophka.com';
 			$subject = "Roophka : Advertiser account success.";
 			$message = '<div style="width:600px;">
 			Dear '.$data['firstname'].'<br>
-			<p>Welcome to ROOPHKA.IN</p>
+			<p>Welcome to ROOPHKA.COM</p>
 			<p>Your adversiter account is now created. please click below link to login to your account. Also your login credntials added below.</p>
 			<br><a href=""></a>
 			<br>
@@ -39,7 +39,7 @@ if(isset($_REQUEST['action'])) {
 			</table>
 			<br>
 			Thanks & regards,<br>
-			<a href="roophka.in">roophka.in</a>
+			<a href="roophka.com">roophka.com</a>
 			</div>';
 			
 			$mailler->sendmail($to, $from, $subject, $message);

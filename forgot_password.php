@@ -43,7 +43,7 @@ if($login === true) {
     <? } ?>
     
     <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == '2') { ?>
-    <div class="error-msg"><strong>Failed!</strong> email is mismatch.</div>
+    <div class="error-msg"><strong>Failed!</strong> You are not yet registered.</div>
     <? } ?>
     
     <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == '3') { ?>

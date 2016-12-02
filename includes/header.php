@@ -4,14 +4,22 @@
         <div class="col-md-10 wrapper">
             <div class="col-md-6">
             	<div class="info-desc">
-                	<span class="info-email"><i class="fa fa-envelope" aria-hidden="true"></i>info@roophka.in</span>
+                	<span class="info-email"><i class="fa fa-envelope" aria-hidden="true"></i>info@roophka.com</span>
                     <!--<span class="info-phone"><i class="fa fa-phone"></i>044 42840257</span>-->
                 </div>
             </div>
+			
             <div class="col-md-6 top-right" align="right">
-            	<a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+            	<!--<a href="#" ><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></i></a>-->
+				<span class='st_facebook'></span>
+<span class='st_twitter' ></span>
+<span class='st_linkedin' ></span>
+<span class='st_pinterest' ></span>
+<span class='st_googleplus' ></span>
+
+				
             </div>
         </div>
         <div class="col-md-1">&nbsp;</div>
@@ -31,7 +39,7 @@
             
             <div class="gen-menu-header">
                 <div class="gen-menu">
-                    <a href="http://www.roophka.in/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn.png"></a>
+                    <a href="http://www.roophka.com/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn.png"></a>
                     <a href="#" class="item"><img src="<?=HTTP_PATH?>assets/img/bn-3.png"></a>
                     <a href="http://www.roophka.com/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn-2.png"></a>
                 </div>
@@ -67,3 +75,6 @@
         </header>
     </div>
 </div>
+
+
+

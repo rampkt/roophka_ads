@@ -4,8 +4,8 @@
         	<h3>Contact Us:</h3>
             <div class="clearfix">&nbsp;</div>
             <p><strong>Office:</strong> 5th Cross Street , Brindavan Nagar, Valasaravakkam, chennai 600087. </p>
-            <p><strong>Phone:</strong> 044 42840257</p>
-            <p class="margin-clear"><strong>Email:</strong> info@roophka.in</p>
+            <!--<p><strong>Phone:</strong> 044 42840257</p>-->
+            <p class="margin-clear"><strong>Email:</strong> info@roophka.com</p>
         </div>
         <div class="grid_3">
         	<h3>Links</h3>
@@ -15,7 +15,7 @@
                 <li><a href="howitworks.php">How it works</a></li>
                 <li><a href="privacy.php">Privacy policy</a></li>
                 <li><a href="terms.php">Terms &amp; Condition</a></li>
-				<li><a href="#">View Ads</a></li>
+				<li><a href="viewads.php">View Ads</a></li>
             </ul>
         </div>
         <div class="grid_3">
@@ -41,7 +41,7 @@
                 <img class="alignnone wp-image-6799 size-thumbnail" src="./assets/img/logo150X150.png" width="150" height="150">
             </span>
         </div>
-        <p class="poweredby">&copy; <?=date('Y')?> Roophka. Powered by <a href="http://www.roophka.in/">Roophka.in</a></p>
+        <p class="poweredby">&copy; <?=date('Y')?> Roophka. Powered by <a href="http://www.roophka.com/">Roophka.com</a></p>
     </div>
 </footer>
 
