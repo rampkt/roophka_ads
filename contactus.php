@@ -53,6 +53,25 @@ if(isset($_REQUEST['action'])) {
     </div>';
 		
 		$mailler->sendmail($to, $from, $subject, $message);
+		
+		$from1 = $adminmail;
+		$to1 = array($cms->email);
+		$subject1 = "ROOPHKA: Contact us";
+   
+    $message1 = '<div style="width:600px;">
+    Dear '.$cms->name.'<br><br>
+   
+    <p>Your Message has been sent to our administator, They will contact as soon.</p>
+    <br><br>
+	
+	
+    Thanks & regards,<br />
+    <a href="'.HTTP_PATH.'">roophka.com</a>
+    </div>';
+		
+		$mailler->sendmail($to1, $from1, $subject1, $message1);
+		
+		
 		redirect(HTTP_PATH . "contactus.php?success=1");
 	}
 }
