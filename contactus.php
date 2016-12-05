@@ -33,7 +33,7 @@ if(isset($_REQUEST['action'])) {
     Dear Admin<br>
     <p>Welcome to ROOPHKA.COM</p>
     <p>Please check below mentioned customer query. revert back to user as soon as possible</p>
-    </br>
+    <br/>
 	<table>
 	<tr>
 	<td>Name :</td>
@@ -46,7 +46,7 @@ if(isset($_REQUEST['action'])) {
 	
 	</tr>
 	
-	</table>
+	</table><br><br>
 	
     Thanks & regards,<br />
     <a href="'.HTTP_PATH.'">roophka.com</a>
