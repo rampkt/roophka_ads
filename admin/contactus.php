@@ -28,7 +28,7 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
    <p>WELCOME TO ROOPHKA.COM</p>
    
     <p>Please Check reply mail for ROOPHKA.com, Have a good day.</p>
-    <br><br>
+    <br>
 	
 	<p><strong>Message : </strong> '.$msg.'</p><br><br>
 	
