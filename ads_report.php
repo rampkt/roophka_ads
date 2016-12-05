@@ -62,48 +62,48 @@ while($row=$db->fetch_array($qry))
 			
 			<table cellpadding="0" cellspacing="0" border="0">
 				<tr>
-					<td align="right"><strong>Adname : </strong> </td>
-					<td>'.$adname.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Adname : </strong> </td>
+					<td style="padding-bottom:10px;">'.$adname.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Ad Title : </strong> </td>
-					<td>'.$addtitle.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Ad Title : </strong> </td>
+					<td style="padding-bottom:10px;">'.$addtitle.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Watch count : </strong> </td>
-					<td>'.$adwatch.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Watch count : </strong> </td>
+					<td style="padding-bottom:10px;">'.$adwatch.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Clicks Remain : </strong> </td>
-					<td>'.$adclicks.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Clicks Remain : </strong> </td>
+					<td style="padding-bottom:10px;">'.$adclicks.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Ad Duration : </strong> </td>
-					<td>'.$adduration.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Ad Duration : </strong> </td>
+					<td style="padding-bottom:10px;">'.$adduration.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Amount : </strong> </td>
-					<td>'.$adamount.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Amount : </strong> </td>
+					<td style="padding-bottom:10px;">'.$adamount.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Status : </strong> </td>
-					<td>'.$status.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Status : </strong> </td>
+					<td style="padding-bottom:10px;">'.$status.'</td>
+				</tr>
+				
+				<tr>				
+					<td align="right" style="padding-bottom:10px;"><strong>Total view count : </strong> </td>
+					<td style="padding-bottom:10px;">'.$totalviews.'</td>
 				</tr>
 				
 				<tr>
-					<td align="right"><strong>Total view count : </strong> </td>
-					<td>'.$totalviews.'</td>
-				</tr>
-				
-				<tr>
-					<td align="right"><strong>Today view count : </strong> </td>
-					<td>'.$todayviews.'</td>
+					<td align="right" style="padding-bottom:10px;"><strong>Today view count : </strong> </td>
+					<td style="padding-bottom:10px;">'.$todayviews.'</td>
 				</tr>
 				
 			</table>
