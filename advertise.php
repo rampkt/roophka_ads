@@ -38,10 +38,10 @@ if(isset($_REQUEST['action'])) {
 		$subject = "ROOPHKA: Advertise with us";
    
     $message = '<div style="width:600px;">
-    Dear Admin<br>
+    Dear Admin<br><br>
    
     <p>'.$cms->companyname.' Company are interested to advertise with us, please check and contact this customer as soon as possible</p>
-    </br>
+    <br><br>
 	
 	
     Thanks & regards,<br />
@@ -49,6 +49,25 @@ if(isset($_REQUEST['action'])) {
     </div>';
 		
 		$mailler->sendmail($to, $from, $subject, $message);
+		
+		
+		$from1 = $adminmail;
+		$to1 = array($cms->email);
+		$subject1 = "ROOPHKA: Advertise with us";
+   
+    $message1 = '<div style="width:600px;">
+    Dear '.$cms->contact_person.'<br><br>
+   
+    <p>Advertise with us request has been sent to our administator, They will contact as soon.</p>
+    <br><br>
+	
+	
+    Thanks & regards,<br />
+    <a href="'.HTTP_PATH.'">roophka.com</a>
+    </div>';
+		
+		$mailler->sendmail($to1, $from1, $subject1, $message1);
+		
 		redirect(HTTP_PATH . "advertise.php?success=1");
 	}
 }
