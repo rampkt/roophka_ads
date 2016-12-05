@@ -266,6 +266,7 @@ list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
 		<div></div>
 		</div>
 		<div id="fade1" class="black_overlay"></div>
+
     <div class="modal hide fade" id="bankAccount">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">x</button>

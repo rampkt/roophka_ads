@@ -24,9 +24,9 @@ class location
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT * FROM roo_advertise_request order by date_added asc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT * FROM roo_advertise_request where status in (0,1) order by date_added asc LIMIT '.$this->start.','.$this->rowLimit;
 		
-		$queryCount = 'SELECT COUNT(id) AS cnt FROM roo_advertise_request '; 
+		$queryCount = 'SELECT COUNT(id) AS cnt FROM roo_advertise_request where status in (0,1) '; 
 		
 		//echo $query; 
 		$qry = $this->db->query($query);
@@ -57,7 +57,7 @@ class location
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT c.id, c.name, c.email, c.subject, c.message, c.date_added FROM roo_contactus AS c order by c.date_added asc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT c.id, c.name, c.email, c.subject, c.message, c.date_added, c.status,c.reply_msg,c.reply_date FROM roo_contactus AS c order by c.date_added asc LIMIT '.$this->start.','.$this->rowLimit;
 		
 		$queryCount = 'SELECT COUNT(c.id) AS cnt FROM roo_contactus AS c '; 
 		
@@ -248,7 +248,7 @@ class location
 	
 	public function Deleteadvertise($id=0) {
 		if($id > 0) {
-			$this->db->query("Delete from roo_advertise_request WHERE id='".$id."' LIMIT 1");
+			$this->db->query("UPDATE roo_advertise_request SET status='2' WHERE id='".$id."' LIMIT 1");
 			return true;
 		}
 		return false;
@@ -262,6 +262,16 @@ class location
 		}
 		return false;
 	}
+	
+	public function Replycontact($id=0,$msg) {
+		if($id > 0) {
+			$this->db->query("UPDATE roo_contactus SET reply_msg='".$msg."',reply_date='".DATETIME24H."',status='1' WHERE id='".$id."' LIMIT 1");
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 	public function Deletestate($id=0) {
 		if($id > 0) {
