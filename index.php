@@ -177,7 +177,7 @@ return $result3[0];
 		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;font-size:14px;" maxlength="6" placeholder="Enter zipcode here..." required>
 		</div>
 		<div class="pull-left"  style="margin-top:5px;margin-left:20px;">
-		<input type="submit" name="submit" id="submit" value="submit" style="padding:5px;font-size:14px;border-radius:0px;" class="btn btn-small btn-success add-new">
+		<input type="submit" name="submit" id="submit" value="Submit" style="padding:5px;font-size:14px;border-radius:0px;" class="btn btn-small btn-success add-new">
 		</div>
 		<div class="clearfix" style="margin-bottom:10px;"></div>
 		</div>
