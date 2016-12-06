@@ -63,7 +63,7 @@ class ads
 					return true;
 				}
 			} else {
-				if($this->adname == '' || $this->adclicks == '' || $this->adduration == '' || $this->file['name'] == '' || $this->adamount == '') {
+				if($this->adname == '' || $this->adclicks == '' || $this->adduration == '' || $this->adamount == '') {
 					return false;
 				} else {
 					return true;
@@ -116,6 +116,9 @@ class ads
 		
 		$this->emptycheck();
 		if($id > 0) {
+			
+			$result=$this->db->query("UPDATE roo_ads SET title='".$this->addtitle."',content='".$this->addcontent."',name='".$this->adname."',duration='".$this->adduration."',amount='".$this->adamount."',watch_count='".$this->adclicks."',clicks_remain='".$this->adclicks."' where id='".$id."'");
+			
 			
 		} else {
 			if($this->addtype == 'text' ) {
