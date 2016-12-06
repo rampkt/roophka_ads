@@ -16,14 +16,30 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 		
 		$pass=rand(9999,99999);
 		
-		echo $pass;
+		//echo $pass;
+		
+		
+		
+		$qry=$db->query("select * from roo_advertise_request where id='".$_REQUEST['id']."' LIMIT 1");
+			$fetch=$db->fetch_array($qry);
+			
+			$qrryy=$db->query("select email from roo_admin_users where email='".$fetch['email']."' and (type='3' and status='0') LIMIT 1");
+			$fetchqrryy=$db->fetch_array($qrryy);
+			$count=$db->num_rows($qrryy);
+			
+			//echo $count; exit;
+			
+			if($count==0)
+			{
+				$username=$fetch['email'];
+			}
+			else
+			{
+				$username=$fetchqrryy['email'];
+			}
 		
 		$location->Approveadvertise($_REQUEST['id'],$pass);
 		
-		$qry=$db->query("select * from roo_advertise_request where id='".$id."' LIMIT 1");
-			$fetch=$db->fetch_array($qry);
-			
-			$username=$fetch['email'];
 		
 			$adminemail=$location->getsetting('1','email');
 			

@@ -311,9 +311,22 @@ class location
 			
 			$username=$fetch['email'];
 			
+			$qrryy=$this->db->query("select * from roo_admin_users where email='".$fetch['email']."' and (type='3' and status='0') LIMIT 1");
+			$fetchqrryy=$this->db->fetch_array($qrryy);
+			$count=$this->db->num_rows($qrryy);
+			
+			if($count==0)
+			{
+			$qry2=$this->db->query("INSERT INTO roo_admin_users(email,username,password,salt,firstname,lastname,phone,signupdate,type,status)values('".$fetch['email']."','".$username."','".$encpassword."','".SALT."','".$fetch['company_name']."','','".$fetch['mobile']."','".DATETIME24H."','3','0')");	
+			}
+			else
+			{
+			$qry2=$this->db->query("UPDATE roo_admin_users SET password='".$encpassword."' where email='".$fetch['email']."'");	
+			}
+			
 			//echo "INSERT INTO roo_admin_users(email,username,password,salt,firstname,lastname,phone,signupdate,type,status)values('".$fetch['email']."','".$username."','".$encpassword."','".SALT."','".$fetch['company_name']."','','".$fetch['mobile']."','".DATETIME24H."','3','0')"; exit;
 			
-			$qry2=$this->db->query("INSERT INTO roo_admin_users(email,username,password,salt,firstname,lastname,phone,signupdate,type,status)values('".$fetch['email']."','".$username."','".$encpassword."','".SALT."','".$fetch['company_name']."','','".$fetch['mobile']."','".DATETIME24H."','3','0')");
+			
 			
 			return true;
 		}
