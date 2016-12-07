@@ -66,5 +66,25 @@ class cms
 		return false;
 	}
 	
+	public function getoperator() {
+		
+		     $code="<option value=''>Select Operator</option>";
+			$qry = $this->db->query("SELECT * FROM roo_mobile_operator where status='0'");
+			$count=$this->db->num_rows($qry);
+			$i=1;
+			if($count>0)
+			{
+			while($row = $this->db->fetch_array($qry))
+			{
+			
+			$code.="<option value='".$row['operator_code']."'>".$row['operator_name']."</option>";
+			 
+			$i++;
+			}
+			echo $code;
+			}
+			return false;
+	}
+	
 }
 ?>

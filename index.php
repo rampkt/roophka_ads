@@ -9,6 +9,7 @@ $subname = '';
 include("./functions/cms.php");
 $cms = new cms();
 $aboutus=$cms->getcms(1,'aboutus');
+
 include("./functions/ads.php");
 $ads = new ads();
 

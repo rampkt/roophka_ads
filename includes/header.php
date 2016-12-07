@@ -59,6 +59,61 @@
               <div class="menu-toggle">Menu</div>  
               <ul class="srt-menu" id="menu-main-navigation">
                   <li <? if($pagename == 'home') { ?>class="current"<? } ?>><a href="./">Home</a></li>
+				   <li><a href="javascript:void(0);" onclick="rechargepopup();">Recharge </a>
+				   <ul class="rc-form rc-formhide">
+				   <li>
+				    <div>
+    	<form action='recharge.php' name="recharge" method="POST" >
+         
+            <div style="text-align:left;padding:20px">
+              <!-- Username -->
+              <div>
+              <div style="padding-bottom:.5rem">Mobile Number</div>
+            
+              <div style="padding-bottom:20px">  
+			  <input type="text" id="mobile" name="mobile" class="rc-input" placeholder="" required />
+			  </div>
+           </div>
+		   <div>
+              <!-- E-mail -->
+              <div style="padding-bottom:.5rem">Opearator</div>
+             <div style="padding-bottom:20px" >
+               <select name="operator" class="rc-input" required> 
+                <?php echo $cms->getoperator(); ?>				
+               </select> 
+            </div>
+			</div>
+			
+			  <div>
+              <div style="padding-bottom:.5rem">Amount</div>
+            
+              <div >  
+			  <input type="text" id="amount" name="amount" class="rc-input" placeholder="" required /></div>
+           </div>
+			
+			
+			</div>
+			
+           <div class="clearfix"></div>
+			
+            <div class="control-group">
+              <!-- Button -->
+              <div class="controls">
+                <button type="submit" name="action" value="dologin" class="btn btn-success">Proceed</button>
+              </div>
+            </div>
+			
+        </form>
+    <!-- #end content area -->
+      
+				   </div>
+				   
+				   </li>
+				  
+				   </ul>
+				   
+				   </li>
+				  
                   <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewads.php">View ads</a></li>
                   <? if(!isset($_SESSION['roo']['user'])) { ?>
                   <li <? if($pagename == 'login') { ?>class="current"<? } ?>><a href="./login.php">Login</a></li>
@@ -77,5 +132,45 @@
     </div>
 </div>
 
+<script>
+function rechargepopup()
+{
+	//alert("dada");
+	$('.rc-form').removeClass('rc-formhide');
+	$('.rc-form').addClass('rc-formshow');
+	
+}
+</script>
 
+<style>
+.rc-input
+{
+height:30px;
+border:1px solid #ccc; 
+border-radius:5px;
+width:100%;
+color:#55595c;
+}
+.btn-success
+{
+	padding:5px 10px;
+	margin-bottom:10px;
+}
+.rc-form
+{
+	position:absolute !important;
+	z-index:100;
+	background-color:#FFF;
+	width:300px;
+	
+}
+.rc-formshow
+{
+	display:block !important;
+}
+.rc-formhide
+{
+	display:none !important;
+}
+</style>
 
