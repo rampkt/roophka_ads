@@ -7,6 +7,12 @@ $pagename = 'recharge';
 $subname = 'recharge';
 include("./functions/cms.php");
 $cms = new cms;
+
+include("./functions/user.php");
+include("./functions/ads.php");
+$user = new user;
+$ads = new ads;
+
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge'))
 			{
 				$_SESSION['recharge_mobile']=$_REQUEST['mobile'];
@@ -49,7 +55,7 @@ curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 $file_contents = curl_exec($ch); 
 $curl_error = curl_errno($ch); 
 
-print_r(curl_getinfo($ch));
+//print_r(curl_getinfo($ch));
 
 curl_close($ch); 
 
@@ -103,6 +109,7 @@ $upd=$db->query($qry2);
 $adminmail=$cms->getsetting('1','email');
 $opname=$user->getoperator_name($operator);
 
+//echo $opname; exit;
 
 $from = $adminmail;
 		$to = array($_SESSION['roo']['user']['email']);
@@ -177,10 +184,7 @@ if($login === false) {
 }
 
 //echo $_SESSION['recharge_mobile'];
-include("./functions/user.php");
-include("./functions/ads.php");
-$user = new user;
-$ads = new ads;
+
 
 $ads->resetAd();
 $database = $user->dashboard();
