@@ -1,3 +1,28 @@
+<?php 
+
+ $code="<option value=''>Select Operator</option>";
+			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0'");
+			$count=$db->num_rows($qry);
+			$i=1;
+			
+			if($count>0)
+			{
+			while($row = $db->fetch_array($qry))
+			{
+				
+				if(isset($_SESSION['recharge_operator']) && ($_SESSION['recharge_operator']==$row['operator_shortname'])){ $select ='selected'; }else{$select="";}
+			
+			$code.="<option value='".$row['operator_shortname']."' ".$select."> ".$row['operator_name']."</option>";
+			 
+			$i++;
+			}
+			//echo $code;
+			}
+
+			
+			
+?>
+
 <div class="container-fluid">
     <div class="row header-top">
         <div class="col-md-1">&nbsp;</div>
@@ -59,27 +84,30 @@
               <div class="menu-toggle">Menu</div>  
               <ul class="srt-menu" id="menu-main-navigation">
                   <li <? if($pagename == 'home') { ?>class="current"<? } ?>><a href="./">Home</a></li>
-				   <li><a href="javascript:void(0);" onclick="rechargepopup();">Recharge </a>
+				  
+				   <? if(!isset($_SESSION['roo']['user'])) { ?>
+				  
+				   <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="javascript:void(0);" onclick="rechargepopup();">Recharge </a>
 				   <ul class="rc-form rc-formhide">
 				   <li>
 				    <div>
-    	<form action='recharge.php' name="recharge" method="POST" >
-         
+    	<form action='recharge_proceed.php' name="recharge" method="get" >
+         <input type="hidden" name="action" value="recharge">
             <div style="text-align:left;padding:20px">
               <!-- Username -->
               <div>
               <div style="padding-bottom:.5rem">Mobile Number</div>
             
               <div style="padding-bottom:20px">  
-			  <input type="text" id="mobile" name="mobile" class="rc-input" placeholder="" required />
+			  <input type="text" id="mobile" name="mobile" class="rc-input numberOnly" onblur="findoperatorvalue(this.value);"  onkeypress="findoperatorvalue(this.value);" placeholder="Enter Numeric values" Autocomplete="OFF" required />
 			  </div>
            </div>
 		   <div>
               <!-- E-mail -->
               <div style="padding-bottom:.5rem">Opearator</div>
              <div style="padding-bottom:20px" >
-               <select name="operator" class="rc-input" required> 
-                <?php echo $cms->getoperator(); ?>				
+               <select name="operator" id="operator" class="rc-input" required> 
+                <?php echo $code; ?>				
                </select> 
             </div>
 			</div>
@@ -88,7 +116,7 @@
               <div style="padding-bottom:.5rem">Amount</div>
             
               <div >  
-			  <input type="text" id="amount" name="amount" class="rc-input" placeholder="" required /></div>
+			  <input type="text" id="amount" name="amount" class="rc-input numberOnly" placeholder="Enter Amount" required /></div>
            </div>
 			
 			
@@ -99,7 +127,7 @@
             <div class="control-group">
               <!-- Button -->
               <div class="controls">
-                <button type="submit" name="action" value="dologin" class="btn btn-success">Proceed</button>
+                <button type="submit" name="submit" value="proceed" class="btn btn-success">Proceed</button>
               </div>
             </div>
 			
@@ -113,6 +141,9 @@
 				   </ul>
 				   
 				   </li>
+				   <?php } else { ?>
+				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php">Recharge</a></li>
+				   <?php } ?>
 				  
                   <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewads.php">View ads</a></li>
                   <? if(!isset($_SESSION['roo']['user'])) { ?>
@@ -140,9 +171,43 @@ function rechargepopup()
 	$('.rc-form').addClass('rc-formshow');
 	
 }
+
+function findoperatorvalue(val) {
+	//alert("sri");
+	var params = { action : '_findoperator',mobile:val}
+	$.ajax({
+		url:"operator.php",
+		type:'POST',
+		dataType:"TEXT",
+		data:params,
+		success: function(result) {
+		
+			//alert(result);
+			if(result.error) {
+				
+			} else {
+			$('#operator').html(result);
+			}
+		}
+	});
+}
+ 
 </script>
 
 <style>
+.table
+{
+	font-size:13px;
+}
+
+#alertamt
+{
+	color: red;
+    font-size: 12px;
+    width: 200px;
+    position: absolute;
+    margin-left: -85px;
+}
 .rc-input
 {
 height:30px;
@@ -150,6 +215,7 @@ border:1px solid #ccc;
 border-radius:5px;
 width:100%;
 color:#55595c;
+font-size:14px;
 }
 .btn-success
 {
@@ -162,6 +228,11 @@ color:#55595c;
 	z-index:100;
 	background-color:#FFF;
 	width:300px;
+	
+}
+input.rc-input
+{
+	padding-left:5px;
 	
 }
 .rc-formshow

@@ -3,6 +3,7 @@ include_once("./config/config.php");
 
 $output = array('error' => true, 'msg' => 'Illeagal operation.');
 
+
 if(isset($_REQUEST['action'])) {
 	$login = check_login();
 

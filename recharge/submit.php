@@ -22,7 +22,7 @@ $userid="roophka";
 
 $myHITurl = "http://joloapi.com/api/recharge.php?mode=0&userid=$userid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
 
-//echo $myHITurl;
+echo $myHITurl;
 curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
 curl_setopt ($ch, CURLOPT_HEADER, 0); 
 curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
