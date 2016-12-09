@@ -2,13 +2,13 @@
 error_reporting(E_ALL); 
 
 // collecting details from html Form 
-$mobile="9629558486";  
+$mobile="9962980183";  
  
 $apikey="862626107699030";
 $userid="roophka";
 
 $url="https://joloapi.com/api/findoperator.php?userid=$userid&key=$apikey&mob=$mobile&type=json";
-//echo $url;
+echo $url;
 //  Initiate curl
 $ch = curl_init();
 // Disable SSL verification
@@ -27,6 +27,6 @@ curl_close($ch);
 $output=json_decode($result, true);
 
 echo $output['operator_code'];
-//print_r($output);
+print_r($output);
 
 ?> 

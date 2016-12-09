@@ -1,7 +1,7 @@
 <?php 
 
  $code="<option value=''>Select Operator</option>";
-			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0'");
+			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0' order by operator_name asc");
 			$count=$db->num_rows($qry);
 			$i=1;
 			
@@ -19,7 +19,24 @@
 			//echo $code;
 			}
 
+	$circle="<option value=''>Select Circle</option>";
+			$qry1 = $db->query("SELECT * FROM roo_operator_circle where status='0' order by circle_name asc");
+			$count1=$db->num_rows($qry1);
+			$ii=1;
 			
+			if($count1>0)
+			{
+			while($row1 = $db->fetch_array($qry1))
+			{
+				
+				if(isset($_SESSION['recharge_circle']) && ($_SESSION['recharge_circle']==$row1['circle_code'])){ $select ='selected'; }else{$select="";}
+			
+			$circle.="<option value='".$row1['circle_code']."' ".$select."> ".$row1['circle_name']."</option>";
+			 
+			$ii++;
+			}
+			//echo $code;
+			}		
 			
 ?>
 
@@ -94,16 +111,16 @@
     	<form action='recharge_proceed.php' name="recharge" method="get" >
          <input type="hidden" name="action" value="recharge">
             <div style="text-align:left;padding:20px">
-              <!-- Username -->
+              <!-- MObile NUmber -->
               <div>
               <div style="padding-bottom:.5rem">Mobile Number</div>
             
               <div style="padding-bottom:20px">  
-			  <input type="text" id="mobile" name="mobile" class="rc-input numberOnly" onblur="findoperatorvalue(this.value);"  onkeypress="findoperatorvalue(this.value);" placeholder="Enter Numeric values" Autocomplete="OFF" required />
+			  <input type="text" id="mobile" name="mobile" class="rc-input numberOnly"  onkeypress="findoperatorvalue(this.value)" onkeyup="findcirclevalue(this.value)" placeholder="Enter Numeric values" Autocomplete="OFF" required />
 			  </div>
            </div>
 		   <div>
-              <!-- E-mail -->
+              <!-- Opertaor -->
               <div style="padding-bottom:.5rem">Opearator</div>
              <div style="padding-bottom:20px" >
                <select name="operator" id="operator" class="rc-input" required> 
@@ -112,7 +129,19 @@
             </div>
 			</div>
 			
+			 <div>
+              <!-- Circle -->
+              <div style="padding-bottom:.5rem">Circle</div>
+             <div style="padding-bottom:20px" >
+               <select name="circle" id="circle" class="rc-input" required> 
+                <?php echo $circle; ?>				
+               </select> 
+            </div>
+			</div>
+			
+			
 			  <div>
+			  <!-- Amount -->
               <div style="padding-bottom:.5rem">Amount</div>
             
               <div >  
@@ -142,7 +171,7 @@
 				   
 				   </li>
 				   <?php } else { ?>
-				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php">Recharge</a></li>
+				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php?view=recharge">Recharge</a></li>
 				   <?php } ?>
 				  
                   <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewads.php">View ads</a></li>
@@ -173,7 +202,7 @@ function rechargepopup()
 }
 
 function findoperatorvalue(val) {
-	//alert("sri");
+//	alert("sri");
 	var params = { action : '_findoperator',mobile:val}
 	$.ajax({
 		url:"operator.php",
@@ -187,6 +216,27 @@ function findoperatorvalue(val) {
 				
 			} else {
 			$('#operator').html(result);
+			}
+		}
+	});
+}
+</script>
+<script>
+function findcirclevalue(val) {
+	//alert("devi");
+	var params = { action : '_findcircle',mobile:val}
+	$.ajax({
+		url:"operator.php",
+		type:'POST',
+		dataType:"TEXT",
+		data:params,
+		success: function(result) {
+		
+			//alert(result);
+			if(result.error) {
+				
+			} else {
+			$('#circle').html(result);
 			}
 		}
 	});
@@ -206,7 +256,7 @@ function findoperatorvalue(val) {
     font-size: 12px;
     width: 200px;
     position: absolute;
-    margin-left: -85px;
+   
 }
 .rc-input
 {
