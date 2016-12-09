@@ -9,6 +9,7 @@ $subname = '';
 include("./functions/cms.php");
 $cms = new cms();
 $aboutus=$cms->getcms(1,'aboutus');
+
 include("./functions/ads.php");
 $ads = new ads();
 
@@ -162,7 +163,7 @@ return $result3[0];
 <!-- footer area -->    
 <? include("./includes/footer.php"); ?>
 <!-- #end footer area --> 
- <div class="modal hide fade" id="light" style="height:340px;">
+ <div class="modal hide fade" id="light" style="height:310px;">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">x</button>
 			<h3>Add Your Location</h3>
@@ -172,22 +173,22 @@ return $result3[0];
 		<form action="index.php" method="post">
 		<input type="hidden" name="action" value="_add_findlocation">
 		<div class="row-fluid" style="margin-top:20px;">
-		<div class="pull-left" style="margin-right:10px;margin-top:10px;">Enter your zipcode :</div>
+		<div class="pull-left" style="margin-right:10px;margin-top:10px;font-size:14px;">Enter your zipcode :</div>
 		<div class="pull-left">
-		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;" maxlength="6" placeholder="Enter zipcode here..." required>
+		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;font-size:14px;" maxlength="6" placeholder="Enter zipcode here..." required>
 		</div>
-		<div class="pull-left"  style="margin-top:3px;margin-left:20px;">
-		<input type="submit" name="submit" id="submit" value="submit" style="padding:5px 15px;" class="btn btn-small btn-primary add-new">
+		<div class="pull-left"  style="margin-top:5px;margin-left:20px;">
+		<input type="submit" name="submit" id="submit" value="Submit" style="padding:5px;font-size:14px;border-radius:0px;" class="btn btn-small btn-success add-new">
 		</div>
 		<div class="clearfix" style="margin-bottom:10px;"></div>
 		</div>
 		
-		<div>(or)</div>
+		<div style="font-size:13px;">(or)</div>
 		
-		<div class="row-fluid" style="margin-top:20px;">
-		<div class="pull-left" style="margin-right:20px;margin-top:10px;"> Share your location</div>
+		<div class="row-fluid" style="margin-top:10px;">
+		<div class="pull-left" style="margin-right:20px;margin-top:5px; font-size:14px;"> Share your location</div>
 		<div class="pull-left">
-		<a href="javascript:void(0);" class="btn btn-primary" onclick="findlocation();">Find Location</a>
+		<a href="javascript:void(0);" class="btn btn-small btn-success" style="padding:5px;font-size:14px;border-radius:0px;" onclick="findlocation();">Find Location</a>
 		</div>
 		<div class="clearfix" style="margin-bottom:10px;"></div>
 		</div>
@@ -197,7 +198,7 @@ return $result3[0];
 		</form>
 		</div>
 		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btncss" data-dismiss="modal">Close</a>
 		</div>
 	</div>
 
@@ -341,7 +342,7 @@ function findlocationvalue(position) {
 }
 
 .modal.fade.in {
-  top: 10%;
+  top: 20%;
 }
 
 .modal-header {
@@ -406,6 +407,17 @@ function findlocationvalue(position) {
 
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
+}
+.btncss {
+    color: #ffffff !important;
+    background-color: #a7a9aa;
+    border-color: #a7a9aa;
+    background-image: none;
+    filter: none;
+    text-shadow: none;
+	padding:10px;
+	font-size:14px;
+	
 }
 
 	</style>

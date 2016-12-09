@@ -107,25 +107,25 @@ return $result3[0];
 		</div>
 		<div class="modal-body" id="bankAjaxResult">
 			<div id="alertmsg">Must be allow your location or enter your zipcode,then only you can view ads !!! </div>
-		<form action="index.php" method="post">
+		<form action="viewads.php" method="post">
 		<input type="hidden" name="action" value="_add_findlocation">
 		<div class="row-fluid" style="margin-top:20px;">
-		<div class="pull-left" style="margin-right:10px;margin-top:10px;">Enter your zipcode :</div>
+		<div class="pull-left" style="margin-right:10px;margin-top:10px;font-size:14px;">Enter your zipcode :</div>
 		<div class="pull-left">
-		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;" maxlength="6" placeholder="Enter zipcode here..." required>
+		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;font-size:14px;" maxlength="6" placeholder="Enter zipcode here..." required>
 		</div>
-		<div class="pull-left"  style="margin-top:3px;margin-left:20px;">
-		<input type="submit" name="submit" id="submit" value="submit" style="padding:5px 15px;" class="btn btn-small btn-primary add-new">
+		<div class="pull-left"  style="margin-top:5px;margin-left:20px;">
+		<input type="submit" name="submit" id="submit" value="Submit" style="padding:5px;font-size:14px;border-radius:0px;" class="btn btn-small btn-success add-new">
 		</div>
 		<div class="clearfix" style="margin-bottom:10px;"></div>
 		</div>
 		
-		<div>(or)</div>
+		<div style="font-size:13px;">(or)</div>
 		
-		<div class="row-fluid" style="margin-top:20px;">
-		<div class="pull-left" style="margin-right:20px;margin-top:10px;"> Share your location</div>
+		<div class="row-fluid" style="margin-top:10px;">
+		<div class="pull-left" style="margin-right:20px;margin-top:5px; font-size:14px;"> Share your location</div>
 		<div class="pull-left">
-		<a href="javascript:void(0);" class="btn btn-primary" onclick="findlocation();">Find Location</a>
+		<a href="javascript:void(0);" class="btn btn-small btn-success" style="padding:5px;font-size:14px;border-radius:0px;" onclick="findlocation();">Find Location</a>
 		</div>
 		<div class="clearfix" style="margin-bottom:10px;"></div>
 		</div>
@@ -133,6 +133,7 @@ return $result3[0];
 		
 		
 		</form>
+
 		</div>
 		<div class="modal-footer">
 			&nbsp;
@@ -233,6 +234,8 @@ function findlocationvalue(position) {
 </script>
 
  <style>
+ 
+ 
         #alertmsg
 		{
 			color:red;

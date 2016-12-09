@@ -8,6 +8,36 @@ class user
 		$this->db = $db;
 	}
 	
+	public function recharge_order()
+	{
+		$user_id = $_SESSION['roo']['user']['id'];
+		$result = array();
+		
+		$userQry = $this->db->query("SELECT * FROM roo_recharge WHERE user_id = '".$user_id."' and status='0' ORDER BY date_added");
+		
+		if($this->db->num_rows($userQry) > 0) {
+			while($userRow = $this->db->fetch_array($userQry)) {
+				//$userRow['number'] = stringMasking($userRow['number'], '*');
+				
+				$userRow['operator_name']=$this->getoperator_name($userRow['operator']);
+				$result[] = $userRow;
+			}
+		}
+		return $result;
+		
+	}
+	
+	
+	public function getoperator_name($opname)
+	{
+		$qry = $this->db->query("SELECT * FROM roo_mobile_operator where operator_shortname='$opname' and status='0'");
+			$count=$this->db->num_rows($qry);
+			$row = $this->db->fetch_array($qry);
+			
+			return $row['operator_name'];
+			
+	}
+	
 	public function dashboard() {
 		
 		$user_id = $_SESSION['roo']['user']['id'];

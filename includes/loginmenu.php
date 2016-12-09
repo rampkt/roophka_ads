@@ -8,13 +8,13 @@
 							 
                         <? } else { ?>
                             <li <? if($subname == 'withdraw') { ?>class="current"<? } ?>><a href="witdraw.php">Withdraw</a></li>
+							 <li <? if($subname == 'recharge') { ?>class="current"<? } ?>><a href="recharge_proceed.php?view=order">Recharge Orders</a></li>
                             <li <? if($subname == 'transaction') { ?>class="current"<? } ?>><a href="transaction.php">Transaction</a></li>
                             <li <? if($subname == 'password') { ?>class="current"<? } ?>><a href="password.php">Change Password</a></li>
                         <? } ?>
                         <li <? if($subname == 'aboutus') { ?>class="current"<? } ?>><a href="aboutus.php">About Us</a></li>
                         <li <? if($subname == 'how') { ?>class="current"<? } ?>><a href="howitworks.php">How it works</a></li>
-						
-						
+												
 						
                     </ul>
              </nav>

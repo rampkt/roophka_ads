@@ -5,10 +5,18 @@ include_once("./config/config.php");
  */
 $pagename = 'login';
 $subname = 'login';
-
+//echo $_SESSION['recharge_mobile'];
 $login = check_login();
 if($login === true) {
+	
+	if(isset($_SESSION['recharge_mobile']))
+	{
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
+	}
+	else
+	{
 	redirect(HTTP_PATH . 'dashboard.php');
+	}
 }
 ?>
 <!DOCTYPE html>

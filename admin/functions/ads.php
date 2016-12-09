@@ -12,9 +12,18 @@ class ads
 	public $file = array();
 	public $id = '';
 	
+	public $page = 1;
+	public $start = 0;
+	public $rowLimit = 10;
+	
 	public function __construct() {
 		global $db;
 		$this->db = $db;
+		
+		$this->page = (isset($_REQUEST['page']) ? $_REQUEST['page'] : 1);
+		if($this->page > 1) {
+			$this->start = ($this->page - 1) * $this->rowLimit;
+		}
 		
 	}
 	
@@ -54,7 +63,7 @@ class ads
 					return true;
 				}
 			} else {
-				if($this->adname == '' || $this->adclicks == '' || $this->adduration == '' || $this->file['name'] == '' || $this->adamount == '') {
+				if($this->adname == '' || $this->adclicks == '' || $this->adduration == '' || $this->adamount == '') {
 					return false;
 				} else {
 					return true;
@@ -107,6 +116,9 @@ class ads
 		
 		$this->emptycheck();
 		if($id > 0) {
+			
+			$result=$this->db->query("UPDATE roo_ads SET title='".$this->addtitle."',content='".$this->addcontent."',name='".$this->adname."',duration='".$this->adduration."',amount='".$this->adamount."',watch_count='".$this->adclicks."',clicks_remain='".$this->adclicks."' where id='".$id."'");
+			
 			
 		} else {
 			if($this->addtype == 'text' ) {
@@ -188,11 +200,9 @@ class ads
 	
 	public function getAllAdsviews($id,$page) {
 		
-		$limit = 10;
-		$start = (($page == 1) ? 0 : (($page * $limit) - 1));
 		
 		//echo "SELECT count(adid) as cnt,visitor_area  FROM roo_transaction where adid='$id' group by visitor_area LIMIT $start, $limit"; exit;
-		$sql="SELECT count(adid) as cnt,visitor_area FROM roo_transaction where (adid='$id' and visitor_area != '') group by visitor_area LIMIT $start, $limit";
+		$sql="SELECT count(adid) as cnt,visitor_area FROM roo_transaction where (adid='$id' and visitor_area != '') group by visitor_area LIMIT ".$this->start.','.$this->rowLimit;
 		
 		$qry = $this->db->query($sql);
 		$queryCount = "SELECT COUNT(t.adid) AS cnt FROM roo_transaction AS t WHERE (adid='$id' and visitor_area != '') group by visitor_area"; 
@@ -224,8 +234,8 @@ class ads
 			
 		//echo $rowCount; exit;
 		
-		$totalPage = getTotalPage($rowCount,$limit);
-		$pagination = pagination("ads_details.php", "action=details&id=$id", $page, $totalPage, 6);
+		$totalPage = getTotalPage($rowCount,$this->rowLimit);
+		$pagination = pagination("ads_details.php", "action=details&id=$id", $this->page, $totalPage, 6);
 		return array($adlist, $pagination);
 			//return array($adlist, '');
 		} 
@@ -234,15 +244,12 @@ class ads
 	
 	public function getAllAds($page = 1) {
 		
-		$limit = 15;
-		$start = (($page == 1) ? 0 : (($page * $limit) - 1));
-		
 		$where = '';
 		if($_SESSION['roo']['admin_user']['type'] != 0) {
 			$where = "WHERE userid = '".$_SESSION['roo']['admin_user']['id']."'";
 		}
 		
-		$qry = $this->db->query("SELECT id, userid,name, type, watch_count, clicks_remain, date_added, status FROM roo_ads ".$where." ORDER BY date_added DESC LIMIT $start, $limit");
+		$qry = $this->db->query("SELECT id, userid,name, type, watch_count, clicks_remain, date_added, status FROM roo_ads ".$where." ORDER BY date_added DESC LIMIT ".$this->start.','.$this->rowLimit);
 		
 		$queryCount = "SELECT count(id) as cnt FROM roo_ads ".$where; 
 		
@@ -265,8 +272,8 @@ class ads
 		
 		//echo $rowCount['cnt']; exit;
 		
-		$totalPage = getTotalPage($rowCount['cnt'],$limit);
-		$pagination = pagination("ads.php", "", $page, $totalPage, 6);
+		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
+		$pagination = pagination("ads.php", "", $this->page, $totalPage, 6);
 	
 			return array($adlist, $pagination);
 		} 

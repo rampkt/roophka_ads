@@ -7,7 +7,15 @@ spl_autoload_register(function($file){
 
 $login = check_login();
 if($login === true) {
+	//redirect(HTTP_PATH . 'dashboard.php');
+	if(isset($_SESSION['recharge_mobile']))
+	{
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
+	}
+	else
+	{
 	redirect(HTTP_PATH . 'dashboard.php');
+	}
 }
 
 if(isset($_REQUEST['enc'])) {
@@ -50,7 +58,15 @@ if($_REQUEST['action'] == 'dologin') {
 		
 		$_SESSION['roo']['user'] = $userRow;
 				
-		redirect(HTTP_PATH . 'dashboard.php');
+		//redirect(HTTP_PATH . 'dashboard.php');
+		if(isset($_SESSION['recharge_mobile']))
+	{
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
+	}
+	else
+	{
+	redirect(HTTP_PATH . 'dashboard.php');
+	}
 		
 	} else {
 		redirect(HTTP_PATH . 'login.php?error=2');

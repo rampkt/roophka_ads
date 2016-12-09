@@ -26,6 +26,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_ads') {
 	$ads->id = ((isset($_REQUEST['addid'])) ? $_REQUEST['addid'] : '');
 	
 	$emptycheck = $ads->emptycheck();
+	
 	if($emptycheck === false) {
 		if($ads->id > 0) {
 			redirect(HTTP_PATH . 'admin/ads_add.php?action=edit&error=empty&id='.$ads->id);
@@ -34,7 +35,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_ads') {
 		}
 	}
 	
-	$save = $ads->save();
+	$save = $ads->save($ads->id);
 	if($save === false) {
 		if($ads->id > 0) {
 			redirect(HTTP_PATH . 'admin/ads_add.php?action=edit&error=failed&id='.$ads->id);
@@ -238,14 +239,17 @@ if($ads->id > 0) {
                                         <p class="help-block">Calculate in seconds</p>
                                       </div>
                                     </div>
-                                       
+                                       <?php if($ads->id == "") { ?>
                                     <div class="control-group ">
                                       <label class="control-label" for="banner">Upload banner</label>
                                       <div class="controls">
-                                        <input type="file" name="upload" id="banner" />
+                                        <input type="file" name="upload" id="banner" required />
                                         <p class="help-block">jpg, png, gif</p>
                                       </div>
                                     </div>
+									   <?php } ?>
+									
+									
                                     <div class="form-actions">
                                       <button type="submit" class="btn btn-primary">Save</button>
                                       <button type="reset" class="btn">Cancel</button>
@@ -291,13 +295,16 @@ if($ads->id > 0) {
                                       </div>
                                     </div>
                                       
+									  <?php if($ads->id == "") { ?>
                                     <div class="control-group">
                                       <label class="control-label" for="banner">Upload video</label>
                                       <div class="controls">
-                                        <input type="file" name="upload" id="banner" />
+                                        <input type="file" name="upload" id="banner" required />
                                         <p class="help-block">mp4</p>
                                       </div>
                                     </div>
+									  <?php } ?>
+									
                                     <div class="form-actions">
                                       <button type="submit" class="btn btn-primary">Save</button>
                                       <button type="reset" class="btn">Cancel</button>

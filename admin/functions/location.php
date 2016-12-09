@@ -17,6 +17,67 @@ class location
 		}
 	}
 	
+	
+	public function getAlladvertise() 
+	{
+		
+		//echo $datestr; exit;
+		$result = array();
+		
+		$query = 'SELECT * FROM roo_advertise_request where status in (0,1) order by date_added asc LIMIT '.$this->start.','.$this->rowLimit;
+		
+		$queryCount = 'SELECT COUNT(id) AS cnt FROM roo_advertise_request where status in (0,1) '; 
+		
+		//echo $query; 
+		$qry = $this->db->query($query);
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				
+				$row['countryname']=$this->getcountryname($row['country']);
+				$row['statename']=$this->getstatename($row['state']);
+				$row['cityname']=$this->getcityname($row['city']);
+				
+				$result[] = $row;
+			}
+		}
+		
+		// pagination code
+		$qryCount = $this->db->query($queryCount);
+		$rowCount = $this->db->fetch_array($qryCount);
+		
+		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
+		$pagination = pagination("advertise.php", "", $this->page, $totalPage, 6);
+		return array($result, $pagination);
+	}
+	
+	
+	public function getAllcontactus() 
+	{
+		
+		//echo $datestr; exit;
+		$result = array();
+		
+		$query = 'SELECT c.id, c.name, c.email, c.subject, c.message, c.date_added, c.status,c.reply_msg,c.reply_date FROM roo_contactus AS c order by c.date_added asc LIMIT '.$this->start.','.$this->rowLimit;
+		
+		$queryCount = 'SELECT COUNT(c.id) AS cnt FROM roo_contactus AS c '; 
+		
+		//echo $query; 
+		$qry = $this->db->query($query);
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				$result[] = $row;
+			}
+		}
+		
+		// pagination code
+		$qryCount = $this->db->query($queryCount);
+		$rowCount = $this->db->fetch_array($qryCount);
+		
+		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
+		$pagination = pagination("contactus.php", "", $this->page, $totalPage, 6);
+		return array($result, $pagination);
+	}
+	
 	public function getAllcountry($country) 
 	{
 		
@@ -121,6 +182,36 @@ class location
 		return false;
 	}
 	
+	public function getcountryname($id=0) {
+		if($id > 0) {
+			$qry=$this->db->query("select name from roo_country WHERE id='".$id."' LIMIT 1");
+			$qryfetch=$this->db->fetch_array($qry);
+			
+			return $qryfetch['name'];
+		}
+		return false;
+	}
+	
+	public function getstatename($id=0) {
+		if($id > 0) {
+			$qry=$this->db->query("select name from roo_state WHERE id='".$id."' LIMIT 1");
+			$qryfetch=$this->db->fetch_array($qry);
+			
+			return $qryfetch['name'];
+		}
+		return false;
+	}
+	
+	public function getcityname($id=0) {
+		if($id > 0) {
+			$qry=$this->db->query("select name from roo_city WHERE id='".$id."' LIMIT 1");
+			$qryfetch=$this->db->fetch_array($qry);
+			
+			return $qryfetch['name'];
+		}
+		return false;
+	}
+	
 	public function countryupdate($id=0,$cname) {
 		if($id > 0) {
 			$this->db->query("UPDATE roo_country SET name='".$cname."' WHERE id='".$id."' LIMIT 1");
@@ -154,6 +245,34 @@ class location
 		return false;
 	}
 	
+	
+	public function Deleteadvertise($id=0) {
+		if($id > 0) {
+			$this->db->query("UPDATE roo_advertise_request SET status='2' WHERE id='".$id."' LIMIT 1");
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public function Deletecontact($id=0) {
+		if($id > 0) {
+			$this->db->query("Delete from roo_contactus WHERE id='".$id."' LIMIT 1");
+			return true;
+		}
+		return false;
+	}
+	
+	public function Replycontact($id=0,$msg) {
+		if($id > 0) {
+			$this->db->query("UPDATE roo_contactus SET reply_msg='".$msg."',reply_date='".DATETIME24H."',status='1' WHERE id='".$id."' LIMIT 1");
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
 	public function Deletestate($id=0) {
 		if($id > 0) {
 			$this->db->query("Delete from roo_state WHERE id='".$id."' LIMIT 1");
@@ -168,8 +287,53 @@ class location
 		}
 		return false;
 	}
+		
+		public function getsetting($id,$field) {
+		if($id > 0) {
+			$qry = $this->db->query("SELECT * FROM roo_settings WHERE id='".$id."'");
+			$row = $this->db->fetch_array($qry);
+			
+			return $row[$field];
+			
+		}
+		return false;
+	}
 	
+	public function Approveadvertise($id=0,$pass) {
+		
+		$encpassword = enc_password($pass);
+		
+		if($id > 0) {
+			$this->db->query("UPDATE roo_advertise_request SET status='1' WHERE id='".$id."' LIMIT 1");
+			
+			$qry=$this->db->query("select * from roo_advertise_request where id='".$id."' LIMIT 1");
+			$fetch=$this->db->fetch_array($qry);
+			
+			$username=$fetch['email'];
+			
+			$qrryy=$this->db->query("select * from roo_admin_users where email='".$fetch['email']."' and (type='3' and status='0') LIMIT 1");
+			$fetchqrryy=$this->db->fetch_array($qrryy);
+			$count=$this->db->num_rows($qrryy);
+			
+			if($count==0)
+			{
+			$qry2=$this->db->query("INSERT INTO roo_admin_users(email,username,password,salt,firstname,lastname,phone,signupdate,type,status)values('".$fetch['email']."','".$username."','".$encpassword."','".SALT."','".$fetch['company_name']."','','".$fetch['mobile']."','".DATETIME24H."','3','0')");	
+			}
+			else
+			{
+			$qry2=$this->db->query("UPDATE roo_admin_users SET password='".$encpassword."' where email='".$fetch['email']."'");	
+			}
+			
+			//echo "INSERT INTO roo_admin_users(email,username,password,salt,firstname,lastname,phone,signupdate,type,status)values('".$fetch['email']."','".$username."','".$encpassword."','".SALT."','".$fetch['company_name']."','','".$fetch['mobile']."','".DATETIME24H."','3','0')"; exit;
+			
+			
+			
+			return true;
+		}
+		return false;
+	}
 	
+
 	public function Updatecountry($id,$country) {
 		if($id > 0) {
 			$this->db->query("UPDATE roo_country SET name='".$country."' WHERE id='".$id."' LIMIT 1");
