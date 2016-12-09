@@ -11,7 +11,7 @@ if($login === true) {
 	
 	if(isset($_SESSION['recharge_mobile']))
 	{
-		redirect(HTTP_PATH . 'recharge_proceed.php');
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
 	}
 	else
 	{

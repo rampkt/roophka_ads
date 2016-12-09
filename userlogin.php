@@ -10,7 +10,7 @@ if($login === true) {
 	//redirect(HTTP_PATH . 'dashboard.php');
 	if(isset($_SESSION['recharge_mobile']))
 	{
-		redirect(HTTP_PATH . 'recharge_proceed.php');
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
 	}
 	else
 	{
@@ -61,7 +61,7 @@ if($_REQUEST['action'] == 'dologin') {
 		//redirect(HTTP_PATH . 'dashboard.php');
 		if(isset($_SESSION['recharge_mobile']))
 	{
-		redirect(HTTP_PATH . 'recharge_proceed.php');
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
 	}
 	else
 	{
