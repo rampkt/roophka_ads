@@ -60,6 +60,26 @@ CREATE TABLE IF NOT EXISTS `roo_mobile_operator` (
 ALTER TABLE `roo_mobile_operator` ADD PRIMARY KEY (`id`);
 ALTER TABLE `roo_mobile_operator` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 
+INSERT INTO `roo_mobile_operator` (`id`, `operator_code`, `operator_shortname`, `operator_name`, `operator_image`, `status`) VALUES
+(1, 28, 'AT', 'AIRTEL', 'NULL', 0),
+(2, 1, 'AL', 'AIRCEL', 'NULL', 0),
+(3, 3, 'BS', 'BSNL', 'NULL', 0),
+(4, 22, 'VF', 'VODAFONE', 'NULL', 0),
+(5, 17, 'TD', 'TATA DOCOMO GSM', 'NULL', 0),
+(6, 18, 'TI', 'TATA DOCOMO CDMA', 'NULL', 0),
+(7, 13, 'RG', 'RELIANCE GSM', 'NULL', 0),
+(8, 12, 'RL', 'RELIANCE CDMA', 'NULL', 0),
+(9, 10, 'MS', 'MTS', 'NULL', 0),
+(10, 19, 'UN', 'UNINOR', 'NULL', 0),
+(12, 5, 'VD', 'VIDEOCON', 'NULL', 0),
+(13, 6, 'MTM', 'MTNL MUMBAI', 'NULL', 0),
+(14, 20, 'MTD', 'MTNL DELHI', 'NULL', 0),
+(15, 0, 'NONE', 'NONE', 'NULL', 0),
+(16, 8, 'IDX', 'IDEA', 'NULL', 0),
+(17, 17, 'T24', 'T24', 'NULL', 0),
+(18, 17, 'VG', 'VIRGIN GSM', 'NULL', 0),
+(19, 18, 'VC', 'VIRGIN CDMA', 'NULL', 0);
+
 CREATE TABLE IF NOT EXISTS `roo_recharge` (
 `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -93,3 +113,4 @@ CREATE TABLE IF NOT EXISTS `roo_advertise_request` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 ALTER TABLE `roo_advertise_request` ADD PRIMARY KEY (`id`);
 ALTER TABLE `roo_advertise_request` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+
