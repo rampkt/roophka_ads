@@ -60,7 +60,7 @@ $html='<table class="table">
 						$validity=$data['Validity'];
 				
                $html.= '<tr>
-                  <td>'.$detail.'</td>
+                  <td style="width:400px;word-break:break-all;">'.$detail.'</td>
                   <td>'.$amount.'</td>
 				   <td>'.$validity.'</td>
 				   <td><input type="checkbox" name="pick" id="pick" onclick="pickval('.$amount.');"></td>

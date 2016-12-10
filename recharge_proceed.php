@@ -417,14 +417,19 @@ $recharge = $user->recharge_order();
   function checkamount(useramt)
   {
 	var enteramt=document.recharge_proceed.amount.value;
-	//alert(enteramt+"<br>"+useramt);
 	
-	  if(enteramt>useramt)
+	var eamt=parseInt(enteramt);
+	
+	var fullamt=parseInt(useramt);
+	
+	//alert(eamt+"<br>"+fullamt);
+	//return false;
+	  if(eamt>fullamt)
 	  {
 		  $('#alertamt').html("Please enter below "+useramt+" rupees");
-		  $('#amount').val('');
+		  document.recharge_proceed.amount.value="";
 		  //$('#amount').css('outline-color','red')
-		  $('#amount').focus();
+		  document.recharge_proceed.amount.focus();
 		  return false;
 		  
 	  }  
@@ -455,6 +460,14 @@ $recharge = $user->recharge_order();
   
   
 function findoperatorplans(val) {
+	
+	var htmlval=$('#topupplans'+val).html();
+	if(htmlval=='<br>Enter 10 digit mobile number in given form on the left to view plans.')
+	{
+	//	alert(htmlval);
+	
+	
+	
 	//alert("devi");
 	var mobileval=document.recharge_proceed.mobile.value;
 	var opval=document.recharge_proceed.operator.value;
@@ -482,6 +495,7 @@ function findoperatorplans(val) {
 		}
 	});
 	}
+}
 }
  
 </script>

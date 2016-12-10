@@ -171,7 +171,7 @@
 				   
 				   </li>
 				   <?php } else { ?>
-				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php?view=recharge">Recharge</a></li>
+				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php?view=order">Recharge</a></li>
 				   <?php } ?>
 				  
                   <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewads.php">View ads</a></li>
@@ -237,6 +237,7 @@ function findcirclevalue(val) {
 				
 			} else {
 			$('#circle').html(result);
+			findoperatorplans('TUP');
 			}
 		}
 	});
