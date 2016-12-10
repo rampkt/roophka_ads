@@ -28,6 +28,16 @@
 						<a href="manual_transaction.php"><i class="icon-edit"></i><span class="hidden-tablet"> Manual Transaction</span></a>
 							
 						</li>
+						
+						<li>
+							<a class="dropmenu" href="#"><i class="icon-list-alt"></i><span class="hidden-tablet"> Recharge</span><span class="label label-important"> 3 </span></a>
+							<ul>
+								<li><a class="submenu" href="operator_name.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Operator Name</span></a></li>
+								<li><a class="submenu" href="operator_circle.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Circle Name</span></a></li>
+								<li><a class="submenu" href="recharge_orders.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Orders</span></a></li>
+							</ul>	
+						</li>
+						
 						<li>
 						<a href="country.php"><i class="icon-dashboard"></i><span class="hidden-tablet"> Location</span></a>
 							
