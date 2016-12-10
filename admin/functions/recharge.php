@@ -102,7 +102,7 @@ class recharge
 		$rowCount = $this->db->fetch_array($qryCount);
 		
 		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
-		$pagination = pagination("recharge_orders.php", "date=$date", $this->page, $totalPage, 6);
+		$pagination = pagination("recharge_orders.php", "Order=$date", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
 
