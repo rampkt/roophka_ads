@@ -36,7 +36,10 @@
 			$ii++;
 			}
 			//echo $code;
-			}		
+			}	
+
+$qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
+			$row_scroll = $db->fetch_array($qry_scroll);			
 			
 ?>
 
@@ -44,14 +47,16 @@
     <div class="row header-top">
         <div class="col-md-1">&nbsp;</div>
         <div class="col-md-10 wrapper">
-            <div class="col-md-6">
+            <div class="col-md-2">
             	<div class="info-desc">
                 	<span class="info-email"><i class="fa fa-envelope" aria-hidden="true"></i>info@roophka.com</span>
                     <!--<span class="info-phone"><i class="fa fa-phone"></i>044 42840257</span>-->
                 </div>
             </div>
-			
-            <div class="col-md-6 top-right" align="right">
+			<div class="col-md-8">
+			<div class="info-desc" ><marquee style="margin-bottom:-10px;"><?=$row_scroll['scrolling_content']?></marquee></div>
+			</div>
+            <div class="col-md-2 top-right" align="right">
             	<!--<a href="#" ><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></i></a>
                 <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></i></a>-->
@@ -65,6 +70,7 @@
             </div>
         </div>
         <div class="col-md-1">&nbsp;</div>
+		<div class="clearfix"></div>
     </div>
     
     <div class="row header-logo">

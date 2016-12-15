@@ -129,7 +129,20 @@ class ads
 				} else {
 					return false;
 				}
-			} else {
+			}
+             else if($this->addtype == 'scroll' ) {
+				 
+				 
+				$result = $this->db->query("INSERT INTO roo_ads (userid, isadmin, type, title, content, name, duration, amount, watch_count, clicks_remain, date_added, status) VALUES ('".$_SESSION['roo']['admin_user']['id']."', 1, '".$this->addtype."', '".$this->addtitle."', '".$this->addcontent."', '".$this->adname."', '".$this->adduration."', '".$this->adamount."', '".$this->adclicks."', '".$this->adclicks."', '". DATETIME24H ."', 1)");
+				unset($_SESSION['roo']['ads']);
+				if($result) { 
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			else {
 				$org_filename = $this->file['name'];
 				$extn = pathinfo($org_filename, PATHINFO_EXTENSION);
 				

@@ -58,7 +58,7 @@ function findlocationvalue(position) {
 		data:params,
 		success: function(result) {
 			//$('.overlay').fadeOut();
-			console.log(result);
+			//console.log(result);
 			if(result.error) {
 				
 			} else {

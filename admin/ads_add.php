@@ -20,7 +20,12 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_ads') {
 	if($ads->addtype == 'text') {
 		$ads->addtitle = $db->escape_string($_REQUEST['addtitle']);
 		$ads->addcontent = encodehtml($_REQUEST['addcontent']);
-	} else {
+	} 
+	else if($ads->addtype == 'scroll') {
+		$ads->addtitle = $db->escape_string($_REQUEST['addtitle']);
+		$ads->addcontent = encodehtml($_REQUEST['addcontent']);
+	} 
+	else {
 		$ads->file = $_FILES['upload'];
 	}
 	$ads->id = ((isset($_REQUEST['addid'])) ? $_REQUEST['addid'] : '');
@@ -55,16 +60,20 @@ $ads->addcontent = ($ads->addcontent == '') ? '' : decodehtml($ads->addcontent);
 $text = true;
 $banner = true;
 $video = true;
+$scroll = true;
 
 if($ads->id > 0) {
 	//echo $ads->addtype;
 	if($ads->addtype == 'text') {
-		$banner = $video = false;
+		$banner = $video = $scroll=false;
 	} elseif($ads->addtype == 'image') {
-		$text = $video = false;
+		$text = $video = $scroll=false;
 	} elseif($ads->addtype == 'video') {
-		$banner = $text = false;
-	} /*else {
+		$banner = $text = $scroll=false;
+	} elseif($ads->addtype == 'scroll') {
+		$banner = $text = $video=false;
+	}
+	/*else {
 		
 	}*/
 }
@@ -143,6 +152,7 @@ if($ads->id > 0) {
 							<li class="active <? echo (($text === false) ? 'hide' : ''); ?>"><a href="#textadd">Text Ad</a></li>
 							<li class="<? echo (($banner === false) ? 'hide' : ''); ?>"><a href="#bannerad">Banner Ad</a></li>
 							<li class="<? echo (($video === false) ? 'hide' : ''); ?>"><a href="#videoad">Video Ad</a></li>
+							<li class="<? echo (($scroll === false) ? 'hide' : ''); ?>"><a href="#scrollad">Scrolling Ad</a></li>
 						</ul>
 						 
 						<div id="myTabContent" class="tab-content">
@@ -312,6 +322,68 @@ if($ads->id > 0) {
                                   </fieldset>
                                 </form>
 							</div>
+						
+						<div class="tab-pane  <? echo (($scroll === false) ? 'hide' : ''); ?>" id="scrollad">
+								<form class="form-horizontal" method="post">
+                                <input type="hidden" name="action" value="_add_ads" />
+                                <input type="hidden" name="addtype" value="scroll" />
+                                <? if($ads->id != '') { ?>
+                                	<input type="hidden" name="addid" value="<?=$ads->id?>" />
+                                <? } ?>
+                                  <fieldset>
+                                    <div class="control-group">
+                                      <label class="control-label" for="adname">Name </label>
+                                      <div class="controls">
+                                        <input type="text" class="input-xlarge" id="adname" name="adname" value="<?=$ads->adname?>" />
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" for="adclicks">Total click</label>
+                                      <div class="controls">
+                                        <input type="text" class="input-xlarge numberOnly" id="adclicks" name="adclicks" maxlength="5" value="<?=$ads->adclicks?>" />
+                                      </div>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                      <label class="control-label" for="adamount">Earn amount</label>
+                                      <div class="controls">
+                                        <input type="number" class="input-xlarge" id="adamount" name="adamount" value="<?=$ads->adamount?>" step="0.01" min="0" max="100" />
+                                      </div>
+                                    </div>
+        
+                                    <div class="control-group">
+                                      <label class="control-label" for="adduration">View duration</label>
+                                      <div class="controls">
+                                        <input type="text" class="input-xlarge numberOnly" id="adduration" name="adduration" maxlength="5" value="<?=$ads->adduration?>" />
+                                        <p class="help-block">Calculate in seconds</p>
+                                      </div>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                      <label class="control-label" for="addtitle">Ad Title</label>
+                                      <div class="controls">
+                                        <input type="text" class="input-xlarge" id="addtitle" name="addtitle" value="<?=$ads->addtitle?>" />
+                                      </div>
+                                    </div>
+                                              
+                                    <div class="control-group ">
+                                      <label class="control-label" for="addcontent">Ad Content</label>
+                                      <div class="controls">
+                                        <textarea id="addcontent" rows="5" class="cleditor" name="addcontent"><?=$ads->addcontent?></textarea>
+										 <p class="help-block">Content separated by ~ symbol.</p>
+                                      </div>
+                                    </div>
+                                    <div class="form-actions">
+                                      <button type="submit" class="btn btn-primary">Save</button>
+                                      <button type="reset" class="btn">Cancel</button>
+                                    </div>
+                                  </fieldset>
+                                </form>
+							</div>
+                        </div>    
+                            
+						
+						
 						</div>
 					</div>
 				</div><!--/span-->
