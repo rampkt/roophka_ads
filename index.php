@@ -163,43 +163,53 @@ return $result3[0];
 <!-- footer area -->    
 <? include("./includes/footer.php"); ?>
 <!-- #end footer area --> 
- <div class="modal hide fade" id="light" style="height:310px;">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">x</button>
-			<h3>Add Your Location</h3>
-		</div>
+ <div class="modal hide fade" id="light" style="height:264px;overflow:hidden;">
+		<div class="modal-header" style="padding:0px;height:270px;">
+			<div class="grid_12 no-padding" style="margin-bottom:0px;">
+             <div class="panel panel-primary" style="text-align:left;margin-bottom:0px;">
+              <div class="panel-heading">
+			  <button type="button" class="close" data-dismiss="modal">x</button>
+			  Share your location
+			  
+			  </div>
+              <div class="panel-body" >
+		
 		<div class="modal-body" id="bankAjaxResult">
 			<div id="alertmsg">Must be allow your location or enter your zipcode,then only you can view ads !!! </div>
 		<form action="index.php" method="post">
 		<input type="hidden" name="action" value="_add_findlocation">
-		<div class="row-fluid" style="margin-top:20px;">
-		<div class="pull-left" style="margin-right:10px;margin-top:10px;font-size:14px;">Enter your zipcode :</div>
+		<div class="row-fluid" style="margin-top:20px;border-bottom:1px dashed #ccc;padding-bottom:30px;">
+		<div class="pull-left" style="font-size:14px;padding:5px 20px 0px 0px;">Enter your zipcode :</div>
 		<div class="pull-left">
-		<input type="text" name="zipcode" id="zipcode" class="form-control" style="height:30px;margin-top:5px;font-size:14px;" maxlength="6" placeholder="Enter zipcode here..." required>
+		<input type="text" name="zipcode" id="zipcode" class="form-control numberOnly" style="height:30px;width:280px;font-size:14px;" maxlength="6" placeholder="Enter numbers only..." required>
 		</div>
-		<div class="pull-left"  style="margin-top:5px;margin-left:20px;">
-		<input type="submit" name="submit" id="submit" value="Submit" style="padding:5px;font-size:14px;border-radius:0px;" class="btn btn-small btn-success add-new">
+		<div class="pull-right" >
+		<input type="submit" name="submit" id="submit" value="Submit" style="font-size:14px;margin-bottom:0px;" class="btn btn-small btn-success add-new">
 		</div>
-		<div class="clearfix" style="margin-bottom:10px;"></div>
+		<div class="clearfix" ></div>
 		</div>
 		
-		<div style="font-size:13px;">(or)</div>
 		
-		<div class="row-fluid" style="margin-top:10px;">
-		<div class="pull-left" style="margin-right:20px;margin-top:5px; font-size:14px;"> Share your location</div>
-		<div class="pull-left">
-		<a href="javascript:void(0);" class="btn btn-small btn-success" style="padding:5px;font-size:14px;border-radius:0px;" onclick="findlocation();">Find Location</a>
+		
+		<div class="row-fluid" style="margin-top:10px;padding-top:20px;">
+		<div class="pull-left" style="margin-right:20px;margin-top:5px; font-size:14px;"> Share your location using browsers tracking</div>
+		<div class="pull-right">
+		<a href="javascript:void(0);" class="btn btn-small btn-success" style="font-size:14px;" onclick="findlocation();">Find Location</a>
 		</div>
-		<div class="clearfix" style="margin-bottom:10px;"></div>
+		<div class="clearfix" style="margin-bottom:5px;"></div>
 		</div>
 		
 		
 		
 		</form>
+
 		</div>
-		<div class="modal-footer">
-			<a href="#" class="btncss" data-dismiss="modal">Close</a>
-		</div>
+		
+	</div>
+</div>
+</div>
+</div>
+
 	</div>
 
 <? include("./includes/footerinclude.php"); ?>
@@ -362,7 +372,7 @@ function findlocationvalue(position) {
 .modal-body {
   position: relative;
   max-height: 400px;
-  padding: 15px;
+  padding: 5px;
   overflow-y: auto;
 }
 

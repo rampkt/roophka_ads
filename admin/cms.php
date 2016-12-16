@@ -11,6 +11,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_cms') {
 	$cms->privacy = $db->escape_string($_REQUEST['privacy']);
 	$cms->terms = $db->escape_string($_REQUEST['terms']);
 	$cms->howitworks = $db->escape_string($_REQUEST['howitworks']);
+	$cms->scroll_text = $db->escape_string($_REQUEST['scroll_text']);
 	
 	$save = $cms->save();
 	if($save === false) {
@@ -140,7 +141,14 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_cms') {
                                         <textarea class="cleditor" id="terms" rows="3" name="terms" required><?=$cms->terms?></textarea>
                                       </div>
                                     </div>
-                                              
+                                   
+                                    <div class="control-group ">
+                                      <label class="control-label" for="scroll_text">Header Scrolling text:</label>
+                                      <div class="controls">
+                                        <textarea class="cleditor" id="scroll_text" rows="3" name="scroll_text" required><?=$cms->scroll_text?></textarea>
+                                      </div>
+                                    </div>								   
+									
                                     <div class="control-group ">
                                       <label class="control-label" for="howitworks">How it Works:</label>
                                       <div class="controls">

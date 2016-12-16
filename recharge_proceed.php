@@ -213,6 +213,7 @@ $recharge = $user->recharge_order();
 <? include("./includes/head-wrap.php"); ?>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="./assets/js/tabs.js"></script>
+  <script src="./assets/js/recharge.js"></script>
   <link type="text/css" rel="stylesheet" href="./assets/css/tabs.css" />
 <!-- main content area -->   
 <div id="main" class="wrapper dashboard"> 
@@ -411,80 +412,6 @@ $recharge = $user->recharge_order();
     <!-- #end sidebar -->
    
   </div><!-- #end div #main .wrapper -->
-
-</style>
-  <script>
-  function checkamount(useramt)
-  {
-	var enteramt=document.recharge_proceed.amount.value;
-	//alert(enteramt+"<br>"+useramt);
-	
-	  if(enteramt>useramt)
-	  {
-		  $('#alertamt').html("Please enter below "+useramt+" rupees");
-		  $('#amount').val('');
-		  //$('#amount').css('outline-color','red')
-		  $('#amount').focus();
-		  return false;
-		  
-	  }  
-	  
-  }
-  
-  function pickval(amt)
-  {
-	  
-	  document.recharge_proceed.amount.value=amt;
-	  
-  }
-  
-  </script>
-  
-  <script>
-  $( document ).ready(function() {
-   // console.log( "ready!" );
-   var mobileval=document.recharge_proceed.mobile.value;
-	var opval=document.recharge_proceed.operator.value;
-	var circleval=document.recharge_proceed.circle.value;
-	
-	//alert(mobileval+''+opval+''+circleval);
-	if((mobileval!="")&&(opval!="")&&(circleval!="")){
-		findoperatorplans('TUP');
-	}
-});
-  
-  
-function findoperatorplans(val) {
-	//alert("devi");
-	var mobileval=document.recharge_proceed.mobile.value;
-	var opval=document.recharge_proceed.operator.value;
-	var circleval=document.recharge_proceed.circle.value;
-	
-	//alert(mobileval+''+opval+''+circleval);
-	if((mobileval!="")&&(opval!="")&&(circleval!="")){
-		
-		$('#topupplans'+val).html('<img src="./assets/images/loader.gif" />');
-		
-	var params = { action : '_findplans',circle:circleval,operator:opval,mobile:mobileval,type:val}
-	$.ajax({
-		url:"operatorplans.php",
-		type:'POST',
-		dataType:"text",
-		data:params,
-		success: function(result) {
-		
-			//alert(result);
-			if(result.error) {
-				
-			} else {
-			$('#topupplans'+val).html(result);
-			}
-		}
-	});
-	}
-}
- 
-</script>
 
 <!-- footer area -->    
 <? include("./includes/footer.php"); ?>

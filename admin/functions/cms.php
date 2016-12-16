@@ -17,7 +17,7 @@ class cms
 				
 				
 				//if(file_exists($destination)) {
-					$result=$this->db->query("UPDATE roo_cms set aboutus='".$this->aboutus."',privacy='".$this->privacy."',terms='".$this->terms."',howitworks='".$this->howitworks."' where id='1'");
+					$result=$this->db->query("UPDATE roo_cms set aboutus='".$this->aboutus."',privacy='".$this->privacy."',terms='".$this->terms."',howitworks='".$this->howitworks."',scrolling_content='".$this->scroll_text."' where id='1'");
 					
 					
 					if($result) { 
@@ -42,6 +42,7 @@ class cms
 			$this->privacy = $row['privacy'];
 			$this->howitworks = $row['howitworks'];
 			$this->terms = $row['terms'];
+			$this->scroll_text=$row['scrolling_content'];
 			
 		}
 		return false;
