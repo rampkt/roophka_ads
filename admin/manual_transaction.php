@@ -9,8 +9,6 @@ $emails=$users->getAllUserstransaction();
 if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_transaction') {
 	//print_r($_REQUEST);
 	$users->userinput=$db->escape_string($_REQUEST['userinput']);
-	
-	
 	$users->username = $db->escape_string($_REQUEST['username']);
 	$users->amount = $db->escape_string($_REQUEST['amount']);
 	$users->reason = $db->escape_string($_REQUEST['reason']);

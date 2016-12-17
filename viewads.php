@@ -156,7 +156,6 @@ var adstype = '<?=$currentAd['type']?>';
 var adscount = parseInt('<?=$currentAd['duration']?>');
 var adsid = '<?=$currentAd['id']?>';
 
-$('.scroll0').scroll();
 </script>
 
 <script src="./assets/js/viewads.js"></script>
@@ -186,7 +185,7 @@ var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ ec
    // alert( "ready!" );
    if((latval=="")&&(lngval==""))
    {
-	 //  locationaddfn(1);
+	   locationaddfn(1);
 	  // pauseTimer();
    }else{
 
