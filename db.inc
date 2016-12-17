@@ -22,3 +22,5 @@ CREATE TABLE `roo_recharge` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+ALTER TABLE  `roo_ads` CHANGE  `type`  `type` ENUM(  'video',  'image',  'text',  'scroll' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;

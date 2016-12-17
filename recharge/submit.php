@@ -1,11 +1,11 @@
 <?
 error_reporting(0); 
-if(isset($_POST))   
-{ 
+//if(isset($_POST))   
+//{ 
 // collecting details from html Form 
-$mobile=$_POST['mobile'];  
-$operator=$_POST['operator'];  
-$amount=$_POST['amount']; 
+$mobile="9751640953";  
+$operator="VF";  
+$amount="10"; 
  
 //generating random unique orderid for your reference 
 $uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
@@ -17,7 +17,7 @@ $uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);
 $ch = curl_init(); 
 $timeout = 100; // set to zero for no timeout 
 
-$apikey="862626107699030";
+$apikey="104746188241741";
 $userid="roophka";
 
 $myHITurl = "http://joloapi.com/api/recharge.php?mode=0&userid=$userid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
@@ -30,7 +30,7 @@ curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 $file_contents = curl_exec($ch); 
 $curl_error = curl_errno($ch); 
 
-//print_r(curl_getinfo($ch));
+print_r(curl_getinfo($ch));
 
 curl_close($ch); 
 
@@ -96,7 +96,5 @@ echo"Operator Txn ID: $operatorid";
 echo"<br/>"; 
 echo"Error No.: $errorcode"; 
 echo"<br/>"; 
-}else{ 
-echo"You cannot run file directly."; 
-} 
+ 
 ?> 
