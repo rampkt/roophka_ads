@@ -1,3 +1,13 @@
+<?php 
+
+$qry_bal = $db->query("SELECT account_balance FROM roo_users WHERE id='".$_SESSION['roo']['user']['id']."'");
+			$row_bal = $db->fetch_array($qry_bal);		
+
+	$_SESSION['roo']['user']['account_balance']=$row_bal['account_balance'];		
+			
+?>
+
+
 <section id="page-header" class="clearfix">    
 <!-- responsive FlexSlider image slideshow -->
 

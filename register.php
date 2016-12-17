@@ -213,7 +213,7 @@ $cityDropDown = $location->getCityDropdown(0, 0, '', true, 'data-parsley-errors-
               <label class="control-label"  for="pincode">Pincode</label>
               <div class="controls">
                 <input type="text" id="pincode" name="pincode" placeholder="" maxlength="6" class="form-control input-lg" required data-parsley-errors-container="#pincode-error" />
-                <p class="help-block">Pincode can contain only numbers with 6 digit</p>
+                <p class="help-block">Pincode can contain only numbers with 6 digits</p>
               </div>
             </div>
          
