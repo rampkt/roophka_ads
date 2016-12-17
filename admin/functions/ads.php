@@ -350,6 +350,24 @@ class ads
 						</div>
 					</div>';
 		} 
+		elseif($ads['type'] == 'scroll') {
+			
+			$exp=explode("~",decodehtml($ads['content']));
+			$val="";
+			for($i=0;count($exp)>$i;$i++)
+			{
+			$val.=$exp[$i];	
+			}
+			
+			
+			$html = '<div class="videoad">
+			<div class="scroll" style="width:400px;">
+						<marquee>
+							'.$val.'
+						</marquee>
+					</div>
+					</div>';
+		} 
 		return $html;
 	}
 	

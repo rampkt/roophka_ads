@@ -95,19 +95,21 @@ class ads {
 		elseif($ads['type'] == 'scroll') {
 			
 			$exp=explode("~",decodehtml($ads['content']));
-			$val="<div class='scroll'>";
+			$val="";
 			for($i=0;count($exp)>$i;$i++)
 			{
 			$val.=$exp[$i];	
 			}
-			$val.="</div>";
+			
 			
 			$html = '<div class="videoad">
+			<div class="scroll">
 						<marquee>
 							'.$val.'
 						</marquee>
+					</div>
 					</div>';
-		} 
+		}
 		return $html;
 	}
 	
