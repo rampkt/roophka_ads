@@ -22,3 +22,20 @@ CREATE TABLE `roo_recharge` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `roo_email_category` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `roo_email_template` (
+  `id` int(11) NOT NULL,
+  `template_name` varchar(255) NOT NULL,
+  `template_content` longtext NOT NULL,
+  `template_image` varchar(255) DEFAULT NULL,
+  `date_added` timestamp NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
