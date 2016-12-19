@@ -39,6 +39,15 @@
 						</li>
 						
 						<li>
+							<a class="dropmenu" href="#"><i class="icon-list-alt"></i><span class="hidden-tablet"> Bulk Emails</span><span class="label label-important"> 3 </span></a>
+							<ul>
+								<li><a class="submenu" href="emailcategory.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Email Category</span></a></li>
+								<li><a class="submenu" href="templates.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Templates</span></a></li>
+								<li><a class="submenu" href="recharge_orders.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Orders</span></a></li>
+							</ul>	
+						</li>
+						
+						<li>
 						<a href="country.php"><i class="icon-dashboard"></i><span class="hidden-tablet"> Location</span></a>
 							
 						</li>
