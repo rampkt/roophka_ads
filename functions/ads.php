@@ -98,7 +98,7 @@ class ads {
 			$val="";
 			for($i=0;count($exp)>$i;$i++)
 			{
-			$val.=$exp[$i];	
+			$val.="<img src='assets/img/bullet.png' /> ".$exp[$i];	
 			}
 			
 			
