@@ -24,6 +24,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_ads') {
 	else if($ads->addtype == 'scroll') {
 		$ads->addtitle = $db->escape_string($_REQUEST['addtitle']);
 		$ads->addcontent = encodehtml($_REQUEST['addcontent']);
+		$ads->file = $_FILES['uploadimage'];
 	} 
 	else {
 		$ads->file = $_FILES['upload'];
@@ -324,7 +325,7 @@ if($ads->id > 0) {
 							</div>
 						
 						<div class="tab-pane  <? echo (($scroll === false) ? 'hide' : ''); ?>" id="scrollad">
-								<form class="form-horizontal" method="post">
+								<form class="form-horizontal" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="_add_ads" />
                                 <input type="hidden" name="addtype" value="scroll" />
                                 <? if($ads->id != '') { ?>
@@ -358,6 +359,15 @@ if($ads->id > 0) {
                                         <p class="help-block">Calculate in seconds</p>
                                       </div>
                                     </div>
+									 
+                                    <div class="control-group ">
+                                      <label class="control-label" for="uploadimage">Upload Image</label>
+                                      <div class="controls">
+                                        <input type="file" name="uploadimage" id="uploadimage" required />
+                                        <p class="help-block">jpg, png, gif</p>
+                                      </div>
+                                    </div>
+									  
                                     
                                     <div class="control-group">
                                       <label class="control-label" for="addtitle">Ad Title</label>

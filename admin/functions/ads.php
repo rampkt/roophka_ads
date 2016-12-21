@@ -132,8 +132,25 @@ class ads
 			}
              else if($this->addtype == 'scroll' ) {
 				 
-				 
-				$result = $this->db->query("INSERT INTO roo_ads (userid, isadmin, type, title, content, name, duration, amount, watch_count, clicks_remain, date_added, status) VALUES ('".$_SESSION['roo']['admin_user']['id']."', 1, '".$this->addtype."', '".$this->addtitle."', '".$this->addcontent."', '".$this->adname."', '".$this->adduration."', '".$this->adamount."', '".$this->adclicks."', '".$this->adclicks."', '". DATETIME24H ."', 1)");
+				 $org_filename = $this->file['name'];
+				$extn = pathinfo($org_filename, PATHINFO_EXTENSION);
+				
+				$path = DOCUMENT_PATH . "uploads/ads/";
+				$filehash = randomString(20);
+				if($this->addtype == 'video') {
+					$filename = $filehash . '.'.$extn;
+				} else {
+					$filename = $filehash . '.attach';
+				}
+				$destination = $path . $filename;
+				
+				$httpPath = HTTP_PATH . "uploads/ads/" . $filename;
+				
+				//echo $destination; exit;
+				
+				@move_uploaded_file($this->file['tmp_name'], $destination);
+				
+				$result = $this->db->query("INSERT INTO roo_ads (userid, isadmin, type, title, content, name, duration, amount, watch_count, clicks_remain, date_added, status,extension, filename, filehash) VALUES ('".$_SESSION['roo']['admin_user']['id']."', 1, '".$this->addtype."', '".$this->addtitle."', '".$this->addcontent."', '".$this->adname."', '".$this->adduration."', '".$this->adamount."', '".$this->adclicks."', '".$this->adclicks."', '". DATETIME24H ."', 1,'".$extn."', '".$org_filename."', '".$filehash."')");
 				unset($_SESSION['roo']['ads']);
 				if($result) { 
 					return true;
@@ -201,6 +218,7 @@ class ads
 			$this->addcontent = $row['content'];
 			$this->addtype = $row['type'];
 			$this->adamount = $row['amount'];
+			$this->filehash = $row['filehash'];
 			$this->adstatus = $row['status'];
 			$this->addate = $row['date_added'];
 			$this->adhtml= $this->getAdHtml($row);

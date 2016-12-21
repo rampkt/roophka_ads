@@ -16,15 +16,17 @@ $ads->addcontent = ($ads->addcontent == '') ? '' : decodehtml($ads->addcontent);
 $text = true;
 $banner = true;
 $video = true;
-
+$scroll=true;
 if($ads->id > 0) {
 	//echo $ads->addtype;
 	if($ads->addtype == 'text') {
-		$banner = $video = false;
+		$banner = $video =$scroll = false;
 	} elseif($ads->addtype == 'image') {
-		$text = $video = false;
-	} elseif($ads->addtype == 'video') {
-		$banner = $text = false;
+		$text = $video =$scroll= false;
+	} elseif($ads->addtype == 'scroll') {
+		$text = $video =$banner= false;
+	}elseif($ads->addtype == 'video') {
+		$banner = $text =$scroll= false;
 	} /*else {
 		
 	}*/
@@ -143,6 +145,7 @@ list($adslist, $pagination)= $ads->getAllAdsviews($_REQUEST['id'],$page);
 					
 					 <div class="col-md-12">
                          <div class="col-md-6 pull-left">
+						 <div style="width:400px;margin-left:20px;"><img src="../uploads/ads/<?=$ads->filehash?>.attach" /></div>
     	                 <?=$ads->adhtml?>
    
                            </div>

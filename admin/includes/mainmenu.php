@@ -18,7 +18,16 @@
 								<li><a class="submenu" href="withdraw_report.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Withdraw Reports</span></a></li>
 							</ul>	
 						</li>
-						
+						<li>
+							<a class="dropmenu" href="#"><i class="icon-star"></i><span class="hidden-tablet"> Bulk Emails</span><span class="label label-important"> 5 </span></a>
+							<ul>
+							<li><a class="submenu" href="compose.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Compose</span></a></li>
+							<li><a class="submenu" href="sentemails.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Sent Emails</span></a></li>
+								<li><a class="submenu" href="emailcategory.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Email Category</span></a></li>
+								<li><a class="submenu" href="templates.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Templates</span></a></li>
+								<li><a class="submenu" href="emails.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Emails</span></a></li>
+							</ul>	
+						</li>
 						<li>
 						<a href="withdraw_request.php"><i class="icon-calendar"></i><span class="hidden-tablet"> Withdraw Request</span></a>
 							
@@ -38,14 +47,7 @@
 							</ul>	
 						</li>
 						
-						<li>
-							<a class="dropmenu" href="#"><i class="icon-list-alt"></i><span class="hidden-tablet"> Bulk Emails</span><span class="label label-important"> 3 </span></a>
-							<ul>
-								<li><a class="submenu" href="emailcategory.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Email Category</span></a></li>
-								<li><a class="submenu" href="templates.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Templates</span></a></li>
-								<li><a class="submenu" href="recharge_orders.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Orders</span></a></li>
-							</ul>	
-						</li>
+						
 						
 						<li>
 						<a href="country.php"><i class="icon-dashboard"></i><span class="hidden-tablet"> Location</span></a>
