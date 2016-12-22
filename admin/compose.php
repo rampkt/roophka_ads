@@ -273,15 +273,21 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 								 
 								 
 									 <div class="control-group " >
-                                      <label class="control-label" for="content">Subject:</label>
+                                      <label class="control-label" for="content"> Email Input Type:</label>
                                       <div class="controls">
-                                       <input type="text" name="subject" id="subject" placeholder="Enter subject here..." class="input-xlarge" required />
-									  
+                                      <div class="controls-label">
+                                       <label for="database" style="width:180px;margin-top: 8px;margin-left:-20px;" class="pull-left">
+										<input type="radio" name="emailinput" id="database" value="1" onclick="emailinputfn(1);" checked> From our database
+										</label>
+										<label for="filein" style="width:130px;margin-top: 8px;" class="pull-left">
+										<input type="radio" name="emailinput" id="filein" value="2" onclick="emailinputfn(2);"> External file
+										</label>
+                                      </div>
                                       </div>
                                     </div>
 								 
 								 
-                                    <div class="control-group">
+                                    <div class="control-group" id="ourcategory" style="display:block;">
                                       <label class="control-label" for="name">Category:</label>
                                       <div class="controls">
                                       <select name="category[]" id="category" class="input-xlarge" Onclick="emailsfn();" style="width:285px;" multiple  required>
@@ -289,6 +295,15 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 									  </select>
 									  
 									  </div>
+                                    </div>
+									
+									<div class="control-group " id="externalinput" style="display:none;">
+                                      <label class="control-label" for="content">Upload file:</label>
+                                      <div class="controls">
+                                       <input type="file" name="emailexternal" id="emailexternal" class="input-xlarge" onmouseout="externalfn();"  />
+									  <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:blue;">here.</a></p>
+                                     
+                                      </div>
                                     </div>
 																		 
 									 <div class="control-group">
@@ -301,6 +316,15 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 									  </div>
                                     </div>
 									<input type="hidden" name="emailids" id="emailids">
+									
+									<div class="control-group " >
+                                      <label class="control-label" for="content">Subject:</label>
+                                      <div class="controls">
+                                       <input type="text" name="subject" id="subject" placeholder="Enter subject here..." class="input-xlarge" required />
+									  
+                                      </div>
+                                    </div>
+									
 											
 									 <div class="control-group">
                                       <label class="control-label" for="userinput">Content Type:</label>
@@ -434,6 +458,25 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 		}
 		
 		
+		function emailinputfn(val)
+		{
+			if(val=='1')
+			{
+				$('#ourcategory').show();
+				$('#externalinput').hide();
+				$('#allemails').html("Please choose category first...");
+			}
+			if(val=='2')
+			{
+				$('#ourcategory').hide();
+				$('#externalinput').show();
+				$('#allemails').html("Please upload file first...");
+				
+			}
+			
+		}
+		
+		
 		function userinputfn(val)
 	{
 	//	alert(val);
@@ -546,6 +589,31 @@ function checkedValues(val)
 			return false;
 		}
 
+		function externalfn()
+		{
+			var file=$('#emailexternal').val();
+			var filename=document.getElementById("emailexternal").files[0].name;
+			//alert(filename);
+			var params = { cmd:'_getemailexternal', temp:filename }
+            $.ajax({
+				url:"./template_ajax.php",
+				dataType:"JSON",
+				data:params,
+				success: function(result) {
+					if(result.error) {
+						alert(result.msg);
+					} else {
+						$('#allemails').html("Total "+result.count+" emails in above selected category");
+						$('#allemailsmodal').html(result.html);
+						//$('#emailids').val(result.ids);
+						//checkedValues();
+					}
+				}
+			});
+			return false;
+			
+		}
+		
 		
 		</script>
 	

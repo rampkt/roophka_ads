@@ -4,6 +4,9 @@ $output = array('error' => true, 'msg' => 'Something went wrong, please try agai
 $login = check_admin_login();
 if($login === true) {
 	if(isset($_REQUEST['cmd'])) {
+		
+		
+		
 		if($_REQUEST['cmd'] == '_gettemplate' AND $_REQUEST['temp'] > 0) {
 			include("./functions/bulkemail.php");
 			$bulkemail = new bulkemail();
@@ -13,6 +16,31 @@ if($login === true) {
 			$output['html'] = $html;
 			$output['msg'] = "Success";
 		}
+		if($_REQUEST['cmd'] == '_getemailexternal' AND $_REQUEST['temp']!="") {
+			include("./functions/bulkemail.php");
+			$bulkemail = new bulkemail();
+			$tmpfile=HTTP_PATH . "admin/csv/".$_REQUEST['temp'];
+		
+			//Import uploaded file to Database
+            $handle = fopen($tmpfile, "r");
+			
+			$i=0;
+			$a=1;
+			$html="";
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$html.=$a.". ".$data[0]."<br>";
+			$i++;
+			$a++;}
+			
+			
+			
+			$output['error'] = false;
+			$output['html'] = $html;
+			$output['count']=$i;
+			$output['msg'] = "Success";
+		}
+		
+		
 		
 		if($_REQUEST['cmd'] == '_getemails' AND $_REQUEST['temp'] > 0) {
 			include("./functions/bulkemail.php");
