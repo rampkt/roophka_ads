@@ -32,12 +32,10 @@ if((isset($_REQUEST['search'])) && $_REQUEST['search']=='search')
 {
 	$email=$_REQUEST['email'];
 	$email2=$_REQUEST['email'];
-	$categorysearch=$_REQUEST['categorysearch'];
 }
 else{
 $email="";
 $email2="";
-$categorysearch="";
 }
 //echo $date;
 

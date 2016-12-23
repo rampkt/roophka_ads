@@ -19,7 +19,7 @@ if($login === true) {
 		if($_REQUEST['cmd'] == '_getemailexternal' AND $_REQUEST['temp']!="") {
 			include("./functions/bulkemail.php");
 			$bulkemail = new bulkemail();
-			$tmpfile=HTTP_PATH . "admin/csv/".$_REQUEST['temp'];
+			$tmpfile=$_FILES['ajaxfile']['tmp_name'];
 		
 			//Import uploaded file to Database
             $handle = fopen($tmpfile, "r");
@@ -27,8 +27,16 @@ if($login === true) {
 			$i=0;
 			$a=1;
 			$html="";
+			$ids="";
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-				$html.=$a.". ".$data[0]."<br>";
+				$html.="<div><input type='checkbox' name='eid[]' id='eid$data[0]' value='$data[0]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$data[0]."</div>";
+				if($ids=="")
+				{
+					$ids.=$data[0];
+				}else{
+					$ids.=",".$data[0];
+				}
+				
 			$i++;
 			$a++;}
 			
@@ -38,6 +46,7 @@ if($login === true) {
 			$output['html'] = $html;
 			$output['count']=$i;
 			$output['msg'] = "Success";
+			$output['ids']=$ids;
 		}
 		
 		
@@ -59,7 +68,7 @@ if($login === true) {
 			$output['ids']=$ids;
 		}
 		
-		if($_REQUEST['cmd'] == '_getemailids' AND $_REQUEST['temp'] > 0) {
+		if($_REQUEST['cmd'] == '_getemailids' AND $_REQUEST['temp'] != "") {
 			include("./functions/bulkemail.php");
 			$bulkemail = new bulkemail();
 			$ids=explode(",", $_REQUEST['ids']);

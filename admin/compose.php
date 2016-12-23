@@ -14,13 +14,19 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 	$bulkemail->subject=$_REQUEST['subject'];
 	$bulkemail->category=$_REQUEST['category'];
 	$bulkemail->eids=$_REQUEST['emailids'];
-	$eids=$_REQUEST['emailids'];
+	//$bulkemail->emailexternal=$_FILES['emailexternal'];
+	$bulkemail->emailinput=$_REQUEST['emailinput'];
 	$bulkemail->userinput=$_REQUEST['userinput'];
 	$bulkemail->adminemail=$location->getsetting('1','email');
+	$eids=$_REQUEST['emailids'];
+	//$tmpfile=$_FILES['emailexternal']['tmp_name'];
+	$emailinput=$_REQUEST['emailinput'];
 	
 		if($bulkemail->userinput==1)
 	{
 		$bulkemail->message=$_REQUEST['textvalue'];
+		
+		if($emailinput==1){
 		$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
@@ -53,7 +59,37 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			$mailler->sendmail($to, $from, $subject, $message);
 			}
 			}
+		}
+	
+if($emailinput==2){
+		
+	$ids=explode(",", $eids);
+		    foreach($ids as $eid)
+			{
+	        $to = array($eid);
+			$from =$bulkemail->adminemail;
+			$subject = $bulkemail->subject;
+			$message = '<div style="width:600px;">
+			Dear<br>
+			<p>Welcome to ROOPHKA.COM</p>
+			<br>
+			<table cellpadding="0" cellspacing="0" border="0">
 			
+				<tr>
+					<td>'.$bulkemail->message.'</td>
+				</tr>
+				
+			</table>
+			<br>
+			Thanks & regards,<br>
+			<a href="roophka.com">roophka.com</a>
+			</div>';
+			
+			$mailler->sendmail($to, $from, $subject, $message);
+			}
+			}
+		
+		
 	}
 	if($bulkemail->userinput==3)
 	{
@@ -62,6 +98,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 		$temname=$tem['template_name'];
 		$temcont=$tem['template_content'];
 		
+		if($emailinput==1){
 		$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
@@ -94,29 +131,66 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			<a href="roophka.com">roophka.com</a>
 			</div>';
 			
+			//echo $message; exit;
+			
+			
 			$mailler->sendmail($to, $from, $subject, $message);
 			}
 			}
+		}
+		if($emailinput==2){
+			$ids=explode(",", $eids);
+		    foreach($ids as $eid)
+			{
+	        $to = array($eid);
+			$from =$bulkemail->adminemail;
+			$subject = $bulkemail->subject;
+			$message = '<div style="width:600px;">
+			Dear<br>
+			<p>Welcome to ROOPHKA.COM</p>
+			<br>
+			<table cellpadding="0" cellspacing="0" border="0">
+			
+				<tr>
+					<td>'.$temname.'</td>
+				</tr>
+				<tr>
+					<td>'.$temcont.'</td>
+				</tr>
+				
+			</table>
+			<br>
+			Thanks & regards,<br>
+			<a href="roophka.com">roophka.com</a>
+			</div>';
+			
+			$mailler->sendmail($to, $from, $subject, $message);
+	 }
+		}
+		
 			
 	}
 	if($bulkemail->userinput==2)
 	{
-		$bulkemail->message=$_FILES['fileemail']['name'];
+		//$bulkemail->message=$_FILES['fileemail']['name'];
 		$bulkemail->file=$_FILES['fileemail'];
 		
 		 $org_filename = $bulkemail->file['name'];
 				$extn = pathinfo($org_filename, PATHINFO_EXTENSION);
-				
+				$filehash = randomString(20);
+				$filename = $filehash . '.'.$extn;
+				$bulkemail->message=$filename;
 				$path = DOCUMENT_PATH . "admin/attachment/";
 				
-				$destination = $path . $org_filename;
+				$destination = $path . $filename;
 				
-				$httpPath = HTTP_PATH . "admin/attachment/" . $org_filename;
+				$httpPath = HTTP_PATH . "admin/attachment/" . $filename;
 				
 				//echo $destination; exit;
 				
 				@move_uploaded_file($bulkemail->file['tmp_name'], $destination);
-		
+		if($emailinput==1)
+		{
 		$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
@@ -151,6 +225,37 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 	}		
 	
 	}
+		}
+		
+		if($emailinput==2){
+			$ids=explode(",", $eids);
+		    foreach($ids as $eid)
+			{
+	        $to = array($eid);
+			$from =$bulkemail->adminemail;
+			$subject = $bulkemail->subject;
+			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$message = '<div style="width:600px;">
+			Dear<br>
+			<p>Welcome to ROOPHKA.COM</p>
+			<br>
+			<table cellpadding="0" cellspacing="0" border="0">
+			
+				<tr>
+					<td><img src='.$mypath.'></td>
+				</tr>
+				
+			</table>
+			<br>
+			Thanks & regards,<br>
+			<a href="roophka.com">roophka.com</a>
+			</div>';
+			
+			$mailler->sendmail($to, $from, $subject, $message);
+		}
+		}
+		
+		
 	}	
 		
 		$bulkemail->composesave();
@@ -300,7 +405,9 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 									<div class="control-group " id="externalinput" style="display:none;">
                                       <label class="control-label" for="content">Upload file:</label>
                                       <div class="controls">
-                                       <input type="file" name="emailexternal" id="emailexternal" class="input-xlarge" onmouseout="externalfn();"  />
+                                      <!-- <input type="file" name="emailexternal" id="emailexternal" class="input-xlarge" onmouseout="externalfn();"  />-->
+									  <input type="button" name="upbtn" id="upbtn" value="Browse" onclick="uplfn();" onmouseout="externalfn();"><span id="spanfile">&nbsp;</span>
+									  
 									  <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:blue;">here.</a></p>
                                      
                                       </div>
@@ -351,7 +458,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 									<div class="control-group " id="fileinput" style="display:none;">
                                       <label class="control-label" for="content">Upload Image:</label>
                                       <div class="controls">
-                                       <input type="file" name="fileemail" id="fileemail" class="input-xlarge"  />
+                                       <input type="file" name="fileemail" id="fileemail" class="input-xlarge"  onchange="return ValidateFileUpload()" />
 									   <p class="help-block">Upload png,jpg,gif images below 10MB size</p>
                                       </div>
                                     </div>
@@ -394,7 +501,17 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
                                   </fieldset>
                                 </form>
 							</div>
-                            
+                            <div style="z-index:-1;visibility:hidden;overflow:hidden;height:1px;">
+			<form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+		
+		<input type="file" name="ajaxfile" id="ajaxfile" onchange="ValidateFileUploadCSV();">
+		
+		<input type="text" name="cmd" value="_getemailexternal">
+		<input type="text" name="temp" value="emails">
+		
+		<input type="submit" name="submit" id="submit" value="Upload CSV Data" />
+		</form>
+</div>
                           	</div>
 					</div>
 				</div><!--/span-->
@@ -406,7 +523,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			<!-- end: Content -->
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
-
+		
 		<? include('./includes/footer.php'); ?>
 		
 		<!-- [emails  popup] -->
@@ -439,7 +556,54 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 		</div>
 		
 	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript">
+  $(function() {
+     $("#ajaxfile").change(function (){
+       var fileName = $(this).val();
+      // $("#spanfile").html(fileName);
+	   var afile=document.getElementById("ajaxfile").files[0].name
+       $("#spanfile").html(" "+afile);
+	   $("#uploadimage").submit();
+	   
+     });
+  });
+</script>
+	
 		<script>
+		
+		$(document).ready(function (e) {
+			
+$("#uploadimage").on('submit',(function(e) {
+e.preventDefault();
+//$("#eids").empty();
+$.ajax({
+url: "template_ajax.php", // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+dataType:"JSON",
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(result)   // A function to be called if request succeeds
+{
+$('#allemails').html("Total "+result.count+" emails in above selected category");
+$('#allemailsmodal').html(result.html);	
+$("#emailids").val(result.ids);
+}
+});
+}));
+
+});
+
+
+		
+		function uplfn()
+		{
+			$('#ajaxfile').trigger('click');
+			
+		}
+		
 		function templateselectfn(id)
 		{
 			//alert(id);
@@ -465,13 +629,20 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 				$('#ourcategory').show();
 				$('#externalinput').hide();
 				$('#allemails').html("Please choose category first...");
+				$('#category').attr('required','required');
+			$('#emailexternal').removeAttr('required');	
+			$('#emailids').val("");
+			$('#category').val("");
 			}
 			if(val=='2')
 			{
 				$('#ourcategory').hide();
 				$('#externalinput').show();
 				$('#allemails').html("Please upload file first...");
-				
+				$('#emailexternal').attr('required','required');
+			$('#category').removeAttr('required');	
+				$('#emailids').val("");
+				$('#category').val("");
 			}
 			
 		}
@@ -589,34 +760,70 @@ function checkedValues(val)
 			return false;
 		}
 
-		function externalfn()
-		{
-			var file=$('#emailexternal').val();
-			var filename=document.getElementById("emailexternal").files[0].name;
-			//alert(filename);
-			var params = { cmd:'_getemailexternal', temp:filename }
-            $.ajax({
-				url:"./template_ajax.php",
-				dataType:"JSON",
-				data:params,
-				success: function(result) {
-					if(result.error) {
-						alert(result.msg);
-					} else {
-						$('#allemails').html("Total "+result.count+" emails in above selected category");
-						$('#allemailsmodal').html(result.html);
-						//$('#emailids').val(result.ids);
-						//checkedValues();
-					}
-				}
-			});
-			return false;
-			
-		}
-		
 		
 		</script>
+	<SCRIPT type="text/javascript">
+    function ValidateFileUpload() {
+        var fuData = document.getElementById('fileemail');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "gif" || Extension == "png" || Extension == "bmp"
+                    || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
+				document.getElementById('fileemail').value="";
+
+            }
+        }
+    }
 	
+	 function ValidateFileUploadCSV() {
+        var fuData = document.getElementById('ajaxfile');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload CSV File");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "csv") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of CSV");
+				document.getElementById('ajaxfile').value="";
+				$('#spanfile').html("");
+
+            }
+        }
+    }
+	
+</SCRIPT>
 	<!-- start: JavaScript-->
 	<? include('./includes/footerinclude.php'); ?>
 	<!-- end: JavaScript-->

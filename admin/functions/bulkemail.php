@@ -492,7 +492,10 @@ public function Activatecategory($id=0) {
 			$message=$this->message;
 			$type=$this->userinput;
 			$adminemail=$this->adminemail;
-			
+			$emailinput=$this->emailinput;
+			//$tmpfile=$this->emailexternal['tmp_name'];
+			if($emailinput==1)
+			{	
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
@@ -509,6 +512,20 @@ public function Activatecategory($id=0) {
 			
 			}
 			}
+			}
+			if($emailinput==2)
+			{
+				$ids=explode(",", $eids);
+		    foreach($ids as $eid)
+			{
+	       
+				$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,status) values('$subject','$adminemail','$eid','$type','$message','0','".DATETIME24H."','0')";
+			//echo $sql; exit;
+			$result=$this->db->query($sql);
+				}
+			}
+			
+			
 		if($result)	
 		{
 			return true;
