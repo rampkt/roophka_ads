@@ -26,10 +26,10 @@ if($login === true) {
 			
 			$i=0;
 			$a=1;
-			$html="";
+			 $html='';
 			$ids="";
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-				$html.="<div><input type='checkbox' name='eid[]' id='eid$data[0]' value='$data[0]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$data[0]."</div>";
+				$html.="<tr><td><div><input type='checkbox' name='eid[]' id='eid$data[0]' value='$data[0]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$data[0]."</div></td></tr>";
 				if($ids=="")
 				{
 					$ids.=$data[0];
@@ -39,8 +39,6 @@ if($login === true) {
 				
 			$i++;
 			$a++;}
-			
-			
 			
 			$output['error'] = false;
 			$output['html'] = $html;

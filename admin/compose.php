@@ -532,8 +532,26 @@ if($emailinput==2){
 			<button type="button" class="close" data-dismiss="modal">x</button>
 			<h3>Emails</h3>
 		</div>
-		<div class="modal-body" id="allemailsmodal">
-			<p>Nothing to show here...</p>
+		<div class="modal-body" >
+			<p>
+			<div class="content">
+				<table id="example" class="display" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>&nbsp;&nbsp;Emails</th>
+							
+						</tr>
+					</thead>
+					<tbody id="allemailsmodal">
+					<tr>
+					<td>No email to display here...</td>
+					
+					</tr>
+					</tbody>
+				</table>
+					
+			</div>
+			</p>
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
@@ -590,6 +608,7 @@ success: function(result)   // A function to be called if request succeeds
 $('#allemails').html("Total "+result.count+" emails in above selected category");
 $('#allemailsmodal').html(result.html);	
 $("#emailids").val(result.ids);
+$('#example').DataTable();
 }
 });
 }));
@@ -734,6 +753,7 @@ function checkedValues(val)
 						$('#allemails').html("Total "+result.count+" emails in above selected category");
 						$('#allemailsmodal').html(result.html);
 						$('#emailids').val(result.ids);
+						$('#example').DataTable();
 						//checkedValues();
 					}
 				}
@@ -823,7 +843,42 @@ else {
         }
     }
 	
+	
 </SCRIPT>
+
+	<script type="text/javascript" class="init">
+	
+
+function filterGlobal () {
+	$('#example').DataTable().search( 
+		$('#global_filter').val(),
+		$('#global_regex').prop('checked'), 
+		$('#global_smart').prop('checked')
+	).draw();
+}
+
+function filterColumn ( i ) {
+	$('#example').DataTable().column( i ).search( 
+		$('#col'+i+'_filter').val(),
+		$('#col'+i+'_regex').prop('checked'), 
+		$('#col'+i+'_smart').prop('checked')
+	).draw();
+}
+
+$(document).ready(function() {
+	$('#example').DataTable();
+
+	$('input.global_filter').on( 'keyup click', function () {
+		filterGlobal();
+	} );
+
+	$('input.column_filter').on( 'keyup click', function () {
+		filterColumn( $(this).parents('tr').attr('data-column') );
+	} );
+} );
+
+
+	</script>
 	<!-- start: JavaScript-->
 	<? include('./includes/footerinclude.php'); ?>
 	<!-- end: JavaScript-->

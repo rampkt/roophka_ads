@@ -363,8 +363,7 @@ class bulkemail
 		return false;
 	}
 	public function emailsvalue($id) {
-		    $html="";
-			
+		    $html='';
 			//foreach($id as $cid)
 			//{
 				$sql="SELECT * FROM roo_emails where category IN ($id)";
@@ -372,10 +371,10 @@ class bulkemail
 			$result=$this->db->query($sql);
 			while($row=$this->db->fetch_array($result))
 			{
-		    $html.="<div><input type='checkbox' name='eid[]' id='eid$row[id]' value='$row[id]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$row['email']."</div>";
+				
+		    $html.="<tr><td><div><input type='checkbox' name='eid[]' id='eid$row[id]' value='$row[id]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$row['email']."</div></td></tr>";
 			}
 			//echo $country; exit;
-			
 			
 			
 		if($result)	
