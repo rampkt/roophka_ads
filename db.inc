@@ -7,7 +7,7 @@ CREATE TABLE `roo_cms` (
   `howitworks` longtext NOT NULL,
   `scrolling_content` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
+ALTER TABLE `roo_cms` ADD `scrolling_content` LONGTEXT NOT NULL ;
 
 
 
