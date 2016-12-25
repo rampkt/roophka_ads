@@ -535,7 +535,7 @@ if($emailinput==2){
 		<div class="modal-body" >
 			<p>
 			<div class="content">
-				<table id="example" class="display" cellspacing="0" width="100%">
+				<table id="email_list" class="display" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th>&nbsp;&nbsp;Emails</th>
@@ -608,7 +608,7 @@ success: function(result)   // A function to be called if request succeeds
 $('#allemails').html("Total "+result.count+" emails in above selected category");
 $('#allemailsmodal').html(result.html);	
 $("#emailids").val(result.ids);
-$('#example').DataTable();
+$('#email_list').DataTable();
 }
 });
 }));
@@ -697,7 +697,14 @@ $('#example').DataTable();
 	}
 	
 	function getSelectValues(select) {
-  var result = [];
+	var result = [];
+	$(select).find("option:selected").each(function(){
+		var $this = $(this);
+	   if ($this.length) {
+	    result.push($this.val());
+	   }
+	});
+  /*
   var options = select && select.options;
   var opt;
 
@@ -708,6 +715,7 @@ $('#example').DataTable();
       result.push(opt.value || opt.text);
     }
   }
+  console.log(result);*/
   return result;
 }
 
@@ -753,7 +761,7 @@ function checkedValues(val)
 						$('#allemails').html("Total "+result.count+" emails in above selected category");
 						$('#allemailsmodal').html(result.html);
 						$('#emailids').val(result.ids);
-						$('#example').DataTable();
+						$('#email_list').DataTable();
 						//checkedValues();
 					}
 				}
@@ -850,7 +858,7 @@ else {
 	
 
 function filterGlobal () {
-	$('#example').DataTable().search( 
+	$('#email_list').DataTable().search( 
 		$('#global_filter').val(),
 		$('#global_regex').prop('checked'), 
 		$('#global_smart').prop('checked')
@@ -858,7 +866,7 @@ function filterGlobal () {
 }
 
 function filterColumn ( i ) {
-	$('#example').DataTable().column( i ).search( 
+	$('#email_list').DataTable().column( i ).search( 
 		$('#col'+i+'_filter').val(),
 		$('#col'+i+'_regex').prop('checked'), 
 		$('#col'+i+'_smart').prop('checked')
@@ -866,7 +874,7 @@ function filterColumn ( i ) {
 }
 
 $(document).ready(function() {
-	$('#example').DataTable();
+	$('#email_list').DataTable();
 
 	$('input.global_filter').on( 'keyup click', function () {
 		filterGlobal();

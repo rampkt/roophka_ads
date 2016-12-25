@@ -7,6 +7,8 @@ CREATE TABLE `roo_cms` (
   `howitworks` longtext NOT NULL,
   `scrolling_content` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `roo_cms` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_cms` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `roo_cms` ADD `scrolling_content` LONGTEXT NOT NULL ;
 
 CREATE TABLE `roo_recharge` (
@@ -21,12 +23,16 @@ CREATE TABLE `roo_recharge` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `roo_recharge` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_recharge` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE `roo_email_category` (
   `id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `roo_email_category` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_email_category` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE `roo_email_template` (
   `id` int(11) NOT NULL,
@@ -36,6 +42,8 @@ CREATE TABLE `roo_email_template` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `roo_email_template` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_email_template` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE `roo_sent_emails` (
   `id` int(11) NOT NULL,
@@ -48,6 +56,8 @@ CREATE TABLE `roo_sent_emails` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `roo_sent_emails` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_sent_emails` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE `roo_emails` (
   `id` int(11) NOT NULL,
@@ -56,6 +66,8 @@ CREATE TABLE `roo_emails` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `roo_emails` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_emails` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 CREATE TABLE `roo_settings` (
   `id` int(11) NOT NULL,
@@ -69,3 +81,5 @@ CREATE TABLE `roo_settings` (
   `filehash` varchar(255) NOT NULL,
   `extension` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `roo_settings` ADD PRIMARY KEY(`id`);
+ALTER TABLE `roo_settings` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
