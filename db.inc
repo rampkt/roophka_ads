@@ -9,8 +9,6 @@ CREATE TABLE `roo_cms` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 ALTER TABLE `roo_cms` ADD `scrolling_content` LONGTEXT NOT NULL ;
 
-
-
 CREATE TABLE `roo_recharge` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -24,13 +22,11 @@ CREATE TABLE `roo_recharge` (
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
 CREATE TABLE `roo_email_category` (
   `id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `roo_email_template` (
   `id` int(11) NOT NULL,
@@ -40,7 +36,6 @@ CREATE TABLE `roo_email_template` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `roo_sent_emails` (
   `id` int(11) NOT NULL,
@@ -54,7 +49,6 @@ CREATE TABLE `roo_sent_emails` (
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
 CREATE TABLE `roo_emails` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -62,7 +56,6 @@ CREATE TABLE `roo_emails` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `roo_settings` (
   `id` int(11) NOT NULL,
@@ -76,4 +69,3 @@ CREATE TABLE `roo_settings` (
   `filehash` varchar(255) NOT NULL,
   `extension` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
