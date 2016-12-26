@@ -145,7 +145,7 @@ class bulkemail
 	}
 	
 	
-		public function getallcategory($cid) 
+		public function getallcategory($cid = 0) 
 	{
 		$result = "";
 		
