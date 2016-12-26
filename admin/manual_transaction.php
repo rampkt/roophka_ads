@@ -3,6 +3,19 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/users.php");
 $users = new users();
+include("./includes/access.php");
+$page_name ="Manual_Transaction";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $emails=$users->getAllUserstransaction();
 //echo json_encode($emails); exit;
 

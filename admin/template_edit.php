@@ -3,6 +3,18 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/bulkemail.php");
 $bulkemail = new bulkemail();
+include("./includes/access.php");
+$page_name ="Bulkmail";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
 $id=$_REQUEST['id'];
 $edit=$bulkemail->templateedit($id);
 

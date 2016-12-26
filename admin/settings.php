@@ -3,6 +3,19 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/setting.php");
 $settings = new settings();
+include("./includes/access.php");
+$page_name ="Settings";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $settings->getsetting(1);
 if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_settings') {
 	//print_r($_REQUEST);

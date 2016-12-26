@@ -2,6 +2,20 @@
 include_once("../config/config.php");
 is_admin_login();
 include("./functions/ads.php");
+include("./includes/access.php");
+
+$page_name ="Ads";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $ads = new ads();
 $emails=$ads->getAlladminUsersemail();
 if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0) {

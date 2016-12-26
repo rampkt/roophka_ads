@@ -1,7 +1,7 @@
 <?php
 include_once("../config/config.php");
 is_admin_login();
-
+include("./includes/access.php");
 spl_autoload_register(function($file){
 	include("./functions/".$file.".php");
 });

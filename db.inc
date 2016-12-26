@@ -77,3 +77,5 @@ CREATE TABLE `roo_settings` (
   `extension` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+ALTER TABLE `roo_admin_users` CHANGE `type` `type` INT(11) NOT NULL COMMENT '0=Superadmin, 1=Admin, 2=subadmin, 3=Advertiser,4=developer';

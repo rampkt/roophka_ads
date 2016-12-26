@@ -3,6 +3,18 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/recharge.php");
 $recharge = new recharge();
+include("./includes/access.php");
+$page_name ="Recharge";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
 
 $start = $recharge->start;
 

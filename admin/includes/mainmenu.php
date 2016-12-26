@@ -1,15 +1,17 @@
-<div id="sidebar-left" class="span2" >
+<div id="sidebar-left" class="span2" style="overflow-y:scroll;" >
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li><a href="./dashboard.php"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-                        <? if($_SESSION['roo']['admin_user']['type'] != 3) { ?>
+                       <?php  if (in_array("Users", $admin_access)) { ?>
 						<li><a href="./users.php"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
-                        <? } ?>
+                       <?php } if (in_array("Ads", $admin_access))
+                       { ?>
 						<li><a href="./ads.php"><i class="icon-tasks"></i><span class="hidden-tablet"> Ads</span></a></li>
-                        <? if($_SESSION['roo']['admin_user']['type'] == 0) { ?>
+					   <?php } if (in_array("Adminuser", $admin_access))
+                       { ?>
                         <li><a href="./adminusers.php"><i class="icon-group"></i><span class="hidden-tablet"> Admin Users</span></a></li>
-                        <? } ?>
-						
+					   <?php } if (in_array("Reports", $admin_access))
+                       { ?>
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Reports</span><span class="label label-important"> 3 </span></a>
 							<ul>
@@ -18,6 +20,7 @@
 								<li><a class="submenu" href="withdraw_report.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Withdraw Reports</span></a></li>
 							</ul>	
 						</li>
+					   <?php } if (in_array("Bulkmail", $admin_access)) { ?>
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-star"></i><span class="hidden-tablet"> Bulk Emails</span><span class="label label-important"> 5 </span></a>
 							<ul>
@@ -28,16 +31,18 @@
 								<li><a class="submenu" href="emails.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Emails</span></a></li>
 							</ul>	
 						</li>
+					   <?php } if (in_array("Withdraw", $admin_access)) { ?>
+						
 						<li>
 						<a href="withdraw_request.php"><i class="icon-calendar"></i><span class="hidden-tablet"> Withdraw Request</span></a>
 							
 						</li>
-						
+					   <?php }  if (in_array("Manual_Transaction", $admin_access)) { ?>
 						<li>
 						<a href="manual_transaction.php"><i class="icon-edit"></i><span class="hidden-tablet"> Manual Transaction</span></a>
 							
 						</li>
-						
+					   <?php }  if (in_array("Recharge", $admin_access)) { ?>
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-list-alt"></i><span class="hidden-tablet"> Recharge</span><span class="label label-important"> 3 </span></a>
 							<ul>
@@ -46,19 +51,26 @@
 								<li><a class="submenu" href="recharge_orders.php"><i class="icon-file-alt"></i><span class="hidden-tablet">Orders</span></a></li>
 							</ul>	
 						</li>
-						
+					   <?php }  if (in_array("Location", $admin_access)) { ?>
 						
 						
 						<li>
 						<a href="country.php"><i class="icon-dashboard"></i><span class="hidden-tablet"> Location</span></a>
 							
 						</li>
-						<li><a href="settings.php"><i class="icon-star"></i><span class="hidden-tablet"> Setting</span></a></li>
+					   <?php }  if (in_array("Settings", $admin_access)) { ?>
+						
+						<li><a href="settings.php"><i class="icon-star"></i><span class="hidden-tablet"> Settings</span></a></li>
+					   <?php }  if (in_array("CMS", $admin_access)) { ?>
+						
 						<li><a href="cms.php"><i class="icon-edit"></i><span class="hidden-tablet"> CMS Pages</span></a></li>
+					   <?php }  if (in_array("Contact", $admin_access)) { ?>
 						
 						<li><a href="contactus.php"><i class="icon-folder-open"></i><span class="hidden-tablet"> Contact Us</span></a></li>
-						<li><a href="advertise.php"><i class="icon-picture"></i><span class="hidden-tablet"> Advertise Request</span></a></li>
 						
+					   <?php }  if (in_array("Advertise", $admin_access)) { ?>
+						<li><a href="advertise.php"><i class="icon-picture"></i><span class="hidden-tablet"> Advertise Request</span></a></li>
+					   <?php } ?>
 						<!--
 						<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
 						<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>
@@ -74,3 +86,19 @@
 					</ul>
 				</div>
 			</div>
+			
+<style>
+#sidebar-left::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+#sidebar-left::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+#sidebar-left::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+</style>			

@@ -2,6 +2,7 @@
 include_once("../config/config.php");
 is_admin_login();
 include("./functions/adminusers.php");
+include("./includes/access.php");
 $user = new adminusers();
 $userDetails = $user->getUser(0);
 

@@ -2,6 +2,21 @@
 include_once("../config/config.php");
 is_admin_login();
 include("./functions/users.php");
+
+include("./includes/access.php");
+
+$page_name ="Users";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $users = new users();
 
 $start = $users->start;

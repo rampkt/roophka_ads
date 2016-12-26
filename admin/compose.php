@@ -5,7 +5,18 @@ include("./functions/bulkemail.php");
 $bulkemail = new bulkemail();
 include("./functions/location.php");
 $location = new location();
+include("./includes/access.php");
 
+$page_name ="Bulkmail";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
 
 $alltemplateList=$bulkemail->AllemailTemplate();
 //echo json_encode($emails); exit;

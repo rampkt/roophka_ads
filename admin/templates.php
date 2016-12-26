@@ -3,7 +3,17 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/bulkemail.php");
 $bulkemail = new bulkemail();
+include("./includes/access.php");
+$page_name ="Bulkmail";
 
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
 $start = $bulkemail->start;
 
 if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0) {

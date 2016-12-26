@@ -2,7 +2,21 @@
 include_once("../config/config.php");
 is_admin_login();
 include("./functions/ads.php");
+include("./includes/access.php");
 $ads = new ads();
+
+$page_name ="Ads";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 if(isset($_REQUEST['action']) AND $_REQUEST['action'] == 'details') {
 	$currentAd=$ads->getAd($_REQUEST['id']);
 } else {

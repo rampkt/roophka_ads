@@ -3,6 +3,17 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/location.php");
 $location = new location();
+include("./includes/access.php");
+$page_name ="Advertise";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
 
 $start = $location->start;
 
