@@ -41,13 +41,16 @@ class ads {
 
 	}
 	
-	public function getAd() {
+	public function getAd($id) {
 		
 		$this->resetAd();
 		
 		$user_id = $_SESSION['roo']['user']['id'];
-
+        if($id>0){
+			$qry = $this->db->query("SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain,ra.filehash FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0) AND (ra.status=0 and ra.id='$id') ORDER BY ra.date_added DESC LIMIT 1");
+		}else{
 		$qry = $this->db->query("SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain,ra.filehash FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0) AND ra.status=0 ORDER BY ra.date_added DESC LIMIT 1");
+		}
 		if($this->db->num_rows($qry) > 0) {
 			$result = $this->db->fetch_array($qry);
 			if($result['clicks_remain'] < 6) {
@@ -72,6 +75,21 @@ class ads {
 		}
 		return $result;
 	}
+	public function getAdlist($type) {
+		$user_id = $_SESSION['roo']['user']['id'];
+		//echo "SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)AND ra.viewing=0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0)"; exit;
+		$qry = $this->db->query("SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)AND ra.viewing=0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0)");
+		$result = array();
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				
+				$result[] = $row;
+			}
+		}
+		return $result;
+	}
+	
+	
 	
 	public function getAdHtml($ads) {
 		$html = '';
