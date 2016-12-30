@@ -86,6 +86,7 @@
 .viewadlistbox{
 	
 	cursor:pointer;
+	
 }
 .alertmsgads {
     color: red;
@@ -95,20 +96,29 @@
 .adnamebox
 {
 	float:left;
-	border:1px solid #ccc;
+	border:1px solid #E6E6E6;
 	width:75%;
 	padding:5px;
-	/*background:#bbb;*/
+	background:#E6E6E6;
 	color:#000;
 	border-radius:5px 0px 0px 5px;
+	font-size:14px;
 }
+
+.adnamebox:hover
+{
+	background:#0099ff;
+	color:#fff;
+}
+
 .adcountboxcss
 {
 	float:left;
-	border:1px solid #000;
+	border:1px solid #333;
 	width:25%;
-	background:#000;
+	background:#333;
 	color:#fff;
 	padding:5px;
+	font-size:14px;
 	border-radius:0px 5px 5px 0px;
 }

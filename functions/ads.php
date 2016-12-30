@@ -76,7 +76,7 @@ class ads {
 		return $result;
 	}
 	public function getAdlist($type) {
-		$qry = $this->db->query("SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE ra.type = '$type' AND ra.status=0");
+		$qry = $this->db->query("SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)");
 		$result = array();
 		if($this->db->num_rows($qry) > 0) {
 			while($row = $this->db->fetch_array($qry)) {
