@@ -3,6 +3,19 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/cms.php");
 $cms = new cms();
+include("./includes/access.php");
+$page_name ="CMS";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $cms->getcms(1);
 if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_cms') {
 	//print_r($_REQUEST);

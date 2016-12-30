@@ -3,7 +3,19 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/ads_report.php");
 $ads = new ads();
+include("./includes/access.php");
 
+$page_name ="Reports";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+  
 $start = $ads->start;
 
 if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0) {
@@ -57,7 +69,7 @@ list($adslist,$pagination) = $ads->getAllads($date);
         <!-- start: Header -->
 	
 		<div class="container-fluid-full">
-		<div class="row-fluid" style="min-height:570px;height:auto;">
+		<div class="row-fluid" >
 				
 			<!-- start: Main Menu -->
 			<? include('./includes/mainmenu.php'); ?>

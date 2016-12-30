@@ -99,9 +99,14 @@ return $result3[0];
             <p>OR</p>
             <p>Please try again later</p>
         </div>
-    <? } else { ?>
+    <? } else {
+
+       if($currentAd['type']=="scroll")	{?>
+	<div style="width:400px;margin-left:20px;"><img src="./uploads/ads/<?=$currentAd['filehash']?>.attach" /></div>
+	<?=$currentAd['html']?>
+	   <?php } else {?>
     	<?=$currentAd['html']?>
-    <? } ?>
+    <? }} ?>
     </div>
     </section>
     <!-- #end content area -->

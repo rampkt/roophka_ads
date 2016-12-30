@@ -47,7 +47,7 @@ class ads {
 		
 		$user_id = $_SESSION['roo']['user']['id'];
 
-		$qry = $this->db->query("SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0) AND ra.status=0 ORDER BY ra.date_added DESC LIMIT 1");
+		$qry = $this->db->query("SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain,ra.filehash FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0) AND ra.status=0 ORDER BY ra.date_added DESC LIMIT 1");
 		if($this->db->num_rows($qry) > 0) {
 			$result = $this->db->fetch_array($qry);
 			if($result['clicks_remain'] < 6) {
@@ -98,7 +98,7 @@ class ads {
 			$val="";
 			for($i=0;count($exp)>$i;$i++)
 			{
-			$val.=$exp[$i];	
+			$val.="<img src='assets/img/bullet.png' /> ".$exp[$i];	
 			}
 			
 			

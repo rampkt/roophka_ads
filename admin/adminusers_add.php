@@ -3,6 +3,18 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/adminusers.php");
 $users = new adminusers();
+include("./includes/access.php");
+$page_name ="Adminuser";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
 
 if(isset($_REQUEST['action'])) { 
 	if($_REQUEST['action'] == '_add_user') {

@@ -31,6 +31,53 @@
 /* Main Colors
 =================================================================== */
 
+.dataTables_length
+{
+	float:left;
+	width:48%;
+}
+.dataTables_length select
+{
+	width:60px;
+}
+
+
+.dataTables_filter
+{
+	float:right;
+	width:52%;
+}
+.display
+{
+	border:1px solid #ccc;
+}
+.display thead 
+{
+text-align:left;
+background-color:#578EBE;	
+color:#fff;
+padding:10px;
+}
+.display th
+{
+	font-weight:normal;
+}
+.display tbody td
+{
+	padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+}
+.dataTables_info
+{
+	float:left;
+	padding:10px 0px;
+}
+.paging_two_button
+{
+	float:right;
+	padding:10px 0px
+}
+
 .black,
 .black [class="box-header"],
 .black.box,

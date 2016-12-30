@@ -4,6 +4,19 @@ is_admin_login();
 include("./functions/location.php");
 $location = new location();
 
+include("./includes/access.php");
+$page_name ="Location";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $start = $location->start;
 
 if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0) {

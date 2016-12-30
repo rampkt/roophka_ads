@@ -2,6 +2,20 @@
 include_once("../config/config.php");
 is_admin_login();
 include("./functions/adminusers.php");
+
+include("./includes/access.php");
+
+$page_name ="Users";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
 $user = new adminusers();
 $userDetails = $user->getUserdetails($_REQUEST['id']);
 $start = $user->start;

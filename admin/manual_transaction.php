@@ -3,6 +3,19 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/users.php");
 $users = new users();
+include("./includes/access.php");
+$page_name ="Manual_Transaction";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
+
 $emails=$users->getAllUserstransaction();
 //echo json_encode($emails); exit;
 
@@ -279,14 +292,15 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
                                    <div class="control-group" >
                                       <label class="control-label" for="transid">Transaction id:</label>
                                       <div class="controls">
-                                        <input type="text" class="input-xlarge" id="transid" name="transid"  placeholder="Enter transaction id here"  />
+                                        <input type="text" class="input-xlarge" id="transid" name="transid"  placeholder="Enter transaction id here" required />
                                       </div>
                                     </div>
                                     
 									 <div class="control-group">
                                       <label class="control-label" for="admin_mail">Upload image:</label>
                                       <div class="controls">
-                                        <input type="file" class="input-xlarge" id="trans_image" name="trans_image"  />
+                                        <input type="file" class="input-xlarge" id="trans_image" name="trans_image" onchange="return ValidateFileUpload()" />
+										 <p class="help-block">jpg, png, gif</p>
                                       </div>
                                     </div>
                                    
@@ -384,6 +398,36 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
 		}
 	});
 	}
+	
+	 function ValidateFileUpload() {
+        var fuData = document.getElementById('trans_image');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
+				document.getElementById('trans_image').value="";
+
+            }
+        }
+    }
+
 	
 	</script>
 </body>

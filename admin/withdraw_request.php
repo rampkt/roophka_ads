@@ -3,7 +3,17 @@ include_once("../config/config.php");
 is_admin_login();
 include("./functions/withdraw_request.php");
 $withdraw = new withdraw();
+include("./includes/access.php");
+$page_name ="Withdraw";
 
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
 $start = $withdraw->start;
 
 if(isset($_REQUEST['todaydate']))
@@ -41,7 +51,7 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdraw($date);
         <!-- start: Header -->
 	
 		<div class="container-fluid-full">
-		<div class="row-fluid" style="min-height:570px;height:auto;">
+		<div class="row-fluid" >
 				
 			<!-- start: Main Menu -->
 			<? include('./includes/mainmenu.php'); ?>

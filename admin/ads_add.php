@@ -2,7 +2,20 @@
 include_once("../config/config.php");
 is_admin_login();
 include("./functions/ads.php");
+include("./includes/access.php");
 $ads = new ads();
+
+$page_name ="Ads";
+
+if (in_array($page_name, $admin_access))
+  {
+  //echo "Match found";
+  }
+else
+  {
+ header("location:accessdenied.php");
+  }
+
 if(isset($_REQUEST['action']) AND $_REQUEST['action'] == 'edit') {
 	$ads->getAd($_REQUEST['id']);
 } else {
@@ -24,6 +37,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_ads') {
 	else if($ads->addtype == 'scroll') {
 		$ads->addtitle = $db->escape_string($_REQUEST['addtitle']);
 		$ads->addcontent = encodehtml($_REQUEST['addcontent']);
+		$ads->file = $_FILES['uploadimage'];
 	} 
 	else {
 		$ads->file = $_FILES['upload'];
@@ -253,7 +267,7 @@ if($ads->id > 0) {
                                     <div class="control-group ">
                                       <label class="control-label" for="banner">Upload banner</label>
                                       <div class="controls">
-                                        <input type="file" name="upload" id="banner" required />
+                                        <input type="file" name="upload" id="banner" onchange="return ValidateFileUpload()" required />
                                         <p class="help-block">jpg, png, gif</p>
                                       </div>
                                     </div>
@@ -307,9 +321,9 @@ if($ads->id > 0) {
                                       
 									  <?php if($ads->id == "") { ?>
                                     <div class="control-group">
-                                      <label class="control-label" for="banner">Upload video</label>
+                                      <label class="control-label" for="video">Upload video</label>
                                       <div class="controls">
-                                        <input type="file" name="upload" id="banner" required />
+                                        <input type="file" name="upload" id="video" onchange="return ValidateFileUploadvideo()" required />
                                         <p class="help-block">mp4</p>
                                       </div>
                                     </div>
@@ -324,7 +338,7 @@ if($ads->id > 0) {
 							</div>
 						
 						<div class="tab-pane  <? echo (($scroll === false) ? 'hide' : ''); ?>" id="scrollad">
-								<form class="form-horizontal" method="post">
+								<form class="form-horizontal" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="_add_ads" />
                                 <input type="hidden" name="addtype" value="scroll" />
                                 <? if($ads->id != '') { ?>
@@ -358,6 +372,15 @@ if($ads->id > 0) {
                                         <p class="help-block">Calculate in seconds</p>
                                       </div>
                                     </div>
+									 
+                                    <div class="control-group ">
+                                      <label class="control-label" for="uploadimage">Upload Image</label>
+                                      <div class="controls">
+                                        <input type="file" name="uploadimage" id="uploadimage" onchange="return ValidateFileUploadimage()" required />
+                                        <p class="help-block">jpg, png, gif</p>
+                                      </div>
+                                    </div>
+									  
                                     
                                     <div class="control-group">
                                       <label class="control-label" for="addtitle">Ad Title</label>
@@ -411,6 +434,91 @@ if($ads->id > 0) {
 			$('.nav-tabs a[href="#bannerad"]').tab('show');
 		}
     });
+	
+	function ValidateFileUpload() {
+        var fuData = document.getElementById('banner');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
+				document.getElementById('banner').value="";
+
+            }
+        }
+    }
+	function ValidateFileUploadimage() {
+        var fuData = document.getElementById('uploadimage');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
+				document.getElementById('uploadimage').value="";
+
+            }
+        }
+    }
+	function ValidateFileUploadvideo() {
+        var fuData = document.getElementById('video');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload a video");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "mp4") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of MP4 ");
+				document.getElementById('video').value="";
+
+            }
+        }
+    }
 	</script>
 </body>
 </html>
