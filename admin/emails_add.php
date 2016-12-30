@@ -156,7 +156,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_addemails")) {
 									<div class="control-group " id="fileinput" style="display:none;">
                                       <label class="control-label" for="content">Upload Emails:</label>
                                       <div class="controls">
-                                       <input type="file" name="fileemail" id="fileemail" class="input-xlarge"  />
+                                       <input type="file" name="fileemail" id="fileemail" class="input-xlarge" onchange="ValidateFileUploadCSV();" />
 									   <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:blue;">here.</a></p>
                                       </div>
                                     </div>
@@ -184,6 +184,37 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_addemails")) {
 
 		<? include('./includes/footer.php'); ?>
 		<script>
+		 function ValidateFileUploadCSV() {
+        var fuData = document.getElementById('fileemail');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload CSV File");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "csv") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of CSV");
+				document.getElementById('fileemail').value="";
+			//	$('#spanfile').html("");
+
+            }
+        }
+    }
+	
+		
 		function userinputfn(val)
 	{
 	//	alert(val);

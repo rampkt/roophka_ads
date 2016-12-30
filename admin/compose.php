@@ -816,8 +816,7 @@ function checkedValues(val)
 
 //The file uploaded is an image
 
-if (Extension == "gif" || Extension == "png" || Extension == "bmp"
-                    || Extension == "jpeg" || Extension == "jpg") {
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
 
 // To Display
 
@@ -825,7 +824,7 @@ if (Extension == "gif" || Extension == "png" || Extension == "bmp"
 
 //The file upload is NOT an image
 else {
-                alert("Upload only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
 				document.getElementById('fileemail').value="";
 
             }

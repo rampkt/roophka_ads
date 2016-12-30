@@ -267,7 +267,7 @@ if($ads->id > 0) {
                                     <div class="control-group ">
                                       <label class="control-label" for="banner">Upload banner</label>
                                       <div class="controls">
-                                        <input type="file" name="upload" id="banner" required />
+                                        <input type="file" name="upload" id="banner" onchange="return ValidateFileUpload()" required />
                                         <p class="help-block">jpg, png, gif</p>
                                       </div>
                                     </div>
@@ -321,9 +321,9 @@ if($ads->id > 0) {
                                       
 									  <?php if($ads->id == "") { ?>
                                     <div class="control-group">
-                                      <label class="control-label" for="banner">Upload video</label>
+                                      <label class="control-label" for="video">Upload video</label>
                                       <div class="controls">
-                                        <input type="file" name="upload" id="banner" required />
+                                        <input type="file" name="upload" id="video" onchange="return ValidateFileUploadvideo()" required />
                                         <p class="help-block">mp4</p>
                                       </div>
                                     </div>
@@ -376,7 +376,7 @@ if($ads->id > 0) {
                                     <div class="control-group ">
                                       <label class="control-label" for="uploadimage">Upload Image</label>
                                       <div class="controls">
-                                        <input type="file" name="uploadimage" id="uploadimage" required />
+                                        <input type="file" name="uploadimage" id="uploadimage" onchange="return ValidateFileUploadimage()" required />
                                         <p class="help-block">jpg, png, gif</p>
                                       </div>
                                     </div>
@@ -434,6 +434,91 @@ if($ads->id > 0) {
 			$('.nav-tabs a[href="#bannerad"]').tab('show');
 		}
     });
+	
+	function ValidateFileUpload() {
+        var fuData = document.getElementById('banner');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
+				document.getElementById('banner').value="";
+
+            }
+        }
+    }
+	function ValidateFileUploadimage() {
+        var fuData = document.getElementById('uploadimage');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
+				document.getElementById('uploadimage').value="";
+
+            }
+        }
+    }
+	function ValidateFileUploadvideo() {
+        var fuData = document.getElementById('video');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload a video");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+//The file uploaded is an image
+
+if (Extension == "mp4") {
+
+// To Display
+
+            } 
+
+//The file upload is NOT an image
+else {
+                alert("Upload only allows file types of MP4 ");
+				document.getElementById('video').value="";
+
+            }
+        }
+    }
 	</script>
 </body>
 </html>
