@@ -76,10 +76,13 @@ class ads {
 		return $result;
 	}
 	public function getAdlist($type) {
-		$qry = $this->db->query("SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)");
+		$user_id = $_SESSION['roo']['user']['id'];
+		//echo "SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)AND ra.viewing=0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0)"; exit;
+		$qry = $this->db->query("SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)AND ra.viewing=0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0)");
 		$result = array();
 		if($this->db->num_rows($qry) > 0) {
 			while($row = $this->db->fetch_array($qry)) {
+				
 				$result[] = $row;
 			}
 		}
