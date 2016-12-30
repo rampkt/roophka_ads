@@ -20,3 +20,95 @@
 }
 .videoad { text-align:center; }
 .videoad video {  max-width: 100%; width:450px; }
+.adsbox{
+  height:275px;
+  width:100%;
+  box-shadow:inset 0 0 15px #ccc;
+  position:relative;
+  margin:0 auto;
+  background:#fff;
+  }
+
+.ribbon{
+  position:absolute;
+  top:30px;
+  left:-2%;
+  height:30px;
+  width:35%;
+  /*background:#009A42;*/
+  background:#0099ff;
+  border-radius: 5px 0 0 0;
+  }
+.ribbon:before{
+  content:"";
+  position:absolute;
+  height:16px;
+  top:5px;
+  left:0;
+  width:100%;
+  
+  }
+.ribbon:after{
+  content:"";
+  position:absolute;
+  right:-10px;
+  height:20px;
+  width:20px;
+  top:5px;
+  /*background:#009A42;*/
+  background:#0099ff;
+  transform:rotate(45deg);  
+  }
+.ribbon a{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  text-align:center;
+  display:inline-block;
+  text-decoration:none;
+  line-height:30px;
+  color:#FFF;
+  }
+.ribbon a:after{
+  content:"";
+  position:absolute;
+  bottom:-15px;
+  left:6px;
+  height:30px;
+  width:30px;
+  /*background:#009A42;*/
+  background:#0099ff;
+  transform:rotate(45deg);  
+  z-index:-2;
+  }
+.viewadlistbox{
+	
+	cursor:pointer;
+}
+.alertmsgads {
+    color: red;
+    text-align: center;
+}
+
+.adnamebox
+{
+	float:left;
+	border:1px solid #ccc;
+	width:75%;
+	padding:5px;
+	/*background:#bbb;*/
+	color:#000;
+	border-radius:5px 0px 0px 5px;
+}
+.adcountboxcss
+{
+	float:left;
+	border:1px solid #000;
+	width:25%;
+	background:#000;
+	color:#fff;
+	padding:5px;
+	border-radius:0px 5px 5px 0px;
+}
