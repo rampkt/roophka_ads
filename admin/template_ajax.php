@@ -1,6 +1,6 @@
 <?php
 include_once("../config/config.php");
-$output = array('error' => true, 'msg' => 'Something went wrong, please try again...', 'html' => '','count'=>'','ids'=>'');
+$output = array('error' => true, 'msg' => 'Something went wrong, please try again...', 'html' => '','count'=>'','ids'=>'','arrvalue'=>'');
 $login = check_admin_login();
 if($login === true) {
 	if(isset($_REQUEST['cmd'])) {
@@ -26,10 +26,10 @@ if($login === true) {
 			
 			$i=0;
 			$a=1;
-			 $html='';
+			 $html=array();
 			$ids="";
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-				$html.="<tr><td><div><input type='checkbox' name='eid[]' id='eid$data[0]' value='$data[0]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$data[0]."</div></td></tr>";
+				$html[]="<div><input type='checkbox' name='eid[]' id='eid$data[0]' value='$data[0]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$data[0]."</div>";
 				if($ids=="")
 				{
 					$ids.=$data[0];
@@ -57,12 +57,14 @@ if($login === true) {
 			$email = $bulkemail->emailsvalue($id);
 			$count=$bulkemail->emailscount($id);
 			$ids=$bulkemail->emailids($id);
+			$arrvalue=$bulkemail->arremailvalue($id);
 			
 			$html = $email;
 			$output['error'] = false;
 			$output['html'] = $html;
 			$output['msg'] = "Success";
 			$output['count']=$count;
+			$output['arrvalue']=$arrvalue;
 			$output['ids']=$ids;
 		}
 		

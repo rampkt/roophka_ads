@@ -327,6 +327,26 @@ if($emailinput==2){
     background-color:#468847;
 	color:#fff;
 	}
+	.dataTables_paginate
+{
+	float:right;
+	padding:10px 0px
+}
+.dataTables_paginate .current
+{
+	border:1px solid #ccc;
+	text-decoration:0px 5px;
+	padding:0px 5px;
+}
+.dataTables_paginate span
+{
+	padding:0px 5px;
+}
+.dataTables_paginate span a
+{
+	padding:0px 5px;
+	cursor:pointer;
+}
 	</style>
 
 </head>
@@ -554,10 +574,7 @@ if($emailinput==2){
 						</tr>
 					</thead>
 					<tbody id="allemailsmodal">
-					<tr>
-					<td>No email to display here...</td>
 					
-					</tr>
 					</tbody>
 				</table>
 					
@@ -604,6 +621,13 @@ if($emailinput==2){
 		$(document).ready(function (e) {
 			
 $("#uploadimage").on('submit',(function(e) {
+	var t = $('#email_list').DataTable();
+	 var trlen = $('#email_list tbody tr').length;
+		  for(var a=0;a<trlen;a++)
+		  {
+			 t.row('#email_list tbody tr').remove().draw();  
+		  }	  
+	
 e.preventDefault();
 //$("#eids").empty();
 $.ajax({
@@ -617,9 +641,15 @@ processData:false,        // To send DOMDocument or non processed data file it i
 success: function(result)   // A function to be called if request succeeds
 {
 $('#allemails').html("Total "+result.count+" emails in above selected category");
-$('#allemailsmodal').html(result.html);	
+//$('#allemailsmodal').html(result.html);	
 $("#emailids").val(result.ids);
-$('#email_list').DataTable();
+for(var i=0; i<result.count;i++)
+{
+//alert(result.html);
+t.row.add([result.html[i]]).draw(false);
+}
+
+//$('#email_list').DataTable();
 }
 });
 }));
@@ -759,6 +789,14 @@ function checkedValues(val)
 	function emailsfn() {
 		 var el = document.getElementsByTagName('select')[0];
          var id=getSelectValues(el);
+		 
+		 
+		  var t = $('#email_list').DataTable();
+		  var trlen = $('#email_list tbody tr').length;
+		  for(var a=0;a<trlen;a++)
+		  {
+			 t.row('#email_list tbody tr').remove().draw();  
+		  }	  
 		// alert(id);
 			var params = { cmd:'_getemails', temp:id }
             $.ajax({
@@ -770,9 +808,14 @@ function checkedValues(val)
 						alert(result.msg);
 					} else {
 						$('#allemails').html("Total "+result.count+" emails in above selected category");
-						$('#allemailsmodal').html(result.html);
 						$('#emailids').val(result.ids);
-						$('#email_list').DataTable();
+
+						for(var i=0; i<result.count;i++)
+						{
+					//alert(result.arrvalue);
+						t.row.add([result.arrvalue[i]]).draw(false);
+						}
+						//$('#email_list').DataTable();
 						//checkedValues();
 					}
 				}
@@ -863,7 +906,9 @@ else {
 	
 	
 </SCRIPT>
-
+<!-- start: JavaScript-->
+	<? include('./includes/footerinclude.php'); ?>
+	<!-- end: JavaScript-->
 	<script type="text/javascript" class="init">
 	
 
@@ -897,9 +942,9 @@ $(document).ready(function() {
 
 
 	</script>
-	<!-- start: JavaScript-->
-	<? include('./includes/footerinclude.php'); ?>
-	<!-- end: JavaScript-->
 	
+	
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
+	</script>
 </body>
 </html>
