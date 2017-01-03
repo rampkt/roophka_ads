@@ -159,8 +159,10 @@ list($adslist, $pagination)= $ads->getAllAdsviews($_REQUEST['id'],$page);
 					
 					 <div class="col-md-12">
                          <div class="col-md-6 pull-left">
-						 <div style="width:400px;margin-left:20px;"><img src="../uploads/ads/<?=$ads->filehash?>.attach" /></div>
-    	                 <?=$ads->adhtml?>
+                        <?php if($ads->addtype =="scroll") { ?>					
+						<div style="width:400px;margin-left:20px;"><img src="../uploads/ads/<?=$ads->filehash?>.attach" /></div>
+						<?php } ?>
+    	                <div style="width:400px;margin-left:20px;"> <?=$ads->adhtml?></div>
    
                            </div>
 	                     <div class="col-md-6 pull-left">
