@@ -69,7 +69,7 @@ list($adslist, $pagination)= $ads->getAllAdsviews($_REQUEST['id'],$page);
 	.tab-menu.nav-tabs > li > a:hover {
 		color:#555;
 	}
-	.videoad { text-align:left; margin-left:20px;}
+	.videoad { text-align:left; }
 .videoad video, .imagead img{  max-width: 100%; width:450px; }
 .spaccss
 {
