@@ -52,3 +52,4 @@
         <div id="loader"></div>
     </div>
 </div>
+<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=hrl7mSX7q72PYzD73RAK9lRLDjbaOhcdmCovS2tZYebMMaRKOt3b2NPgkAaF"></script></span>
