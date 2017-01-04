@@ -46,7 +46,7 @@
                 <img class="alignnone wp-image-6799 size-thumbnail" src="./assets/img/logo150X150.png" width="150" height="150">
             </span>
         </div>
-        <p class="poweredby">&copy; <?=date('Y')?> Roophka. Powered by <a href="http://www.roophka.com/">Roophka.com</a></p>
+        <p class="poweredby">&copy; <?=date('Y')?> Roophka. Powered by <a href="https://www.roophka.com/">Roophka.com</a></p>
     </div>
 </footer>
 

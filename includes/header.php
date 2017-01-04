@@ -87,9 +87,9 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
             
             <div class="gen-menu-header">
                 <div class="gen-menu">
-                    <a href="http://www.roophka.com/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn.png"></a>
+                    <a href="https://www.roophka.com/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn.png"></a>
                     <a href="#" class="item"><img src="<?=HTTP_PATH?>assets/img/bn-3.png"></a>
-                    <a href="http://www.roophka.com/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn-2.png"></a>
+                    <a href="https://www.roophka.com/" class="item"><img src="<?=HTTP_PATH?>assets/img/bn-2.png"></a>
                 </div>
             </div>
             <div class="clearfix"></div>
