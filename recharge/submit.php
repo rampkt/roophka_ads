@@ -17,7 +17,7 @@ $uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);
 $ch = curl_init(); 
 $timeout = 100; // set to zero for no timeout 
 
-$apikey="862626107699030";
+$apikey="104746188241741";
 $userid="roophka";
 
 $myHITurl = "http://joloapi.com/api/recharge.php?mode=0&userid=$userid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
