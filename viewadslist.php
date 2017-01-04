@@ -101,7 +101,7 @@ return $result3[0];
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <a href="viewads.php?id=<?=$text['id']?>">
 	   <div class="viewadlistbox">
-	      <div class="adnamebox"><?=substr($text['name'],0,24)?></div>
+	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
 		  <div class="adcountboxcss"><?=$text['amount']?></div>
 	   </div>
 	   </a>
@@ -110,7 +110,7 @@ return $result3[0];
 	 <a href="viewads.php?id=<?=$text['id']?>">
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <div class="viewadlistbox">
-	      <div class="adnamebox"><?=substr($text['name'],0,24)?></div>
+	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
 		  <div class="adcountboxcss"><?=$text['amount']?></div>
 	   </div>
      </div>
@@ -140,7 +140,7 @@ return $result3[0];
 	 <a href="viewads.php?id=<?=$text['id']?>">
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <div class="viewadlistbox">
-	      <div class="adnamebox"><?=substr($text['name'],0,24)?></div>
+	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
 		  <div class="adcountboxcss"><?=$text['amount']?></div>
 	   </div>
      </div>
@@ -170,7 +170,7 @@ return $result3[0];
 	 <a href="viewads.php?id=<?=$text['id']?>">
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <div class="viewadlistbox">
-	      <div class="adnamebox"><?=substr($text['name'],0,24)?></div>
+	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
 		  <div class="adcountboxcss"><?=$text['amount']?></div>
 	   </div>
      </div>

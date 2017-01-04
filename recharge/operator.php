@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 // collecting details from html Form 
 $mobile="9962980183";  
  
-$apikey="862626107699030";
+$apikey="104746188241741";
 $userid="roophka";
 
 $url="https://joloapi.com/api/findoperator.php?userid=$userid&key=$apikey&mob=$mobile&type=json";
