@@ -121,7 +121,7 @@ $from = $adminmail;
     $message = '<div style="width:600px;">
     Dear '.$_SESSION['roo']['user']['firstname'].'<br><br>
    
-    <p> Your Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.' was succesful</p>
+    <p> Your Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.' was successfull !</p>
     <br>
 	
 	<table>
