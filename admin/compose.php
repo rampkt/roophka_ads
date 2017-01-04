@@ -223,7 +223,7 @@ if($emailinput==2){
 			<table cellpadding="0" cellspacing="0" border="0">
 			
 				<tr>
-					<td><img src='.$mypath.'></td>
+					<td><img src='.$my_path.' style="width:300px;"></td>
 				</tr>
 				
 			</table>
@@ -231,6 +231,8 @@ if($emailinput==2){
 			Thanks & regards,<br>
 			<a href="roophka.com">roophka.com</a>
 			</div>';
+			
+			//echo $message; exit;
 			
 			$mailler->sendmail($to, $from, $subject, $message);			
 	}		
