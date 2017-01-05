@@ -60,5 +60,5 @@ padding:20px 15px;
 -->
 </style>
 
-<script type="text/javascript" id="st_insights_js" src="http://w.sharethis.com/button/buttons.js?publisher=1759570e-6d72-44a2-a656-b77877c4f0c2"></script>
+<script type="text/javascript" id="st_insights_js" src="https://ws.sharethis.com/button/buttons.js?publisher=1759570e-6d72-44a2-a656-b77877c4f0c2"></script>
 <script type="text/javascript">stLight.options({publisher: "1759570e-6d72-44a2-a656-b77877c4f0c2", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>

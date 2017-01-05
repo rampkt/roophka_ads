@@ -14,10 +14,15 @@ if($login === false) {
 include("./functions/ads.php");
 $ads = new ads;
 
+if(isset($_REQUEST['id']))
+{
+	 $currentAd = $ads->getAd($_REQUEST['id']);
+}else {
 if($_SESSION['roo']['user']['demo'] == 1) {
     $currentAd = $ads->getDemoAd(false);
 } else {
-    $currentAd = $ads->getAd();
+    $currentAd = $ads->getAd(0);
+}
 }
 
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='_add_findlocation'))

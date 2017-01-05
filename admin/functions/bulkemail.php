@@ -436,6 +436,24 @@ class bulkemail
 		return false;
 	}
 	
+	public function arremailvalue($id) {
+		    $arr=array();
+			
+				$sql="SELECT * FROM roo_emails where category IN ($id)";
+			
+			$result=$this->db->query($sql);
+			while($row=$this->db->fetch_array($result))
+			{
+			$arr[]="<div><input type='checkbox' name='eid[]' id='eid$row[id]' value='$row[id]' style='margin-top:0px;' checked onclick='checkedValues(this.value)'> ".$row['email']."</div>";
+		    
+			}
+			
+		if($result)	
+		{
+			return $arr;
+		}
+		return false;
+	}
 	public function emailscount($id) {
 		    $html="";
 			

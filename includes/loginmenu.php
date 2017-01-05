@@ -13,7 +13,7 @@
 							 <li><a href="recharge_proceed.php?view=recharge">Recharge Now</a></li>
 						<?php }?>
 							  <li <? if($subname == 'recharge') { ?>class="current"<? } ?>><a href="recharge_proceed.php?view=order">Recharge Orders</a></li>
-						
+						      <li <? if($subname == 'allads') { ?>class="current"<? } ?>><a href="viewadslist.php">View All Ads</a></li>
                             <li <? if($subname == 'transaction') { ?>class="current"<? } ?>><a href="transaction.php">Transaction</a></li>
                             <li <? if($subname == 'password') { ?>class="current"<? } ?>><a href="password.php">Change Password</a></li>
                         <? } ?>

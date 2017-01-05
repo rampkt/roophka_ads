@@ -191,11 +191,11 @@ if($emailinput==2){
 				$filehash = randomString(20);
 				$filename = $filehash . '.'.$extn;
 				$bulkemail->message=$filename;
-				$path = DOCUMENT_PATH . "admin/attachment/";
+				$path = DOCUMENT_PATH . "uploads/attachment/";
 				
 				$destination = $path . $filename;
 				
-				$httpPath = HTTP_PATH . "admin/attachment/" . $filename;
+				$httpPath = HTTP_PATH . "uploads/attachment/" . $filename;
 				
 				//echo $destination; exit;
 				
@@ -215,7 +215,7 @@ if($emailinput==2){
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
-			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$my_path = HTTP_PATH . "uploads/attachment/".$bulkemail->message;
 			$message = '<div style="width:600px;">
 			Dear<br>
 			<p>Welcome to ROOPHKA.COM</p>
@@ -223,7 +223,7 @@ if($emailinput==2){
 			<table cellpadding="0" cellspacing="0" border="0">
 			
 				<tr>
-					<td><img src='.$mypath.'></td>
+					<td><img src='.$my_path.' style="width:300px;"></td>
 				</tr>
 				
 			</table>
@@ -231,6 +231,8 @@ if($emailinput==2){
 			Thanks & regards,<br>
 			<a href="roophka.com">roophka.com</a>
 			</div>';
+			
+			//echo $message; exit;
 			
 			$mailler->sendmail($to, $from, $subject, $message);			
 	}		
@@ -245,7 +247,7 @@ if($emailinput==2){
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
-			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$my_path = HTTP_PATH . "uploads/attachment/".$bulkemail->message;
 			$message = '<div style="width:600px;">
 			Dear<br>
 			<p>Welcome to ROOPHKA.COM</p>
@@ -327,6 +329,26 @@ if($emailinput==2){
     background-color:#468847;
 	color:#fff;
 	}
+	.dataTables_paginate
+{
+	float:right;
+	padding:10px 0px
+}
+.dataTables_paginate .current
+{
+	border:1px solid #ccc;
+	text-decoration:0px 5px;
+	padding:0px 5px;
+}
+.dataTables_paginate span
+{
+	padding:0px 5px;
+}
+.dataTables_paginate span a
+{
+	padding:0px 5px;
+	cursor:pointer;
+}
 	</style>
 
 </head>
@@ -554,10 +576,7 @@ if($emailinput==2){
 						</tr>
 					</thead>
 					<tbody id="allemailsmodal">
-					<tr>
-					<td>No email to display here...</td>
 					
-					</tr>
 					</tbody>
 				</table>
 					
@@ -585,7 +604,7 @@ if($emailinput==2){
 		</div>
 		
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript">
   $(function() {
      $("#ajaxfile").change(function (){
@@ -604,6 +623,13 @@ if($emailinput==2){
 		$(document).ready(function (e) {
 			
 $("#uploadimage").on('submit',(function(e) {
+	var t = $('#email_list').DataTable();
+	 var trlen = $('#email_list tbody tr').length;
+		  for(var a=0;a<trlen;a++)
+		  {
+			 t.row('#email_list tbody tr').remove().draw();  
+		  }	  
+	
 e.preventDefault();
 //$("#eids").empty();
 $.ajax({
@@ -617,9 +643,15 @@ processData:false,        // To send DOMDocument or non processed data file it i
 success: function(result)   // A function to be called if request succeeds
 {
 $('#allemails').html("Total "+result.count+" emails in above selected category");
-$('#allemailsmodal').html(result.html);	
+//$('#allemailsmodal').html(result.html);	
 $("#emailids").val(result.ids);
-$('#email_list').DataTable();
+for(var i=0; i<result.count;i++)
+{
+//alert(result.html);
+t.row.add([result.html[i]]).draw(false);
+}
+
+//$('#email_list').DataTable();
 }
 });
 }));
@@ -759,6 +791,14 @@ function checkedValues(val)
 	function emailsfn() {
 		 var el = document.getElementsByTagName('select')[0];
          var id=getSelectValues(el);
+		 
+		 
+		  var t = $('#email_list').DataTable();
+		  var trlen = $('#email_list tbody tr').length;
+		  for(var a=0;a<trlen;a++)
+		  {
+			 t.row('#email_list tbody tr').remove().draw();  
+		  }	  
 		// alert(id);
 			var params = { cmd:'_getemails', temp:id }
             $.ajax({
@@ -770,9 +810,14 @@ function checkedValues(val)
 						alert(result.msg);
 					} else {
 						$('#allemails').html("Total "+result.count+" emails in above selected category");
-						$('#allemailsmodal').html(result.html);
 						$('#emailids').val(result.ids);
-						$('#email_list').DataTable();
+
+						for(var i=0; i<result.count;i++)
+						{
+					//alert(result.arrvalue);
+						t.row.add([result.arrvalue[i]]).draw(false);
+						}
+						//$('#email_list').DataTable();
 						//checkedValues();
 					}
 				}
@@ -816,8 +861,7 @@ function checkedValues(val)
 
 //The file uploaded is an image
 
-if (Extension == "gif" || Extension == "png" || Extension == "bmp"
-                    || Extension == "jpeg" || Extension == "jpg") {
+if (Extension == "gif" || Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
 
 // To Display
 
@@ -825,7 +869,7 @@ if (Extension == "gif" || Extension == "png" || Extension == "bmp"
 
 //The file upload is NOT an image
 else {
-                alert("Upload only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
+                alert("Upload only allows file types of GIF, PNG, JPG and JPEG. ");
 				document.getElementById('fileemail').value="";
 
             }
@@ -864,7 +908,9 @@ else {
 	
 	
 </SCRIPT>
-
+<!-- start: JavaScript-->
+	<? include('./includes/footerinclude.php'); ?>
+	<!-- end: JavaScript-->
 	<script type="text/javascript" class="init">
 	
 
@@ -898,9 +944,9 @@ $(document).ready(function() {
 
 
 	</script>
-	<!-- start: JavaScript-->
-	<? include('./includes/footerinclude.php'); ?>
-	<!-- end: JavaScript-->
 	
+	
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
+	</script>
 </body>
 </html>
