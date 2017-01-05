@@ -123,7 +123,9 @@ $from = $adminmail;
 <tr>
 <td style="width:55%;">
 <div>
-<img src="'.HTTP_PATH.'assets/img/roophka-logo.png" style="width:200px;height:100px;">
+<a href="'.HTTP_PATH.'" target="_blank">
+<img src="'.HTTP_PATH.'assets/img/logo150X150.png" style="width:200px;height:100px;">
+<a>
 </div>
 <div>
 <h3>Transaction receipt</h3>
@@ -136,7 +138,7 @@ $from = $adminmail;
 </div>
 </td>
 <td style="width:38%;">
-<div>We are here 24X7 for you! Please <a href="'.HTTP_PATH.'contactus.php">Click here</a> to reach us. </di>
+<div>If you have any query or support! Please <a href="'.HTTP_PATH.'contactus.php">Click here</a> to reach us. </di>
 
 </td>
 <td style="width:12%;">
