@@ -116,43 +116,72 @@ $opname=$user->getoperator_name($operator);
 
 $from = $adminmail;
 		$to = array($_SESSION['roo']['user']['email']);
-		$subject = "ROOPHKA: Recharge order Details";
+		$subject = "ROOPHKA: Your Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.' was successfull !";
    
-    $message = '<div style="width:600px;">
-    Dear '.$_SESSION['roo']['user']['firstname'].'<br><br>
-   
-    <p> Your Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.' was successfull !</p>
-    <br>
-	
-	<table>
-	<tr>
-	<td><strong>Order ID: </strong></td>
-	<td>'.$mywebsiteorderid.'</td>
-	</tr>
-	
-	<tr>
-	<td><strong>Order Reference Number: </strong></td>
-	<td>'.$joloapiorderid.'</td>
-	</tr>
-	
-	<tr>
-	<td><strong>Date: </strong></td>
-	<td>'.DATETIME24H.'</td>
-	</tr>
-	
-	<tr>
-	<td><strong>Status: </strong></td>
-	<td>Success</td>
-	</tr>
-	
-	</table>
+    $message = '<div style="background-color: #fff;width: 650px;margin: 0 auto; box-shadow: 1px 6px 40px #aaa;border: 1px solid #ccc;padding: 10px;font-family: arial;font-size: 14px;"> 
+<table style="width:100%;border-bottom:1px dashed #ccc;font-size: 14px;" >
+<tr>
+<td style="width:55%;">
+<div>
+<img src="'.HTTP_PATH.'assets/img/roophka-logo.png" style="width:200px;height:100px;">
+</div>
+<div>
+<h3>Transaction receipt</h3>
+<p>Order no: #'.$mywebsiteorderid.'</p>
+<p>Operator reference no: #'.$joloapiorderid.' </p>
+<p>'.DATETIME24H.'</p>
+<br/>
+<p>'.$_SESSION['roo']['user']['phone'].'</p>
+<p><a href="mailto:'.$_SESSION['roo']['user']['email'].'">'.$_SESSION['roo']['user']['email'].'</a></p>
+</div>
+</td>
+<td style="width:38%;">
+<div>We are here 24X7 for you! Please <a href="'.HTTP_PATH.'contactus.php">Click here</a> to reach us. </di>
+
+</td>
+<td style="width:12%;">
+<div>
+<img src="'.HTTP_PATH.'assets/img/r-logo.png">
+</div>
+
+</td>
+</tr>
+</table>
+
+<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
+<tr >
+
+<td style="width:85%;">Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.'</td>
+<td style="width:15%;"> Rs.'.$amount.'</td>
+
+</tr>
+</table>
+<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
+<tr>
+
+<td style="width:85%;">Total</td>
+<td style="width:15%;"> Rs.'.$amount.'</td>
+
+</tr>
+</table>
+<table style="width:100%;height:70px;padding-bottom:10px;font-size: 14px;">
+<tr>
+
+<td style="width:85%;"><strong>Amount Paid</strong></td>
+<td style="width:15%;"><strong>Rs.'.$amount.'</strong></td>
+
+</tr>
+</table>
+
 	
 	<br/>
 	
     Thanks & regards,<br />
     <a href="'.HTTP_PATH.'">roophka.com</a>
     </div>';
-		
+
+	//echo $message; exit;
+	
 		$mailler->sendmail($to, $from, $subject, $message);
 
 redirect(HTTP_PATH . 'recharge_proceed.php?report=success&view=order');
