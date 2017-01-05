@@ -116,7 +116,7 @@ $opname=$user->getoperator_name($operator);
 
 $from = $adminmail;
 		$to = array($_SESSION['roo']['user']['email']);
-		$subject = "ROOPHKA: Your Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.' was successfull !";
+		$subject = "ROOPHKA: Your Recharge of $opname Mobile $mobile for Rs.$amount was successfull !";
    
     $message = '<div style="background-color: #fff;width: 650px;margin: 0 auto; box-shadow: 1px 6px 40px #aaa;border: 1px solid #ccc;padding: 10px;font-family: arial;font-size: 14px;"> 
 <table style="width:100%;border-bottom:1px dashed #ccc;font-size: 14px;" >
