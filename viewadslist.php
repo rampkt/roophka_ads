@@ -3,7 +3,7 @@ include_once("./config/config.php");
 /***
  * initial setup
  */
-$pagename = 'allads';
+$pagename = 'viewads';
 $subname = 'allads';
 
 $login = check_login();
