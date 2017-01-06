@@ -191,11 +191,11 @@ if($emailinput==2){
 				$filehash = randomString(20);
 				$filename = $filehash . '.'.$extn;
 				$bulkemail->message=$filename;
-				$path = DOCUMENT_PATH . "admin/attachment/";
+				$path = DOCUMENT_PATH . "uploads/attachment/";
 				
 				$destination = $path . $filename;
 				
-				$httpPath = HTTP_PATH . "admin/attachment/" . $filename;
+				$httpPath = HTTP_PATH . "uploads/attachment/" . $filename;
 				
 				//echo $destination; exit;
 				
@@ -215,7 +215,7 @@ if($emailinput==2){
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
-			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$my_path = HTTP_PATH . "uploads/attachment/".$bulkemail->message;
 			$message = '<div style="width:600px;">
 			Dear<br>
 			<p>Welcome to ROOPHKA.COM</p>
@@ -247,7 +247,7 @@ if($emailinput==2){
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
-			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$my_path = HTTP_PATH . "uploads/attachment/".$bulkemail->message;
 			$message = '<div style="width:600px;">
 			Dear<br>
 			<p>Welcome to ROOPHKA.COM</p>
@@ -604,7 +604,7 @@ if($emailinput==2){
 		</div>
 		
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript">
   $(function() {
      $("#ajaxfile").change(function (){

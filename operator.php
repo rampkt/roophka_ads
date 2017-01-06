@@ -36,7 +36,7 @@ $output=json_decode($result, true);
 $opcode=$output['operator_code'];
 if($opcode!=0){
   $code="";
-			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0' and operator_code='$opcode'");
+			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0' and operator_code='$opcode' order by operator_name asc");
 			$count=$db->num_rows($qry);
 			$i=1;
 			if($count>0)
@@ -54,7 +54,7 @@ if($opcode!=0){
 	else
 	{
 		$code="<option value=''>Select Operator</option>";
-			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0'");
+			$qry = $db->query("SELECT * FROM roo_mobile_operator where status='0' order by operator_name asc");
 			$count=$db->num_rows($qry);
 			$i=1;
 			if($count>0)
@@ -106,7 +106,7 @@ $output=json_decode($result, true);
 $ccode=$output['circle_code'];
 if($ccode!=0){
   $code="";
-			$qry = $db->query("SELECT * FROM roo_operator_circle where status='0' and circle_code='$ccode'");
+			$qry = $db->query("SELECT * FROM roo_operator_circle where status='0' and circle_code='$ccode' order by circle_name asc");
 			$count=$db->num_rows($qry);
 			$i=1;
 			if($count>0)
@@ -124,7 +124,7 @@ if($ccode!=0){
 	else
 	{
 		$code="<option value=''>Select Circle</option>";
-			$qry = $db->query("SELECT * FROM roo_operator_circle where status='0'");
+			$qry = $db->query("SELECT * FROM roo_operator_circle where status='0' order by circle_name asc");
 			$count=$db->num_rows($qry);
 			$i=1;
 			if($count>0)

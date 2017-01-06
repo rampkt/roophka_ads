@@ -292,7 +292,7 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
                                    <div class="control-group" >
                                       <label class="control-label" for="transid">Transaction id:</label>
                                       <div class="controls">
-                                        <input type="text" class="input-xlarge" id="transid" name="transid"  placeholder="Enter transaction id here" required />
+                                        <input type="text" class="input-xlarge" id="transid" name="transid"  placeholder="Enter transaction id here"  />
                                       </div>
                                     </div>
                                     
@@ -352,10 +352,14 @@ $mailler->sendmail_attachment($my_file,$tempfile,$file_type, $my_path, $to, $fro
 		if(val==1)
 		{
 			$('#withdrawid').hide();	
+			$('#transid').removeAttr('required');	
+			
 		}
 	    if(val==2)
 		{
 			$('#withdrawid').show();
+			$('#transid').attr('required','required');
+			
 		}
 	}
 	function userinputfn(val)
