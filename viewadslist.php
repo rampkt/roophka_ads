@@ -89,7 +89,7 @@ return $result3[0];
 	  <div class="adsbox">
 
      <div class="ribbon" >
-    <a href="#">Ads</a>
+    <a href="#">Standard Ads</a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding" style="overflow-y:auto;height:175px">
