@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Kolkata");
 // Get settings table
 $setQry = $db->query("SELECT * FROM roo_settings WHERE id=1");
 $setting = $db->fetch_array($setQry);

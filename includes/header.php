@@ -110,8 +110,8 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
 				  
 				   <? if(!isset($_SESSION['roo']['user'])) { ?>
 				  
-				   <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="javascript:void(0);" onclick="rechargepopup();">Recharge </a>
-				   <ul class="rc-form rc-formhide">
+				   <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="javascript:void(0);" onclick="rechargepopup('showme');">Recharge </a>
+				   <ul id="showme" class="rc-form" style="display:none;">
 				   <li>
 				    <div>
     	<form action='recharge_proceed.php' name="recharge" method="get" >
@@ -199,14 +199,19 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
 </div>
 
 <script>
-function rechargepopup()
-{
-	//alert("dada");
-	$('.rc-form').removeClass('rc-formhide');
-	$('.rc-form').addClass('rc-formshow');
-	
-}
 
+function rechargepopup(id) 
+{
+    var e = document.getElementById(id);
+    if (e.style.display == 'block' || e.style.display=='')
+    {
+        e.style.display = 'none';
+    }
+    else 
+    {
+        e.style.display = 'block';
+    }
+}
 function findoperatorvalue(val) {
 //	alert("sri");
 	var params = { action : '_findoperator',mobile:val}
