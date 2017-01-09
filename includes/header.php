@@ -266,7 +266,7 @@ function findcirclevalue(val) {
 {
 	color: red;
     font-size: 12px;
-    width: 200px;
+    width: 290px;
     position: absolute;
    
 }
