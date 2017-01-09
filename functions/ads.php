@@ -88,7 +88,7 @@ class ads {
 		
 		$html = '<div class="videoad">
 						<div>
-							<video id="videoID" src="'.$row2['content'].'" controls autoplay onended="videoEnded()"></video>
+							<video id="videoID" src="'.$row2['content'].'" controls autoplay onended="videoEnded()" style="width:600px;"></video>
 						</div>
 					</div>';
 		return $html;
