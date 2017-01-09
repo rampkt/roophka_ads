@@ -274,7 +274,7 @@ var autovdval="<?php if(isset($_SESSION['autoenable'])){ echo $_SESSION['autoena
 	  }else{
 		  $('#videopopup').modal('hide');
 		  $("#videoID").get(0).pause();
-	  }
+	  
    // alert( "ready!" );
    if((latval=="")&&(lngval==""))
    {
@@ -283,6 +283,7 @@ var autovdval="<?php if(isset($_SESSION['autoenable'])){ echo $_SESSION['autoena
 
 	locationaddfn(2);
    }
+	 }
 });
    
   function videoEnded() {
