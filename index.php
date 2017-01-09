@@ -236,7 +236,7 @@ return $result3[0];
 		<div class="modal-header">
 			<h3>Auto Video</h3>
 		</div>
-		<div class="modal-body" id="bankAjaxResult" style="overflow: hidden;margin:10px;padding:0px;">
+		<div class="modal-body" id="bankAjaxResult" style="overflow: hidden;margin:10px;padding:15px;">
 			<?=$videoad?>
 		</div>
 		
@@ -266,7 +266,7 @@ var autovdval="<?php if(isset($_SESSION['autoenable'])){ echo $_SESSION['autoena
   
   
   $( document ).ready(function() {
-	  //alert(autovdval);
+	 // alert(autovdval);
 	  
 	  if(autovdval==0)
 	  {
@@ -288,7 +288,7 @@ var autovdval="<?php if(isset($_SESSION['autoenable'])){ echo $_SESSION['autoena
   function videoEnded() {
    $('#videopopup').modal('hide');
    document.autovideo.submit();
-   location.reload(true);
+  // location.reload(true);
 }
    
   function findlocation(){
