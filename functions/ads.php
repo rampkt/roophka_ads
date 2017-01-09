@@ -75,6 +75,25 @@ class ads {
 		}
 		return $result;
 	}
+	
+	public function getHomevideoAd() {
+		$qry = $this->db->query("SELECT * FROM roo_videopopup  WHERE status = '0'");
+		$row = $this->db->fetch_array($qry);
+		$id=$row['video_id'];
+		//echo "SELECT ra.id, ra.name, ra.content FROM roo_ads AS ra WHERE (ra.type = 'video' AND ra.status=0) and ra.id='$id'";
+		$qry2 = $this->db->query("SELECT ra.id, ra.name, ra.content FROM roo_ads AS ra WHERE (ra.type = 'video' AND ra.status=0) and ra.id='$id'");
+		$row2 = $this->db->fetch_array($qry2);
+		//echo $row2['content']; exit;
+		
+		
+		$html = '<div class="videoad">
+						<div>
+							<video id="videoID" src="'.$row2['content'].'" controls autoplay onended="videoEnded()"></video>
+						</div>
+					</div>';
+		return $html;
+	}
+	
 	public function getAdlist($type) {
 		$user_id = $_SESSION['roo']['user']['id'];
 		//echo "SELECT ra.id, ra.name,ra.amount,ra.content FROM roo_ads AS ra WHERE (ra.type = '$type' AND ra.status=0)AND ra.viewing=0 AND ((SELECT COUNT(id) AS cnt FROM roo_transaction AS rt WHERE rt.adid = ra.id AND rt.userid = '".$user_id."' AND rt.date_added >= '".DATE_TODAY."') = 0)"; exit;
