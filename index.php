@@ -236,7 +236,7 @@ return $result3[0];
 		<div class="modal-header">
 			<h3>Auto Video</h3>
 		</div>
-		<div class="modal-body" id="bankAjaxResult" style="overflow: hidden;margin:10px;">
+		<div class="modal-body" id="bankAjaxResult" style="overflow: hidden;margin:10px;padding:0px;">
 			<?=$videoad?>
 		</div>
 		
