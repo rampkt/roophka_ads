@@ -9,6 +9,7 @@ function checkamount(useramt)
 	//alert(eamt+"<br>"+fullamt);
 	//return false;
 	 var smat=$('#spl_rechr').val();
+	 //alert(smat);
 	 if(smat==0)
 	 {
 	 if(fullamt<30)
