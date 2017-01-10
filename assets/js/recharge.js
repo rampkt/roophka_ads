@@ -8,7 +8,9 @@ function checkamount(useramt)
 	
 	//alert(eamt+"<br>"+fullamt);
 	//return false;
-	
+	 var smat=$('#spl_rechr').val();
+	 if(smat==0)
+	 {
 	 if(fullamt<30)
 	 {
 		 $('#alertamt').html("If must be to reach Rs.30 in your account balance. After that only you can proceed recharge");
@@ -27,6 +29,7 @@ function checkamount(useramt)
 		  return false;
 		  
 	  }  
+	 }
 	  
   }
   
