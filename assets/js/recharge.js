@@ -8,6 +8,16 @@ function checkamount(useramt)
 	
 	//alert(eamt+"<br>"+fullamt);
 	//return false;
+	
+	 if(fullamt<30)
+	 {
+		 $('#alertamt').html("If must be to reach Rs.30 in your account balance. After that only you can proceed recharge");
+		 document.recharge_proceed.amount.value="";
+		  //$('#amount').css('outline-color','red')
+		  document.recharge_proceed.amount.focus();
+		 return false;
+	 }
+	
 	  if(eamt>fullamt)
 	  {
 		  $('#alertamt').html("Please enter below "+useramt+" rupees");

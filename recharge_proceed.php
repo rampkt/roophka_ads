@@ -37,7 +37,7 @@ $amount=$_REQUEST['amount'];
  $sessuser_id = $_SESSION['roo']['user']['id'];
 //generating random unique orderid for your reference 
 $uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
- 
+ $splrc=$_REQUEST['spl_rechr'];
 //inserting above 4 values in database first 
 //run your php query here to store values of user inputs in database 
  
@@ -106,8 +106,20 @@ $ins=$db->query($qry);
 
 $balance=$_SESSION['roo']['user']['account_balance']-$amount;
 $_SESSION['roo']['user']['account_balance']=$balance;
+
+
+if($splrc=='1')
+{
+	$qqry2="UPDATE roo_users SET spl_recharge='1' where id='$sessuser_id'";
+$qupd=$db->query($qqry2);
+$_SESSION['roo']['user']['spl_recharge']=1;
+}else
+{
 $qry2="UPDATE roo_users SET account_balance='$balance' where id='$sessuser_id'";
 $upd=$db->query($qry2);
+
+}
+
 
 $adminmail=$cms->getsetting('1','email');
 $opname=$user->getoperator_name($operator);
@@ -411,6 +423,7 @@ $recharge = $user->recharge_order();
             </div>
 			</div>
 			
+			<input type="hidden" value="0" name="spl_rechr" id="spl_rechr">
 			
 			<div class="grid_12" style="margin-bottom:20px;">
 			<div style="margin-bottom:5px;">Amount</div>
@@ -423,7 +436,7 @@ $recharge = $user->recharge_order();
 			</div>
 			
 			<div class="grid_12">
-			<div style="margin-top:15px;">
+			<div style="margin-top:25px;">
 			<input type="submit" name="submit" value="Recharge Now" class="btn btn-primary" onclick="checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');">
 			</div>
 			</div>
@@ -447,8 +460,161 @@ $recharge = $user->recharge_order();
 <!-- footer area -->    
 <? include("./includes/footer.php"); ?>
 <!-- #end footer area --> 
-
+<?php if((isset($_REQUEST['view'])) && ($_REQUEST['view']=='recharge')){ 
+if($_SESSION['roo']['user']['spl_recharge']=='0'){
+?>
+<div class="modal hide fade" id="specialpopup" style="height: 200px;width:650px; overflow: hidden; display: block;left:47%;">
+		<div class="modal-header">
+			<h3>Special Recharge Offer</h3>
+		</div>
+		<div class="modal-body" id="Specialrge" style="overflow: hidden;margin:10px;padding:15px;">
+			<div>
+			You have a special offer for first login, recharge worth is Rs.10.
+			</div>
+			
+			<div style="margin-top:30px;">
+			<input type="button" name="proceed_special" id="proceed_special" value="Proceed" class="btn btn-primary btn-small" onclick="specialfn();">
+			</div>
+			
+		</div>
+		
+	</div>
+<?php } }?>
 <? include("./includes/footerinclude.php"); ?>
+<script>
+$( document ).ready(function() {
+	 // alert(autovdval);
+	 $('#specialpopup').modal('show');
+});	 
 
+function specialfn()
+{
+	$('#amount').val('10');
+	$('#spl_rechr').val('1');
+	$('#amount').attr('readonly','readonly');
+	$('#specialpopup').modal('hide');
+}
+
+</script>
+<style>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+}
+
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  margin-left: -280px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+}
+
+.modal.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal.fade.in {
+  top: 20%;
+}
+
+.modal-header {
+  padding: 9px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header .close {
+  margin-top: 2px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  line-height: 30px;
+}
+
+.modal-body {
+  position: relative;
+  max-height: 400px;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.modal-form {
+  margin-bottom: 0;
+}
+
+.modal-footer {
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  text-align: right;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.modal-footer:before,
+.modal-footer:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.modal-footer:after {
+  clear: both;
+}
+
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+</style>
 </body>
 </html>
