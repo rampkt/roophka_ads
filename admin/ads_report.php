@@ -160,7 +160,7 @@ list($adslist,$pagination) = $ads->getAllads($date);
 								<tr>
 									<td><?=$sno?></td>
 									<td><?=$ad['adname']?></td>
-									<td class="center"><?=$ad['type']?></td>
+									<td class="center"><?=(($ad['type'] == 'add') ? $ad['adtype'] : $ad['type'])?></td>
                                     <td class="center"><?=$ad['username']?></td>
 									<td class="center"><?=$ad['email']?></td>
 									<td class="center"><?=$ad['ipaddr']?></td>
