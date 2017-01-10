@@ -13,6 +13,10 @@ if($login === true) {
 	{
 		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
 	}
+	else if(isset($_SESSION['spl_recharge_today']))
+	{
+		redirect(HTTP_PATH . 'recharge_proceed.php?view=recharge');
+	}
 	else
 	{
 	redirect(HTTP_PATH . 'dashboard.php');

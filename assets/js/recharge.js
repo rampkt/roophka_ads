@@ -6,20 +6,31 @@ function checkamount(useramt)
 	
 	var fullamt=parseInt(useramt);
 	
+	var resamt=parseInt(useramt)-100;
 	//alert(eamt+"<br>"+fullamt);
 	//return false;
 	 var smat=$('#spl_rechr').val();
 	 //alert(smat);
 	 if(smat==0)
 	 {
-	 if(fullamt<30)
+	 if(fullamt<100)
 	 {
-		 $('#alertamt').html("If must be to reach Rs.30 in your account balance. After that only you can proceed recharge");
+		 $('#alertamt').html("You must be to reach above Rs.100 in your account balance. After that only you can proceed recharge");
 		 document.recharge_proceed.amount.value="";
 		  //$('#amount').css('outline-color','red')
 		  document.recharge_proceed.amount.focus();
 		 return false;
 	 }
+	
+	 if(eamt>resamt)
+	  {
+		  $('#alertamt').html("Please enter below "+resamt+" rupees,Minimum maintain balance is 100.");
+		  document.recharge_proceed.amount.value="";
+		  //$('#amount').css('outline-color','red')
+		  document.recharge_proceed.amount.focus();
+		  return false;
+		  
+	  } 
 	
 	  if(eamt>fullamt)
 	  {
@@ -36,8 +47,16 @@ function checkamount(useramt)
   
   function pickval(amt)
   {
-	  
+	   var smat=$('#spl_rechr').val();
+	 //alert(smat);
+	 if(smat==0)
+	 {
 	  document.recharge_proceed.amount.value=amt;
+	 }
+	 if(smat==1)
+	 {
+		 alert("Special recharge can not be pick the plan.")
+	 }
 	  
   }
   

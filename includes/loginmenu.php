@@ -8,12 +8,10 @@
 							 
                         <? } else { ?>
                             <li <? if($subname == 'withdraw') { ?>class="current"<? } ?>><a href="witdraw.php">Withdraw</a></li>
-							<?php if((isset($_REQUEST['view'])) && ($_REQUEST['view']=='order')){ ?>
-							
-							 <li><a href="recharge_proceed.php?view=recharge">Recharge Now</a></li>
-						<?php }?>
-							  <li <? if($subname == 'recharge') { ?>class="current"<? } ?>><a href="recharge_proceed.php?view=order">Recharge Orders</a></li>
-						      <li <? if($subname == 'allads') { ?>class="current"<? } ?>><a href="viewadslist.php">View All Ads</a></li>
+							 <li <? if(isset($_REQUEST['view'])&&($_REQUEST['view'] == 'recharge')) { ?>class="current"<? } ?>><a href="recharge_proceed.php?view=recharge">Recharge Now</a></li>
+							  <li <?  if(isset($_REQUEST['view'])&&($_REQUEST['view'] == 'order')) { ?>class="current"<? } ?>><a href="recharge_proceed.php?view=order">Recharge Orders</a></li>
+							  <li <? if($subname == 'viewads') { ?>class="current"<? } ?>><a href="viewads.php">View All Ads</a></li>
+							    <li <? if($subname == 'allads') { ?>class="current"<? } ?>><a href="viewadslist.php">Ads List</a></li>
                             <li <? if($subname == 'transaction') { ?>class="current"<? } ?>><a href="transaction.php">Transaction</a></li>
                             <li <? if($subname == 'password') { ?>class="current"<? } ?>><a href="password.php">Change Password</a></li>
                         <? } ?>

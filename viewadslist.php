@@ -99,7 +99,7 @@ return $result3[0];
   </div>
 	 <?php } foreach($Adstext as $text) { ?>
 	  <div class="grid_4" style="margin-bottom: 30px;" >
-	   <a href="viewads.php?id=<?=$text['id']?>">
+	   <a href="viewads.php?id=<?=$text['id']?>&type=text">
 	   <div class="viewadlistbox">
 	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
 		  <div class="adcountboxcss"><?=$text['amount']?></div>
@@ -107,7 +107,7 @@ return $result3[0];
 	   </a>
      </div>
 	 <?php } foreach($Adsimage as $text) { ?>
-	 <a href="viewads.php?id=<?=$text['id']?>">
+	 <a href="viewads.php?id=<?=$text['id']?>&type=image">
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <div class="viewadlistbox">
 	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
@@ -137,7 +137,7 @@ return $result3[0];
   No premium ads to show here ...
   </div>
 	 <?php } foreach($Adsscroll as $text) { ?>
-	 <a href="viewads.php?id=<?=$text['id']?>">
+	 <a href="viewads.php?id=<?=$text['id']?>&type=scroll">
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <div class="viewadlistbox">
 	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>
@@ -167,7 +167,7 @@ return $result3[0];
   No deluxe ads to show here ...
   </div>
 	 <?php } foreach($Adsvideo as $text) { ?>
-	 <a href="viewads.php?id=<?=$text['id']?>">
+	 <a href="viewads.php?id=<?=$text['id']?>&type=video">
 	  <div class="grid_4" style="margin-bottom: 30px;" >
 	   <div class="viewadlistbox">
 	      <div class="adnamebox"><?=substr($text['name'],0,20)?></div>

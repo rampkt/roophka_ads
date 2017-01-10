@@ -22,6 +22,12 @@ if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge'))
 				$_SESSION['recharge_amount']=$_REQUEST['amount'];
 				//redirect(HTTP_PATH . 'recharge_proceed.php');
 			}
+			if((isset($_REQUEST['type'])) && ($_REQUEST['type']=='spl'))
+			{
+				$_SESSION['spl_recharge_today']=$_REQUEST['type'];
+				//redirect(HTTP_PATH . 'recharge_proceed.php');
+			}
+			
 			
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
 			{
@@ -33,7 +39,14 @@ if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
 				
 				$mobile=$_REQUEST['mobile'];  
 $operator=$_REQUEST['operator'];  
-$amount=$_REQUEST['amount']; 
+if($splrc=='1')
+{
+	$amount=10; 
+}
+else {
+$amount=$_REQUEST['amount']; 	
+}
+
  $sessuser_id = $_SESSION['roo']['user']['id'];
 //generating random unique orderid for your reference 
 $uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
@@ -48,7 +61,7 @@ $timeout = 100; // set to zero for no timeout
 $apikey="104746188241741";
 $apiuserid="roophka";
 
-$myHITurl = "http://joloapi.com/api/recharge.php?mode=1&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
+$myHITurl = "http://joloapi.com/api/recharge.php?mode=0&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
 
 //echo $myHITurl;
 curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
@@ -143,7 +156,7 @@ $from = $adminmail;
 <h3>Transaction receipt</h3>
 <p>Order no: #'.$mywebsiteorderid.'</p>
 <p>Operator reference no: #'.$joloapiorderid.' </p>
-<p>'.DATETIME24H.'</p>
+<p>'.date('d-m-Y h:i a').'</p>
 <br/>
 <p>'.$_SESSION['roo']['user']['phone'].'</p>
 <p><a href="mailto:'.$_SESSION['roo']['user']['email'].'">'.$_SESSION['roo']['user']['email'].'</a></p>
@@ -165,7 +178,7 @@ $from = $adminmail;
 <table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
 <tr >
 
-<td style="width:85%;">Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.'</td>
+<td style="width:85%;">Recharge of '.$opname.' Mobile '.$mobile.' for</td>
 <td style="width:15%;"> Rs.'.$amount.'</td>
 
 </tr>
@@ -197,7 +210,10 @@ $from = $adminmail;
 	//echo $message; exit;
 	
 		$mailler->sendmail($to, $from, $subject, $message);
-
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 redirect(HTTP_PATH . 'recharge_proceed.php?report=success&view=order');
 }  
 if($txnstatus=='PENDING'){ 
@@ -205,6 +221,10 @@ if($txnstatus=='PENDING'){
 $qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$uniqueorderid','".DATETIME24H."','0')";
 
 $ins=$db->query($qry);
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 redirect(HTTP_PATH . 'recharge_proceed.php?report=pending&view=order');
 } 
 if($txnstatus=='FAILED'){ 
@@ -214,10 +234,17 @@ $qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status
 //echo $qry; exit;
 
 $ins=$db->query($qry);
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 redirect(HTTP_PATH . 'recharge_proceed.php?report=failed&view=order');
 } 
 
-
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 
 redirect(HTTP_PATH . 'recharge_proceed.php?');
 				
@@ -275,7 +302,26 @@ $recharge = $user->recharge_order();
     <? } ?>
 	<section id="content">
 	 <?php if((isset($_REQUEST['view'])) && ($_REQUEST['view']=='recharge')){ ?>
-	 <div class="grid_12 no-padding">
+	 
+	  <div id='rgsplid' class="grid_12" style="display:none;">
+        	
+        	
+              <div class="spl-heading">Special Recharge</div>
+			
+			<img src="./assets/img/pay-per-click-advertising.jpg">
+			<div class="grid_12">
+        	<h4>User account summary:</h4>
+        	<ol>
+            	<li>Last login : <?=$_SESSION['roo']['user']['lastlogin']?></li>
+                <li>Total ads viwed so far : <?=$database['total_ads']?></li>
+                <li>Total amount earned so far : <i class="fa fa-inr" aria-hidden="true"></i> <?=$database['total_amount']?></li>
+                <li>Total amount withdrawn : <i class="fa fa-inr" aria-hidden="true"></i> <?=$database['withdraw_amount']?></li>
+            </ol>
+        </div>
+      </div>  
+	 
+	 
+	 <div id='plandlid' class="grid_12 no-padding" >
              <div class="panel panel-primary" style="text-align:left;">
               <div class="panel-heading">Operator Plan Details</div>
               <div class="panel-body" style="height:405px;">
@@ -428,7 +474,7 @@ $recharge = $user->recharge_order();
 			<div class="grid_12" style="margin-bottom:20px;">
 			<div style="margin-bottom:5px;">Amount</div>
 			<div>
-			<input type="text" name="amount" id="amount" class="rc-input numberonly" placeholder="Enter Numeric values" required value="<?php if(isset($_SESSION['recharge_amount'])){ echo $_SESSION['recharge_amount']; }?>">
+			<input type="text" name="amount" id="amount" class="rc-input numberonly" onblur="return checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');" placeholder="Enter Numeric values" required value="<?php if(isset($_SESSION['recharge_amount'])){ echo $_SESSION['recharge_amount']; }?>">
 			
 			</div>
 			<span id="alertamt"></span>
@@ -437,7 +483,9 @@ $recharge = $user->recharge_order();
 			
 			<div class="grid_12">
 			<div style="margin-top:25px;">
-			<input type="submit" name="submit" value="Recharge Now" class="btn btn-primary" onclick="checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');">
+			<input type="submit" name="submit" value="Recharge Now" class="btn btn-primary" onclick="return checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');">
+			
+			<a href="terms.php" target="_blank" style="text-decoration:underline;font-size:14px;"> Terms & Conditions</a>
 			</div>
 			</div>
 			
@@ -468,18 +516,43 @@ if($_SESSION['roo']['user']['spl_recharge']=='0'){
 			<h3>Special Recharge Offer</h3>
 		</div>
 		<div class="modal-body" id="Specialrge" style="overflow: hidden;margin:10px;padding:15px;">
+			
 			<div>
-			You have a special offer for first login, recharge worth is Rs.10.
+			You have a special offer for a first login, recharge worth is Rs.10.
 			</div>
 			
 			<div style="margin-top:30px;">
 			<input type="button" name="proceed_special" id="proceed_special" value="Proceed" class="btn btn-primary btn-small" onclick="specialfn();">
+			&nbsp;<a href="#" class="btn btn-warning btn-small" data-dismiss="modal">Later</a>
 			</div>
 			
 		</div>
 		
 	</div>
-<?php } }?>
+<?php } 
+if($_SESSION['roo']['user']['spl_recharge']=='1'){
+ if((isset($_REQUEST['type'])) && ($_REQUEST['type']=='spl'))
+			{ ?>
+<div class="modal hide fade" id="specialpopup" style="height: 200px;width:650px; overflow: hidden; display: block;left:47%;">
+		<div class="modal-header">
+			<h3>Special Recharge Offer</h3>
+		</div>
+		<div class="modal-body" id="Specialrge" style="overflow: hidden;margin:10px;padding:15px;">
+			
+			
+		     <div style="color:red;">
+			Special offer for a first login, recharge worth is Rs.10 is already done.
+			</div>
+		    <div style="margin-top:30px;">
+			<a href="#" class="btn btn-warning btn-small" data-dismiss="modal">Close</a>
+			</div>
+		</div>
+		
+	</div>
+<?php } }
+
+
+}?>
 <? include("./includes/footerinclude.php"); ?>
 <script>
 $( document ).ready(function() {
@@ -489,6 +562,8 @@ $( document ).ready(function() {
 
 function specialfn()
 {
+	$('#rgsplid').show();
+	$('#plandlid').hide();
 	$('#amount').val('10');
 	$('#spl_rechr').val('1');
 	$('#amount').attr('readonly','readonly');
