@@ -180,7 +180,7 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
 				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php?view=order">Recharge</a></li>
 				   <?php } ?>
 				  
-                  <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewads.php">View ads</a></li>
+                  <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewadslist.php">View ads</a></li>
                   <? if(!isset($_SESSION['roo']['user'])) { ?>
                   <li <? if($pagename == 'login') { ?>class="current"<? } ?>><a href="./login.php">Login</a></li>
                   <li <? if($pagename == 'register') { ?>class="current"<? } ?>><a href="./register.php">Register</a></li>
@@ -266,7 +266,7 @@ function findcirclevalue(val) {
 {
 	color: red;
     font-size: 12px;
-    width: 200px;
+    width: 290px;
     position: absolute;
    
 }
