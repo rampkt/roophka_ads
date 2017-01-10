@@ -232,7 +232,7 @@ return $result3[0];
 
 	</div>
 
-<div class="modal hide fade" id="videopopup" style="height: 450px;width:650px; overflow: hidden; display: none;left:47%;">
+<div class="modal hide fade" id="videopopup" style="height: 450px;width:650px; overflow: hidden; display: none;left:47%;cursor:none;">
 		<div class="modal-header">
 			<h3>Auto Video</h3>
 		</div>
