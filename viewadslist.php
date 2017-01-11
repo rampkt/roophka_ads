@@ -89,7 +89,7 @@ return $result3[0];
 	  <div class="adsbox">
 
      <div class="ribbon" >
-    <a href="#">Standard Ads</a>
+    <a href="#">Image Ads</a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding" style="overflow-y:auto;height:175px">
@@ -128,7 +128,7 @@ return $result3[0];
 	  <div class="adsbox">
 
      <div class="ribbon" >
-    <a href="#">Premium Ads</a>
+    <a href="#">Animation & Scroll Ads</a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding" style="overflow-y:auto;height:175px">
@@ -158,7 +158,7 @@ return $result3[0];
 	  <div class="adsbox">
 
      <div class="ribbon" >
-    <a href="#">Deluxe Ads</a>
+    <a href="#">Video Ads</a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding" style="overflow-y:auto;height:175px">
