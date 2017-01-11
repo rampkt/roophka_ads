@@ -190,12 +190,12 @@ list($orderList,$pagination) = $recharge->getAllorders($Order);
 									</td>
                                     <td>
                                     	<? if($order['status'] == 0) { ?>
-                                        <a href="./recharge_orders.php?action=deactivate&id=<?=$order['id']?>&Order=<?php echo $Order2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./recharge_orders.php?action=deactivate&id=<?=$order['id']?>&Order=<?php echo $Order2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($order['status'] == 1) { ?>
-                                        <a href="./recharge_orders.php?action=activate&id=<?=$order['id']?>&Order=<?php echo $Order2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./recharge_orders.php?action=activate&id=<?=$order['id']?>&Order=<?php echo $Order2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
                                         
-										<a href="./recharge_orders.php?action=delete&id=<?=$order['id']?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
+										<a href="./recharge_orders.php?action=delete&id=<?=$order['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
 										
 										</td>
 								</tr>

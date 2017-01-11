@@ -17,7 +17,8 @@
                         <? } ?>
                         <li <? if($subname == 'aboutus') { ?>class="current"<? } ?>><a href="aboutus.php">About Us</a></li>
                         <li <? if($subname == 'how') { ?>class="current"<? } ?>><a href="howitworks.php">How it works</a></li>
-												
+						<li <? if($subname == 'advertise') { ?>class="current"<? } ?>><a href="advertise.php">Advertise with us</a></li>
+                        <li <? if($subname == 'plans') { ?>class="current"<? } ?>><a href="plans.php">Advertisement Plans</a></li						
 						
                     </ul>
              </nav>

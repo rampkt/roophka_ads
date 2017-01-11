@@ -23,7 +23,7 @@ class bulkemail
 		$field="";
 		if($name!="")
 		{
-			$field.=' and (o.category_name like '."'%$name%'".')';
+			$field.=' and (e.category_name like '."'%$name%'".')';
 		}
 		//echo $datestr; exit;
 		$result = array();
@@ -45,7 +45,7 @@ class bulkemail
 		$rowCount = $this->db->fetch_array($qryCount);
 		
 		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
-		$pagination = pagination("emailcategory.php", "operator=$name", $this->page, $totalPage, 6);
+		$pagination = pagination("emailcategory.php", "category=$name", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
 

@@ -112,6 +112,40 @@ class ads {
 		}
 		return $result;
 	}
+	public function getplanlist($type) {
+		//echo "select * from roo_plancategory where category_name='".$type."'"; exit;
+		
+		$qrycat=$this->db->query("select * from roo_plancategory where category_name='".$type."'");
+		$row1 = $this->db->fetch_array($qrycat);
+		//echo $row1['id']; exit;
+		
+		$qry = $this->db->query("SELECT * from roo_plan_details where status=0 and catid='".$row1['id']."'");
+		$result = array();
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				
+				$result[] = $row;
+			}
+		}
+		return $result;
+	}
+	public function getplanlistvideo($type,$from,$to) {
+		//echo "select * from roo_plancategory where category_name='".$type."'"; exit;
+		
+		$qrycat=$this->db->query("select * from roo_plancategory where category_name='".$type."'");
+		$row1 = $this->db->fetch_array($qrycat);
+		//echo $row1['id']; exit;
+		
+		$qry = $this->db->query("SELECT * from roo_plan_details where (status=0 and catid='".$row1['id']."') and (from_sec='".$from."' and to_sec='".$to."')");
+		$result = array();
+		if($this->db->num_rows($qry) > 0) {
+			while($row = $this->db->fetch_array($qry)) {
+				
+				$result[] = $row;
+			}
+		}
+		return $result;
+	}
 	
 	
 	

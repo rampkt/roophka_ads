@@ -20,6 +20,17 @@
 								<li><a class="submenu" href="withdraw_report.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Withdraw Reports</span></a></li>
 							</ul>	
 						</li>
+						
+						
+						<li>
+							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Plan Details</span><span class="label label-important"> 2 </span></a>
+							<ul>
+								<li><a class="submenu" href="plancategory.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Plan Category</span></a></li>
+								<li><a class="submenu" href="plandetails.php"><i class="icon-file-alt"></i><span class="hidden-tablet"> Plan Details</span></a></li>
+								
+							</ul>	
+						</li>
+						
 					   <?php } if (in_array("Bulkmail", $admin_access)) { ?>
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-star"></i><span class="hidden-tablet"> Bulk Emails</span><span class="label label-important"> 5 </span></a>

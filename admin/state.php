@@ -222,11 +222,11 @@ list($stateList,$pagination) = $location->getAllstate($state2,$cid);
 									</td>
                                     <td>
                                     	<? if($state['status'] == 0) { ?>
-                                        <a href="./state.php?action=deactivate&id=<?=$state['id']?>&cid=<?=$state['cid']?>&state=<?php echo $state2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./state.php?action=deactivate&id=<?=$state['id']?>&cid=<?=$state['cid']?>&state=<?php echo $state2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($state['status'] == 1) { ?>
-                                        <a href="./state.php?action=activate&id=<?=$state['id']?>&cid=<?=$state['cid']?>&state=<?php echo $state2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./state.php?action=activate&id=<?=$state['id']?>&cid=<?=$state['cid']?>&state=<?php echo $state2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
-                                         <a href="./state.php?action=delete&id=<?=$state['id']?>&cid=<?=$state['cid']?>&state=<?php echo $state2;?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
+                                         <a href="./state.php?action=delete&id=<?=$state['id']?>&cid=<?=$state['cid']?>&state=<?php echo $state2;?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
 										 
 										  <a href="javascript:void(0);" onClick="countryeditfn(1,'<?php echo $state['cid'];?>','<?php echo $state['id'];?>','<?php echo $state['name'];?>');" class="btn btn-small " >Edit</a>
 										 

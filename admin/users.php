@@ -211,7 +211,7 @@ list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
 										<? if($usr['demo'] == 1) { ?>
 											<span class="label label-info">Demo Account</span>
 										<? } else { ?>
-											<a href="./users.php?action=demo&id=<?=$usr['id']?>" onClick="return confirm('Do you realy want to make this account as demo?');" class="btn btn-small"><i class="halflings-icon white send"></i>Make as demo</a>
+											<a href="./users.php?action=demo&id=<?=$usr['id']?>" onClick="return confirm('Do you really want to make this account as demo?');" class="btn btn-small"><i class="halflings-icon white send"></i>Make as demo</a>
 										<? } ?>
 									</td>
 									<td class="center">
@@ -223,9 +223,9 @@ list($userList,$pagination) = $users->getAllUsers($date,$name,$email,$phone);
 									</td>
                                     <td>
                                     	<? if($usr['status'] == 0) { ?>
-                                        <a href="./users.php?action=deactivate&id=<?=$usr['id']?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./users.php?action=deactivate&id=<?=$usr['id']?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($usr['status'] == 1) { ?>
-                                        <a href="./users.php?action=activate&id=<?=$usr['id']?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./users.php?action=activate&id=<?=$usr['id']?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
                                         <a href="javascript:void(0);" onClick="changepassfn('1',<?=$usr['id']?>)" class="btn btn-small btn-primary"><i class="halflings-icon white lock"></i>Change Password</a>
                                     </td>

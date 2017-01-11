@@ -214,12 +214,12 @@ list($countryList,$pagination) = $location->getAllcountry($country);
 									</td>
                                     <td>
                                     	<? if($cntry['status'] == 0) { ?>
-                                        <a href="./country.php?action=deactivate&id=<?=$cntry['id']?>&country=<?php echo $country2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./country.php?action=deactivate&id=<?=$cntry['id']?>&country=<?php echo $country2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($cntry['status'] == 1) { ?>
-                                        <a href="./country.php?action=activate&id=<?=$cntry['id']?>&country=<?php echo $country2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./country.php?action=activate&id=<?=$cntry['id']?>&country=<?php echo $country2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
                                         
-										<a href="./country.php?action=delete&id=<?=$cntry['id']?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
+										<a href="./country.php?action=delete&id=<?=$cntry['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
 										
 										 <a href="javascript:void(0);" onClick="countryeditfn(1,'<?php echo $cntry['id'];?>','<?php echo $cntry['name'];?>');" class="btn btn-small " >Edit</a>
                                     </td>
