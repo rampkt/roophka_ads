@@ -21,6 +21,7 @@
                 <li><a href="terms.php">Terms &amp; Condition</a></li>
 				<li><a href="viewads.php">View Ads</a></li>
 				<li><a href="advertise.php">Advertise With us</a></li>
+				<li><a href="plans.php">Plans</a></li>
             </ul>
         </div>
         <div class="grid_3">

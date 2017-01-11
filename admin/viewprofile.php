@@ -382,11 +382,11 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 									</td>
                                     <td>
                                     	<? if($bank['status'] == 0) { ?>
-                                        <a href="./viewprofile.php?action=bankdeactivate&id=<?=$bank['id']?>&uid=<?=$bank['userid']?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./viewprofile.php?action=bankdeactivate&id=<?=$bank['id']?>&uid=<?=$bank['userid']?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($bank['status'] == 1) { ?>
-                                        <a href="./viewprofile.php?action=bankactivate&id=<?=$bank['id']?>&uid=<?=$bank['userid']?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./viewprofile.php?action=bankactivate&id=<?=$bank['id']?>&uid=<?=$bank['userid']?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
-                                       <a href="./viewprofile.php?action=bankdelete&id=<?=$bank['id']?>&uid=<?=$bank['userid']?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
+                                       <a href="./viewprofile.php?action=bankdelete&id=<?=$bank['id']?>&uid=<?=$bank['userid']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
                                     </td>
 								</tr>
                               <? $sno++; } } ?>

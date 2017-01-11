@@ -4,7 +4,7 @@ include_once("./config/config.php");
  * initial setup
  */
 $pagename = 'viewads';
-$subname = '';
+$subname = 'viewads';
 
 $login = check_login();
 if($login === false) {
@@ -14,14 +14,24 @@ if($login === false) {
 include("./functions/ads.php");
 $ads = new ads;
 
+ if(isset($_REQUEST['type']))
+ {
+	 $typ=$_REQUEST['type'];
+ }
+ else
+ {
+	$typ='all'; 
+ }
+
+
 if(isset($_REQUEST['id']))
 {
-	 $currentAd = $ads->getAd($_REQUEST['id']);
+	 $currentAd = $ads->getAd($_REQUEST['id'],$typ);
 }else {
 if($_SESSION['roo']['user']['demo'] == 1) {
     $currentAd = $ads->getDemoAd(false);
 } else {
-    $currentAd = $ads->getAd(0);
+    $currentAd = $ads->getAd(0,$typ);
 }
 }
 
@@ -58,7 +68,6 @@ $result2[]=$result1[0]['geometry'];
 $result3[]=$result2[0]['location'];
 return $result3[0];
 }
- 
 
 //session_destroy();
 ?>
@@ -94,13 +103,13 @@ return $result3[0];
         <div class="loader hide">
         	<img src="./assets/img/ajax-loader-bar.gif" />
         </div>
-        <div class="continue hide"><button class="btn btn-primary" onClick="window.location = './viewads.php'">Next Ad</button></div>
+        <div class="continue hide"><button class="btn btn-primary" onClick="window.location = './viewads.php?type=<?=$typ?>'">Next Ad</button></div>
     </div>
     <div id="content">
     <? if(empty($currentAd)) { ?>
     	<div class="empty-ad" align="center">
-        	<p style="color:red;">Sorry!!! Currently no ads to display now.</p>
-            <button class="btn btn-danger" onClick="window.location = './viewads.php'">Try Again</button>
+        	<p style="color:red;">Sorry!!! Currently no <?=$typ?> ads to display now.</p>
+            <button class="btn btn-danger" onClick="window.location = './viewadslist.php'">Try Again</button>
             <p>OR</p>
             <p>Please try again later</p>
         </div>

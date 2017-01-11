@@ -148,9 +148,9 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdraw($date);
 									
                                     <td>
 									<? if($wdrw['status'] == 0) { ?>
-									<a href="./withdraw_approve.php?action=approve&id=<?=$wdrw['id']?>&todaydate=<?php echo $date; ?>" onClick="return confirm('Do you realy want to Approve this withdraw request?');" class="btn btn-small btn-success" style="padding:0px 10px;"><i class="halflings-icon white ok">&nbsp;</i>Approve</a>
+									<a href="./withdraw_approve.php?action=approve&id=<?=$wdrw['id']?>&todaydate=<?php echo $date; ?>" onClick="return confirm('Do you really want to Approve this withdraw request?');" class="btn btn-small btn-success" style="padding:0px 10px;"><i class="halflings-icon white ok">&nbsp;</i>Approve</a>
                                     	
-                                        <a href="./withdraw_decline.php?action=deactivate&id=<?=$wdrw['id']?>&todaydate=<?php echo $date; ?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small" style="padding:0px 10px;"><i class="halflings-icon white remove"></i>Decline</a>
+                                        <a href="./withdraw_decline.php?action=deactivate&id=<?=$wdrw['id']?>&todaydate=<?php echo $date; ?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small" style="padding:0px 10px;"><i class="halflings-icon white remove"></i>Decline</a>
 										 <? } elseif($wdrw['status'] == 1) { ?>
                                         <span class="label">Approved</span>
                                         <? }  elseif($wdrw['status'] == 2) { ?>

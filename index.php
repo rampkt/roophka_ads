@@ -232,9 +232,9 @@ return $result3[0];
 
 	</div>
 
-<div class="modal hide fade" id="videopopup" style="height: 450px;width:650px; overflow: hidden; display: none;left:47%;">
+<div class="modal hide fade" id="videopopup" style="height: 450px;width:650px; overflow: hidden; display: none;left:47%;cursor:none;">
 		<div class="modal-header">
-			<h3>Auto Video</h3>
+			<h3>Platinum Ad</h3>
 		</div>
 		<div class="modal-body" id="bankAjaxResult" style="overflow: hidden;margin:10px;padding:15px;">
 			<?=$videoad?>

@@ -206,14 +206,14 @@ list($emailList,$pagination) = $bulkemail->getAllemails($email,$categorysearch);
 									</td>
                                     <td>
                                     	<? if($email['status'] == 0) { ?>
-                                        <a href="./emails.php?action=deactivate&id=<?=$email['id']?>&email=<?php echo $email2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./emails.php?action=deactivate&id=<?=$email['id']?>&email=<?php echo $email2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($email['status'] == 1) { ?>
-                                        <a href="./emails.php?action=activate&id=<?=$email['id']?>&email=<?php echo $email2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./emails.php?action=activate&id=<?=$email['id']?>&email=<?php echo $email2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
 										
 										
                                         
-										<a href="./emails.php?action=delete&id=<?=$email['id']?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
+										<a href="./emails.php?action=delete&id=<?=$email['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
 										
 										</td>
 								</tr>

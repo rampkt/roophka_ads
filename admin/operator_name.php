@@ -202,12 +202,12 @@ list($operatorList,$pagination) = $recharge->getAlloperator($operator);
 									</td>
                                     <td>
                                     	<? if($operator['status'] == 0) { ?>
-                                        <a href="./operator_name.php?action=deactivate&id=<?=$operator['id']?>&operator=<?php echo $operator2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./operator_name.php?action=deactivate&id=<?=$operator['id']?>&operator=<?php echo $operator2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($operator['status'] == 1) { ?>
-                                        <a href="./operator_name.php?action=activate&id=<?=$operator['id']?>&operator=<?php echo $operator2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./operator_name.php?action=activate&id=<?=$operator['id']?>&operator=<?php echo $operator2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
                                         
-										<a href="./operator_name.php?action=delete&id=<?=$operator['id']?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
+										<a href="./operator_name.php?action=delete&id=<?=$operator['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
 										
 										</td>
 								</tr>

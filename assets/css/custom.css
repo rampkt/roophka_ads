@@ -1,4 +1,13 @@
-
+.spl-heading
+{
+color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+	padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
 
 @charset "utf-8";
 

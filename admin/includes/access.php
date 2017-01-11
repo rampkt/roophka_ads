@@ -2,15 +2,15 @@
 include_once("../config/config.php");
 if($_SESSION['roo']['admin_user']['type'] == 0) 
 { 
-    $admin_access=array('Ads','Withdraw','Users','Adminuser','Reports','Bulkmail','Manual_Transaction','Recharge','Location','CMS','Settings','Contact','Advertise');
+    $admin_access=array('Ads','Withdraw','Users','Adminuser','Reports','Bulkmail','Manual_Transaction','Recharge','Location','CMS','Settings','Contact','Advertise','plan');
  }
  if($_SESSION['roo']['admin_user']['type'] == 1) 
 { 
-     $admin_access=array('Ads','Withdraw','Users','Adminuser','Reports','Bulkmail','Manual_Transaction','Recharge','Location','CMS','Settings','Contact','Advertise');
+     $admin_access=array('Ads','Withdraw','Users','Adminuser','Reports','Bulkmail','Manual_Transaction','Recharge','Location','CMS','Settings','Contact','Advertise','plan');
  }
  if($_SESSION['roo']['admin_user']['type'] == 2) 
 { 
-     $admin_access=array('Ads','Withdraw','Users','Reports','Bulkmail','Manual_Transaction','Recharge','Location','Settings','Advertise');
+     $admin_access=array('Ads','Withdraw','Users','Reports','Bulkmail','Manual_Transaction','Recharge','Location','Settings','Advertise','plan');
  }
  if($_SESSION['roo']['admin_user']['type'] == 3) 
 { 
@@ -19,7 +19,7 @@ if($_SESSION['roo']['admin_user']['type'] == 0)
 
 if($_SESSION['roo']['admin_user']['type'] == 4) 
 { 
-     $admin_access=array('Ads','Withdraw','Users','Adminuser','Reports','Bulkmail','Manual_Transaction','Recharge','Location','CMS','Settings','Contact','Advertise');
+     $admin_access=array('Ads','Withdraw','Users','Adminuser','Reports','Bulkmail','Manual_Transaction','Recharge','Location','CMS','Settings','Contact','Advertise','plan');
  }
 
 ?>

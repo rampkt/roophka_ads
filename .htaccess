@@ -102,6 +102,8 @@ AddCharset utf-8 .js
 	RewriteCond %{HTTP_HOST} ^roophka.com [NC]
 	RewriteRule ^(.*)$ https://www.roophka.com/$1 [L,R=301,NC]
 
+  RewriteRule ^mailverify/(.*)/logo.jpg bulkmailverify.php?email=$1    [NC,L]
+
 </IfModule>
 
 
