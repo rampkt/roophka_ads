@@ -485,7 +485,7 @@ $recharge = $user->recharge_order();
 			<div style="margin-top:25px;">
 			<input type="submit" name="submit" value="Recharge Now" class="btn btn-primary" onclick="return checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');">
 			
-			<a href="terms.php" target="_blank" style="text-decoration:underline;font-size:14px;"> Terms & Conditions</a>
+			<a href="javascript:void(0);" onclick="openWin()" style="text-decoration:underline;font-size:14px;"> Terms & Conditions</a>
 			</div>
 			</div>
 			
@@ -570,6 +570,18 @@ function specialfn()
 	$('#specialpopup').modal('hide');
 }
 
+</script>
+<script>
+var myWindow;
+
+function openWin() {
+    myWindow = window.open("https://www.roophka.com/terms.php", "myWindow", "width=500,height=300");
+    //myWindow.document.write("<p>This is 'myWindow'</p>");
+}
+
+function closeWin() {
+    myWindow.close();
+}
 </script>
 <style>
 .modal-backdrop {

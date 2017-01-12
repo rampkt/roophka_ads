@@ -9,5 +9,5 @@ imagefilledrectangle($im, 0, 0, 0, 0, 0xFb6b6F);
 header('Content-Type: image/jpeg');
 imagegif($im);
 imagedestroy($im);
-
+//echo $im;
 ?>
