@@ -61,7 +61,7 @@ $timeout = 100; // set to zero for no timeout
 $apikey="104746188241741";
 $apiuserid="roophka";
 
-$myHITurl = "http://joloapi.com/api/recharge.php?mode=0&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
+$myHITurl = "http://joloapi.com/api/recharge.php?mode=1&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
 
 //echo $myHITurl;
 curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
