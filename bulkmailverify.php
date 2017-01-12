@@ -1,8 +1,13 @@
 <?php
-/*print_r($_REQUEST);
+include_once("./config/config.php");
 
+//print_r($_REQUEST['email']);
 
-echo md5(base64_encode('ram_123+dsfd@gmail.com'));*/
+$email=$_REQUEST['email'];
+
+$sql=$db->query("UPDATE roo_sent_emails SET sent='1',readmail='1' where md5_hash='$email'");
+//echo $row['email'];  exit;
+
 
 $im = imagecreatetruecolor(1, 1);
 imagefilledrectangle($im, 0, 0, 0, 0, 0xFb6b6F);

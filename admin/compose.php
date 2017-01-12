@@ -47,6 +47,9 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
+			$b=base64_encode($row['email']);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
 		
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
@@ -60,6 +63,11 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 				<tr>
 					<td>'.$bulkemail->message.'</td>
 				</tr>
+				
+				<tr>
+					<td><img src='.$httpPathlogo.'></td>
+				</tr>
+				
 				
 			</table>
 			<br>
@@ -77,6 +85,10 @@ if($emailinput==2){
 	$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
+			$b=base64_encode($eid);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";	
+			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -88,6 +100,9 @@ if($emailinput==2){
 			
 				<tr>
 					<td>'.$bulkemail->message.'</td>
+				</tr>
+				<tr>
+					<td><img src='.$httpPathlogo.'></td>
 				</tr>
 				
 			</table>
@@ -119,7 +134,10 @@ if($emailinput==2){
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-		
+		    $b=base64_encode($row['email']);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+			
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -135,7 +153,9 @@ if($emailinput==2){
 				<tr>
 					<td>'.$temcont.'</td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.'></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -153,6 +173,10 @@ if($emailinput==2){
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
+			$b=base64_encode($eid);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -168,7 +192,9 @@ if($emailinput==2){
 				<tr>
 					<td>'.$temcont.'</td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.'></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -211,7 +237,10 @@ if($emailinput==2){
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-		
+		    $b=base64_encode($row['email']);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+			
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -225,7 +254,9 @@ if($emailinput==2){
 				<tr>
 					<td><img src='.$my_path.' style="width:300px;"></td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.'></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -244,6 +275,10 @@ if($emailinput==2){
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
+			$b=base64_encode($eid);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -257,7 +292,9 @@ if($emailinput==2){
 				<tr>
 					<td><img src='.$mypath.'></td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.'></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
