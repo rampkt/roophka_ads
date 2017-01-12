@@ -1,3 +1,7 @@
+ALTER TABLE  `roo_sent_emails` ADD  `md5_hash` VARCHAR( 255 ) NOT NULL AFTER  `date_added` ,
+ADD  `b64_hash` VARCHAR( 255 ) NOT NULL AFTER  `md5_hash` ,
+ADD  `sent` INT NOT NULL COMMENT  '1=sent' AFTER  `b64_hash` ,
+ADD  `readmail` INT NOT NULL COMMENT  '1=yes' AFTER  `sent` ;
 
 CREATE TABLE `roo_cms` (
   `id` int(11) NOT NULL,

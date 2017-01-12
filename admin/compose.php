@@ -49,7 +49,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			{
 			$b=base64_encode($row['email']);
             $m=md5($b);
-		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 		
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
@@ -65,7 +65,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 				</tr>
 				
 				<tr>
-					<td><img src='.$httpPathlogo.'></td>
+					<td><img src='.$httpPathlogo.' alt=''></td>
 				</tr>
 				
 				
@@ -87,7 +87,7 @@ if($emailinput==2){
 			{
 			$b=base64_encode($eid);
             $m=md5($b);
-		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";	
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";	
 			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
@@ -102,7 +102,7 @@ if($emailinput==2){
 					<td>'.$bulkemail->message.'</td>
 				</tr>
 				<tr>
-					<td><img src='.$httpPathlogo.'></td>
+					<td><img src='.$httpPathlogo.' alt=''></td>
 				</tr>
 				
 			</table>
@@ -136,7 +136,7 @@ if($emailinput==2){
 			{
 		    $b=base64_encode($row['email']);
             $m=md5($b);
-		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
@@ -154,7 +154,7 @@ if($emailinput==2){
 					<td>'.$temcont.'</td>
 				</tr>
 				<tr>
-					<td><img src='.$httpPathlogo.'></td>
+					<td><img src='.$httpPathlogo.' alt=''></td>
 				</tr>
 			</table>
 			<br>
@@ -175,7 +175,7 @@ if($emailinput==2){
 			{
 			$b=base64_encode($eid);
             $m=md5($b);
-		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
@@ -193,7 +193,7 @@ if($emailinput==2){
 					<td>'.$temcont.'</td>
 				</tr>
 				<tr>
-					<td><img src='.$httpPathlogo.'></td>
+					<td><img src='.$httpPathlogo.' alt=''></td>
 				</tr>
 			</table>
 			<br>
@@ -239,7 +239,7 @@ if($emailinput==2){
 			{
 		    $b=base64_encode($row['email']);
             $m=md5($b);
-		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
@@ -255,7 +255,7 @@ if($emailinput==2){
 					<td><img src='.$my_path.' style="width:300px;"></td>
 				</tr>
 				<tr>
-					<td><img src='.$httpPathlogo.'></td>
+					<td><img src='.$httpPathlogo.' alt=''></td>
 				</tr>
 			</table>
 			<br>
@@ -277,7 +277,7 @@ if($emailinput==2){
 			{
 			$b=base64_encode($eid);
             $m=md5($b);
-		    $httpPathlogo = HTTP_PATH  . $m."/logo.jpg";
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
@@ -293,7 +293,7 @@ if($emailinput==2){
 					<td><img src='.$mypath.'></td>
 				</tr>
 				<tr>
-					<td><img src='.$httpPathlogo.'></td>
+					<td><img src='.$httpPathlogo.' alt=''></td>
 				</tr>
 			</table>
 			<br>
