@@ -169,6 +169,7 @@ list($emailList,$pagination) = $bulkemail->getAllsentemails($email);
 									  <th>Subject</th>
                                       <th>Email Address</th>
 									  <th>Type</th>
+									  <th>Email Status</th>
 									  <th>Date</th>
 									  <th>Status</th>
                                       <!--<th style="width:235px;">Action</th>-->
@@ -197,7 +198,13 @@ list($emailList,$pagination) = $bulkemail->getAllsentemails($email);
                                         <span>Template</span>
                                         <? } ?>
 									</td>
-									 
+									 <td>
+									 <? if($email['readmail'] == 0) { ?>
+										<span class="label" style="padding:6px;">Unread</span>
+                                        <? } elseif($email['readmail'] ==1) { ?>
+                                        <span class="label label-success" style="padding:6px;">Read</span>
+                                        <? } ?>
+									 </td>
 									 <td ><?=$email['date_added']?></td>
 									
 									<td class="center">

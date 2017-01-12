@@ -1,7 +1,7 @@
 <?php
 include_once("./config/config.php");
 
-//print_r($_REQUEST['email']);
+//print_r($_REQUEST['email']); exit;
 
 $email=$_REQUEST['email'];
 

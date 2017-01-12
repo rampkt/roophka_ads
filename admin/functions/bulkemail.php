@@ -97,7 +97,7 @@ class bulkemail
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT e.id, e.email, e.subject,e.type, e.status,e.date_added FROM roo_sent_emails AS e WHERE e.status IN (0,1) '.$field.' order by e.email asc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT e.id, e.email, e.subject,e.type,e.readmail, e.status,e.date_added FROM roo_sent_emails AS e WHERE e.status IN (0,1) '.$field.' order by e.email asc LIMIT '.$this->start.','.$this->rowLimit;
 		
 		$queryCount = 'SELECT COUNT(e.id) AS cnt FROM roo_sent_emails AS e WHERE e.status IN (0,1)'.$field; 
 		
