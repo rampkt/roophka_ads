@@ -289,6 +289,13 @@ $recharge = $user->recharge_order();
 <div id="main" class="wrapper dashboard"> 
 	
     <!-- content area -->    
+	<?php $apibalance=$cms->checkbalance();
+	//echo $apibalance ?>
+	<? if($apibalance == '0') { ?>
+	<br>
+    <div class="error-msg"><strong>Please Try again later !</strong> You not able to recharge now, because we need to add money in my Recharge Wallet.</div>
+    <? } ?>
+	
 	<? if(isset($_REQUEST['report']) AND $_REQUEST['report'] == 'failed') { ?>
     <div class="error-msg"><strong>Order failed !</strong> Your order has been failed, please try again.</div>
     <? } ?>

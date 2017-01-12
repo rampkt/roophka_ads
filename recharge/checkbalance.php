@@ -2,7 +2,11 @@
 //now run joloapi.com api link for checking api balance 
 $ch = curl_init(); 
 $timeout = 100; // set to zero for no timeout 
-$myHITurl = "http://joloapi.com/api/balance.php?userid=yourusername&key=apikey"; 
+
+$apikey="104746188241741";
+$userid="roophka";
+
+$myHITurl = "http://joloapi.com/api/balance.php?userid=$userid&key=$apikey"; 
 curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
 curl_setopt ($ch, CURLOPT_HEADER, 0); 
 curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
