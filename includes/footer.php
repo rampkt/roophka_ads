@@ -28,8 +28,7 @@
         	<h3>Website Hit Count</h3>
             <div class="clearfix">&nbsp;</div>
             <!-- hitwebcounter Code START -->
-			<div align='left'><a href='javascript:void(0);'><img src='https://www.hit-counts.com/counter.php?t=MTQwMjk1Ng==' border='0' alt='Hit Counter'></a></div>
-            <br/>
+			<div align='left'><a href='javascript:void(0);'><img src='http://www.hit-counts.com/counter.php?t=MTQwMjk1OQ==' border='0' alt='Hit Counter'></a></div>
             <!-- hitwebcounter.com -->
             
         </div>
