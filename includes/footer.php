@@ -28,13 +28,10 @@
         	<h3>Website Hit Count</h3>
             <div class="clearfix">&nbsp;</div>
             <!-- hitwebcounter Code START -->
-            <!-- <a href="http://www.hitwebcounter.com" target="_blank">
-            	<img src="http://hitwebcounter.com/counter/counter.php?page=6524864&style=0001&nbdigits=6&type=ip&initCount=1" title="URL Counter" Alt="URL Counter"   border="0" >
-            </a> -->
-            <img src="./assets/img/counter-static.png" title="URL Counter" Alt="URL Counter"   border="0" >
+			<div align='left'><a href='javascript:void(0);'><img src='https://www.hit-counts.com/counter.php?t=MTQwMjk1Ng==' border='0' alt='Hit Counter'></a></div>
             <br/>
             <!-- hitwebcounter.com -->
-            <!-- <a href="http://www.hitwebcounter.com" title="Web Tracker" target="_blank" style="font-family: sans-serif, Arial, Helvetica; font-size: 12px; color: #6E7A76; text-decoration: underline ;"><em>Web Tracker</em></a>    -->
+            
         </div>
         <div class="grid_3">
         	<h3>Information</h3>
