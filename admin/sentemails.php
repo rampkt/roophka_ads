@@ -44,14 +44,21 @@ if((isset($_REQUEST['search'])) && $_REQUEST['search']=='search')
 {
 	$email=$_REQUEST['email'];
 	$email2=$_REQUEST['email'];
+	$bno=$_REQUEST['bno'];
+	$etype=$_REQUEST['etype'];
+	$estatus=$_REQUEST['estatus'];
 }
 else{
 $email="";
 $email2="";
+$bno="";
+$estatus="";
+$etype="";
 }
-//echo $date;
+//echo $estatus; exit;
 
-list($emailList,$pagination) = $bulkemail->getAllsentemails($email);
+
+list($emailList,$pagination) = $bulkemail->getAllsentemails($email,$bno,$etype,$estatus);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,20 +149,42 @@ list($emailList,$pagination) = $bulkemail->getAllsentemails($email);
 			<div class="row-fluid ">	
 				<div class="box span12">
 				
-					<div class="box-header">
-						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Sent Emails Management</h2>
-						<div class="box-icon">
-						<form name="search" action="sentemails.php" method="get">
+				<form name="search" action="sentemails.php" method="get">
 						
 						<input type="hidden" name="search" value="search">
-						<div class="row-fluid" style="height:30px;margin-top:-10px;">
+						<div class="row-fluid" style="height:30px;margin:20px 20px 0px 20px;">
 			
-			<div class="pull-right"><a href="javascript:void(0);" onclick="usersreportfn();"; class="btn btn-small ">Search</a></div>
-			<div class="pull-right"><input type="text" name="email" id="email" placeholder="Enter email here..." value="<?php echo $email;?>"></div>
+			
+			<div class="pull-left" style="padding-right:28px;"><input type="text" name="email" id="email" placeholder="Enter email here..." value="<?php echo $email;?>"></div>
+			<div class="pull-left" style="padding-right:28px;"><input type="text" name="bno" id="bno" placeholder="Enter Batchno here..." value="<?php echo $bno;?>"></div>
+			<div class="pull-left" style="padding-right:28px;">
+			<select name="etype" id="etype">
+			<option value="">Choose type</option>
+			<option value="1" <?php if($etype==1){ echo "selected";} ?>>Text</option>
+			<option value="2" <?php if($etype==2){ echo "selected";} ?>>Image</option>
+			<option value="3" <?php if($etype==3){ echo "selected";} ?>>Template</option>
+			</select>
+			
+			</div>
+			
+			<div class="pull-left" style="padding-right:27px;">
+			<select name="estatus" id="estatus">
+			<option value="">Choose status</option>
+			<option value="1" <?php if($estatus=='1'){ echo "selected";} ?>>Read</option>
+			<option value="0" <?php if($estatus=='0'){ echo "selected";} ?>>Unread</option>
+			</select>
+			
+			</div>
+			<div class="pull-left"><a href="javascript:void(0);" onclick="usersreportfn();"; class="btn btn-small ">Search</a></div>
 			 <div class="clearfix" style="margin-bottom:20px;"></div>
 			
 			</div>
 			</form>
+				
+					<div class="box-header">
+						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Sent Emails Management</h2>
+						<div class="box-icon">
+						
 							<!--<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>-->

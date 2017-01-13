@@ -85,13 +85,28 @@ class bulkemail
 		$pagination = pagination("emails.php", "email=$name", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
-		public function getAllsentemails($name) 
+		public function getAllsentemails($name,$bno,$etype,$estatus) 
 	{
 		
 		$field="";
 		if($name!="")
 		{
 			$field.=' and (e.email like '."'%$name%'".')';
+		}
+		
+		if($bno!="")
+		{
+			$field.=' and (e.batchno like '."'%$bno%'".')';
+		}
+		
+		if($etype!="")
+		{
+			$field.=' and (e.type like '."'%$etype%'".')';
+		}
+		
+		if($estatus!="")
+		{
+			$field.=' and (e.readmail like '."'%$estatus%'".')';
 		}
 		
 		//echo $datestr; exit;
@@ -114,7 +129,7 @@ class bulkemail
 		$rowCount = $this->db->fetch_array($qryCount);
 		
 		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
-		$pagination = pagination("sentemails.php", "search=search&email=$name", $this->page, $totalPage, 6);
+		$pagination = pagination("sentemails.php", "search=search&bno=$bno&etype=$etype&estatus=$estatus&email=$name", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
 	
