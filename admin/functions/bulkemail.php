@@ -523,7 +523,7 @@ public function Activatecategory($id=0) {
 			$res=$this->db->query($sql);
 			while($row=$this->db->fetch_array($res))
 			{	
-		    $b=base64_encode($row['email']);
+		    $b=base64_encode($row['email'].$batchno);
             $m=md5($b);
 			//echo $country; exit;
 			$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,md5_hash,b64_hash,sent,readmail,batchno,status) values('$subject','$adminemail','$row[email]','$type','$message','0','".DATETIME24H."','$m','$b','0','0','$batchno','0')";
@@ -538,7 +538,7 @@ public function Activatecategory($id=0) {
 				$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
-	       $b=base64_encode($eid);
+	       $b=base64_encode($eid.$batchno);
             $m=md5($b);
 				$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,md5_hash,b64_hash,sent,readmail,batchno,status) values('$subject','$adminemail','$eid','$type','$message','0','".DATETIME24H."','$m','$b','0','0','$batchno','0')";
 			//echo $sql; exit;
