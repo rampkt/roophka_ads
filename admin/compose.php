@@ -17,7 +17,7 @@ else
   {
  header("location:accessdenied.php");
   }
-
+  
 $alltemplateList=$bulkemail->AllemailTemplate();
 //echo json_encode($emails); exit;
 if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
@@ -29,6 +29,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 	$bulkemail->emailinput=$_REQUEST['emailinput'];
 	$bulkemail->userinput=$_REQUEST['userinput'];
 	$bulkemail->adminemail=$location->getsetting('1','email');
+	$bulkmail->batchno=rand('10000','99999');
 	$eids=$_REQUEST['emailids'];
 	//$tmpfile=$_FILES['emailexternal']['tmp_name'];
 	$emailinput=$_REQUEST['emailinput'];
@@ -47,7 +48,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-			$b=base64_encode($row['email']);
+			$b=base64_encode($row['email'].$bulkmail->batchno);
             $m=md5($b);
 		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 		
@@ -85,7 +86,7 @@ if($emailinput==2){
 	$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
-			$b=base64_encode($eid);
+			$b=base64_encode($eid.$bulkmail->batchno);
             $m=md5($b);
 		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";	
 			
@@ -134,7 +135,7 @@ if($emailinput==2){
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-		    $b=base64_encode($row['email']);
+		    $b=base64_encode($row['email'].$bulkmail->batchno);
             $m=md5($b);
 		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
@@ -173,7 +174,7 @@ if($emailinput==2){
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
-			$b=base64_encode($eid);
+			$b=base64_encode($eid.$bulkmail->batchno);
             $m=md5($b);
 		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
@@ -237,7 +238,7 @@ if($emailinput==2){
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-		    $b=base64_encode($row['email']);
+		    $b=base64_encode($row['email'].$bulkmail->batchno);
             $m=md5($b);
 		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			
@@ -275,7 +276,7 @@ if($emailinput==2){
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
-			$b=base64_encode($eid);
+			$b=base64_encode($eid.$bulkmail->batchno);
             $m=md5($b);
 		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 			

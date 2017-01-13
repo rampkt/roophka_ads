@@ -5,7 +5,7 @@ include_once("./config/config.php");
 
 $email=$_REQUEST['email'];
 
-$sql=$db->query("UPDATE roo_sent_emails SET sent='1',readmail='1' where md5_hash='$email'");
+$sql=$db->query("UPDATE roo_sent_emails SET sent='1',readmail='1' where md5_hash='$email' and readmail='0'");
 //echo $row['email'];  exit;
 
 

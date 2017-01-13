@@ -169,6 +169,7 @@ list($emailList,$pagination) = $bulkemail->getAllsentemails($email);
 									  <th>Subject</th>
                                       <th>Email Address</th>
 									  <th>Type</th>
+									  <th>Batch No</th>
 									  <th>Email Status</th>
 									  <th>Date</th>
 									  <th>Status</th>
@@ -198,6 +199,7 @@ list($emailList,$pagination) = $bulkemail->getAllsentemails($email);
                                         <span>Template</span>
                                         <? } ?>
 									</td>
+									<td><?=$email['batchno']?></td>
 									 <td>
 									 <? if($email['readmail'] == 0) { ?>
 										<span class="label" style="padding:6px;">Unread</span>
