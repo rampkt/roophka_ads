@@ -30,7 +30,6 @@
             <!-- hitwebcounter Code START -->
 			<div align='left'><a href='javascript:void(0);'><img src='https://www.hit-counts.com/counter.php?t=MTQwMjk1OQ==' border='0' alt='Hit Counter'></a></div>
             <!-- hitwebcounter.com -->
-            
         </div>
         <div class="grid_3">
         	<h3>Information</h3>
