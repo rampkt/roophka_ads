@@ -269,7 +269,9 @@ function findlocationvalue(position) {
 </script>
 
  <style>
- 
+  video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
  
         #alertmsg
 		{
