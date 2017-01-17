@@ -132,7 +132,7 @@ list($advertiseList,$pagination) = $location->getAlladvertise(1);
 									
                                     <td>
                                    
-                                        <a href="../resume/<?=$adv['filename']?>" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Download</a>
+                                        <a href="../uploads/resume/<?=$adv['filename']?>" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Download</a>
                                        
 										
                                     </td>

@@ -77,7 +77,7 @@ return $apibal;
 			{
 				$org_filename = $this->resume['name'];
 				$extn = pathinfo($org_filename, PATHINFO_EXTENSION);
-				$path = DOCUMENT_PATH . "resume/";
+				$path = DOCUMENT_PATH . "uploads/resume/";
 				$filehash = randomString(20);
 			   $filename = $filehash .".". $extn;
 				$destination = $path . $filename;
