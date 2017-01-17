@@ -119,7 +119,7 @@ class ads {
 		$row1 = $this->db->fetch_array($qrycat);
 		//echo $row1['id']; exit;
 		
-		$qry = $this->db->query("SELECT * from roo_plan_details where status=0 and catid='".$row1['id']."'");
+		$qry = $this->db->query("SELECT * from roo_plan_details where status=0 and catid='".$row1['id']."' order by to_sec asc");
 		$result = array();
 		if($this->db->num_rows($qry) > 0) {
 			while($row = $this->db->fetch_array($qry)) {

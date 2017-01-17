@@ -12,9 +12,7 @@ $ads = new ads;
 
 $Adstext = $ads->getplanlist("text");
 $Adsscroll = $ads->getplanlist("scroll");
-$Adsvideo1 = $ads->getplanlistvideo("video","1","30");
-$Adsvideo2 = $ads->getplanlistvideo("video","31","80");
-$Adsvideo3 = $ads->getplanlistvideo("video","81","100");
+$Adsvideo = $ads->getplanlist("video");
 $Adsimage = $ads->getplanlist("image");
 
 
@@ -52,27 +50,33 @@ $Adsimage = $ads->getplanlist("image");
     <div id="content">
    <div class="grid_12 no-padding" >
       <div class="grid_12 no-padding">
-	  <div class="adsbox2">
+	  <div class="adsbox" style="margin-bottom:30px;">
 
      <div class="ribbon" >
     <a href="#">Image Ads</a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding">
-  <?php if(empty($Adsimage)) { ?>
-  <div class="alertmsgads">
-  No Plans to show here ...
-  </div>
   
-	 <?php } 
-	 ?>
 	 <div class="grid_12" style="margin-bottom: 30px;" >
   <table cellpadding='7' cellspacing='7' style="border:1px solid #0099ff;font-size:13px;text-align:center;width:100%;">
   <tr style="background-color:#0099ff;color:#FFF;height:30px;">
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
+  <th style="text-align:center;border-right:1px solid #ccc;">Duration (sec)</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
   <th style="text-align:center;">Viewers</th>
   </tr>
+  
+  <?php if(empty($Adsimage)) { ?>
+  <tr>
+  <td colspan="4">
+  <div class="alertmsgads">
+  No Plans to show here ...
+  </div>
+  </td>
+  </tr>
+	 <?php } 
+	 ?>
   <?php
 	 
 	 $i=1;
@@ -81,6 +85,7 @@ $Adsimage = $ads->getplanlist("image");
 	   
 	  <tr style="border:1px solid #ccc;">
   <td style="border-right:1px solid #ccc;"><?=$i?></td>
+  <td style="border-right:1px solid #ccc;"><?=$image['to_sec']?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
   <td><?=$image['viewers']?></td>
   </tr>
@@ -94,35 +99,41 @@ $Adsimage = $ads->getplanlist("image");
 	  
 	   
     </div>
- <div class="adsbox2">
+ <div class="adsbox" style="margin-bottom:30px;">
 
      <div class="ribbon" >
-    <a href="#">Video Ads (1 to 30 sec)</a>
+    <a href="#">Animation & Scroll Ads</a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding">
-  <?php if(empty($Adsvideo1)) { ?>
-  <div class="alertmsgads">
-  No Plans to show here ...
-  </div>
-  
-	 <?php } 
-	 ?>
+ 
 	 <div class="grid_12" style="margin-bottom: 30px;" >
   <table cellpadding='7' cellspacing='7' style="border:1px solid #0099ff;font-size:13px;text-align:center;width:100%;">
   <tr style="background-color:#0099ff;color:#FFF;height:30px;">
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
+   <th style="text-align:center;border-right:1px solid #ccc;">Duration (Sec)</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
   <th style="text-align:center;">Viewers</th>
   </tr>
+  <?php if(empty($Adsscroll)) { ?>
+  <tr>
+  <td colspan="4">
+  <div class="alertmsgads">
+  No Plans to show here ...
+  </div>
+  </td>
+  </tr>
+	 <?php } 
+	 ?>
   <?php
 	 
 	 $i=1;
-	 foreach($Adsvideo1 as $image) { ?>
+	 foreach($Adsscroll as $image) { ?>
 	  
 	   
 	  <tr style="border:1px solid #ccc;">
   <td style="border-right:1px solid #ccc;"><?=$i?></td>
+  <td style="border-right:1px solid #ccc;"><?=$image['to_sec']?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
   <td><?=$image['viewers']?></td>
   </tr>
@@ -140,32 +151,39 @@ $Adsimage = $ads->getplanlist("image");
 <div class="adsbox2">
 
      <div class="ribbon" >
-    <a href="#">Video Ads (31 to 80 sec)</a>
+    <a href="#">Video Ads </a>
     </div>
   <div style="margin-bottom:70px;">&nbsp;</div>
    <div class="grid_12 no-padding">
-  <?php if(empty($Adsvideo2)) { ?>
-  <div class="alertmsgads">
-  No Plans to show here ...
-  </div>
   
-	 <?php } 
-	 ?>
 	 <div class="grid_12" style="margin-bottom: 30px;" >
   <table cellpadding='7' cellspacing='7' style="border:1px solid #0099ff;font-size:13px;text-align:center;width:100%;">
   <tr style="background-color:#0099ff;color:#FFF;height:30px;">
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
+  <th style="text-align:center;border-right:1px solid #ccc;">Duration (Sec)</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
   <th style="text-align:center;">Viewers</th>
   </tr>
+  <?php if(empty($Adsvideo)) { ?>
+  <tr>
+  <td colspan="4">
+  <div class="alertmsgads">
+  No Plans to show here ...
+  </div>
+  </td>
+  </tr>
+	 <?php } 
+	 ?>
+  
   <?php
 	 
 	 $i=1;
-	 foreach($Adsvideo2 as $image) { ?>
+	 foreach($Adsvideo as $image) { ?>
 	  
 	   
 	  <tr style="border:1px solid #ccc;">
   <td style="border-right:1px solid #ccc;"><?=$i?></td>
+  <td style="border-right:1px solid #ccc;"><?=$image['to_sec']?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
   <td><?=$image['viewers']?></td>
   </tr>
@@ -179,51 +197,7 @@ $Adsimage = $ads->getplanlist("image");
 	  
 	   
     </div>
-      
-<div class="adsbox2">
-
-     <div class="ribbon" >
-    <a href="#">Video Ads (81 to 100 & Above sec)</a>
-    </div>
-  <div style="margin-bottom:70px;">&nbsp;</div>
-   <div class="grid_12 no-padding">
-  <?php if(empty($Adsvideo3)) { ?>
-  <div class="alertmsgads">
-  No Plans to show here ...
-  </div>
-  
-	 <?php } 
-	 ?>
-	 <div class="grid_12" style="margin-bottom: 30px;" >
-  <table cellpadding='7' cellspacing='7' style="border:1px solid #0099ff;font-size:13px;text-align:center;width:100%;">
-  <tr style="background-color:#0099ff;color:#FFF;height:30px;">
-  <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
-  <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
-  <th style="text-align:center;">Viewers</th>
-  </tr>
-  <?php
-	 
-	 $i=1;
-	 foreach($Adsvideo3 as $image) { ?>
-	  
-	   
-	  <tr style="border:1px solid #ccc;">
-  <td style="border-right:1px solid #ccc;"><?=$i?></td>
-  <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
-  <td><?=$image['viewers']?></td>
-  </tr>
-     
-	 <?php $i++;}?> 
-	 </table>
-	 
-	</div> 
-	 
-	  </div>
-	  
-	   
-    </div>
-      
-
+ 
 
    </section>
    
