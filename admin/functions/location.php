@@ -18,15 +18,15 @@ class location
 	}
 	
 	
-	public function getAlladvertise() 
+	public function getAlladvertise($estatus) 
 	{
 		
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT * FROM roo_advertise_request where status in (0,1) order by date_added asc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT * FROM roo_advertise_request where status in (0,1) and email_status='.$estatus.' order by date_added asc LIMIT '.$this->start.','.$this->rowLimit;
 		
-		$queryCount = 'SELECT COUNT(id) AS cnt FROM roo_advertise_request where status in (0,1) '; 
+		$queryCount = 'SELECT COUNT(id) AS cnt FROM roo_advertise_request where status in (0,1) and email_status='.$estatus; 
 		
 		//echo $query; 
 		$qry = $this->db->query($query);

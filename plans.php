@@ -63,7 +63,7 @@ $Adsimage = $ads->getplanlist("image");
   <tr style="background-color:#0099ff;color:#FFF;height:30px;">
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Duration (sec)</th>
-  <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
+  <th style="text-align:center;border-right:1px solid #ccc;">Amount (Per Month)</th>
   <th style="text-align:center;">Viewers</th>
   </tr>
   
@@ -112,7 +112,7 @@ $Adsimage = $ads->getplanlist("image");
   <tr style="background-color:#0099ff;color:#FFF;height:30px;">
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
    <th style="text-align:center;border-right:1px solid #ccc;">Duration (Sec)</th>
-  <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
+  <th style="text-align:center;border-right:1px solid #ccc;">Amount (Per Month)</th>
   <th style="text-align:center;">Viewers</th>
   </tr>
   <?php if(empty($Adsscroll)) { ?>
@@ -161,7 +161,7 @@ $Adsimage = $ads->getplanlist("image");
   <tr style="background-color:#0099ff;color:#FFF;height:30px;">
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Duration (Sec)</th>
-  <th style="text-align:center;border-right:1px solid #ccc;">Amount</th>
+  <th style="text-align:center;border-right:1px solid #ccc;">Amount (Per Month)</th>
   <th style="text-align:center;">Viewers</th>
   </tr>
   <?php if(empty($Adsvideo)) { ?>

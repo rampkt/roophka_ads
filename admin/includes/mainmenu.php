@@ -82,6 +82,9 @@
 					   <?php }  if (in_array("Advertise", $admin_access)) { ?>
 						<li><a href="advertise.php"><i class="icon-picture"></i><span class="hidden-tablet"> Advertise Request</span></a></li>
 					   <?php } ?>
+					    <?php if (in_array("Resume", $admin_access)) { ?>
+						<li><a href="resume.php"><i class="icon-picture"></i><span class="hidden-tablet"> Resumes</span></a></li>
+					   <?php } ?>
 						<!--
 						<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
 						<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>

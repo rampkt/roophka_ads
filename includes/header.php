@@ -54,7 +54,7 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
                 </div>
             </div>
 			<div class="col-md-8">
-			<div class="info-desc" ><marquee style="margin-bottom:-10px;"><?=$row_scroll['scrolling_content']?></marquee></div>
+			<div class="info-desc" ><marquee style="margin-bottom:-10px;" onmouseover="this.stop();" onmouseout="this.start();"><?=$row_scroll['scrolling_content']?></marquee></div>
 			</div>
             <div class="col-md-2 top-right" align="right">
             	<!--<a href="#" ><i class="fa fa-facebook-official" aria-hidden="true"></i></a>

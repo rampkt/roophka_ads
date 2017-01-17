@@ -73,8 +73,23 @@ return $apibal;
 	
 	public function advertisesave() {
 		
+		    if($this->email_status=='1')
+			{
+				$org_filename = $this->resume['name'];
+				$extn = pathinfo($org_filename, PATHINFO_EXTENSION);
+				$path = DOCUMENT_PATH . "resume/";
+				$filehash = randomString(20);
+			   $filename = $filehash .".". $extn;
+				$destination = $path . $filename;
+				@move_uploaded_file($this->resume['tmp_name'], $destination);
+				
+				$result = $this->db->query("INSERT INTO roo_advertise_request (email_status,filename,email,contact_person, mobile,address1,address2,country,state,city,pincode, ipaddr, date_added,status) VALUES ('1','".$filename."','".$this->email."', '".$this->contact_person."','".$this->mobile."','".$this->address1."','".$this->address2."','".$this->country."','".$this->state."','".$this->city."','".$this->pincode."', '".$this->ipaddr."','".DATETIME24H."','0')");
+				
+			}else{	
+		
 			
-			$result = $this->db->query("INSERT INTO roo_advertise_request (company_name,email,contact_person, mobile,address1,address2,country,state,city,pincode, ipaddr, date_added,status) VALUES ('".$this->companyname."','".$this->email."', '".$this->contact_person."','".$this->mobile."','".$this->address1."','".$this->address2."','".$this->country."','".$this->state."','".$this->city."','".$this->pincode."', '".$this->ipaddr."','".DATETIME24H."','0')");
+			$result = $this->db->query("INSERT INTO roo_advertise_request (email_status,company_name,email,contact_person, mobile,address1,address2,country,state,city,pincode, ipaddr, date_added,status) VALUES ('0','".$this->companyname."','".$this->email."', '".$this->contact_person."','".$this->mobile."','".$this->address1."','".$this->address2."','".$this->country."','".$this->state."','".$this->city."','".$this->pincode."', '".$this->ipaddr."','".DATETIME24H."','0')");
+			}
 			if($result) {
 				
 				return true;
