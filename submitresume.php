@@ -33,8 +33,9 @@ if(isset($_REQUEST['action'])) {
 	     
 	if($result)
 	{
-		$from = $cms->email;
-		$to = array($adminmail);
+		$from = $adminmail;
+		$to = array($cms->email);
+		
 		$subject = "ROOPHKA: Resume";
    
    $message = '<div style="width:600px;">
@@ -52,8 +53,8 @@ if(isset($_REQUEST['action'])) {
 		$mailler->sendmail($to, $from, $subject, $message);
 		
 		
-		$from1 = $adminmail;
-		$to1 = array($cms->email);
+		$from1 = $cms->email;
+		$to1 = array($adminmail);
 		$subject1 = "ROOPHKA: Resume";
    
     $message1 = '<div style="width:600px;">
