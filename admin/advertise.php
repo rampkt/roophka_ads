@@ -89,7 +89,7 @@ if(isset($_REQUEST['action']) AND isset($_REQUEST['id']) AND $_REQUEST['id'] > 0
 
 //echo $date;
 
-list($advertiseList,$pagination) = $location->getAlladvertise();
+list($advertiseList,$pagination) = $location->getAlladvertise(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">

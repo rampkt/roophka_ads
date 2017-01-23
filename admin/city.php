@@ -224,11 +224,11 @@ list($cityList,$pagination) = $location->getAllcity($city2,$cid,$sid);
 									</td>
                                     <td>
                                     	<? if($city['status'] == 0) { ?>
-                                        <a href="./city.php?action=deactivate&id=<?=$city['id']?>&cid=<?=$city['cid']?>&sid=<?=$city['sid']?>&city=<?php echo $city2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./city.php?action=deactivate&id=<?=$city['id']?>&cid=<?=$city['cid']?>&sid=<?=$city['sid']?>&city=<?php echo $city2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($city['status'] == 1) { ?>
-                                        <a href="./city.php?action=activate&id=<?=$city['id']?>&cid=<?=$city['cid']?>&sid=<?=$city['sid']?>&city=<?php echo $city2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./city.php?action=activate&id=<?=$city['id']?>&cid=<?=$city['cid']?>&sid=<?=$city['sid']?>&city=<?php echo $city2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
-                                        <a href="./city.php?action=delete&id=<?=$city['id']?>&cid=<?=$city['cid']?>&sid=<?=$city['sid']?>&city=<?php echo $city2;?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
+                                        <a href="./city.php?action=delete&id=<?=$city['id']?>&cid=<?=$city['cid']?>&sid=<?=$city['sid']?>&city=<?php echo $city2;?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white ok">&nbsp;</i>Delete</a>
 										
 										 <a href="javascript:void(0);" onClick="countryeditfn(1,'<?php echo $city['cid'];?>','<?php echo $city['sid'];?>','<?php echo $city['id'];?>','<?php echo $city['name'];?>');" class="btn btn-small " >Edit</a>
 										

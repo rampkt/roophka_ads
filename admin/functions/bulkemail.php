@@ -23,7 +23,7 @@ class bulkemail
 		$field="";
 		if($name!="")
 		{
-			$field.=' and (o.category_name like '."'%$name%'".')';
+			$field.=' and (e.category_name like '."'%$name%'".')';
 		}
 		//echo $datestr; exit;
 		$result = array();
@@ -45,7 +45,7 @@ class bulkemail
 		$rowCount = $this->db->fetch_array($qryCount);
 		
 		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
-		$pagination = pagination("emailcategory.php", "operator=$name", $this->page, $totalPage, 6);
+		$pagination = pagination("emailcategory.php", "category=$name", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
 
@@ -85,7 +85,7 @@ class bulkemail
 		$pagination = pagination("emails.php", "email=$name", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
-		public function getAllsentemails($name) 
+		public function getAllsentemails($name,$bno,$etype,$estatus) 
 	{
 		
 		$field="";
@@ -94,10 +94,25 @@ class bulkemail
 			$field.=' and (e.email like '."'%$name%'".')';
 		}
 		
+		if($bno!="")
+		{
+			$field.=' and (e.batchno like '."'%$bno%'".')';
+		}
+		
+		if($etype!="")
+		{
+			$field.=' and (e.type like '."'%$etype%'".')';
+		}
+		
+		if($estatus!="")
+		{
+			$field.=' and (e.readmail like '."'%$estatus%'".')';
+		}
+		
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT e.id, e.email, e.subject,e.type, e.status,e.date_added FROM roo_sent_emails AS e WHERE e.status IN (0,1) '.$field.' order by e.email asc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT e.id, e.email, e.subject,e.type,e.readmail,e.batchno, e.status,e.date_added FROM roo_sent_emails AS e WHERE e.status IN (0,1) '.$field.' order by e.email asc LIMIT '.$this->start.','.$this->rowLimit;
 		
 		$queryCount = 'SELECT COUNT(e.id) AS cnt FROM roo_sent_emails AS e WHERE e.status IN (0,1)'.$field; 
 		
@@ -114,7 +129,7 @@ class bulkemail
 		$rowCount = $this->db->fetch_array($qryCount);
 		
 		$totalPage = getTotalPage($rowCount['cnt'],$this->rowLimit);
-		$pagination = pagination("sentemails.php", "email=$name", $this->page, $totalPage, 6);
+		$pagination = pagination("sentemails.php", "search=search&bno=$bno&etype=$etype&estatus=$estatus&email=$name", $this->page, $totalPage, 6);
 		return array($result, $pagination);
 	}
 	
@@ -510,6 +525,7 @@ public function Activatecategory($id=0) {
 			$type=$this->userinput;
 			$adminemail=$this->adminemail;
 			$emailinput=$this->emailinput;
+			$batchno=$this->batchno;
 			//$tmpfile=$this->emailexternal['tmp_name'];
 			if($emailinput==1)
 			{	
@@ -522,8 +538,10 @@ public function Activatecategory($id=0) {
 			$res=$this->db->query($sql);
 			while($row=$this->db->fetch_array($res))
 			{	
+		    $b=base64_encode($row['email'].$batchno);
+            $m=md5($b);
 			//echo $country; exit;
-			$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,status) values('$subject','$adminemail','$row[email]','$type','$message','0','".DATETIME24H."','0')";
+			$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,md5_hash,b64_hash,sent,readmail,batchno,status) values('$subject','$adminemail','$row[email]','$type','$message','0','".DATETIME24H."','$m','$b','0','0','$batchno','0')";
 			//echo $sql; exit;
 			$result=$this->db->query($sql);
 			
@@ -535,8 +553,9 @@ public function Activatecategory($id=0) {
 				$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
-	       
-				$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,status) values('$subject','$adminemail','$eid','$type','$message','0','".DATETIME24H."','0')";
+	       $b=base64_encode($eid.$batchno);
+            $m=md5($b);
+				$sql="INSERT INTO roo_sent_emails(subject,from_email,email,type,message,subscribe,date_added,md5_hash,b64_hash,sent,readmail,batchno,status) values('$subject','$adminemail','$eid','$type','$message','0','".DATETIME24H."','$m','$b','0','0','$batchno','0')";
 			//echo $sql; exit;
 			$result=$this->db->query($sql);
 				}

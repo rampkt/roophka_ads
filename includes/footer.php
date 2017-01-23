@@ -17,21 +17,19 @@
             	<li><a href="aboutus.php">About Us</a></li>
 				<li><a href="contactus.php">Contact Us</a></li>
                 <li><a href="howitworks.php">How it works</a></li>
-                <li><a href="privacy.php">Privacy policy</a></li>
                 <li><a href="terms.php">Terms &amp; Condition</a></li>
 				<li><a href="viewads.php">View Ads</a></li>
 				<li><a href="advertise.php">Advertise With us</a></li>
+				<li><a href="submitresume.php">Submit Your Resume</a></li>
+				<!--<li><a href="plans.php">Plans</a></li>-->
             </ul>
         </div>
         <div class="grid_3">
         	<h3>Website Hit Count</h3>
             <div class="clearfix">&nbsp;</div>
             <!-- hitwebcounter Code START -->
-            <a href="http://www.hitwebcounter.com" target="_blank">
-            	<img src="http://hitwebcounter.com/counter/counter.php?page=6524864&style=0001&nbdigits=6&type=ip&initCount=1" title="URL Counter" Alt="URL Counter"   border="0" >
-            </a><br/>
+			<div align='left'><a href='javascript:void(0);'><img src='https://www.hit-counts.com/counter.php?t=MTQwMjk1OQ==' border='0' alt='Hit Counter'></a></div>
             <!-- hitwebcounter.com -->
-            <a href="http://www.hitwebcounter.com" title="Web Tracker" target="_blank" style="font-family: sans-serif, Arial, Helvetica; font-size: 12px; color: #6E7A76; text-decoration: underline ;"><em>Web Tracker</em></a>   
         </div>
         <div class="grid_3">
         	<h3>Information</h3>
@@ -46,7 +44,7 @@
                 <img class="alignnone wp-image-6799 size-thumbnail" src="./assets/img/logo150X150.png" width="150" height="150">
             </span>
         </div>
-        <p class="poweredby">&copy; <?=date('Y')?> Roophka. Powered by <a href="http://www.roophka.com/">Roophka.com</a></p>
+        <p class="poweredby">&copy; <?=date('Y')?> Roophka. Powered by <a href="https://www.roophka.com/">Roophka.com</a></p>
     </div>
 </footer>
 

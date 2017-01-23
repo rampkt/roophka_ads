@@ -17,7 +17,7 @@ else
   {
  header("location:accessdenied.php");
   }
-
+  
 $alltemplateList=$bulkemail->AllemailTemplate();
 //echo json_encode($emails); exit;
 if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
@@ -29,6 +29,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 	$bulkemail->emailinput=$_REQUEST['emailinput'];
 	$bulkemail->userinput=$_REQUEST['userinput'];
 	$bulkemail->adminemail=$location->getsetting('1','email');
+	$bulkemail->batchno=rand('10000','99999');
 	$eids=$_REQUEST['emailids'];
 	//$tmpfile=$_FILES['emailexternal']['tmp_name'];
 	$emailinput=$_REQUEST['emailinput'];
@@ -47,6 +48,9 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
+			$b=base64_encode($row['email'].$bulkemail->batchno);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
 		
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
@@ -60,6 +64,11 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_composeemails")) {
 				<tr>
 					<td>'.$bulkemail->message.'</td>
 				</tr>
+				
+				<tr>
+					<td><img src='.$httpPathlogo.' alt=""></td>
+				</tr>
+				
 				
 			</table>
 			<br>
@@ -77,6 +86,10 @@ if($emailinput==2){
 	$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
+			$b=base64_encode($eid.$bulkemail->batchno);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";	
+			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -88,6 +101,9 @@ if($emailinput==2){
 			
 				<tr>
 					<td>'.$bulkemail->message.'</td>
+				</tr>
+				<tr>
+					<td><img src='.$httpPathlogo.' alt=""></td>
 				</tr>
 				
 			</table>
@@ -119,7 +135,10 @@ if($emailinput==2){
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-		
+		    $b=base64_encode($row['email'].$bulkemail->batchno);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
+			
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -135,7 +154,9 @@ if($emailinput==2){
 				<tr>
 					<td>'.$temcont.'</td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.' alt=""></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -153,6 +174,10 @@ if($emailinput==2){
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
+			$b=base64_encode($eid.$bulkemail->batchno);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
+			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
@@ -168,7 +193,9 @@ if($emailinput==2){
 				<tr>
 					<td>'.$temcont.'</td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.' alt=""></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -191,11 +218,11 @@ if($emailinput==2){
 				$filehash = randomString(20);
 				$filename = $filehash . '.'.$extn;
 				$bulkemail->message=$filename;
-				$path = DOCUMENT_PATH . "admin/attachment/";
+				$path = DOCUMENT_PATH . "uploads/attachment/";
 				
 				$destination = $path . $filename;
 				
-				$httpPath = HTTP_PATH . "admin/attachment/" . $filename;
+				$httpPath = HTTP_PATH . "uploads/attachment/" . $filename;
 				
 				//echo $destination; exit;
 				
@@ -211,11 +238,14 @@ if($emailinput==2){
 			$res=$db->query($sql);
 			while($row=$db->fetch_array($res))
 			{
-		
+		    $b=base64_encode($row['email'].$bulkemail->batchno);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
+			
 	        $to = array($row['email']);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
-			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$my_path = HTTP_PATH . "uploads/attachment/".$bulkemail->message;
 			$message = '<div style="width:600px;">
 			Dear<br>
 			<p>Welcome to ROOPHKA.COM</p>
@@ -225,7 +255,9 @@ if($emailinput==2){
 				<tr>
 					<td><img src='.$my_path.' style="width:300px;"></td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.' alt=""></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -244,10 +276,14 @@ if($emailinput==2){
 			$ids=explode(",", $eids);
 		    foreach($ids as $eid)
 			{
+			$b=base64_encode($eid.$bulkemail->batchno);
+            $m=md5($b);
+		    $httpPathlogo = HTTP_PATH."mailverify/".$m."/logo.jpg";
+			
 	        $to = array($eid);
 			$from =$bulkemail->adminemail;
 			$subject = $bulkemail->subject;
-			$my_path = HTTP_PATH . "admin/attachment/".$bulkemail->message;
+			$my_path = HTTP_PATH . "uploads/attachment/".$bulkemail->message;
 			$message = '<div style="width:600px;">
 			Dear<br>
 			<p>Welcome to ROOPHKA.COM</p>
@@ -257,7 +293,9 @@ if($emailinput==2){
 				<tr>
 					<td><img src='.$mypath.'></td>
 				</tr>
-				
+				<tr>
+					<td><img src='.$httpPathlogo.' alt=""></td>
+				</tr>
 			</table>
 			<br>
 			Thanks & regards,<br>
@@ -604,7 +642,7 @@ if($emailinput==2){
 		</div>
 		
 	</div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript">
   $(function() {
      $("#ajaxfile").change(function (){

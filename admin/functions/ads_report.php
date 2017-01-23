@@ -97,14 +97,20 @@ class ads
 	}
 	
 	public function getAllads($date) {
+		$field="";
+		if($date!="")
+		{	
 		$datestr=date('Y-m-d',strtotime($date));
+		$field='ad.date_added like '."'%$datestr%'".' and ';
+		}
+		
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT ad.id,ad.userid,ad.adid,ad.detail,ad.type,ad.date_added,ad.demo,ad.visitor_location,ad.ipaddr FROM roo_transaction AS ad WHERE ad.date_added like '."'%$datestr%'".' and ad.type='."'add'".' AND adid > 0 order by ad.date_added desc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT ad.id,ad.userid,ad.adid,ad.detail,ad.type,ad.date_added,ad.demo,ad.visitor_location,ad.ipaddr,(SELECT ra.type FROM roo_ads AS ra WHERE ra.id = ad.adid) AS adtype FROM roo_transaction AS ad WHERE '.$field.' ad.type='."'add'".' AND adid > 0 order by ad.date_added desc LIMIT '.$this->start.','.$this->rowLimit;
 		
 		//echo $query; exit;
-		$queryCount = 'SELECT COUNT(ad.id) AS cnt FROM roo_transaction AS ad WHERE ad.type='."'add'".' AND adid > 0 and ad.date_added like'. "'%$datestr%'"; 
+		$queryCount = 'SELECT COUNT(ad.id) AS cnt FROM roo_transaction AS ad WHERE '.$field.' ad.type='."'add'".' AND adid > 0'; 
 		//echo $queryCount;
 		$qry = $this->db->query($query);
 		

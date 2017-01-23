@@ -149,9 +149,9 @@ $userList = $users->getAllUsers();
 									</td>
                                     <td>
                                     	<? if($usr['status'] == 0) { ?>
-                                        <a href="./adminusers.php?action=deactivate&id=<?=$usr['id']?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./adminusers.php?action=deactivate&id=<?=$usr['id']?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($usr['status'] == 1) { ?>
-                                        <a href="./adminusers.php?action=activate&id=<?=$usr['id']?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./adminusers.php?action=activate&id=<?=$usr['id']?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
                                         <a href="#" class="btn btn-small btn-primary"><i class="halflings-icon white lock"></i>Change Password</a>
                                     </td>

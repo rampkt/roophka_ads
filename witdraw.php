@@ -112,7 +112,7 @@ $accounts = $user->accounts(0);
         <div class="grid_4 no-padding">
             <div class="panel panel-primary">
               <div class="panel-heading">Available to withdraw</div>
-              <div class="panel-body"><i class="fa fa-inr" aria-hidden="true"></i> <?=$withdraw['withdraw_available']?>/-</div>
+              <div class="panel-body"><i class="fa fa-inr" aria-hidden="true"></i> <?=$_SESSION['roo']['user']['account_balance']-100?>/-</div>
             </div>
         </div>
         
@@ -182,10 +182,10 @@ $accounts = $user->accounts(0);
         </div>
         <? if(!empty($accounts)) { ?>
         <div class="grid_12">
-        	<center>
-            	<? if($withdraw['withdraw_available'] < 500) { ?>
+        	<center><?php $amt=$_SESSION['roo']['user']['account_balance']-100; ?>
+            	<? if($amt==0) { ?>
             		<button class="btn btn-success" title="Minimum balance not met" disabled>WITHDRAW NOW</button>
-                    <p class="text-danger">Minimum withdraw amount <i class="fa fa-inr" aria-hidden="true"></i> 500/-</p>
+                    <p style="font-size:13px;color:red;">Must be maintain minimum balance Rs.100/-. So Above Rs.100 amount only you can withdrawn. Now you have a withdraw balance is  <i class="fa fa-inr" aria-hidden="true"></i> Rs.<?php echo $_SESSION['roo']['user']['account_balance']-100; ?>/-.</p>
                 <? } else { ?>
                 	<button class="btn btn-success" data-toggle="modal" data-target="#addWithdraw">WITHDRAW NOW</button>
                 <? } ?>
@@ -193,7 +193,7 @@ $accounts = $user->accounts(0);
         </div>
         <? } ?>
     </section><!-- #end content area -->
-      
+    
       
     <!-- sidebar -->    
     <? include("./includes/loginmenu.php"); ?>
@@ -206,7 +206,7 @@ $accounts = $user->accounts(0);
 <? include("./includes/footer.php"); ?>
 <!-- #end footer area --> 
 
-<? if($withdraw['withdraw_available'] >= 500) { ?>
+<? if($_SESSION['roo']['user']['account_balance'] > 100) { ?>
 <!-- Modal -->
 <div id="addWithdraw" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -220,10 +220,10 @@ $accounts = $user->accounts(0);
         <h4 class="modal-title">Withdraw amount</h4>
       </div>
       
-      <div class="modal-body">
+      <div class="modal-body" style="color:green;font-size:14px;">
       <center>
-      	<p>Withdraw amount should be greater then <i class="fa fa-inr" aria-hidden="true"></i> 500. And below available amount</p>
-        <input type="number" id="withdraw_amount" name="withdraw_amount" placeholder="" min="500" max="<?=$withdraw['withdraw_available']?>" value="500.00" class="form-control width-50" required />
+      	<p>Must be maintain minimum balance Rs.100. So Above Rs.100 amount only you can withdrawn. Now you can withdraw <i class="fa fa-inr" aria-hidden="true"></i> Rs.<?php echo $_SESSION['roo']['user']['account_balance']-100; ?>/. And below available amount</p>
+        <input type="number" id="withdraw_amount" name="withdraw_amount" placeholder="" min="1" max="<?php echo $_SESSION['roo']['user']['account_balance']-100; ?>" value="<?php echo $_SESSION['roo']['user']['account_balance']-100; ?>.00" class="form-control width-50" required />
       </center>
       </div>
       

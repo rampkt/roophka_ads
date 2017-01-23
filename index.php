@@ -14,6 +14,9 @@ include("./functions/ads.php");
 $ads = new ads();
 
 $sliderAds = $ads->getHomeSliderAd();
+
+$videoad = $ads->getHomevideoAd();
+
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='_add_findlocation'))
 {
 	$zipcode=trim($_REQUEST['zipcode']);
@@ -50,6 +53,10 @@ $result3[]=$result2[0]['location'];
 return $result3[0];
 }
  
+ if(isset($_REQUEST['autoenable']))
+ {
+	 $_SESSION['autoenable']=$_REQUEST['autoenable'];
+ }
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -65,7 +72,9 @@ return $result3[0];
 	<!-- header area -->
 	<? include("./includes/header.php"); ?>
     <!-- end header -->
- 
+ <form action="index.php" method="post" id="autovideo" name="autovideo">
+ <input type="hidden" name="autoenable" value="1">
+ </form>
  
 <!-- hero area (the grey one with a slider -->
     <section id="hero" class="clearfix">    
@@ -223,10 +232,20 @@ return $result3[0];
 
 	</div>
 
+<div class="modal hide fade" id="videopopup" style="height: 450px;width:650px; overflow: hidden; display: none;left:47%;cursor:none;">
+		<div class="modal-header">
+			<h3>Platinum Ad</h3>
+		</div>
+		<div class="modal-body" id="bankAjaxResult" style="overflow: hidden;margin:10px;padding:15px;">
+			<?=$videoad?>
+		</div>
+		
+	</div>
 <? include("./includes/footerinclude.php"); ?>
 <script>
 var latval="<?php if(isset($_SESSION['lat'])) { echo $_SESSION['lat']; }else{ echo "";} ?>";
 var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ echo "";} ?>";
+var autovdval="<?php if(isset($_SESSION['autoenable'])){ echo $_SESSION['autoenable'];}else{echo "0";} ?>";
  function locationaddfn(val)
   {
 	  //alert("adad");
@@ -247,6 +266,15 @@ var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ ec
   
   
   $( document ).ready(function() {
+	 // alert(autovdval);
+	  
+	  if(autovdval==0)
+	  {
+	  $('#videopopup').modal('show');
+	  }else{
+		  $('#videopopup').modal('hide');
+		  $("#videoID").get(0).pause();
+	  
    // alert( "ready!" );
    if((latval=="")&&(lngval==""))
    {
@@ -255,9 +283,14 @@ var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ ec
 
 	locationaddfn(2);
    }
+	 }
 });
    
-  
+  function videoEnded() {
+   $('#videopopup').modal('hide');
+   document.autovideo.submit();
+  // location.reload(true);
+}
    
   function findlocation(){
 	  

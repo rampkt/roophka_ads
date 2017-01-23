@@ -22,6 +22,12 @@ if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge'))
 				$_SESSION['recharge_amount']=$_REQUEST['amount'];
 				//redirect(HTTP_PATH . 'recharge_proceed.php');
 			}
+			if((isset($_REQUEST['type'])) && ($_REQUEST['type']=='spl'))
+			{
+				$_SESSION['spl_recharge_today']=$_REQUEST['type'];
+				//redirect(HTTP_PATH . 'recharge_proceed.php');
+			}
+			
 			
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
 			{
@@ -33,11 +39,18 @@ if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
 				
 				$mobile=$_REQUEST['mobile'];  
 $operator=$_REQUEST['operator'];  
-$amount=$_REQUEST['amount']; 
+if($splrc=='1')
+{
+	$amount=10; 
+}
+else {
+$amount=$_REQUEST['amount']; 	
+}
+
  $sessuser_id = $_SESSION['roo']['user']['id'];
 //generating random unique orderid for your reference 
 $uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
- 
+ $splrc=$_REQUEST['spl_rechr'];
 //inserting above 4 values in database first 
 //run your php query here to store values of user inputs in database 
  
@@ -48,7 +61,7 @@ $timeout = 100; // set to zero for no timeout
 $apikey="104746188241741";
 $apiuserid="roophka";
 
-$myHITurl = "http://joloapi.com/api/recharge.php?mode=0&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
+$myHITurl = "http://joloapi.com/api/recharge.php?mode=1&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
 
 //echo $myHITurl;
 curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
@@ -106,8 +119,20 @@ $ins=$db->query($qry);
 
 $balance=$_SESSION['roo']['user']['account_balance']-$amount;
 $_SESSION['roo']['user']['account_balance']=$balance;
+
+
+if($splrc=='1')
+{
+	$qqry2="UPDATE roo_users SET spl_recharge='1' where id='$sessuser_id'";
+$qupd=$db->query($qqry2);
+$_SESSION['roo']['user']['spl_recharge']=1;
+}else
+{
 $qry2="UPDATE roo_users SET account_balance='$balance' where id='$sessuser_id'";
 $upd=$db->query($qry2);
+
+}
+
 
 $adminmail=$cms->getsetting('1','email');
 $opname=$user->getoperator_name($operator);
@@ -116,45 +141,79 @@ $opname=$user->getoperator_name($operator);
 
 $from = $adminmail;
 		$to = array($_SESSION['roo']['user']['email']);
-		$subject = "ROOPHKA: Recharge order Details";
+		$subject = "ROOPHKA: Your Recharge of $opname Mobile $mobile for Rs.$amount was successfull !";
    
-    $message = '<div style="width:600px;">
-    Dear '.$_SESSION['roo']['user']['firstname'].'<br><br>
-   
-    <p> Ypur Recharge of '.$opname.' Mobile '.$mobile.' for Rs.'.$amount.' was succesful</p>
-    <br>
+    $message = '<div style="background-color: #fff;width: 650px;margin: 0 auto; box-shadow: 1px 6px 40px #aaa;border: 1px solid #ccc;padding: 10px;font-family: arial;font-size: 14px;"> 
+<table style="width:100%;border-bottom:1px dashed #ccc;font-size: 14px;" >
+<tr>
+<td style="width:55%;">
+<div>
+<a href="'.HTTP_PATH.'" target="_blank">
+<img src="'.HTTP_PATH.'assets/img/logo150X150.png" style="width:200px;height:100px;">
+<a>
+</div>
+<div>
+<h3>Transaction receipt</h3>
+<p>Order no: #'.$mywebsiteorderid.'</p>
+<p>Operator reference no: #'.$joloapiorderid.' </p>
+<p>'.date('d-m-Y h:i a').'</p>
+<br/>
+<p>'.$_SESSION['roo']['user']['phone'].'</p>
+<p><a href="mailto:'.$_SESSION['roo']['user']['email'].'">'.$_SESSION['roo']['user']['email'].'</a></p>
+</div>
+</td>
+<td style="width:38%;">
+<div>If you have any query or support! Please <a href="'.HTTP_PATH.'contactus.php">Click here</a> to reach us. </di>
+
+</td>
+<td style="width:12%;">
+<div>
+<img src="'.HTTP_PATH.'assets/img/r-logo.png">
+</div>
+
+</td>
+</tr>
+</table>
+
+<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
+<tr >
+
+<td style="width:85%;">Recharge of '.$opname.' Mobile '.$mobile.' for</td>
+<td style="width:15%;"> Rs.'.$amount.'</td>
+
+</tr>
+</table>
+<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
+<tr>
+
+<td style="width:85%;">Total</td>
+<td style="width:15%;"> Rs.'.$amount.'</td>
+
+</tr>
+</table>
+<table style="width:100%;height:70px;padding-bottom:10px;font-size: 14px;">
+<tr>
+
+<td style="width:85%;"><strong>Amount Paid</strong></td>
+<td style="width:15%;"><strong>Rs.'.$amount.'</strong></td>
+
+</tr>
+</table>
+
 	
-	<table>
-	<tr>
-	<td><strong>Order ID: </strong></td>
-	<td>'.$mywebsiteorderid.'</td>
-	</tr>
-	
-	<tr>
-	<td><strong>Order Reference Number: </strong></td>
-	<td>'.$joloapiorderid.'</td>
-	</tr>
-	
-	<tr>
-	<td><strong>Date: </strong></td>
-	<td>'.DATETIME24H.'</td>
-	</tr>
-	
-	<tr>
-	<td><strong>Status: </strong></td>
-	<td>Success</td>
-	</tr>
-	
-	</table>
-	
-	
+	<br/>
 	
     Thanks & regards,<br />
     <a href="'.HTTP_PATH.'">roophka.com</a>
     </div>';
-		
-		$mailler->sendmail($to, $from, $subject, $message);
 
+	//echo $message; exit;
+	
+		$mailler->sendmail($to, $from, $subject, $message);
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 redirect(HTTP_PATH . 'recharge_proceed.php?report=success&view=order');
 }  
 if($txnstatus=='PENDING'){ 
@@ -162,6 +221,10 @@ if($txnstatus=='PENDING'){
 $qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$uniqueorderid','".DATETIME24H."','0')";
 
 $ins=$db->query($qry);
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 redirect(HTTP_PATH . 'recharge_proceed.php?report=pending&view=order');
 } 
 if($txnstatus=='FAILED'){ 
@@ -171,10 +234,17 @@ $qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status
 //echo $qry; exit;
 
 $ins=$db->query($qry);
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 redirect(HTTP_PATH . 'recharge_proceed.php?report=failed&view=order');
 } 
 
-
+unset($_SESSION['recharge_mobile']);
+unset($_SESSION['recharge_operator']);
+unset($_SESSION['recharge_circle']);
+unset($_SESSION['recharge_amount']);
 
 redirect(HTTP_PATH . 'recharge_proceed.php?');
 				
@@ -219,6 +289,13 @@ $recharge = $user->recharge_order();
 <div id="main" class="wrapper dashboard"> 
 	
     <!-- content area -->    
+	<?php $apibalance=$cms->checkbalance();
+	//echo $apibalance ?>
+	<? if($apibalance == '0') { ?>
+	<br>
+    <div class="error-msg"><strong>Please Try again later !</strong> You not able to recharge now, because we need to add money in my Recharge Wallet.</div>
+    <? } ?>
+	
 	<? if(isset($_REQUEST['report']) AND $_REQUEST['report'] == 'failed') { ?>
     <div class="error-msg"><strong>Order failed !</strong> Your order has been failed, please try again.</div>
     <? } ?>
@@ -232,7 +309,26 @@ $recharge = $user->recharge_order();
     <? } ?>
 	<section id="content">
 	 <?php if((isset($_REQUEST['view'])) && ($_REQUEST['view']=='recharge')){ ?>
-	 <div class="grid_12 no-padding">
+	 
+	  <div id='rgsplid' class="grid_12" style="display:none;">
+        	
+        	
+              <div class="spl-heading">Special Recharge</div>
+			
+			<img src="./assets/img/pay-per-click-advertising.jpg">
+			<div class="grid_12">
+        	<h4>User account summary:</h4>
+        	<ol>
+            	<li>Last login : <?=$_SESSION['roo']['user']['lastlogin']?></li>
+                <li>Total ads viwed so far : <?=$database['total_ads']?></li>
+                <li>Total amount earned so far : <i class="fa fa-inr" aria-hidden="true"></i> <?=$database['total_amount']?></li>
+                <li>Total amount withdrawn : <i class="fa fa-inr" aria-hidden="true"></i> <?=$database['withdraw_amount']?></li>
+            </ol>
+        </div>
+      </div>  
+	 
+	 
+	 <div id='plandlid' class="grid_12 no-padding" >
              <div class="panel panel-primary" style="text-align:left;">
               <div class="panel-heading">Operator Plan Details</div>
               <div class="panel-body" style="height:405px;">
@@ -380,11 +476,12 @@ $recharge = $user->recharge_order();
             </div>
 			</div>
 			
+			<input type="hidden" value="0" name="spl_rechr" id="spl_rechr">
 			
 			<div class="grid_12" style="margin-bottom:20px;">
 			<div style="margin-bottom:5px;">Amount</div>
 			<div>
-			<input type="text" name="amount" id="amount" class="rc-input numberonly" placeholder="Enter Numeric values" required value="<?php if(isset($_SESSION['recharge_amount'])){ echo $_SESSION['recharge_amount']; }?>">
+			<input type="text" name="amount" id="amount" class="rc-input numberonly" onblur="return checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');" placeholder="Enter Numeric values" required value="<?php if(isset($_SESSION['recharge_amount'])){ echo $_SESSION['recharge_amount']; }?>">
 			
 			</div>
 			<span id="alertamt"></span>
@@ -392,8 +489,10 @@ $recharge = $user->recharge_order();
 			</div>
 			
 			<div class="grid_12">
-			<div style="margin-top:15px;">
-			<input type="submit" name="submit" value="Recharge Now" class="btn btn-primary" onclick="checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');">
+			<div style="margin-top:25px;">
+			<input type="submit" name="submit" value="Recharge Now" class="btn btn-primary" onclick="return checkamount('<?=$_SESSION['roo']['user']['account_balance']?>');">
+			
+			<a href="javascript:void(0);" onclick="openWin()" style="text-decoration:underline;font-size:14px;"> Terms & Conditions</a>
 			</div>
 			</div>
 			
@@ -416,8 +515,200 @@ $recharge = $user->recharge_order();
 <!-- footer area -->    
 <? include("./includes/footer.php"); ?>
 <!-- #end footer area --> 
+<?php if((isset($_REQUEST['view'])) && ($_REQUEST['view']=='recharge')){ 
+if($_SESSION['roo']['user']['spl_recharge']=='0'){
+?>
+<div class="modal hide fade" id="specialpopup" style="height: 200px;width:650px; overflow: hidden; display: block;left:47%;">
+		<div class="modal-header">
+			<h3>Special Recharge Offer</h3>
+		</div>
+		<div class="modal-body" id="Specialrge" style="overflow: hidden;margin:10px;padding:15px;">
+			
+			<div>
+			You have a special offer for a first login, recharge worth is Rs.10.
+			</div>
+			
+			<div style="margin-top:30px;">
+			<input type="button" name="proceed_special" id="proceed_special" value="Proceed" class="btn btn-primary btn-small" onclick="specialfn();">
+			&nbsp;<a href="#" class="btn btn-warning btn-small" data-dismiss="modal">Later</a>
+			</div>
+			
+		</div>
+		
+	</div>
+<?php } 
+if($_SESSION['roo']['user']['spl_recharge']=='1'){
+ if((isset($_REQUEST['type'])) && ($_REQUEST['type']=='spl'))
+			{ ?>
+<div class="modal hide fade" id="specialpopup" style="height: 200px;width:650px; overflow: hidden; display: block;left:47%;">
+		<div class="modal-header">
+			<h3>Special Recharge Offer</h3>
+		</div>
+		<div class="modal-body" id="Specialrge" style="overflow: hidden;margin:10px;padding:15px;">
+			
+			
+		     <div style="color:red;">
+			Special offer for a first login, recharge worth is Rs.10 is already done.
+			</div>
+		    <div style="margin-top:30px;">
+			<a href="#" class="btn btn-warning btn-small" data-dismiss="modal">Close</a>
+			</div>
+		</div>
+		
+	</div>
+<?php } }
 
+
+}?>
 <? include("./includes/footerinclude.php"); ?>
+<script>
+$( document ).ready(function() {
+	 // alert(autovdval);
+	 $('#specialpopup').modal('show');
+});	 
 
+function specialfn()
+{
+	$('#rgsplid').show();
+	$('#plandlid').hide();
+	$('#amount').val('10');
+	$('#spl_rechr').val('1');
+	$('#amount').attr('readonly','readonly');
+	$('#specialpopup').modal('hide');
+}
+
+</script>
+<script>
+var myWindow;
+
+function openWin() {
+    myWindow = window.open("https://www.roophka.com/terms.php", "myWindow", "width=500,height=300");
+    //myWindow.document.write("<p>This is 'myWindow'</p>");
+}
+
+function closeWin() {
+    myWindow.close();
+}
+</script>
+<style>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+}
+
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  margin-left: -280px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+}
+
+.modal.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal.fade.in {
+  top: 20%;
+}
+
+.modal-header {
+  padding: 9px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header .close {
+  margin-top: 2px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  line-height: 30px;
+}
+
+.modal-body {
+  position: relative;
+  max-height: 400px;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.modal-form {
+  margin-bottom: 0;
+}
+
+.modal-footer {
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  text-align: right;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.modal-footer:before,
+.modal-footer:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.modal-footer:after {
+  clear: both;
+}
+
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+</style>
 </body>
 </html>

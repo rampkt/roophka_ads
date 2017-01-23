@@ -93,7 +93,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_addemails")) {
 				</li>
 				<li>
 					<i class="icon-home"></i>
-					<a href="templates.php">Emails</a> 
+					<a href="emails.php">Emails</a> 
 					<i class="icon-angle-right"></i>
 				</li>
 				<li>Add</li>

@@ -105,7 +105,7 @@ $totalstoday = $dash->totalCounttoday($date);
 					<div class="number"><?=$totalstoday['withdraw']?><i class="icon-arrow-down"></i></div>
 					<div class="title">Today Withdrawn</div>
 					<div class="footer">
-						<a href="#"> read full report</a>
+						<a href="withdraw_report.php"> read full report</a>
 					</div>
 				</div>	
 				
@@ -146,7 +146,7 @@ $totalstoday = $dash->totalCounttoday($date);
 					<div class="number"><?=$totals['transaction']?><i class="icon-arrow-up"></i></div>
 					<div class="title">Ads seen</div>
 					<div class="footer">
-						<a href="#"> views full ads</a>
+						<a href="ads_report.php?todaydate="> views full ads</a>
 					</div>
 				</div>
 				<div class="span3 statbox yellow" onTablet="span6" onDesktop="span3">
@@ -154,7 +154,7 @@ $totalstoday = $dash->totalCounttoday($date);
 					<div class="number"><?=$totals['withdraw']?><i class="icon-arrow-down"></i></div>
 					<div class="title">Total Withdrawn</div>
 					<div class="footer">
-						<a href="#"> View full withdrawn</a>
+						<a href="withdraw_report.php?todaydate="> View full withdrawn</a>
 					</div>
 				</div>	
 				

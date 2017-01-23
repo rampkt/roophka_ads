@@ -1,3 +1,7 @@
+ALTER TABLE  `roo_sent_emails` ADD  `md5_hash` VARCHAR( 255 ) NOT NULL AFTER  `date_added` ,
+ADD  `b64_hash` VARCHAR( 255 ) NOT NULL AFTER  `md5_hash` ,
+ADD  `sent` INT NOT NULL COMMENT  '1=sent' AFTER  `b64_hash` ,
+ADD  `readmail` INT NOT NULL COMMENT  '1=yes' AFTER  `sent` ;
 
 CREATE TABLE `roo_cms` (
   `id` int(11) NOT NULL,
@@ -93,4 +97,11 @@ ALTER TABLE `roo_admin_users` CHANGE `type` `type` INT(11) NOT NULL COMMENT '0=S
 ALTER TABLE `roo_settings` ADD PRIMARY KEY(`id`);
 ALTER TABLE `roo_settings` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 >>>>>>> 5039de3711fad7739b14b63782b0cb4826f1dbec
+<<<<<<< HEAD
 >>>>>>> 4ac408addb62bee109e52f68a0b6c4b547a8499b
+=======
+
+
+ALTER TABLE `roo_advertise_request` ADD `alternate_email` VARCHAR(255) NOT NULL AFTER `email`;
+ALTER TABLE `roo_advertise_request` ADD `alternate_mobile` BIGINT NOT NULL AFTER `mobile`;
+>>>>>>> da61ae298695ff3b9f3553343461b8c0aec248ce

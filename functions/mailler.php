@@ -29,7 +29,11 @@ class mailler {
 		//$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
 		
 		// Mail it
-		@mail($tomail, $subject, $message, $headers);
+		if(@mail($tomail, $subject, $message, $headers)) {
+			return true;
+		} else {
+			return false;
+		}
 		
 	}
 	

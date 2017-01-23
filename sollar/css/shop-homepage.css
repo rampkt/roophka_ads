@@ -1,0 +1,315 @@
+/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+   /* margin-bottom: 30px;*/
+}
+
+.topheader a
+{
+	color:#fff !important;
+}
+.topheader a:hover
+{
+	color:#666 !important;
+}
+.caption {
+    height: 90px;
+    overflow: hidden;
+}
+.cartcss
+{
+	position:absolute;
+	
+}
+
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+ .nav li:hover
+  {
+	  background-color:#63b81d;
+  }
+   .nav li a:hover
+  {
+	  color:#fff !important;
+  }
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #63b81d;
+}
+.slidertop
+{
+	z-index:1;
+	margin-top:-50px;
+	background-color:#f7f8f8;
+	margin-bottom:30px;
+}
+.topheader
+{
+	background-color:#63b81d;
+	color:#fff;
+	height:120px;
+	margin-top:30px;
+}
+
+.thumbnail {
+    padding: 0;
+	border-radius:0px;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+.pricecss
+{
+	color:red;
+}
+
+footer {
+    margin: 50px 0;
+}
+.footer-menu
+{
+	list-style-type:none;
+	font-family:inherit;
+	font-weight:500;
+	font-size:14px;
+	text-align:left;
+	color:#fff;
+	padding-left:0px;
+	line-height:25px;
+}
+.newsbold
+{
+	font-size:15px;
+}
+.newssmall
+{
+	font-size:12px;
+	color:#63b81d;
+}
+
+.footer-menu a
+{
+	color:#fff;
+}
+.footer-menu a:hover
+{
+	color:#63b81d;
+}
+.rib-btm
+{
+	padding-top:80px;
+}
+
+.ribbon{
+  position:absolute;
+  top:20px;
+  left:-2%;
+  height:42px;
+  width:25%;
+  /*background:#009A42;*/
+  background:#63b81d;
+  border-radius: 5px 0 0 0;
+  
+  }
+.ribbon:before{
+  content:"";
+  position:absolute;
+  height:16px;
+  top:5px;
+  left:0;
+  width:100%;
+  
+  }
+.ribbon:after{
+  content:"";
+  position:absolute;
+  right:-16px;
+  height:30px;
+  width:30px;
+  top:6px;
+  /*background:#009A42;*/
+  background:#63b81d;
+  transform:rotate(45deg);  
+  }
+.ribbon a{
+  position:absolute;
+  top:5px;
+  left:0;
+  height:100%;
+  width:100%;
+  text-align:center;
+  display:inline-block;
+  text-decoration:none;
+  line-height:30px;
+  color:#FFF;
+  }
+.ribbon a:after{
+  content:"";
+  position:absolute;
+  bottom:-10px;
+  left:6px;
+  height:30px;
+  width:30px;
+  /*background:#009A42;*/
+  background:#63b81d;
+  transform:rotate(45deg);  
+  z-index:-2;
+  }
+  .adsbox{
+  height:375px;
+  width:100%;
+  box-shadow:inset 0 0 15px #ccc;
+  position:relative;
+  margin:0 auto;
+  background:#fff;
+  margin-bottom:30px;
+  
+  }
+   .adsbox3{
+  height:200px;
+  width:100%;
+  box-shadow:inset 0 0 15px #ccc;
+  position:relative;
+  margin:0 auto;
+  background:#fff;
+  margin-bottom:30px;
+  
+  }
+
+.input-lg-textgray
+{
+	height:33px;
+	width:250px;
+	border-radius:5px;
+	border:1px solid #ccc;
+	padding-left:10px;
+}
+
+.input-lg-texttop
+{
+	height:33px;
+	width:100%;
+	border-radius:5px;
+	border:1px solid #ccc;
+	padding-left:10px;
+	margin-top:40px;
+}
+
+.input-lg-text
+{
+	height:33px;
+	width:250px;
+	border-radius:5px;
+	border:1px solid #fff;
+	padding-left:10px;
+}
+.txtcntr
+{
+	text-align:center;
+}
+.txtcntr .lead
+{
+	padding-top:40px;
+}
+.wrapper
+{
+	background-color:#707070;
+	color:#fff;
+	padding-bottom:10px;
+}
+.wrappercenter
+{
+	background-color:#444;
+	color:#fff;
+	padding:40px 0px 20px 0px;
+}
+.wrapperdark span
+{
+	color:#63b81d;
+}
+.wrapperdark
+{
+	background-color:#333;
+	color:#fff;
+	text-align:center;
+	padding:20px 0px 10px 0px;
+	font-family:inherit;
+	font-weight:600;
+}
+
+.coldisplay
+{
+	display:none !important;
+}
+ 
+ 
+  .coltophide
+  {
+	display:block !important;
+  }
+ 
+@media (max-width: 768px) {
+	
+.navbar-collapse.in
+  {
+	z-index: 1000;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    margin-top: -80px;
+	padding-top:0px !important;
+  }	
+  
+  
+  .adsbox{
+  height:auto;
+  width:100%;
+  box-shadow:inset 0 0 15px #ccc;
+  position:relative;
+  margin:0 auto;
+  background:#fff;
+  margin-bottom:30px;
+  
+  }
+   .adsbox3{
+  height:auto;
+  width:100%;
+  box-shadow:inset 0 0 15px #ccc;
+  position:relative;
+  margin:0 auto;
+  background:#fff;
+  margin-bottom:30px;
+  
+  }
+  .coldisplay
+  {
+	display:block !important;
+  }
+  
+  .coltophide
+  {
+	display:none !important;
+  }
+}

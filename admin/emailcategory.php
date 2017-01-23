@@ -198,12 +198,12 @@ list($categoryList,$pagination) = $bulkemail->getAllemailcategory($category);
 									</td>
                                     <td>
                                     	<? if($ctgry['status'] == 0) { ?>
-                                        <a href="./emailcategory.php?action=deactivate&id=<?=$ctgry['id']?>&category=<?php echo $category2;?>" onClick="return confirm('Do you realy want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
+                                        <a href="./emailcategory.php?action=deactivate&id=<?=$ctgry['id']?>&category=<?php echo $category2;?>" onClick="return confirm('Do you really want to deactivate this account?');" class="btn btn-small"><i class="halflings-icon white remove"></i>Deactiavte</a>
                                         <? } elseif($ctgry['status'] == 1) { ?>
-                                        <a href="./emailcategory.php?action=activate&id=<?=$ctgry['id']?>&category=<?php echo $category2;?>" onClick="return confirm('Do you realy want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
+                                        <a href="./emailcategory.php?action=activate&id=<?=$ctgry['id']?>&category=<?php echo $category2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
                                         
-										<a href="./emailcategory.php?action=delete&id=<?=$ctgry['id']?>" onClick="return confirm('Do you realy want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
+										<a href="./emailcategory.php?action=delete&id=<?=$ctgry['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
 										
 										</td>
 								</tr>

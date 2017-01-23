@@ -138,7 +138,7 @@ class user
 		$temp = (($temp == '') ? 0 : $temp);
 		$result['account_balance'] = number_format($temp,2);
 		
-		$result['withdraw_available'] = ($ab > 500) ? $result['account_balance'] : '0.00';
+		$result['withdraw_available'] = ($ab > 100) ? $result['account_balance'] : '0.00';
 		
 		$temp = $this->db->fetch_field("roo_withdraw","userid = '".$user_id."' AND status=0","SUM(amount) AS amt");
 		$temp = (($temp == '') ? 0 : $temp);

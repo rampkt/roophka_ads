@@ -116,9 +116,16 @@ class ads
 		
 		$this->emptycheck();
 		if($id > 0) {
-			
+			if($this->addtype == 'text' ) {
 			$result=$this->db->query("UPDATE roo_ads SET title='".$this->addtitle."',content='".$this->addcontent."',name='".$this->adname."',duration='".$this->adduration."',amount='".$this->adamount."',watch_count='".$this->adclicks."',clicks_remain='".$this->adclicks."' where id='".$id."'");
-			
+			}
+			else if($this->addtype == 'scroll' ) {
+			$result=$this->db->query("UPDATE roo_ads SET title='".$this->addtitle."',content='".$this->addcontent."',name='".$this->adname."',duration='".$this->adduration."',amount='".$this->adamount."',watch_count='".$this->adclicks."',clicks_remain='".$this->adclicks."' where id='".$id."'");
+			}
+			else
+			{
+				$result=$this->db->query("UPDATE roo_ads SET title='".$this->addtitle."',name='".$this->adname."',duration='".$this->adduration."',amount='".$this->adamount."',watch_count='".$this->adclicks."',clicks_remain='".$this->adclicks."' where id='".$id."'");
+			}
 			
 		} else {
 			if($this->addtype == 'text' ) {

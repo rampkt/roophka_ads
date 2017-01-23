@@ -18,15 +18,20 @@ class withdraw
 	}
 	
 	public function getAllwithdraw($date) {
+		$field="";
+		if($date!="")
+		{	
 		$datestr=date('Y-m-d',strtotime($date));
+		$field='WHERE w.date_added like '."'%$datestr%'";
+		}
 		//echo $datestr; exit;
 		$result = array();
 		
-		$query = 'SELECT w.id, w.userid, w.amount,w.details,w.date_added, w.status FROM roo_withdraw AS w WHERE w.date_added like '."'%$datestr%'".'  order by w.date_added desc LIMIT '.$this->start.','.$this->rowLimit;
+		$query = 'SELECT w.id, w.userid, w.amount,w.details,w.date_added, w.status FROM roo_withdraw AS w '.$field.' order by w.date_added desc LIMIT '.$this->start.','.$this->rowLimit;
 		
 		//echo $query; 
 		
-		$queryCount = 'SELECT COUNT(w.id) AS cnt FROM roo_withdraw AS w WHERE w.date_added like'. "'%$datestr%'"; 
+		$queryCount = 'SELECT COUNT(w.id) AS cnt FROM roo_withdraw AS w '.$field; 
 		
 		$qry = $this->db->query($query);
 		if($this->db->num_rows($qry) > 0) {
