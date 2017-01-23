@@ -93,3 +93,7 @@ ALTER TABLE `roo_admin_users` CHANGE `type` `type` INT(11) NOT NULL COMMENT '0=S
 ALTER TABLE `roo_settings` ADD PRIMARY KEY(`id`);
 ALTER TABLE `roo_settings` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 >>>>>>> 5039de3711fad7739b14b63782b0cb4826f1dbec
+
+
+ALTER TABLE `roo_advertise_request` ADD `alternate_email` VARCHAR(255) NOT NULL AFTER `email`;
+ALTER TABLE `roo_advertise_request` ADD `alternate_mobile` BIGINT NOT NULL AFTER `mobile`;

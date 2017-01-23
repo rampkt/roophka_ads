@@ -174,7 +174,7 @@ list($planList,$pagination) = $plans->getAllplans($categorysearch);
 									  <th>Amount</th>
 									  <th>Viewers</th>
 									  <th>Status</th>
-                                      <th style="width:235px;">Action</th>
+                                      <th style="width:250px;">Action</th>
 								  </tr>
 							  </thead>   
 							  <tbody>
@@ -207,7 +207,7 @@ list($planList,$pagination) = $plans->getAllplans($categorysearch);
                                         <a href="./plandetails.php?action=activate&id=<?=$plan['id']?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
 										
-										
+										<a href="./plan_edit.php?action=edit&id=<?=$plan['id']?>" class="btn btn-small btn-warning"><i class="halflings-icon white ok">&nbsp;</i>Edit</a>
                                         
 										<a href="./plandetails.php?action=delete&id=<?=$plan['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
 										

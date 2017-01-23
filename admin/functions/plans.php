@@ -158,7 +158,47 @@ class plans
 		return $result;
 	}
 
+	public function planedit($id)
+	{
+		$result = "";
+		
+		$query = "SELECT * FROM roo_plan_details WHERE id='$id'";
+		
+		$queryCount = "SELECT COUNT(id) AS cnt FROM roo_plan_details WHERE id='$id'"; 
+		
+		//echo $query; 
+		$qry = $this->db->query($query);
+		if($this->db->num_rows($qry) > 0) {
+	     $row = $this->db->fetch_array($qry);
+				
+				$result=$row;
+			
+		}
+		
+		
+		
+		return $result;
+	}
 	
+	public function planeditsave() {
+		    
+			$category=$this->db->escape_string($this->category);
+			$fromsec=$this->db->escape_string($this->fromsec);
+			$tosec=$this->db->escape_string($this->tosec);
+			$amount=$this->db->escape_string($this->amount);
+			$viewers=$this->db->escape_string($this->viewers);
+		    $id=$this->id;
+			$sql="Update roo_plan_details set catid='".$category."',from_sec='".$fromsec."',to_sec='".$tosec."',amount='".$amount."',viewers='".$viewers."' where id='".$id."'";
+			//echo $sql; exit;
+			$result=$this->db->query($sql);
+		//echo $country; exit;
+			
+		if($result)	
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	public function plansave() {
 		    

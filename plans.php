@@ -64,7 +64,7 @@ $Adsimage = $ads->getplanlist("image");
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Duration (sec)</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Amount (Per Month)</th>
-  <th style="text-align:center;">Viewers</th>
+  <!--<th style="text-align:center;">Viewers</th>-->
   </tr>
   
   <?php if(empty($Adsimage)) { ?>
@@ -87,7 +87,7 @@ $Adsimage = $ads->getplanlist("image");
   <td style="border-right:1px solid #ccc;"><?=$i?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['to_sec']?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
-  <td><?=$image['viewers']?></td>
+  <!--<td><?=$image['viewers']?></td>-->
   </tr>
      
 	 <?php $i++;}?> 
@@ -113,11 +113,11 @@ $Adsimage = $ads->getplanlist("image");
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
    <th style="text-align:center;border-right:1px solid #ccc;">Duration (Sec)</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Amount (Per Month)</th>
-  <th style="text-align:center;">Viewers</th>
+  <!--<th style="text-align:center;">Viewers</th>-->
   </tr>
   <?php if(empty($Adsscroll)) { ?>
   <tr>
-  <td colspan="4">
+  <td colspan="3">
   <div class="alertmsgads">
   No Plans to show here ...
   </div>
@@ -135,7 +135,7 @@ $Adsimage = $ads->getplanlist("image");
   <td style="border-right:1px solid #ccc;"><?=$i?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['to_sec']?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
-  <td><?=$image['viewers']?></td>
+  <!--<td><?=$image['viewers']?></td>-->
   </tr>
      
 	 <?php $i++;}?> 
@@ -162,11 +162,11 @@ $Adsimage = $ads->getplanlist("image");
   <th style="text-align:center;border-right:1px solid #ccc;">S.No</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Duration (Sec)</th>
   <th style="text-align:center;border-right:1px solid #ccc;">Amount (Per Month)</th>
-  <th style="text-align:center;">Viewers</th>
+  <!--<th style="text-align:center;">Viewers</th>-->
   </tr>
   <?php if(empty($Adsvideo)) { ?>
   <tr>
-  <td colspan="4">
+  <td colspan="3">
   <div class="alertmsgads">
   No Plans to show here ...
   </div>
@@ -185,7 +185,7 @@ $Adsimage = $ads->getplanlist("image");
   <td style="border-right:1px solid #ccc;"><?=$i?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['to_sec']?></td>
   <td style="border-right:1px solid #ccc;"><?=$image['amount']?></td>
-  <td><?=$image['viewers']?></td>
+  <!--<td><?=$image['viewers']?></td>-->
   </tr>
      
 	 <?php $i++;}?> 

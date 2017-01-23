@@ -203,7 +203,7 @@ list($templateList,$pagination) = $bulkemail->getAllemailtemplate($template);
                                         <a href="./templates.php?action=activate&id=<?=$temp['id']?>&template=<?php echo $template2;?>" onClick="return confirm('Do you really want to activate this account?');" class="btn btn-small btn-success"><i class="halflings-icon white ok">&nbsp;</i>Actiavte</a>
                                         <? } ?>
 										
-										<a href="./template_edit.php?action=edit&id=<?=$temp['id']?>" onClick="return confirm('Do you really want to edit this account?');" class="btn btn-small btn-warning"><i class="halflings-icon white ok">&nbsp;</i>Edit</a>
+										<a href="./template_edit.php?action=edit&id=<?=$temp['id']?>" class="btn btn-small btn-warning"><i class="halflings-icon white ok">&nbsp;</i>Edit</a>
                                         
 										<a href="./templates.php?action=delete&id=<?=$temp['id']?>" onClick="return confirm('Do you really want to delete this account?');" class="btn btn-small btn-primary"><i class="halflings-icon white remove">&nbsp;</i>Delete</a>
 										

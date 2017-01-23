@@ -15,8 +15,15 @@ if(isset($_REQUEST['action'])) {
 	
 	$cms->resume = $_FILES['resume'];
 	$cms->email = $db->escape_string($_REQUEST['email']);
+	$cms->experience = $db->escape_string($_REQUEST['exp']);
+	$cms->aemail = $db->escape_string($_REQUEST['aemail']);
 	$cms->contact_person = $db->escape_string($_REQUEST['contact_person']);
+	$cms->qualification = $db->escape_string($_REQUEST['qualification']);
 	$cms->mobile = $db->escape_string($_REQUEST['mobile']);
+	$cms->amobile = $db->escape_string($_REQUEST['amobile']);
+	$cms->aadhar = $db->escape_string($_REQUEST['aadhar']);
+	$cms->dob = $db->escape_string($_REQUEST['sdob']);
+	$cms->cdob = $db->escape_string($_REQUEST['cdob']);
 	$cms->state = $db->escape_string($_REQUEST['state']);
 	$cms->city = $db->escape_string($_REQUEST['city']);
 	$cms->address1 = $db->escape_string($_REQUEST['address1']);
@@ -146,6 +153,17 @@ $cityDropDown = $location->getCityDropdown(0, 0, '', true, 'data-parsley-errors-
               </div>
             </div>
           
+		  <div class="control-group">
+              <!-- E-mail -->
+              <span class="pull-right" id="aemail-error"></span>
+              <label class="control-label" for="aemail">Alternate E-mail</label>
+              <div class="controls">
+                <input type="email" id="aemail" name="aemail" placeholder="" class="form-control input-lg"  />
+                <p class="help-block">Please provide your Alternate E-mail</p>
+              </div>
+            </div>
+          
+		  
             <div class="control-group">
               <!-- Mobile -->
               <span class="pull-right" id="mobile-error"></span>
@@ -153,6 +171,67 @@ $cityDropDown = $location->getCityDropdown(0, 0, '', true, 'data-parsley-errors-
               <div class="controls">
                 <input type="text" id="mobile" name="mobile" placeholder="" class="form-control input-lg numberOnly" required data-parsley-errors-container="#mobile-error" maxlength="10" />
                 <p class="help-block">Mobile can contain only numbers with 10 digit</p>
+              </div>
+            </div>
+			
+			<div class="control-group">
+              <!-- Mobile -->
+              <span class="pull-right" id="amobile-error"></span>
+              <label class="control-label"  for="amobile">Alternate Mobile</label>
+              <div class="controls">
+                <input type="text" id="amobile" name="amobile" placeholder="" class="form-control input-lg numberOnly" maxlength="10" />
+                <p class="help-block">Alternate Mobile can contain only numbers with 10 digit</p>
+              </div>
+            </div>
+			
+			<div class="control-group">
+              <!-- Mobile -->
+              <span class="pull-right" id="qualification-error"></span>
+              <label class="control-label"  for="qualification">Qualification</label>
+              <div class="controls">
+                <input type="text" id="qualification" name="qualification" placeholder="" class="form-control input-lg " required data-parsley-errors-container="#qualification-error"  />
+                <p class="help-block">Please enter your qualification here</p>
+              </div>
+            </div>
+			
+			<div class="control-group">
+              <!-- Mobile -->
+              <span class="pull-right" id="exp-error"></span>
+              <label class="control-label"  for="exp">Experience</label>
+              <div class="controls">
+                <input type="text" id="exp" name="exp" placeholder="" class="form-control input-lg numberOnly" required data-parsley-errors-container="#exp-error"  />
+                <p class="help-block">Please enter your total work experience here</p>
+              </div>
+            </div>
+			
+			 <div class="control-group">
+              <!-- Mobile -->
+              <span class="pull-right" id="sdob-error"></span>
+              <label class="control-label"  for="sdob">Original D O B</label>
+              <div class="controls">
+                <input type="date" id="sdob" name="sdob" placeholder="" class="form-control input-lg" required data-parsley-errors-container="#sdob-error" />
+                <p class="help-block">Must be 13 years old</p>
+              </div>
+            </div>
+			
+			 <div class="control-group">
+              <!-- Mobile -->
+              <span class="pull-right" id="cdob-error"></span>
+              <label class="control-label"  for="cdob">Certificate D O B</label>
+              <div class="controls">
+                <input type="date" id="cdob" name="cdob" placeholder="" class="form-control input-lg" required data-parsley-errors-container="#cdob-error" />
+                <p class="help-block">Must be 13 years old</p>
+              </div>
+            </div>
+			
+			
+			  <div class="control-group">
+              <!-- Mobile -->
+              <span class="pull-right" id="aadhar-error"></span>
+              <label class="control-label"  for="aadhar">Aadhar Card Number</label>
+              <div class="controls">
+                <input type="text" id="aadhar" name="aadhar" placeholder="" class="form-control input-lg numberOnly" required data-parsley-errors-container="#aadhar-error" maxlength="15" />
+                <p class="help-block">Please enter Aadhar card number</p>
               </div>
             </div>
             

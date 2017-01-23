@@ -106,9 +106,12 @@ list($advertiseList,$pagination) = $location->getAlladvertise(1);
                                      <th>Name</th>
                                       <th>email</th>
                                       <th>Address</th>
+									  <th>DOB</th>
+									  <th>Experience</th>
+									  <th>Qualification</th>
 									  <th>Mobile</th>
 									  <th>Date</th>
-                                      <th style="width:185px;">Action</th>
+                                      <th>Action</th>
 								  </tr>
 							  </thead>   
 							  <tbody>
@@ -126,8 +129,10 @@ list($advertiseList,$pagination) = $location->getAlladvertise(1);
                                     <td><?=$adv['contact_person']?></td>
                                     <td><?=$adv['email']?></td>
 									<td><?=$adv['address1']?>,<?=$adv['address2']?>,<?=$adv['countryname']?>,<?=$adv['statename']?>,<?=$adv['cityname']?>,<?=$adv['pincode']?></td>
+									<td><?=date("d-m-Y",strtotime($adv['dob']))?></td>
+									<td><?=$adv['experience']?> yrs</td>
+									<td><?=$adv['qualification']?></td>
 									<td><?=$adv['mobile']?></td>
-									
 									<td><?=date("d-M-Y h:i:s",strtotime($adv['date_added']))?></td>
 									
                                     <td>
