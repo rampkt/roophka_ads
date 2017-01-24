@@ -25,7 +25,7 @@ body {
 	color:#666 !important;
 }
 .caption {
-    height: 90px;
+    height: 80px;
     overflow: hidden;
 }
 .cartcss
@@ -120,6 +120,7 @@ footer {
 .rib-btm
 {
 	padding-top:80px;
+	padding-right:0px;
 }
 
 .ribbon{
@@ -185,19 +186,117 @@ footer {
   margin:0 auto;
   background:#fff;
   margin-bottom:30px;
-  
+  padding-right:15px;
   }
    .adsbox3{
-  height:200px;
+  height:195px;
   width:100%;
   box-shadow:inset 0 0 15px #ccc;
   position:relative;
   margin:0 auto;
   background:#fff;
   margin-bottom:30px;
-  
+  padding-right:15px;
   }
-
+  
+  .popleft
+  {
+	  background-color:#63b81d;
+	  height:380px;
+	  width:250px;
+  }
+  .poprght
+  {
+	  padding:10px 50px;
+  }
+  .popleft li
+  {
+	  color:#fff;
+	  list-style-type:none;
+	  line-height:30px;
+  }
+  .imght
+  {
+	  height:250px;
+	  padding:20px;
+  }
+  .modal-body {
+  position: relative;
+  max-height: 400px;
+  padding: 0px;
+  overflow-y: auto;
+ 
+}
+.modal-content
+{
+	border-radius:0px;
+}
+ .modal
+ {
+	margin-top:72px; 
+	
+ }
+ 
+ .txt-reg
+ {   border:none;
+	 border-bottom:1px solid #CCC;
+	 width:300px;
+	 padding:5px;
+ }
+ .regtexttop
+ {
+	 margin:30px 0px;
+ }
+ .btncss
+ {
+	 width:300px;
+	 background-color:#63b81d;
+	 padding:5px;
+	 
+ }
+ .forgotcss
+ {
+	color:#63b81d;
+    	
+ }
+ 
+ .tab
+ {
+	 float:left;
+	 font-size:18px;
+	 width:80px;
+	 padding-bottom:40px;
+ }
+ .tab a
+ {
+	 color:#999;
+	text-decoration:none;
+ }
+ 
+ .tab .active
+ {
+	 color:#63b81d;
+	 border-bottom:2px solid #63b81d;
+ }
+ 
+ 
+ .btn-success
+ {
+	background-color:#63b81d;
+    border:1px solid #63b81d;	
+ }
+ .smalltext
+ {
+	color:#999;
+    font-size:11px;	
+	padding-top:10px;
+	width:300px;
+ }
+ .smalltext a
+ {
+  color:#63b81d; 
+ }
+  
 .input-lg-textgray
 {
 	height:33px;
@@ -269,6 +368,9 @@ footer {
   {
 	display:block !important;
   }
+  .modal-dialog {
+    width: 650px;
+}
  
 @media (max-width: 768px) {
 	

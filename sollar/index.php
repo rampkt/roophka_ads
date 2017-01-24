@@ -72,10 +72,10 @@
                         <a href="#"><img src="images/cart.png">&nbsp;Cart</a>
                     </li>
                     <li>
-                        <a href="#"><img src="images/user.png">&nbsp;Register</a>
+                        <a href="javascript:void(0);"  data-toggle="modal" data-target="#myModal" id="menureg"><img src="images/user.png">&nbsp;Register</a>
                     </li>
                     <li>
-                        <a href="#">Login</a>
+                        <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" id="menulogin">Login</a>
                     </li>
                 </ul>
             </div>
@@ -713,9 +713,109 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="col-sm-12 col-lg-12 col-md-12">
+		 <div class="row">
+		 <div class="col-sm-6 col-lg-6 col-md-6 popleft">
+		 <div class="imght"><img src="images/pop.png"></div>
+		 <div>
+		 <ul>
+		 <li><img src="images/tick.png"> Non-polluting</li>
+		 <li><img src="images/tick.png"> Renewable</li>
+		 <li><img src="images/tick.png"> Low maintenance</li>
+		 </ul>
+		 </div>
+		 </div>
+		 
+		 <div class="col-sm-6 col-lg-6 col-md-6 poprght">
+		 <div>
+		 <div class="tab"><a href="javascript:void(0);" id="tablogin">Login</a></div>
+		 <div class="tab"><a href="javascript:void(0);" id="tabreg" class="active">Sign up</a></div>
+		 </div>
+		 
+		 <div id="login" style="display:none">
+		   
+		   <div class="regtexttop">
+		   <input type="email" name="email" id="email" placeholder="Email Id" class="txt-reg">
+		   </div>
+		   <div class="regtexttop">
+		   <input type="password" name="password" id="password" placeholder="Password" class="txt-reg">
+		   </div>
+		   <br>
+		   <div>
+		   <input type="submit" name="submit" value="Login" class="btn btn-lg btn-success btncss">
+		   </div>
+		   
+		   <div style="padding-top:10px;"><a href="#" class="forgotcss">Forgot Password? </a></div>
+		   
+		 </div>
+		 
+		 
+		 <div id="register">
+		   <div class="regtexttop">
+		   <input type="text" name="username" id="username" placeholder="Your Name" class="txt-reg">
+		   </div>
+		   <div class="regtexttop">
+		   <input type="email" name="email" id="email" placeholder="Email Id" class="txt-reg">
+		   </div>
+		   <div class="regtexttop">
+		   <input type="password" name="password" id="password" placeholder="Password" class="txt-reg">
+		   </div>
+		   <br>
+		   <div>
+		   <input type="submit" name="submit" value="Register" class="btn btn-lg btn-success btncss">
+		   </div>
+		   
+		   <div class="smalltext">By signing up you agree to our <a href="#">T&C </a> and <a href="#">Privacy Policy</a>.</div>
+		   
+		 </div>
+		 
+		 
+		 
+		 </div>
+		 
+		</div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
+<script>
+$( "#tablogin" ).click(function() {
+  $("#tablogin").addClass('active');
+  $("#tabreg").removeClass('active');
+  $("#login").show();
+  $("#register").hide();
+});
+$( "#tabreg" ).click(function() {
+  $("#tabreg").addClass('active');
+  $("#tablogin").removeClass('active');
+  $("#login").hide();
+  $("#register").show();
+});
+
+$( "#menulogin" ).click(function() {
+  $("#tablogin").addClass('active');
+  $("#tabreg").removeClass('active');
+  $("#login").show();
+  $("#register").hide();
+});
+$( "#menureg" ).click(function() {
+  $("#tabreg").addClass('active');
+  $("#tablogin").removeClass('active');
+  $("#login").hide();
+  $("#register").show();
+});
+
+</script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">var switchTo5x=true;</script>
