@@ -45,6 +45,9 @@ if($_REQUEST['action'] == 'dologin') {
 		redirect(HTTP_PATH . 'login.php?error=1');
 	}
 	$pass = enc_password($pass);
+	
+	//echo "SELECT id,email,firstname,account_balance,lastlogin,status,phone,demo,spl_recharge FROM `roo_users` WHERE email='".$user."' AND pass='".$pass."'"; exit;
+	
 	$userQry = $db->query("SELECT id,email,firstname,account_balance,lastlogin,status,phone,demo,spl_recharge FROM `roo_users` WHERE email='".$user."' AND pass='".$pass."'");
 	$num = $db->num_rows($userQry);
 	if($num == 1) {
