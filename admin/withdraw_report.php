@@ -142,7 +142,7 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
 							  ?>
 								<tr>
 									<td><?=$sno?></td>
-									 <td><a href="viewprofile.php?action=view&id=<?=$wdrw['userid']?>" style="color:blue;"><?=$wdrw['username']?></a></td>
+									 <td><a href="viewprofile.php?action=view&id=<?=$wdrw['userid']?>" style="color:#08c;"><?=$wdrw['username']?></a></td>
                                     <td><?=$wdrw['email']?></td>
                                     <td><?=$wdrw['amount']?></td>
 									<td><?=$wdrw['details']?></td>

@@ -479,7 +479,7 @@ if($emailinput==2){
                                       <!-- <input type="file" name="emailexternal" id="emailexternal" class="input-xlarge" onmouseout="externalfn();"  />-->
 									  <input type="button" name="upbtn" id="upbtn" value="Browse" onclick="uplfn();" onmouseout="externalfn();"><span id="spanfile">&nbsp;</span>
 									  
-									  <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:blue;">here.</a></p>
+									  <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:#08c;">here.</a></p>
                                      
                                       </div>
                                     </div>

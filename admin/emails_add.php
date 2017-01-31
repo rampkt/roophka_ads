@@ -157,7 +157,7 @@ if(isset($_REQUEST['action'])and ($_REQUEST['action']=="_addemails")) {
                                       <label class="control-label" for="content">Upload Emails:</label>
                                       <div class="controls">
                                        <input type="file" name="fileemail" id="fileemail" class="input-xlarge" onchange="ValidateFileUploadCSV();" />
-									   <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:blue;">here.</a></p>
+									   <p class="help-block">Sample CSV file <a href="./csv/sample.csv" style="color:#08c;">here.</a></p>
                                       </div>
                                     </div>
                                     
