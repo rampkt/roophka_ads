@@ -193,7 +193,7 @@ if(isset($_REQUEST['action']) AND $_REQUEST['action'] == '_add_settings') {
                                     <div class="control-group ">
                                       <label class="control-label" for="description">Description:</label>
                                       <div class="controls">
-                                        <textarea class="cleditor" id="description" rows="3" name="description"required><?=$settings->description?></textarea>
+                                        <textarea class="cleditor" id="description" rows="3" name="description" required><?=$settings->description?></textarea>
                                       </div>
                                     </div>
                                     <div class="form-actions">

@@ -83,14 +83,14 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
             <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>Success!</strong> Withdraw Request has been Approved successfully.
+                <strong>Success!</strong> Withdraw Report has been Approved successfully.
             </div>
             <div class="clearfix" style="margin-bottom:20px;"></div>
             <? } ?>
             <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '2') { ?>
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>Success!</strong> Withdraw Request has been Declined successfully.
+                <strong>Success!</strong> Withdraw Report has been Declined successfully.
             </div>
             <div class="clearfix" style="margin-bottom:20px;"></div>
             <? } ?>
@@ -102,7 +102,7 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
 					<div class="box-header">
 						<h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Withdraw Report</h2>
 						<div class="box-icon">
-						<form name="search" action="withdraw_request.php" method="get">
+						<form name="search" action="withdraw_report.php" method="get">
 						<div class="row-fluid" style="height:30px;margin-top:-10px;">
 			
 			<div class="pull-right"><a href="javascript:void(0);" onclick="withdrawreportfn();"; class="btn btn-small ">Search</a></div>
@@ -134,7 +134,7 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
                               <?
 							  if(empty($withdrawList)){
 							  ?>
-                              <tr><td colspan="9" style="text-align:center;" class="text-error">No withdraw request available to show....</td></tr>
+                              <tr><td colspan="9" style="text-align:center;" class="text-error">No withdraw Report available to show....</td></tr>
                               <?
 							  } else {
 								  $sno = $start + 1;
@@ -142,7 +142,7 @@ list($withdrawList,$pagination) = $withdraw->getAllwithdrawreport($date);
 							  ?>
 								<tr>
 									<td><?=$sno?></td>
-									 <td><?=$wdrw['username']?></td>
+									 <td><a href="viewprofile.php?action=view&id=<?=$wdrw['userid']?>" style="color:blue;"><?=$wdrw['username']?></a></td>
                                     <td><?=$wdrw['email']?></td>
                                     <td><?=$wdrw['amount']?></td>
 									<td><?=$wdrw['details']?></td>

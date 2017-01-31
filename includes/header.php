@@ -176,9 +176,11 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
 				   </ul>
 				   
 				   </li>
-				   <?php } else { ?>
+				   <?php } else { 
+				   if($_SESSION['roo']['user']['demo']=='0'){
+				   ?>
 				    <li <? if($pagename == 'recharge') { ?>class="current"<? } ?>><a href="./recharge_proceed.php?view=order">Recharge</a></li>
-				   <?php } ?>
+				   <?php }} ?>
 				  
                   <li <? if($pagename == 'viewads') { ?>class="current"<? } ?>><a href="./viewadslist.php">View ads</a></li>
                   <? if(!isset($_SESSION['roo']['user'])) { ?>
@@ -203,6 +205,7 @@ $qry_scroll = $db->query("SELECT * FROM roo_cms WHERE id='1'");
 function rechargepopup(id) 
 {
     var e = document.getElementById(id);
+	
     if (e.style.display == 'block' || e.style.display=='')
     {
         e.style.display = 'none';

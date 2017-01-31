@@ -158,7 +158,7 @@ list($userList,$pagination) = $users->getAllUsers($date);
 							  ?>
 								<tr>
 									<td><?=$sno?></td>
-									 <td><?=$usr['firstname']?></td>
+									 <td><a href="viewprofile.php?action=view&id=<?=$usr['id']?>" style="color:blue;"><?=$usr['firstname']?></a></td>
                                     <td><?=$usr['email']?></td>
                                     
 									<td class="center"><?=date('d-M-Y h:i A', strtotime($usr['signupdate']))?></td>
