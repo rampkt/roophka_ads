@@ -5,10 +5,8 @@ include("./functions/location.php");
 
 $reg = new register();
 
-
-
-
-if(isset($_REQUEST['action'])) {
+if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App'))
+	{
 
 	if($_REQUEST['action'] == 'login')
 	{
@@ -95,6 +93,58 @@ if(isset($_REQUEST['action'])) {
 		$result['verify'] == 'Please check and verify your email';
 	}
 	echo "[".json_encode($result)."]";exit;
+	}
+	
+	if($_REQUEST['action']=='state')
+	{
+		$output=array("error" => false,"state"=>"");
+		
+		
+		$cid=$_REQUEST['cid'];
+		if($cid > 0) {
+			$stateQry = $db->query("SELECT id, name FROM roo_state WHERE cid = '".$cid."' AND status=0 order by name asc");
+			if($db->num_rows($stateQry) > 0) {
+				while($stateRow = $db->fetch_array($stateQry)) {
+				// $output['statename']=$stateRow['name'];
+				//	$output['sid']=$stateRow['id'];
+				 $state[]=array("name"=>$stateRow['name'],"sid"=>$stateRow['id']); 
+				//json_encode($state);
+				}
+				$output['state']=$state;
+				
+			}
+			else
+			{
+				$output['error']=true;
+				$output['state']="No States found";
+			}
+			
+		}
+		echo "[".json_encode($output)."]";exit;
+	}
+	if($_REQUEST['action']=='city')
+	{
+		$output=array("error" => false,"city"=>"");
+		
+		$sid=$_REQUEST['sid'];
+		if($sid > 0) {
+			$cityQry = $db->query("SELECT id, name FROM roo_city WHERE sid = '".$sid."' AND status=0 order by name asc");
+			if($db->num_rows($cityQry) > 0) {
+				while($cityRow = $db->fetch_array($cityQry)) {
+				 $city[]=array("name"=>$cityRow['name'],"cityid"=>$cityRow['id']); 
+				//json_encode($state);
+				}
+				$output['city']=$city;
+				
+			}
+			else
+			{
+				$output['error']=true;
+				$output['state']="No States found";
+			}
+			
+		}
+		echo "[".json_encode($output)."]";exit;
 	}
 	
 }
