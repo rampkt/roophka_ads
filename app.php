@@ -1,14 +1,21 @@
 <?php
 include_once("./config/config.php");
+include("./functions/register.php");
+include("./functions/location.php");
 
-$output = array('error' => '', 'session_id'=>'','msg' => '');
+$reg = new register();
+
+
 
 
 if(isset($_REQUEST['action'])) {
 
 	if($_REQUEST['action'] == 'login')
 	{
-		$user = $db->escape_string($_REQUEST['username']);
+		
+	$output = array('error' => '', 'session_id'=>'','msg' => '');
+		
+	$user = $db->escape_string($_REQUEST['username']);
 	$pass = $db->escape_string($_REQUEST['password']);
 	
 	if($user == '' || $pass == '') {
@@ -36,14 +43,59 @@ if(isset($_REQUEST['action'])) {
 	
 	   $output['msg']="success";
 	}
-	}
 		
 	} else {
 		$output['error']="not exist";
 	}
+	echo "[".json_encode($output)."]"; exit;
+}
 	
+	if($_REQUEST['action'] == 'register')
+	{
+		
+		$reg->name = $db->escape_string($_REQUEST['name']);
+	$reg->email = $db->escape_string($_REQUEST['email']);
+	$reg->password = $db->escape_string($_REQUEST['password']);
+	$reg->mobile = $db->escape_string($_REQUEST['mobile']);
+	$reg->dob = $db->escape_string($_REQUEST['dob']);
+	$reg->address = $db->escape_string($_REQUEST['address']);
+	$reg->state = $db->escape_string($_REQUEST['state']);
+	$reg->city = $db->escape_string($_REQUEST['city']);
+	$reg->pincode = $db->escape_string($_REQUEST['pincode']);
 	
+	$result = $reg->save();
+  
+	if($result['error']) {
+		if($result['msg'] == 'empty')
+			$result['error']="All input fields are mandatory";
+		elseif($result['msg'] == 'insert')
+			$result['msg']="Not inserted";
+		elseif($result['msg'] == 'duplicate')
+			$result['msg']="Email already exists";
+		else
+			$result['error']="Not inserted";
+	}else {
+		$result['error']=false;
+			$result['msg']="Inserted Successfully";
+		$to = array($reg->email);
+		$from = 'info@roophka.com';
+		$subject = "Roophka : Registration complete.";
+    $encarray = array('userid'=>$result['userid'], 'action'=>'verify', 'type'=>'email');
+    $enc = three_layer_encrypt('',$encarray);
+    $message = '<div style="width:600px;">
+    Dear '.$reg->name.'<br>
+    <p>Welcome to ROOPHKA.COM</p>
+    <p>Please verify your mail address by clicking below link.</p>
+    <a href="'.HTTP_PATH.'userlogin.php?enc='.$enc.'">Click here to verify</a><br /><br />
+    Thanks & regards,<br />
+    <a href="'.HTTP_PATH.'">roophka.com</a>
+    </div>';
+		
+		$mailler->sendmail($to, $from, $subject, $message);
+		$result['verify'] == 'Please check and verify your email';
+	}
+	echo "[".json_encode($result)."]";exit;
 	}
 	
-echo json_encode($output); exit;
+}
 ?>
