@@ -23,17 +23,30 @@ $ads = new ads;
 	$typ='all'; 
  }
 
+ //echo $_SESSION['roo']['user']['demo'];
+ 
+if((isset($_SESSION['roo']['user']['demo']))&&($_SESSION['roo']['user']['demo'] == 1)) {
+	if(isset($_REQUEST['id']))
+{
+	//echo "sdfdsf";
+    $currentAd = $ads->getDemoAd($_REQUEST['id'],$typ,false);
+}
+else {
+    $currentAd = $ads->getDemoAd(0,$typ,false);
+}
 
+} else{
 if(isset($_REQUEST['id']))
 {
 	 $currentAd = $ads->getAd($_REQUEST['id'],$typ);
 }else {
-if($_SESSION['roo']['user']['demo'] == 1) {
-    $currentAd = $ads->getDemoAd(false);
-} else {
     $currentAd = $ads->getAd(0,$typ);
 }
 }
+
+
+//print_r($currentAd);
+
 
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='_add_findlocation'))
 {
@@ -46,8 +59,8 @@ $_SESSION['lng']=$val['lng'];
  //echo "Latitude: ".$_SESSION['lat']."<br>";
  //echo "Longitude: ".$_SESSION['lng']."<br>"; exit;
 }
- function getLnt($zip){
-$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($zip)."&sensor=false";
+  function getLnt($zip){
+$url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAK-1Q2Z8KGzQMWuGHLKubFbuLhlII7u3Q&address=".urlencode($zip)."&sensor=false";
 //$result_string = file_get_contents($url);
 $ch = curl_init();
 // Disable SSL verification

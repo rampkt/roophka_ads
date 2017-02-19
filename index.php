@@ -20,19 +20,18 @@ $videoad = $ads->getHomevideoAd();
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='_add_findlocation'))
 {
 	$zipcode=trim($_REQUEST['zipcode']);
-$val = getLnt($zipcode);
-
-$_SESSION['lat']=$val['lat'];
-$_SESSION['lng']=$val['lng'];
-
- //echo "Latitude: ".$_SESSION['lat']."<br>";
- //echo "Longitude: ".$_SESSION['lng']."<br>"; exit;
+  $val = getLnt($zipcode);
+  $_SESSION['lat']=$val['lat'];
+  $_SESSION['lng']=$val['lng'];
 }
 
 //echo "Latitude: ".$_SESSION['lat']."<br>";
  //echo "Longitude: ".$_SESSION['lng']."<br>"; 
- function getLnt($zip){
-$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($zip)."&sensor=false";
+ function getLnt($zip){ 
+$url = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAK-1Q2Z8KGzQMWuGHLKubFbuLhlII7u3Q&address=".urlencode($zip)."&sensor=false";
+
+//echo $url; exit;
+
 $ch = curl_init();
 // Disable SSL verification
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -248,7 +247,7 @@ var lngval="<?php if(isset($_SESSION['lng'])) { echo $_SESSION['lng']; }else{ ec
 var autovdval="<?php if(isset($_SESSION['autoenable'])){ echo $_SESSION['autoenable'];}else{echo "0";} ?>";
  function locationaddfn(val)
   {
-	  //alert("adad");
+	  //alert("adad" + val);
 	  if(val==1)
 	  {
 	  //document.getElementById('light').style.display='block';

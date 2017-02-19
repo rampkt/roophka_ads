@@ -173,7 +173,7 @@ list($orderList,$pagination) = $recharge->getAllorders($Order);
 							  ?>
 								<tr>
 									<td><?=$sno?></td>
-                                    <td> <?=$recharge->getusername($order['user_id'])?></td>
+                                    <td> <a href="viewprofile.php?action=view&id=<?=$order['user_id']?>" style="color:#08c;"><?=$recharge->getusername($order['user_id'])?></a></td>
                                     <td><?=$order['mobile']?></td>
                                     <td><?=$order['amount']?></td>
 									<td><?=$order['apiorder_id']?></td>
