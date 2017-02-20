@@ -3,7 +3,6 @@ include_once("./config/config.php");
 
 $output = array('response_code' => -1, 'error' => 'Invalid Request', 'session_id'=>'','msg' => 'No action performed for your request, Please send valid information.');
 
-include("./functions/register.php");
 include("./functions/location.php");
 include("./functions/cms.php");
 
@@ -51,6 +50,76 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 		//exit;
 	}
 
+	if($_REQUEST['action'] == 'submitad')	{
+		include("./functions/user.php");
+		$usr = new user();
+		
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+
+		$user = $usr->fulldetails($_REQUEST['session_id']);
+
+		$ip_addr=$_REQUEST['ip'];
+		/*$lat=$_REQUEST['lat'];
+		$lng=$_REQUEST['lng'];
+		
+		$conlatlng=$lat.",".$lng;
+		// Get the string from the URL
+		$url="https://maps.googleapis.com/maps/api/geocode/json?latlng=$conlatlng";
+		//echo $url;
+        $json = file_get_contents($url);
+		// Decode the JSON string into an object
+		$obj = json_decode($json);
+		// In the case of this input, do key and array lookups to get the values
+		$vistorlocation=$obj->results[0]->formatted_address; 
+
+		$visitexp=explode(',',$vistorlocation);
+		$vcount=count($visitexp);
+		$vcity=$visitexp[$vcount-3];
+		$varea=$visitexp[$vcount-4];*/
+
+		$vistorlocation='';
+		$vcity='';
+		$varea='';
+		
+		if(!isset($_REQUEST['adid']) OR $_REQUEST['adid'] < 1) {
+			$output['msg'] = 'Something went wrong. Please referesh the page or try again later.';
+		} else {
+			$adid = $_REQUEST['adid'];
+			$qry = $db->query("SELECT * FROM roo_ads WHERE id = '".$adid."'");
+			if($db->num_rows($qry) > 0) {
+				
+				$adRow = $db->fetch_array($qry);
+				
+				$balance = $user['account_balance'];
+				$user_id = $user['id'];
+				
+				//echo "INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added, demo,ipaddr,visitor_city,visitor_area,visitor_location) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."', 1,'".$ip_addr."','".$vcity."','".$varea."','".$vistorlocation."')"; exit;
+				
+				if($user['demo'] == 1) {
+					$db->query("INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added, demo,ipaddr,visitor_city,visitor_area,visitor_location) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."', 1,'".$ip_addr."','".$vcity."','".$varea."','".$vistorlocation."')");
+				} else {
+					$db->query("INSERT INTO roo_transaction (userid, adid, type, detail, amount, date_added,demo,ipaddr,visitor_city,visitor_area,visitor_location) VALUES ('".$user_id."', '".$adid."', 'add', 'Credit for watching ad', '".$adRow['amount']."', '".DATETIME24H."','0','".$ip_addr."','".$vcity."','".$varea."','".$vistorlocation."')");
+				}
+				
+				$db->query("UPDATE roo_ads SET clicks_remain = (clicks_remain - 1), viewing = 0 WHERE id = '".$adid."' LIMIT 1");
+				$db->query("UPDATE roo_users SET account_balance = (account_balance + ".$adRow['amount'].") WHERE id = '".$user_id."' LIMIT 1");
+				
+				$user['account_balance'] = number_format(($balance + $adRow['amount']), 2);
+
+				$output['response_code']=2;
+				$output['error'] = false;
+				$output['msg'] = '';
+				$output['account_balance'] = $user['account_balance'];
+			} else {
+				$output['response_code']=-2;
+				$output['msg'] = 'Something went wrong. Please referesh the page or try again later.';
+			}
+		}
+		echo "[".json_encode($output)."]";exit;
+	}
+
 	if($_REQUEST['action'] == 'login')	{
 			
 		$output = array('error' => '', 'session_id'=>'','msg' => '');
@@ -73,18 +142,18 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 				$output['error']="inactive";
 			}else{
 			
-			$db->query("UPDATE `roo_users` SET lastlogin='".DATETIME24H."' WHERE id='".$userRow['id']."'");
+				$db->query("UPDATE `roo_users` SET lastlogin='".DATETIME24H."' WHERE id='".$userRow['id']."'");
+				
+				$output['session_id'] = $userRow['id'];
+				
+			   	$output['msg']="success";
+			}
 			
-			$output['session_id'] = $userRow['id'];
-			
-		   	$output['msg']="success";
+		} else {
+			$output['error']="not exist";
 		}
-		
-	} else {
-		$output['error']="not exist";
+		echo "[".json_encode($output)."]"; exit;
 	}
-	echo "[".json_encode($output)."]"; exit;
-}
 	
 	if($_REQUEST['action'] == 'advertiseus')
 	{
@@ -205,7 +274,7 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 	    </div>';
 			
 			$mailler->sendmail($to, $from, $subject, $message);
-			$result['verify'] == 'Please check and verify your email';
+			//$result['verify'] = 'Please check and verify your email';
 		}
 		echo "[".json_encode($result)."]";exit;
 	}
