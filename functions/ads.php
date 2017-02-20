@@ -15,7 +15,7 @@ class ads {
 		
 	}
 	
-	public function getDemoAd($id,$type,$demotry = false) {
+	public function getDemoAd($id,$type,$demotry = false, $app = false) {
 		
 		$this->resetAd();
 		
@@ -41,7 +41,9 @@ class ads {
 				$this->db->query("UPDATE roo_ads SET viewing = 1, view_time = '".DATETIME24H."' WHERE id = '".$result['id']."' LIMIT 1");
 			}
 			unset($result['clicks_remain']);
-			$result['html'] = $this->getAdHtml($result);
+			if(!$app) {
+				$result['html'] = $this->getAdHtml($result);
+			}
 			$demotry = true;
 			return $result;
 			
@@ -55,7 +57,7 @@ class ads {
 
 	}
 	
-	public function getAd($id,$type) {
+	public function getAd($id,$type,$app=false) {
 		
 		$this->resetAd();
 		
@@ -76,7 +78,9 @@ class ads {
 				$this->db->query("UPDATE roo_ads SET viewing = 1, view_time = '".DATETIME24H."' WHERE id = '".$result['id']."' LIMIT 1");
 			}
 			unset($result['clicks_remain']);
-			$result['html'] = $this->getAdHtml($result);
+			if(!$app) {
+				$result['html'] = $this->getAdHtml($result);
+			}
 			return $result;
 		} else {
 			return false;
