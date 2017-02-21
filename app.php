@@ -10,6 +10,35 @@ $cms=new cms();
 
 if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 
+	if($_REQUEST['action'] == 'getadlist')	{
+		
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+		include("./functions/ads.php");
+		include("./functions/user.php");
+
+		$usr = new user();
+		$ads = new ads;
+
+		$user = $usr->fulldetails($_REQUEST['session_id']);
+		$data = array();
+
+		if($user['demo'] == 1) {
+			$data['text'] = $ads->getdemoAdlist("text");
+			$data['scroll'] = $ads->getdemoAdlist("scroll");
+			$data['video'] = $ads->getdemoAdlist("video");
+			$data['image'] = $ads->getdemoAdlist("image");	
+		} else {
+			$data['text'] = $ads->getAdlist("text");
+			$data['scroll'] = $ads->getAdlist("scroll");
+			$data['video'] = $ads->getAdlist("video");
+			$data['image'] = $ads->getAdlist("image");
+		}
+		sendJson(1,$data);
+	}
+
+
 	if($_REQUEST['action'] == 'getad')	{
 		include("./functions/ads.php");
 		include("./functions/user.php");
