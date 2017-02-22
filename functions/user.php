@@ -38,8 +38,8 @@ class user
 			
 	}
 	
-	public function dashboard() {
-		
+	public function dashboard($user_id = '') {
+		if($user_id != '')
 		$user_id = $_SESSION['roo']['user']['id'];
 		$result = array();
 		

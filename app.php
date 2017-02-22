@@ -149,6 +149,26 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 		echo "[".json_encode($output)."]";exit;
 	}
 
+	/****
+	 * get dashboard details
+	 */
+	if($_REQUEST['action'] == 'dashboard')	{
+
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+
+		include("./functions/user.php");
+		include("./functions/ads.php");
+		$user = new user;
+		$ads = new ads;
+
+		$ads->resetAd();
+		$database = $user->dashboard($_REQUEST['session_id']);
+
+		sendJson(1,$database);
+	}
+
 	if($_REQUEST['action'] == 'login')	{
 			
 		$output = array('error' => '', 'session_id'=>'','msg' => '');
