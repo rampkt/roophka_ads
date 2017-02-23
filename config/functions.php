@@ -303,25 +303,35 @@ function pagination_ajax($reload, $page, $tpages, $adjacents = 2, $prevlabel = "
 function sendJson($code = -1, $data = array(), $message = '') {
 	global $db;
 
+	$output = array();
+	$output['response_code'] = $code;
+	$output['error'] = false;
+	$output['session_id'] = '';
+	$output['msg'] = $message;
+	$output['data'] = array($data);
+
 	if($code < 0) {
 		if($code == -1) {
-			$output = array(
+			$output['error'] = 'Invalid Request';
+			$output['msg'] = 'No action performed for your request, Please send valid information.';
+			/*$output = array(
 					'response_code' => $code, 
 					'error' => 'Invalid Request', 
 					'session_id'=>'', 
 					'msg' => 'No action performed for your request, Please send valid information.',
 					'data' => $data
-				);
+				);*/
 		} else {
-			$output = array(
+			$output['error'] = 'Error message';
+			/*$output = array(
 					'response_code' => $code, 
 					'error' => 'Error message', 
 					'session_id'=>'', 
 					'msg' => $message,
 					'data' => $data
-				);
+				);*/
 		}
-	} else {
+	} /*else {
 		$output = array(
 				'response_code' => $code, 
 				'error' => '', 
@@ -329,7 +339,7 @@ function sendJson($code = -1, $data = array(), $message = '') {
 				'msg' => $message,
 				'data' => $data
 			);
-	}
+	}*/
 
 
 	ob_clean();
