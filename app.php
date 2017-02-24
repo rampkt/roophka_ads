@@ -45,13 +45,15 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 
 		$ads = new ads;
 		$usr = new user();
+		$_SESSION['roo'] = array();
 
 		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
 			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
 		}
 
 		$user = $usr->fulldetails($_REQUEST['session_id']);
-
+		$_SESSION['roo']['user'] = $user;
+		
 		if(isset($_REQUEST['type']))
 		{
 		 	$typ=$_REQUEST['type'];
@@ -74,6 +76,7 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 			    $currentAd = $ads->getAd(0,$typ,true);
 			}	
 		}
+		$currentAd['user_balance'] = $user['account_balance'];
 		$data = $currentAd;
 		sendJson(1,$data);
 		//exit;
