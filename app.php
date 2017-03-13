@@ -168,10 +168,33 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 
 		$ads->resetAd();
 		$database = $user->dashboard($_REQUEST['session_id']);
-
+		$database['account_balance'] = $user->getAccountBalance($_REQUEST['session_id']);
 		sendJson(1,$database);
 	}
 
+	/****
+	 * get list of transaction details
+	 */
+	if($_REQUEST['action'] == 'transaction')	{
+
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+
+		include("./functions/user.php");
+		include("./functions/ads.php");
+		$user = new user;
+		//$ads = new ads;
+
+		//$ads->resetAd();
+		$database = $user->transactions($_REQUEST['session_id']);
+		$database['account_balance'] = $user->getAccountBalance($_REQUEST['session_id']);
+		sendJson(1,$database);
+	}
+
+	/****
+	 * User login
+	 */
 	if($_REQUEST['action'] == 'login')	{
 			
 		$output = array('error' => '', 'session_id'=>'','msg' => '');

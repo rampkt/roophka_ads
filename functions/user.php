@@ -91,6 +91,18 @@ class user
 		
 		return $userRow;
 	}
+
+	public function getAccountBalance($user_id = 0) {
+		
+		if($user_id == 0) { 
+			$user_id = $_SESSION['roo']['user']['id'];
+		}
+		
+		$userQry = $this->db->query("SELECT account_balance FROM roo_users WHERE id = '".$user_id."'");
+		$userRow = $this->db->fetch_array($userQry);
+		
+		return $userRow['account_balance'];
+	}
 	
 	public function transactions($user_id = 0) {
 		if($user_id == 0) { 
