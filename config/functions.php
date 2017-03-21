@@ -63,8 +63,9 @@ function check_admin_login() {
 }
 
 function is_login() {
-	
+	global $db;
 	if(isset($_SESSION['roo']['user'])) {
+		$db->close();
 		header("Location:./index.php");
 		exit;
 	}
@@ -72,8 +73,9 @@ function is_login() {
 }
 
 function is_admin_login() {
-	
+	global $db;
 	if(!isset($_SESSION['roo']['admin_user'])) {
+		$db->close();
 		header("Location:./index.php");
 		exit;
 	}
@@ -107,7 +109,9 @@ function get_head_js($js) {
 }
 
 function redirect($url) {
+	global $db;
 	ob_clean();
+	$db->close();
 	header("Location:".$url);
 	exit;
 }
@@ -179,11 +183,11 @@ function getTotalPage($count, $limit) {
 function pagination($reload, $query, $page, $tpages, $adjacents = 2, $prevlabel = "&laquo; Prev", $nextlabel = "Next &raquo;") {
 	
 	if($tpages == 0) {
-		return '';exit;
+		return '';
 	}
 	
 	if($page == $tpages AND $page == 1) {
-		return '';exit;
+		return '';
 	}
 	
 	$reloadPage = $reload . (($query == '') ? '?' : '?'.$query.'&');
@@ -240,11 +244,11 @@ function pagination($reload, $query, $page, $tpages, $adjacents = 2, $prevlabel 
 function pagination_ajax($reload, $page, $tpages, $adjacents = 2, $prevlabel = "&laquo; Prev", $nextlabel = "Next &raquo;") {
 		
 	if($tpages == 0) {
-		return '';exit;
+		return '';
 	}
 	
 	if($page == $tpages AND $page == 1) {
-		return '';exit;
+		return '';
 	}
 	
 	$adjacents = $adjacents-1;
@@ -296,4 +300,52 @@ function pagination_ajax($reload, $page, $tpages, $adjacents = 2, $prevlabel = "
 	return $out;
 }
 
+function sendJson($code = -1, $data = array(), $message = '') {
+	global $db;
+
+	$output = array();
+	$output['response_code'] = $code;
+	$output['error'] = false;
+	$output['session_id'] = '';
+	$output['msg'] = $message;
+	$output['data'] = array($data);
+
+	if($code < 0) {
+		if($code == -1) {
+			$output['error'] = 'Invalid Request';
+			$output['msg'] = 'No action performed for your request, Please send valid information.';
+			/*$output = array(
+					'response_code' => $code, 
+					'error' => 'Invalid Request', 
+					'session_id'=>'', 
+					'msg' => 'No action performed for your request, Please send valid information.',
+					'data' => $data
+				);*/
+		} else {
+			$output['error'] = 'Error message';
+			/*$output = array(
+					'response_code' => $code, 
+					'error' => 'Error message', 
+					'session_id'=>'', 
+					'msg' => $message,
+					'data' => $data
+				);*/
+		}
+	} /*else {
+		$output = array(
+				'response_code' => $code, 
+				'error' => '', 
+				'session_id'=>'', 
+				'msg' => $message,
+				'data' => $data
+			);
+	}*/
+
+
+	ob_clean();
+	header('Content-Type: application/json');
+	echo "[".json_encode($output)."]";
+	$db->close();
+	exit;
+}
 ?>
