@@ -1,6 +1,11 @@
 <?php
 error_reporting(0);
 include_once("./config/config.php");
+
+if($setting['recharge'] == 1) {
+	header("Location:underconstruction.php?from=recharge");exit;
+}
+
 /***
  * initial setup
  */
@@ -15,245 +20,235 @@ $user = new user;
 $ads = new ads;
 
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge'))
-			{
-				$_SESSION['recharge_mobile']=$_REQUEST['mobile'];
-				$_SESSION['recharge_operator']=$_REQUEST['operator'];
-				$_SESSION['recharge_circle']=$_REQUEST['circle'];
-				$_SESSION['recharge_amount']=$_REQUEST['amount'];
-				//redirect(HTTP_PATH . 'recharge_proceed.php');
-			}
-			if((isset($_REQUEST['type'])) && ($_REQUEST['type']=='spl'))
-			{
-				$_SESSION['spl_recharge_today']=$_REQUEST['type'];
-				//redirect(HTTP_PATH . 'recharge_proceed.php');
-			}
-			
-			
+{
+	$_SESSION['recharge_mobile']=$_REQUEST['mobile'];
+	$_SESSION['recharge_operator']=$_REQUEST['operator'];
+	$_SESSION['recharge_circle']=$_REQUEST['circle'];
+	$_SESSION['recharge_amount']=$_REQUEST['amount'];
+	//redirect(HTTP_PATH . 'recharge_proceed.php');
+}
+if((isset($_REQUEST['type'])) && ($_REQUEST['type']=='spl'))
+{
+	$_SESSION['spl_recharge_today']=$_REQUEST['type'];
+	//redirect(HTTP_PATH . 'recharge_proceed.php');
+}
+
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
-			{
-				$_SESSION['recharge_mobile']=$_REQUEST['mobile'];
-				$_SESSION['recharge_operator']=$_REQUEST['operator'];
-				$_SESSION['recharge_circle']=$_REQUEST['circle'];
-				$_SESSION['recharge_amount']=$_REQUEST['amount'];
-				//redirect(HTTP_PATH . 'recharge_proceed.php');
-				
-				$mobile=$_REQUEST['mobile'];  
-$operator=$_REQUEST['operator'];  
-if($splrc=='1')
 {
-	$amount=10; 
+	$_SESSION['recharge_mobile']=$_REQUEST['mobile'];
+	$_SESSION['recharge_operator']=$_REQUEST['operator'];
+	$_SESSION['recharge_circle']=$_REQUEST['circle'];
+	$_SESSION['recharge_amount']=$_REQUEST['amount'];
+	$_SESSION['action']=$_REQUEST['recharge_now'];
 }
-else {
-$amount=$_REQUEST['amount']; 	
-}
-
- $sessuser_id = $_SESSION['roo']['user']['id'];
-//generating random unique orderid for your reference 
-$uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
- $splrc=$_REQUEST['spl_rechr'];
-//inserting above 4 values in database first 
-//run your php query here to store values of user inputs in database 
- 
-//now run joloapi.com api link for recharge 
-$ch = curl_init(); 
-$timeout = 100; // set to zero for no timeout 
-
-$apikey="104746188241741";
-$apiuserid="roophka";
-
-$myHITurl = "http://joloapi.com/api/recharge.php?mode=1&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
-
-//echo $myHITurl;
-curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
-curl_setopt ($ch, CURLOPT_HEADER, 0); 
-curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
-curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout); 
-$file_contents = curl_exec($ch); 
-$curl_error = curl_errno($ch); 
-
-//print_r(curl_getinfo($ch));
-
-curl_close($ch); 
-
-//dump output of api if you want during test 
-//echo"$file_contents"; exit;
- $joloapiorderid='';
-// lets extract data from output for display to user and for updating databse 
-$maindata = explode(",", $file_contents); 
-$countdatas = count($maindata); 
-if($countdatas > 2) 
-{ 
-//recharge is success 
-$joloapiorderid = $maindata[0]; //it is joloapi.com generated order id 
-$txnstatus = $maindata[1]; //it is status of recharge SUCCESS,FAILED 
-$operator= $maindata[2]; //operator code 
-$service= $maindata[3]; //mobile number 
-$amount= $maindata[4]; //amount 
-$mywebsiteorderid= $maindata[5]; //your website order id 
-$errorcode= $maindata[6]; // api error code  
-$operatorid= $maindata[7]; //original operator transaction id 
-$myapibalance= $maindata[8];  //my joloapi.com remaining balance 
-$myapiprofit= $maindata[9]; //my earning on this recharge 
-$txntime= $maindata[10]; // recharge time 
-}else{ 
-//recharge is failed 
-$txnstatus = $maindata[0]; //it is status of recharge FAILED 
-$errorcode= $maindata[1]; // api error code  
-} 
- 
-//if curl request timeouts 
-
-if($curl_error=='28'){ 
-//Request timeout, consider recharge status as pending/success 
-$txnstatus = "PENDING"; 
-} 
- 
- 
-//cases 
-if($txnstatus=='SUCCESS'){ 
-//YOUR REST QUERY HERE 
-
-$qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$mywebsiteorderid','".DATETIME24H."','0')";
-
-$ins=$db->query($qry);
-
-$balance=$_SESSION['roo']['user']['account_balance']-$amount;
-$_SESSION['roo']['user']['account_balance']=$balance;
-
-
-if($splrc=='1')
-{
-	$qqry2="UPDATE roo_users SET spl_recharge='1' where id='$sessuser_id'";
-$qupd=$db->query($qqry2);
-$_SESSION['roo']['user']['spl_recharge']=1;
-}else
-{
-$qry2="UPDATE roo_users SET account_balance='$balance' where id='$sessuser_id'";
-$upd=$db->query($qry2);
-
-}
-
-
-$adminmail=$cms->getsetting('1','email');
-$opname=$user->getoperator_name($operator);
-
-//echo $opname; exit;
-
-$from = $adminmail;
-		$to = array($_SESSION['roo']['user']['email']);
-		$subject = "ROOPHKA: Your Recharge of $opname Mobile $mobile for Rs.$amount was successfull !";
-   
-    $message = '<div style="background-color: #fff;width: 650px;margin: 0 auto; box-shadow: 1px 6px 40px #aaa;border: 1px solid #ccc;padding: 10px;font-family: arial;font-size: 14px;"> 
-<table style="width:100%;border-bottom:1px dashed #ccc;font-size: 14px;" >
-<tr>
-<td style="width:55%;">
-<div>
-<a href="'.HTTP_PATH.'" target="_blank">
-<img src="'.HTTP_PATH.'assets/img/logo150X150.png" style="width:200px;height:100px;">
-<a>
-</div>
-<div>
-<h3>Transaction receipt</h3>
-<p>Order no: #'.$mywebsiteorderid.'</p>
-<p>Operator reference no: #'.$joloapiorderid.' </p>
-<p>'.date('d-m-Y h:i a').'</p>
-<br/>
-<p>'.$_SESSION['roo']['user']['phone'].'</p>
-<p><a href="mailto:'.$_SESSION['roo']['user']['email'].'">'.$_SESSION['roo']['user']['email'].'</a></p>
-</div>
-</td>
-<td style="width:38%;">
-<div>If you have any query or support! Please <a href="'.HTTP_PATH.'contactus.php">Click here</a> to reach us. </di>
-
-</td>
-<td style="width:12%;">
-<div>
-<img src="'.HTTP_PATH.'assets/img/r-logo.png">
-</div>
-
-</td>
-</tr>
-</table>
-
-<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
-<tr >
-
-<td style="width:85%;">Recharge of '.$opname.' Mobile '.$mobile.' for</td>
-<td style="width:15%;"> Rs.'.$amount.'</td>
-
-</tr>
-</table>
-<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
-<tr>
-
-<td style="width:85%;">Total</td>
-<td style="width:15%;"> Rs.'.$amount.'</td>
-
-</tr>
-</table>
-<table style="width:100%;height:70px;padding-bottom:10px;font-size: 14px;">
-<tr>
-
-<td style="width:85%;"><strong>Amount Paid</strong></td>
-<td style="width:15%;"><strong>Rs.'.$amount.'</strong></td>
-
-</tr>
-</table>
-
 	
-	<br/>
-	
-    Thanks & regards,<br />
-    <a href="'.HTTP_PATH.'">roophka.com</a>
-    </div>';
-
-	//echo $message; exit;
-	
-		$mailler->sendmail($to, $from, $subject, $message);
-unset($_SESSION['recharge_mobile']);
-unset($_SESSION['recharge_operator']);
-unset($_SESSION['recharge_circle']);
-unset($_SESSION['recharge_amount']);
-redirect(HTTP_PATH . 'recharge_proceed.php?report=success&view=order');
-}  
-if($txnstatus=='PENDING'){ 
-//YOUR REST QUERY HERE 
-$qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$uniqueorderid','".DATETIME24H."','0')";
-
-$ins=$db->query($qry);
-unset($_SESSION['recharge_mobile']);
-unset($_SESSION['recharge_operator']);
-unset($_SESSION['recharge_circle']);
-unset($_SESSION['recharge_amount']);
-redirect(HTTP_PATH . 'recharge_proceed.php?report=pending&view=order');
-} 
-if($txnstatus=='FAILED'){ 
-//YOUR REST QUERY HERE 
-$qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$uniqueorderid','".DATETIME24H."','0')";
-
-//echo $qry; exit;
-
-$ins=$db->query($qry);
-unset($_SESSION['recharge_mobile']);
-unset($_SESSION['recharge_operator']);
-unset($_SESSION['recharge_circle']);
-unset($_SESSION['recharge_amount']);
-redirect(HTTP_PATH . 'recharge_proceed.php?report=failed&view=order');
-} 
-
-unset($_SESSION['recharge_mobile']);
-unset($_SESSION['recharge_operator']);
-unset($_SESSION['recharge_circle']);
-unset($_SESSION['recharge_amount']);
-
-redirect(HTTP_PATH . 'recharge_proceed.php?');
-				
-}			
-			
-			
 $login = check_login();
 if($login === false) {
 	redirect(HTTP_PATH . 'login.php');
+}
+			
+if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
+{
+	$_SESSION['recharge_mobile']=$_REQUEST['mobile'];
+	$_SESSION['recharge_operator']=$_REQUEST['operator'];
+	$_SESSION['recharge_circle']=$_REQUEST['circle'];
+	$_SESSION['recharge_amount']=$_REQUEST['amount'];
+	//redirect(HTTP_PATH . 'recharge_proceed.php');
+	$mobile=$_REQUEST['mobile'];  
+	$operator=$_REQUEST['operator'];  
+	if($splrc=='1')	{
+		$amount=10; 
+	} else {
+		$amount=$_REQUEST['amount']; 	
+	}
+
+	$sessuser_id = $_SESSION['roo']['user']['id'];
+	//generating random unique orderid for your reference 
+	$uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
+	$splrc=$_REQUEST['spl_rechr'];
+	//inserting above 4 values in database first 
+	//run your php query here to store values of user inputs in database 
+
+	//now run joloapi.com api link for recharge 
+	$ch = curl_init(); 
+	$timeout = 100; // set to zero for no timeout 
+
+	$apikey="104746188241741";
+	$apiuserid="roophka";
+
+	$myHITurl = "http://joloapi.com/api/recharge.php?mode=1&userid=$apiuserid&key=$apikey&operator=$operator&service=$mobile&amount=$amount&orderid=$uniqueorderid"; 
+
+	//echo $myHITurl;
+	curl_setopt ($ch, CURLOPT_URL, $myHITurl); 
+	curl_setopt ($ch, CURLOPT_HEADER, 0); 
+	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout); 
+	$file_contents = curl_exec($ch); 
+	$curl_error = curl_errno($ch); 
+
+	curl_close($ch); 
+
+	//dump output of api if you want during test 
+	//echo"$file_contents"; exit;
+	$joloapiorderid='';
+	// lets extract data from output for display to user and for updating databse 
+	$maindata = explode(",", $file_contents); 
+	$countdatas = count($maindata); 
+	if($countdatas > 2) { 
+		//recharge is success 
+		$joloapiorderid = $maindata[0]; //it is joloapi.com generated order id 
+		$txnstatus = $maindata[1]; //it is status of recharge SUCCESS,FAILED 
+		$operator = $maindata[2]; //operator code 
+		$service = $maindata[3]; //mobile number 
+		$amount = $maindata[4]; //amount 
+		$mywebsiteorderid = $maindata[5]; //your website order id 
+		$errorcode = $maindata[6]; // api error code  
+		$operatorid = $maindata[7]; //original operator transaction id 
+		$myapibalance = $maindata[8];  //my joloapi.com remaining balance 
+		$myapiprofit = $maindata[9]; //my earning on this recharge 
+		$txntime = $maindata[10]; // recharge time 
+	} else { 
+		//recharge is failed 
+		$txnstatus = $maindata[0]; //it is status of recharge FAILED 
+		$errorcode= $maindata[1]; // api error code  
+	} 
+
+	//if curl request timeouts 
+	if($curl_error=='28'){ 
+		//Request timeout, consider recharge status as pending/success 
+		$txnstatus = "PENDING"; 
+	} 
+
+	//cases 
+	if($txnstatus=='SUCCESS'){ 
+		//YOUR REST QUERY HERE 
+		$qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$mywebsiteorderid','".DATETIME24H."','0')";
+		$ins=$db->query($qry);
+
+		$balance=$_SESSION['roo']['user']['account_balance']-$amount;
+		$_SESSION['roo']['user']['account_balance']=$balance;
+
+		if($splrc=='1') {
+			$qqry2="UPDATE roo_users SET spl_recharge='1' where id='$sessuser_id'";
+			$qupd=$db->query($qqry2);
+			$_SESSION['roo']['user']['spl_recharge']=1;
+		} else {
+			$qry2="UPDATE roo_users SET account_balance='$balance' where id='$sessuser_id'";
+			$upd=$db->query($qry2);
+		}
+
+		$adminmail=$cms->getsetting('1','email');
+		$opname=$user->getoperator_name($operator);
+		//echo $opname; exit;
+
+		$from = $adminmail;
+		$to = array($_SESSION['roo']['user']['email']);
+		$subject = "ROOPHKA: Your Recharge of $opname Mobile $mobile for Rs.$amount was successfull !";
+
+		$message = '<div style="background-color: #fff;width: 650px;margin: 0 auto; box-shadow: 1px 6px 40px #aaa;border: 1px solid #ccc;padding: 10px;font-family: arial;font-size: 14px;"> 
+		<table style="width:100%;border-bottom:1px dashed #ccc;font-size: 14px;" >
+		<tr>
+		<td style="width:55%;">
+		<div>
+		<a href="'.HTTP_PATH.'" target="_blank">
+		<img src="'.HTTP_PATH.'assets/img/logo150X150.png" style="width:200px;height:100px;">
+		<a>
+		</div>
+		<div>
+		<h3>Transaction receipt</h3>
+		<p>Order no: #'.$mywebsiteorderid.'</p>
+		<p>Operator reference no: #'.$joloapiorderid.' </p>
+		<p>'.date('d-m-Y h:i a').'</p>
+		<br/>
+		<p>'.$_SESSION['roo']['user']['phone'].'</p>
+		<p><a href="mailto:'.$_SESSION['roo']['user']['email'].'">'.$_SESSION['roo']['user']['email'].'</a></p>
+		</div>
+		</td>
+		<td style="width:38%;">
+		<div>If you have any query or support! Please <a href="'.HTTP_PATH.'contactus.php">Click here</a> to reach us. </di>
+
+		</td>
+		<td style="width:12%;">
+		<div>
+		<img src="'.HTTP_PATH.'assets/img/r-logo.png">
+		</div>
+
+		</td>
+		</tr>
+		</table>
+
+		<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
+		<tr >
+
+		<td style="width:85%;">Recharge of '.$opname.' Mobile '.$mobile.' for</td>
+		<td style="width:15%;"> Rs.'.$amount.'</td>
+
+		</tr>
+		</table>
+		<table style="width:100%;height:70px;border-bottom:1px dashed #ccc;font-size: 14px;">
+		<tr>
+
+		<td style="width:85%;">Total</td>
+		<td style="width:15%;"> Rs.'.$amount.'</td>
+
+		</tr>
+		</table>
+		<table style="width:100%;height:70px;padding-bottom:10px;font-size: 14px;">
+		<tr>
+
+		<td style="width:85%;"><strong>Amount Paid</strong></td>
+		<td style="width:15%;"><strong>Rs.'.$amount.'</strong></td>
+
+		</tr>
+		</table>
+
+
+		<br/>
+
+		Thanks & regards,<br />
+		<a href="'.HTTP_PATH.'">roophka.com</a>
+		</div>';
+
+		//echo $message; exit;
+
+		$mailler->sendmail($to, $from, $subject, $message);
+		unset($_SESSION['recharge_mobile']);
+		unset($_SESSION['recharge_operator']);
+		unset($_SESSION['recharge_circle']);
+		unset($_SESSION['recharge_amount']);
+		redirect(HTTP_PATH . 'recharge_proceed.php?report=success&view=order');
+	}  
+	if($txnstatus=='PENDING'){ 
+		//YOUR REST QUERY HERE 
+		$qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$uniqueorderid','".DATETIME24H."','0')";
+
+		$ins=$db->query($qry);
+		unset($_SESSION['recharge_mobile']);
+		unset($_SESSION['recharge_operator']);
+		unset($_SESSION['recharge_circle']);
+		unset($_SESSION['recharge_amount']);
+		redirect(HTTP_PATH . 'recharge_proceed.php?report=pending&view=order');
+	} 
+	if($txnstatus=='FAILED'){ 
+		//YOUR REST QUERY HERE 
+		$qry="INSERT INTO roo_recharge(user_id,amount,mobile,apiorder_id,recharge_status,operator,myorder_id,date_added,status) values('$sessuser_id','$amount','$mobile','$joloapiorderid','$txnstatus','$operator','$uniqueorderid','".DATETIME24H."','0')";
+
+		//echo $qry; exit;
+
+		$ins=$db->query($qry);
+		unset($_SESSION['recharge_mobile']);
+		unset($_SESSION['recharge_operator']);
+		unset($_SESSION['recharge_circle']);
+		unset($_SESSION['recharge_amount']);
+		redirect(HTTP_PATH . 'recharge_proceed.php?report=failed&view=order');
+	} 
+
+	unset($_SESSION['recharge_mobile']);
+	unset($_SESSION['recharge_operator']);
+	unset($_SESSION['recharge_circle']);
+	unset($_SESSION['recharge_amount']);
+
+	redirect(HTTP_PATH . 'recharge_proceed.php?');			
 }
 
 //echo $_SESSION['recharge_mobile'];

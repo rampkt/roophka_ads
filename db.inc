@@ -27,10 +27,9 @@ CREATE TABLE `roo_recharge` (
   `date_added` timestamp NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-<<<<<<< HEAD
 
 ALTER TABLE  `roo_ads` CHANGE  `type`  `type` ENUM(  'video',  'image',  'text',  'scroll' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;
-=======
+
 ALTER TABLE `roo_recharge` ADD PRIMARY KEY(`id`);
 ALTER TABLE `roo_recharge` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 
@@ -89,19 +88,13 @@ CREATE TABLE `roo_settings` (
   `filehash` varchar(255) NOT NULL,
   `extension` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-<<<<<<< HEAD
-
 
 ALTER TABLE `roo_admin_users` CHANGE `type` `type` INT(11) NOT NULL COMMENT '0=Superadmin, 1=Admin, 2=subadmin, 3=Advertiser,4=developer';
-=======
+
 ALTER TABLE `roo_settings` ADD PRIMARY KEY(`id`);
 ALTER TABLE `roo_settings` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
->>>>>>> 5039de3711fad7739b14b63782b0cb4826f1dbec
-<<<<<<< HEAD
->>>>>>> 4ac408addb62bee109e52f68a0b6c4b547a8499b
-=======
-
 
 ALTER TABLE `roo_advertise_request` ADD `alternate_email` VARCHAR(255) NOT NULL AFTER `email`;
 ALTER TABLE `roo_advertise_request` ADD `alternate_mobile` BIGINT NOT NULL AFTER `mobile`;
->>>>>>> da61ae298695ff3b9f3553343461b8c0aec248ce
+
+ALTER TABLE `roo_settings` ADD `recharge` INT NOT NULL COMMENT '0=active, 1=inactive' ;
