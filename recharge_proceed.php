@@ -18,7 +18,7 @@ include("./functions/user.php");
 include("./functions/ads.php");
 $user = new user;
 $ads = new ads;
-
+ 
 if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge'))
 {
 	$_SESSION['recharge_mobile']=$_REQUEST['mobile'];

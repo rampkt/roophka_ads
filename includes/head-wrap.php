@@ -7,7 +7,6 @@ $qry_bal = $db->query("SELECT account_balance FROM roo_users WHERE id='".$_SESSI
 			
 ?>
 
-
 <section id="page-header" class="clearfix">    
 <!-- responsive FlexSlider image slideshow -->
 
