@@ -1,5 +1,5 @@
 <?php 
-
+if(isset($_SESSION['roo']['user'])) {
 $qry_bal = $db->query("SELECT account_balance FROM roo_users WHERE id='".$_SESSION['roo']['user']['id']."'");
 			$row_bal = $db->fetch_array($qry_bal);		
 
@@ -19,3 +19,12 @@ $qry_bal = $db->query("SELECT account_balance FROM roo_users WHERE id='".$_SESSI
 	 <span style="font-size:12px;font-weight:600;"><?=date("d-M-y h:i:s",strtotime($_SESSION['roo']['user']['lastlogin']));?></span>
     </div>
 </section>
+<?php } else { ?>
+<section id="page-header" class="clearfix">    
+<!-- responsive FlexSlider image slideshow -->
+<div class="wrapper">
+	<h1><?php if(isset($_REQUEST['from'])) { echo ucfirst($_REQUEST['from']); } else { echo "Welcome"; }?></h1>
+    </div>
+
+</section>
+<?php } ?>
