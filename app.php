@@ -2,8 +2,10 @@
 include_once("./config/config.php");
 include("./functions/register.php");
 include("./functions/location.php");
+include("./functions/cms.php");
 
 $reg = new register();
+$cms=new cms();
 
 if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App'))
 	{
@@ -47,6 +49,81 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App'))
 	}
 	echo "[".json_encode($output)."]"; exit;
 }
+	
+	if($_REQUEST['action'] == 'advertiseus')
+	{
+     
+     $output=array("error" => false,"msg"=>"");	 
+	
+	$cms->companyname = $db->escape_string($_REQUEST['companyname']);
+	$cms->email = $db->escape_string($_REQUEST['email']);
+	$cms->contact_person = $db->escape_string($_REQUEST['contact_person']);
+	$cms->mobile = $db->escape_string($_REQUEST['mobile']);
+	$cms->state = $db->escape_string($_REQUEST['state']);
+	$cms->city = $db->escape_string($_REQUEST['city']);
+	$cms->address1 = $db->escape_string($_REQUEST['address1']);
+	$cms->address2 = $db->escape_string($_REQUEST['address2']);
+	$cms->pincode = $db->escape_string($_REQUEST['pincode']);
+	$cms->email_status=0;
+	$cms->ipaddr=$_SERVER['REMOTE_ADDR'];
+	$adminmail=$cms->getsetting('1','email');
+	//echo $adminmail; exit;
+	
+	$result = $cms->advertisesave();
+
+  
+	if($result)
+	{
+		$output['error']=false;
+		$output['msg']="Your Request has been send to our administrator,they will contact you soon";
+		
+		$from = $cms->email;
+		$to = array($adminmail);
+		$subject = "ROOPHKA: Advertise with us";
+   
+    $message = '<div style="width:600px;">
+    Dear Admin<br><br>
+   
+    <p>'.$cms->companyname.' Company are interested to advertise with us, please check and contact this customer as soon as possible</p>
+    <br><br>
+	
+	
+    Thanks & regards,<br />
+    <a href="'.HTTP_PATH.'">roophka.com</a>
+    </div>';
+		
+		$mailler->sendmail($to, $from, $subject, $message);
+		
+		
+		$from1 = $adminmail;
+		$to1 = array($cms->email);
+		$subject1 = "ROOPHKA: Advertise with us";
+   
+    $message1 = '<div style="width:600px;">
+    Dear '.$cms->contact_person.'<br><br>
+   
+    <p>Advertise with us request has been sent to our administator, They will contact as soon.</p>
+    <br><br>
+	
+	
+    Thanks & regards,<br />
+    <a href="'.HTTP_PATH.'">roophka.com</a>
+    </div>';
+		
+		$mailler->sendmail($to1, $from1, $subject1, $message1);
+		
+//redirect(HTTP_PATH . "advertise.php?success=1");
+	}
+	else
+	{
+		$output['error']=true;
+		$output['msg']="Error, please try again !!!";
+	}
+	
+	
+	echo "[".json_encode($output)."]";exit;
+	}
+	
 	
 	if($_REQUEST['action'] == 'register')
 	{
@@ -140,7 +217,7 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App'))
 			else
 			{
 				$output['error']=true;
-				$output['state']="No States found";
+				$output['city']="No Cities found";
 			}
 			
 		}

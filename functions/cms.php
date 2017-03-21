@@ -87,6 +87,7 @@ return $apibal;
 				
 			}else{	
 		
+		     //echo "INSERT INTO roo_advertise_request (email_status,company_name,email,contact_person, mobile,address1,address2,country,state,city,pincode, ipaddr, date_added,status) VALUES ('0','".$this->companyname."','".$this->email."', '".$this->contact_person."','".$this->mobile."','".$this->address1."','".$this->address2."','".$this->country."','".$this->state."','".$this->city."','".$this->pincode."', '".$this->ipaddr."','".DATETIME24H."','0')"; exit;
 			
 			$result = $this->db->query("INSERT INTO roo_advertise_request (email_status,company_name,email,contact_person, mobile,address1,address2,country,state,city,pincode, ipaddr, date_added,status) VALUES ('0','".$this->companyname."','".$this->email."', '".$this->contact_person."','".$this->mobile."','".$this->address1."','".$this->address2."','".$this->country."','".$this->state."','".$this->city."','".$this->pincode."', '".$this->ipaddr."','".DATETIME24H."','0')");
 			}
