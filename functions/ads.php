@@ -23,13 +23,13 @@ class ads {
 		
 		if($id>0){
 			
-			$sql = "SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND  (ra.status=0 and ra.id='$id') AND ra.type='".$type."' ORDER BY ra.date_added DESC LIMIT 1";
+			$sql = "SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain, ra.name FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND  (ra.status=0 and ra.id='$id') AND ra.type='".$type."' ORDER BY ra.date_added DESC LIMIT 1";
 		}else{
 			if($type=='all')
 			{
-				$sql = "SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND ra.status=0 ORDER BY ra.date_added DESC LIMIT 1";
+				$sql = "SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain, ra.name FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND ra.status=0 ORDER BY ra.date_added DESC LIMIT 1";
 			}else{
-		$sql="SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND (ra.status=0 AND ra.type='".$type."') ORDER BY ra.date_added DESC LIMIT 1";
+		$sql="SELECT ra.id, ra.type, ra.content, ra.duration, ra.clicks_remain, ra.name FROM roo_ads AS ra WHERE ra.clicks_remain > 0 AND ra.viewing = 0 AND (ra.status=0 AND ra.type='".$type."') ORDER BY ra.date_added DESC LIMIT 1";
 		}
 		}
 		//echo $sql;

@@ -193,6 +193,64 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 	}
 
 	/****
+	 * my profile details
+	 */
+	if($_REQUEST['action'] == 'profile') {
+
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+
+		include("./functions/user.php");
+		$user = new user;
+		
+		$userdetails = $user->fulldetails($_REQUEST['session_id']);
+		unset($userdetails['id'], $userdetails['pass'], $userdetails['salt'], $userdetails['lastname'], $userdetails['lastlogin'], $userdetails['signupdate'], $userdetails['demo'], $userdetails['spl_recharge'], $userdetails['status']);
+
+		sendJson(1,$userdetails);
+	}
+
+	/****
+	 * update profile details
+	 */
+	if($_REQUEST['action'] == 'upate_profile') {
+		
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0 || !isset($_REQUEST['name']) || !isset($_REQUEST['mobile']) || !isset($_REQUEST['dob']) || !isset($_REQUEST['address']) || !isset($_REQUEST['state']) || !isset($_REQUEST['city']) || !isset($_REQUEST['pincode'])) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+		
+		include("./functions/register.php");
+		include("./functions/user.php");
+
+		$register = new register;
+		$user = new user;
+		
+		$register->userid = $_REQUEST['session_id'];
+		$register->name = $db->escape_string($_REQUEST['name']);
+		$register->mobile = $db->escape_string($_REQUEST['mobile']);
+		$register->dob = $db->escape_string($_REQUEST['dob']);
+		$register->address = $db->escape_string($_REQUEST['address']);
+		$register->state = $db->escape_string($_REQUEST['state']);
+		$register->city = $db->escape_string($_REQUEST['city']);
+		$register->pincode = $db->escape_string($_REQUEST['pincode']);
+		
+		$result = $register->update();
+		if($result['error']) {
+			if($result['msg'] == 'empty')
+				sendJson(-5,array('request'=>$_REQUEST),'All fields should be filled...');
+			elseif($result['msg'] == 'insert')
+				sendJson(-5,array('request'=>$_REQUEST),'Data update issue, Please try again or after some time later.');
+			else
+				sendJson(-5,array('request'=>$_REQUEST),'Some thing went wrong, Please try again later.');
+		} else {
+			$userdetails = $user->fulldetails($_REQUEST['session_id']);
+			unset($userdetails['id'], $userdetails['pass'], $userdetails['salt'], $userdetails['lastname'], $userdetails['lastlogin'], $userdetails['signupdate'], $userdetails['demo'], $userdetails['spl_recharge'], $userdetails['status']);
+
+			sendJson(1,$userdetails);
+		}
+	}
+
+	/****
 	 * User login
 	 */
 	if($_REQUEST['action'] == 'login')	{

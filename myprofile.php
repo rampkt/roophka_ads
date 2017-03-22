@@ -104,7 +104,7 @@ $enc = three_layer_encrypt('',array("userid" => $_SESSION['roo']['user']['id']))
     <? } ?>
     
     <? if(isset($_REQUEST['error']) AND $_REQUEST['error'] == '1') { ?>
-    <div class="error-msg"><strong>Register failed!</strong> Some thing went wrong, Please try again later</div>
+    <div class="error-msg"><strong>Register failed!</strong> Some thing went wrong, Please try again later.</div>
     <? } ?>
     
     <? if(isset($_REQUEST['success']) AND $_REQUEST['success'] == '1') { ?>
