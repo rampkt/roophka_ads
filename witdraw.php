@@ -38,7 +38,7 @@ if(isset($_REQUEST['cmd'])) {
 	}
 	if($_REQUEST['cmd'] == '_addwithdraw') {
 		$amount = $_REQUEST['withdraw_amount'];
-		if($amount >= 500) {
+		if($amount >= 1) {
 			$result = $user->addWithdraw($amount);
 			if($result['error']) {
 				redirect(HTTP_PATH . "witdraw.php?error=withdraw");

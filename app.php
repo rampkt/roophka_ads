@@ -276,8 +276,37 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 	}
 
 	/****
+	 * withdraw request in list
+	 */
+	 if($_REQUEST['action'] == 'addwithdraw') {
+		 
+	 if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0 || !isset($_REQUEST['amount'])) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}	 
+	 include("./functions/user.php");
+     $user = new user; 
+	 $data = array();
+	 $amount = $_REQUEST['amount'];
+	 $data['amount']=$amount;
+			$result = $user->addWithdraw($amount,$_REQUEST['session_id']);
+			
+			print_r($result); 
+			
+			if($result['error']) {
+	        if($result['msg'] == 'amount')
+				sendJson(-5,array('request'=>$_REQUEST),'Not eligible for withdraw..');
+			elseif($result['msg'] == 'insert')
+				sendJson(-5,array('request'=>$_REQUEST),'Data update issue, Please try again or after some time later.');
+			} else {
+				$data['status']="Success";
+				sendJson(1,$data);
+			}		
+		 
+	 }
+	 /****
 	 * Add bank in list
 	 */
+	 
 	if($_REQUEST['action'] == 'addbank') {
 		
 		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0 || !isset($_REQUEST['name']) || !isset($_REQUEST['bankname']) || !isset($_REQUEST['accname']) || !isset($_REQUEST['accnumber']) || !isset($_REQUEST['branch']) || !isset($_REQUEST['ifsc'])) {

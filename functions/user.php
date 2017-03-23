@@ -204,19 +204,25 @@ class user
 		
 	}
 	
-	public function addWithdraw($amt) {
+	public function addWithdraw($amt,$userid) {
 		
-		$user_id = $_SESSION['roo']['user']['id'];
+		if($userid=="")
+		{
+		$user_id =$userid;	
+		}else{
+		$user_id = $_SESSION['roo']['user']['id'];	
+		}	
+		
 		
 		$output = array('error' => true, 'msg' => 'empty');		
 		$ab = $this->db->fetch_field("roo_users","id = '".$user_id."'","account_balance");
 		
-		if($amt > $ab || $amt < 500) {
+		if($amt > $ab || $ab < 100) {
 			$output['msg'] = 'amount';
 			return $output;	
 		}
 		
-		$tempInsert = $this->db->query("INSERT INTO roo_withdraw (userid, amount, date_added) VALUES ('".$user_id."', '".$amt."', '".DATETIME24H."')");
+		$tempInsert = $this->db->query("INSERT INTO roo_withdraw (userid, amount, date_added,status,details) VALUES ('".$user_id."', '".$amt."', '".DATETIME24H."','0','withdraw request')");
 		if($tempInsert) {
 			$currentBalance = $ab - $amt;
 			$tempupdate = $this->db->query("UPDATE roo_users SET account_balance = '".$currentBalance."' WHERE id='".$user_id."' LIMIT 1");
