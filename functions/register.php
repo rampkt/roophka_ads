@@ -50,7 +50,7 @@ class register
 	}
 	
 	public function save() {
-		$output = array('error' => true, 'msg' => 'empty');
+		$output = array('error' => true, 'msg' => 'empty','userid'=>'','verify'=>'');
 		
 		$check = $this->emptycheck(false);
 		if($check) {
@@ -63,7 +63,7 @@ class register
 			
 			$encpassword = enc_password($this->password);
 			
-			$reg = $this->db->query("INSERT INTO roo_users (email, pass, salt, firstname, phone, signupdate, status, dob, address, country, state, city, pincode,account_balance) VALUES ('".$this->email."', '".$encpassword."', '".SALT."', '".$this->name."', '".$this->mobile."', '".DATETIME24H."', 1, '".$this->dob."', '".$this->address."', '".$this->country."', '".$this->state."', '".$this->city."', '".$this->pincode."',0)");
+			$reg = $this->db->query("INSERT INTO roo_users (spl_recharge,email, pass, salt, firstname, phone, signupdate, status, dob, address, country, state, city, pincode,account_balance) VALUES ('0','".$this->email."', '".$encpassword."', '".SALT."', '".$this->name."', '".$this->mobile."', '".DATETIME24H."', 1, '".$this->dob."', '".$this->address."', '".$this->country."', '".$this->state."', '".$this->city."', '".$this->pincode."',0)");
 			if($reg) {
 				$output['error'] = false;
 				$output['msg'] = 'success';
