@@ -251,6 +251,53 @@ if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
 	}
 
 	/****
+	 * Add bank in list
+	 */
+	if($_REQUEST['action'] == 'viewbank') {
+		
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+		include("./functions/user.php");
+		$user = new user;
+		$bankdetails = $user->accounts($_REQUEST['session_id']);
+		sendJson(1,$bankdetails);
+	}
+
+	/****
+	 * Add bank in list
+	 */
+	if($_REQUEST['action'] == 'addbank') {
+		
+		if(!isset($_REQUEST['session_id']) || $_REQUEST['session_id'] =='' || $_REQUEST['session_id'] <=0 || !isset($_REQUEST['name']) || !isset($_REQUEST['bankname']) || !isset($_REQUEST['accname']) || !isset($_REQUEST['accnumber']) || !isset($_REQUEST['branch']) || !isset($_REQUEST['ifsc'])) {
+			sendJson(-5,array('request'=>$_REQUEST),'Not valid information');
+		}
+		include("./functions/user.php");
+		$user = new user;
+
+		$data = array();
+		$data['user_id'] = $_REQUEST['session_id'];
+		$data['name'] = $db->escape_string($_REQUEST['name']);
+		$data['bank'] = $db->escape_string($_REQUEST['bankname']);
+		$data['ac_name'] = $db->escape_string($_REQUEST['accname']);
+		$data['number'] = $db->escape_string($_REQUEST['accnumber']);
+		$data['branch'] = $db->escape_string($_REQUEST['branch']);
+		$data['ifsc'] = $db->escape_string($_REQUEST['ifsc']);
+		$result = $user->addBank($data);
+		if($result['error']) {
+			if($result['msg'] == 'empty')
+				sendJson(-5,array('request'=>$_REQUEST),'All fields should be filled...');
+			elseif($result['msg'] == 'insert')
+				sendJson(-5,array('request'=>$_REQUEST),'Data update issue, Please try again or after some time later.');
+			else
+				sendJson(-5,array('request'=>$_REQUEST),'Some thing went wrong, Please try again later.');
+		} else {
+			$bankdetails = $user->accounts($_REQUEST['session_id']);
+			sendJson(1,$bankdetails);
+		}
+	}
+
+	/****
 	 * User login
 	 */
 	if($_REQUEST['action'] == 'login')	{
