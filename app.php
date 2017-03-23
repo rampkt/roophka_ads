@@ -9,6 +9,17 @@ include("./functions/cms.php");
 $cms=new cms();
 
 if((isset($_REQUEST['action']))&&($_REQUEST['appkey']=='Roo2017App')) {
+	
+	if($_REQUEST['action'] == 'cms')
+	{
+      $page=$_REQUEST['page'];
+	  $pagecontent=html_entity_decode($cms->getcms(1,$page));
+	  $data = array();
+	  $data['pagecontent']=$pagecontent;
+	  sendJson(1,$data);	
+	}
+	
+	
 
 	if($_REQUEST['action'] == 'getadlist')	{
 		
