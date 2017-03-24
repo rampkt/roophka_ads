@@ -54,6 +54,7 @@ if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
 	$_SESSION['recharge_circle']=$_REQUEST['circle'];
 	$_SESSION['recharge_amount']=$_REQUEST['amount'];
 	//redirect(HTTP_PATH . 'recharge_proceed.php');
+	$splrc=$_REQUEST['spl_rechr'];
 	$mobile=$_REQUEST['mobile'];  
 	$operator=$_REQUEST['operator'];  
 	if($splrc=='1')	{
@@ -65,7 +66,7 @@ if((isset($_REQUEST['action'])) && ($_REQUEST['action']=='recharge_now'))
 	$sessuser_id = $_SESSION['roo']['user']['id'];
 	//generating random unique orderid for your reference 
 	$uniqueorderid = substr(number_format(time() * rand(),0,'',''),0,10);  
-	$splrc=$_REQUEST['spl_rechr'];
+
 	//inserting above 4 values in database first 
 	//run your php query here to store values of user inputs in database 
 
